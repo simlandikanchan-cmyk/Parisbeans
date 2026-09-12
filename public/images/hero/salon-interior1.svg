@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5A3A28" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#432719" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="338" fill="url(#g)"/>
+  <circle cx="300" cy="155.48000000000002" r="54.08" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="3"/>
+  <circle cx="300" cy="155.48000000000002" r="30.419999999999998" fill="rgba(255,255,255,0.35)"/>
+  <text x="300" y="263.64" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="23.660000000000004" fill="rgba(255,255,255,0.92)">Salon Interior</text>
+  <text x="300" y="297.44" text-anchor="middle" font-family="sans-serif" font-size="16.900000000000002" letter-spacing="4" fill="rgba(255,255,255,0.7)">PARIS BEANS</text>
+</svg>

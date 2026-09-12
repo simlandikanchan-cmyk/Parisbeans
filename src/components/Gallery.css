@@ -1,0 +1,519 @@
+/* ============================================================
+   Gallery page — shared section styles
+   ============================================================ */
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.gal-hero {
+  background-color: var(--color-bg);
+  padding-top: clamp(56px, 6vw, 88px);
+  padding-bottom: clamp(56px, 6vw, 80px);
+  overflow: clip;
+}
+
+.gal-hero-copy {
+  max-width: 720px;
+  text-align: left;
+}
+
+.gal-hero-title {
+  color: var(--color-espresso);
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  line-height: 1.15;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.015em;
+  margin: 1rem 0 1.2rem;
+  max-width: 700px;
+}
+
+.gal-hero-title em {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--color-coffee);
+}
+
+.gal-hero-desc {
+  max-width: 560px;
+  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  line-height: 1.65;
+}
+
+/* ---------- Hero composition — centered, overlapping, focal-card carousel ---------- */
+.gal-stage {
+  position: relative;
+  height: clamp(440px, 36vw, 640px);
+  max-width: min(1920px, 96vw);
+  margin: clamp(1.5rem, 3vw, 2.4rem) auto 0;
+  overflow: hidden;
+  --card-w: clamp(280px, 28vw, 480px);
+  --side-x: calc(var(--card-w) * 0.62);
+  --far-x: calc(var(--card-w) * 1.25);
+  --side-y: clamp(10px, 1.2vw, 16px);
+  --far-y: clamp(18px, 2.2vw, 30px);
+  --side-s: 0.84;
+  --far-s: 0.64;
+  touch-action: pan-y;
+}
+
+.gal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--card-w);
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition:
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.gal-card:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+.gal-card-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg);
+  will-change: transform;
+  animation: galCardFloat 7s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -1.1s);
+}
+
+.gal-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+  animation: galKenBurns 15s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -1.6s);
+}
+
+/* Gentle, continuous hover-float for the whole photo group */
+@keyframes galCardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(clamp(-7px, -0.9vw, -12px)); }
+}
+
+/* Slow, subtle zoom inside each frame (premium editorial feel) */
+@keyframes galKenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+.gal-card.center {
+  transform: translate(-50%, -50%) translateY(-6px) rotate(0deg) scale(1);
+  z-index: 10;
+}
+
+.gal-card.left {
+  transform: translate(-50%, -50%)
+    translate3d(calc(-1 * var(--side-x)), var(--side-y), 0)
+    rotate(-2.5deg) scale(var(--side-s));
+  z-index: 6;
+}
+
+.gal-card.right {
+  transform: translate(-50%, -50%)
+    translate3d(var(--side-x), var(--side-y), 0)
+    rotate(2.5deg) scale(var(--side-s));
+  z-index: 6;
+}
+
+.gal-card.far-left {
+  transform: translate(-50%, -50%)
+    translate3d(calc(-1 * var(--far-x)), var(--far-y), 0)
+    rotate(-4deg) scale(var(--far-s));
+  z-index: 3;
+}
+
+.gal-card.far-right {
+  transform: translate(-50%, -50%)
+    translate3d(var(--far-x), var(--far-y), 0)
+    rotate(4deg) scale(var(--far-s));
+  z-index: 3;
+}
+
+.gal-card.hidden-left {
+  transform: translate(-50%, -50%)
+    translate3d(calc(-1 * var(--far-x)), var(--far-y), 0)
+    rotate(-4deg) scale(var(--far-s));
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gal-card.hidden-right {
+  transform: translate(-50%, -50%)
+    translate3d(var(--far-x), var(--far-y), 0)
+    rotate(4deg) scale(var(--far-s));
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Carousel prev/next arrows */
+.gal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  color: var(--color-espresso);
+  cursor: pointer;
+  box-shadow: 0 6px 20px -12px rgba(53, 29, 19, 0.45);
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
+    transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.gal-arrow:hover {
+  background-color: var(--color-surface);
+  border-color: var(--color-coffee);
+  color: var(--color-coffee);
+}
+
+.gal-arrow:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.gal-arrow:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 3px;
+}
+
+.gal-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+.gal-arrow--prev {
+  left: 14px;
+}
+
+.gal-arrow--next {
+  right: 14px;
+}
+
+/* Slide dots */
+.gal-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-btn);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 16px -10px rgba(53, 29, 19, 0.35);
+}
+
+.gal-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(169, 110, 63, 0.45);
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.gal-dot:hover {
+  background: var(--color-coffee);
+}
+
+.gal-dot.is-active {
+  background: var(--color-espresso);
+  transform: scale(1.35);
+}
+
+.gal-dot:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 2px;
+}
+
+/* ── White gallery sections ───────────────────────────────── */
+.gal-section {
+  background-color: var(--color-white);
+  padding-block: var(--section-pad-desktop);
+  overflow: clip;
+}
+
+.gal-section-head {
+  max-width: 720px;
+  text-align: left;
+}
+
+.gal-section-eyebrow {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.gal-section-title {
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  font-style: italic;
+  margin: 1rem 0 1.2rem;
+  max-width: 640px;
+}
+
+.gal-section-title em {
+  font-style: italic;
+  color: var(--color-coffee);
+}
+
+.gal-section-desc {
+  max-width: 560px;
+  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  line-height: 1.65;
+}
+
+/* ---------- Image grids ---------- */
+.gal-grid {
+  display: grid;
+  gap: clamp(12px, 1.6vw, 20px);
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.gal-tile {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg);
+}
+
+.gal-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 550ms var(--ease);
+}
+
+.gal-tile:hover img {
+  transform: scale(1.03);
+}
+
+/* Section grid layouts */
+.gal-grid--atmosphere {
+  grid-template-columns: 1fr 1fr 1.35fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 16 / 10;
+}
+
+.gal-grid--atmosphere .gal-tile--a { grid-column: 1; grid-row: 1; }
+.gal-grid--atmosphere .gal-tile--b { grid-column: 2; grid-row: 1; }
+.gal-grid--atmosphere .gal-tile--feature { grid-column: 3; grid-row: 1 / span 2; }
+.gal-grid--atmosphere .gal-tile--wide { grid-column: 1 / span 2; grid-row: 2; }
+
+.gal-grid--wall {
+  grid-template-columns: 1fr 1fr 1.5fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 16 / 10;
+}
+
+.gal-grid--wall .gal-tile--a { grid-column: 1; grid-row: 1; }
+.gal-grid--wall .gal-tile--b { grid-column: 2; grid-row: 1; }
+.gal-grid--wall .gal-tile--c { grid-column: 1; grid-row: 2; }
+.gal-grid--wall .gal-tile--d { grid-column: 2; grid-row: 2; }
+.gal-grid--wall .gal-tile--feature { grid-column: 3; grid-row: 1 / span 2; }
+
+.gal-grid--food {
+  grid-template-columns: 1fr 1.15fr 1.15fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 16 / 9;
+}
+
+.gal-grid--food .gal-tile--a { grid-column: 1; grid-row: 1; }
+.gal-grid--food .gal-tile--b { grid-column: 4; grid-row: 1; }
+.gal-grid--food .gal-tile--c { grid-column: 1; grid-row: 2; }
+.gal-grid--food .gal-tile--d { grid-column: 2; grid-row: 2; }
+.gal-grid--food .gal-tile--e { grid-column: 3; grid-row: 2; }
+.gal-grid--food .gal-tile--g { grid-column: 4; grid-row: 2; }
+.gal-grid--food .gal-tile--feature { grid-column: 2 / span 2; grid-row: 1; }
+
+.gal-grid--salon {
+  grid-template-columns: 1fr 1.7fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 16 / 10;
+}
+
+.gal-grid--salon .gal-tile--a { grid-column: 1; grid-row: 1; }
+.gal-grid--salon .gal-tile--b { grid-column: 1; grid-row: 2; }
+.gal-grid--salon .gal-tile--c { grid-column: 3; grid-row: 1; }
+.gal-grid--salon .gal-tile--d { grid-column: 3; grid-row: 2; }
+.gal-grid--salon .gal-tile--feature { grid-column: 2; grid-row: 1 / span 2; }
+
+/* Saloon bookend — last section returns to the warm cream ground */
+.gal-section--bookend {
+  background-color: var(--color-bg);
+}
+
+/* ── Tablet ───────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .gal-grid--atmosphere,
+  .gal-grid--wall,
+  .gal-grid--salon {
+    aspect-ratio: 4 / 3;
+  }
+
+  .gal-grid--food {
+    aspect-ratio: 16 / 11;
+  }
+}
+
+/* ── Hero composition: tablet ─────────────────────────────── */
+@media (max-width: 1024px) {
+  .gal-stage {
+    --card-w: clamp(150px, 15vw, 210px);
+    --side-x: calc(var(--card-w) * 0.6);
+    --far-x: calc(var(--card-w) * 1.22);
+    height: clamp(280px, 34vw, 380px);
+    max-width: clamp(460px, 88vw, 760px);
+  }
+}
+
+/* ── Hero composition: mobile (centered, no horizontal overflow) ── */
+@media (max-width: 640px) {
+  .gal-stage {
+    --card-w: clamp(120px, 46vw, 170px);
+    --side-x: calc(var(--card-w) * 0.52);
+    --far-x: calc(var(--card-w) * 1.1);
+    --side-y: 8px;
+    --far-y: 14px;
+    height: clamp(270px, 78vw, 330px);
+    max-width: 92vw;
+  }
+
+  .gal-grid--atmosphere,
+  .gal-grid--wall,
+  .gal-grid--salon {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    aspect-ratio: auto;
+  }
+
+  .gal-grid--atmosphere .gal-tile--feature,
+  .gal-grid--wall .gal-tile--feature,
+  .gal-grid--salon .gal-tile--feature {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    aspect-ratio: 4 / 5;
+    min-height: 320px;
+    order: -1;
+  }
+
+  .gal-grid--atmosphere .gal-tile--a,
+  .gal-grid--atmosphere .gal-tile--b {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gal-grid--atmosphere .gal-tile--wide {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .gal-grid--wall .gal-tile--a,
+  .gal-grid--wall .gal-tile--b,
+  .gal-grid--wall .gal-tile--c,
+  .gal-grid--wall .gal-tile--d {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gal-grid--salon .gal-tile--a,
+  .gal-grid--salon .gal-tile--b,
+  .gal-grid--salon .gal-tile--c,
+  .gal-grid--salon .gal-tile--d {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gal-grid--food {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    aspect-ratio: auto;
+  }
+
+  .gal-grid--food .gal-tile--feature {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    aspect-ratio: 4 / 5;
+    min-height: 300px;
+    order: -1;
+  }
+
+  .gal-grid--food .gal-tile--a,
+  .gal-grid--food .gal-tile--b,
+  .gal-grid--food .gal-tile--c,
+  .gal-grid--food .gal-tile--d,
+  .gal-grid--food .gal-tile--e,
+  .gal-grid--food .gal-tile--g {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gal-card {
+    border-radius: var(--radius-sm);
+  }
+
+  .gal-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .gal-arrow--prev {
+    left: 6px;
+  }
+
+  .gal-arrow--next {
+    right: 6px;
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .gal-card,
+  .gal-card-media,
+  .gal-card-media img {
+    transition: none;
+    animation: none;
+  }
+
+  .gal-tile img {
+    transition: none;
+  }
+}

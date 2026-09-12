@@ -1,0 +1,66 @@
+/* ============================================================
+   Paris Beans — Our Story PAGE (shared page-level styles)
+   Scoped .ostory-* classes. Header/Footer untouched.
+   ============================================================ */
+
+.ostory-page {
+  background-color: var(--color-white);
+}
+
+.ostory-shell {
+  width: 91%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.ostory-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-gold);
+}
+
+.ostory-dash {
+  width: 28px;
+  height: 1px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   ANIMATION (shared entrance)
+   ============================================================ */
+.ostory-hero .ostory-eyebrow,
+.ostory-title,
+.ostory-desc,
+.ostory-cta .ostory-eyebrow {
+  animation: ostoryFadeUp 0.9s var(--ease) both;
+}
+
+@keyframes ostoryFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ostoryRingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ostory-hero .ostory-eyebrow,
+  .ostory-title,
+  .ostory-desc,
+  .ostory-cta .ostory-eyebrow {
+    animation: none;
+  }
+}

@@ -1,0 +1,104 @@
+import { useEffect, useState } from 'react'
+import { Menu, X } from 'lucide-react'
+import { navLinks } from '../data/siteData'
+import './Header.css'
+
+export default function Header() {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  return (
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+      <div className="header-inner">
+        {/* Left nav — desktop */}
+        <nav className="nav-left" aria-label="Primary navigation">
+          {navLinks.map((link) => (
+            <a key={link.label} className="nav-link" href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Center logo */}
+        <a href="/" className="header-logo" aria-label="Paris Beans — home">
+          <span className="logo-badge">
+            <img src="/logo (2).svg" alt="" className="logo-img" />
+          </span>
+          {/* <span className="logo-word">Paris Beans</span> */}
+        </a>
+
+        {/* Right — appointment + mobile trigger */}
+        <div className="header-right">
+          <a href="#book" className="btn btn--dark btn--small header-cta">
+            Book Appointment
+          </a>
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-label="Open menu"
+            aria-expanded={open}
+            onClick={() => setOpen(true)}
+          >
+            <Menu />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile drawer */}
+      <div className={`mobile-drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+        <div className="drawer-head">
+          <a href="/" className="drawer-logo" onClick={() => setOpen(false)}>
+            <span className="logo-badge">
+              <img src="/logo (2).svg" alt="" className="logo-img" />
+            </span>
+            <span className="logo-word">Paris Beans</span>
+          </a>
+          <button
+            type="button"
+            className="menu-toggle close"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+          >
+            <X />
+          </button>
+        </div>
+        <nav className="drawer-nav" aria-label="Mobile navigation">
+          {navLinks.map((link, i) => (
+            <a
+              key={link.label}
+              className="drawer-link"
+              href={link.href}
+              style={{ '--i': i }}
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#book"
+            className="btn btn--primary drawer-cta"
+            onClick={() => setOpen(false)}
+          >
+            Book Appointment
+          </a>
+        </nav>
+      </div>
+
+      {open && <div className="drawer-backdrop" onClick={() => setOpen(false)} />}
+    </header>
+  )
+}

@@ -1,0 +1,78 @@
+/* ============================================================
+   CLOSING CTA — striped
+   ============================================================ */
+.ostory-cta {
+  background-color: var(--color-white);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-white) 0px,
+    var(--color-white) 72px,
+    var(--color-bg) 72px,
+    var(--color-bg) 144px
+  );
+  padding: clamp(72px, 7vw, 100px) 0;
+}
+
+.ostory-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ostory-cta .ostory-eyebrow {
+  justify-content: center;
+}
+
+.ostory-cta-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  color: var(--color-espresso);
+  margin-top: 1.1rem;
+  max-width: 760px;
+}
+
+.ostory-cta-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.7;
+  color: var(--color-muted);
+  margin-top: 0.9rem;
+  max-width: 620px;
+}
+
+.ostory-cta-btn {
+  margin-top: clamp(1.6rem, 2vw, 2rem);
+  padding: 0.82rem 1.75rem;
+  border-radius: var(--radius-btn);
+  background-color: var(--color-coffee);
+  color: var(--color-white);
+  font-size: 0.9rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn--primary.ostory-cta-btn:hover {
+  background-color: var(--color-espresso);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -20px rgba(67, 39, 25, 0.4);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  .ostory-cta {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-white) 0px,
+      var(--color-white) 40px,
+      var(--color-bg) 40px,
+      var(--color-bg) 80px
+    );
+  }
+}

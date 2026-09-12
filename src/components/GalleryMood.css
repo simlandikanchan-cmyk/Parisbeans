@@ -1,0 +1,254 @@
+.gallery {
+  padding-block: var(--section-pad-desktop);
+  background-color: var(--color-bg);
+  overflow: clip;
+}
+
+.gallery-title {
+  margin: 1rem auto 1.2rem;
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+}
+
+.gallery-title em {
+  font-style: italic;
+  color: var(--color-coffee);
+}
+
+.gallery-desc {
+  max-width: 620px;
+  margin-inline: auto;
+  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  line-height: 1.65;
+}
+
+/* ---------- Carousel stage ---------- */
+.gallery-stage {
+  margin-top: clamp(1.4rem, 3vw, 2.4rem);
+  touch-action: pan-y;
+  /* Arc geometry per positional state */
+  --side-x: clamp(150px, 15vw, 270px);
+  --mid-x: clamp(260px, 26vw, 470px);
+  --far-x: clamp(380px, 34vw, 630px);
+  --hide-x: clamp(500px, 44vw, 800px);
+  --side-y: 26px;
+  --far-y: 44px;
+  --hide-y: 70px;
+  --side-s: 0.8;
+  --far-s: 0.6;
+}
+
+.carousel {
+  position: relative;
+  height: clamp(360px, 40vw, 520px);
+  max-width: min(1920px, 96vw);
+  margin-inline: auto;
+  user-select: none;
+  perspective: 1100px;
+}
+
+/* ---------- Slide: one element per gallery image, positioned by state class ---------- */
+.carousel-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(340px, 28vw);
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  transform-style: preserve-3d;
+  transition:
+    transform 900ms cubic-bezier(0.24, 1.08, 0.34, 1),
+    opacity 650ms ease,
+    filter 650ms ease,
+    z-index 0s;
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- Photo frame (no card, no Polaroid border) ---------- */
+.polaroid {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.polaroid-photo {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 12px 26px -16px rgba(53, 29, 19, 0.35);
+  transition: box-shadow 700ms ease;
+}
+
+.polaroid-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* ---------- Positional states form the arc ---------- */
+.carousel-item.center {
+  transform: translate(-50%, -50%) translate3d(0, 0, 36px) rotate(0deg) scale(1);
+  z-index: 10;
+  opacity: 1;
+  filter: none;
+}
+
+.carousel-item.center .polaroid-photo {
+  box-shadow: 0 26px 50px -22px rgba(53, 29, 19, 0.55);
+}
+
+.carousel-item.left {
+  transform: translate(-50%, -50%)
+    translate3d(calc(-1 * var(--side-x)), var(--side-y), 18px)
+    rotate(-3deg) scale(var(--side-s));
+  z-index: 3;
+  opacity: 0.95;
+  filter: none;
+}
+
+.carousel-item.right {
+  transform: translate(-50%, -50%)
+    translate3d(var(--side-x), var(--side-y), 18px)
+    rotate(3deg) scale(var(--side-s));
+  z-index: 3;
+  opacity: 0.95;
+  filter: none;
+}
+
+.carousel-item.far-left {
+  transform: translate(-50%, -50%)
+    translate3d(calc(-1 * var(--far-x)), var(--far-y), 0)
+    rotate(-5deg) scale(0.5);
+  z-index: 1;
+  opacity: 0.7;
+  filter: brightness(0.94);
+}
+
+.carousel-item.far-right {
+  transform: translate(-50%, -50%)
+    translate3d(var(--far-x), var(--far-y), 0)
+    rotate(5deg) scale(0.5);
+  z-index: 1;
+  opacity: 0.7;
+  filter: brightness(0.94);
+}
+
+.carousel-item.mid-left {
+  transform: translate(-50%, -50%)
+    translate3d(calc(-1 * var(--mid-x)), var(--side-y), 8px)
+    rotate(-4deg) scale(var(--mid-s, 0.65));
+  z-index: 2;
+  opacity: 0.88;
+  filter: none;
+}
+
+.carousel-item.mid-right {
+  transform: translate(-50%, -50%)
+    translate3d(var(--mid-x), var(--side-y), 8px)
+    rotate(4deg) scale(var(--mid-s, 0.65));
+  z-index: 2;
+  opacity: 0.88;
+  filter: none;
+}
+
+.carousel-item.hidden-left {
+  transform: translate(-50%, -50%)
+    translate3d(calc(-1 * var(--hide-x)), var(--hide-y), -60px)
+    rotate(-7deg) scale(0.4);
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(4px) brightness(0.9);
+}
+
+.carousel-item.hidden-right {
+  transform: translate(-50%, -50%)
+    translate3d(var(--hide-x), var(--hide-y), -60px)
+    rotate(7deg) scale(0.4);
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(4px) brightness(0.9);
+}
+
+.gallery-cta {
+  text-align: center;
+  margin-top: 2.2rem;
+}
+
+/* ---------- Tablet (builds down, outer cards drop away) ---------- */
+@media (max-width: 1100px) {
+  .gallery-stage {
+    --side-x: 12vw;
+    --mid-x: 26vw;
+    --far-x: 40vw;
+    --hide-x: 52vw;
+    --side-y: 18px;
+    --far-y: 34px;
+  }
+
+  .carousel {
+    height: clamp(300px, 38vw, 380px);
+  }
+}
+
+@media (max-width: 900px) {
+  .gallery-stage {
+    --side-x: 14vw;
+    --mid-x: 30vw;
+    --side-y: 16px;
+    --side-s: 0.7;
+    --mid-s: 0.6;
+  }
+
+  .carousel-item.far-left,
+  .carousel-item.far-right {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(4px) brightness(0.9);
+  }
+}
+
+/* ---------- Mobile: center + a peeking card on each side ---------- */
+@media (max-width: 640px) {
+  .gallery-stage {
+    --side-x: 15vw;
+    --mid-x: 33vw;
+    --side-y: 10px;
+    --side-s: 0.66;
+  }
+
+  .carousel {
+    height: clamp(200px, 60vw, 280px);
+  }
+
+  .carousel-item {
+    width: 30vw;
+  }
+
+  .carousel-item.mid-left,
+  .carousel-item.mid-right {
+    transform: translate(-50%, -50%)
+      translate3d(calc(-1 * var(--mid-x)), var(--side-y), 8px)
+      rotate(-4deg) scale(0.66);
+  }
+
+  .carousel-item.mid-right {
+    transform: translate(-50%, -50%)
+      translate3d(var(--mid-x), var(--side-y), 8px)
+      rotate(4deg) scale(0.66);
+  }
+
+  .polaroid-photo {
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item {
+    transition-duration: 0.001ms;
+  }
+}

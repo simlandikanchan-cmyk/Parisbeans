@@ -1,0 +1,14 @@
+/* ============================================================
+   STORY IMAGE ROW — full-width image between sections
+   ============================================================ */
+.ostory-story-img {
+  display: grid;
+  justify-items: center;
+  padding-block: clamp(0.5rem, 1vw, 1.25rem);
+}
+
+.ostory-story-img img {
+  display: block;
+  width: min(1920px, 100%);
+  height: auto;
+}

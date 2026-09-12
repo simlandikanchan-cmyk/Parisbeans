@@ -1,0 +1,287 @@
+/* ============================================================
+   Paris Beans — Global styles & design tokens
+   ============================================================ */
+
+:root {
+  /* Colors */
+  --color-bg: #F7F3EB;          /* cream */
+  --color-surface: #FBF9F4;     /* cream-light */
+  --color-white: #FFFFFF;
+  --color-espresso: #432719;
+  --color-espresso-dark: #351D13;
+  --color-coffee: #A96E3F;
+  --color-coffee-light: #C18A5B;
+  --color-gold: #B77A43;
+  --color-muted: #77685D;
+  --color-border: #E5D9CC;
+  --color-soft-green: #EEF4F1;
+
+  /* Footer dark */
+  --color-footer: #3B2217;
+
+  /* Typography */
+  --font-serif: 'Fraunces',sans-serif;
+  --font-sans: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --container-max: 1920px;
+  --section-pad-desktop: 110px;
+  --section-pad-mobile: 64px;
+  --gutter: clamp(20px, 4vw, 72px);
+
+  /* Effects */
+  --radius-btn: 999px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-soft: 18px;
+  --shadow-soft: 0 18px 40px -20px rgba(67, 39, 25, 0.35);
+  --shadow-card: 0 24px 50px -30px rgba(53, 29, 19, 0.45);
+
+  /* Transition */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-espresso);
+  line-height: 1.6;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+main {
+  background-color: var(--color-white);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* ---------- Focus & accessibility ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Section wrapper for consistent vertical rhythm */
+.section {
+  padding-block: var(--section-pad-desktop);
+}
+
+.section--tight {
+  padding-block: 88px;
+}
+
+@media (max-width: 768px) {
+  .section,
+  .section--tight {
+    padding-block: var(--section-pad-mobile);
+  }
+}
+
+/* ---------- Typography ---------- */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: clamp(0.66rem, 0.8vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-coffee);
+}
+
+h1, h2, h3, h4, .display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--color-espresso);
+  letter-spacing: -0.01em;
+}
+
+.h-display {
+  font-size: clamp(2.4rem, 5.2vw, 6.4rem);
+}
+
+.section-heading {
+  font-size: clamp(1.9rem, 3.6vw, 4.4rem);
+}
+
+.section-heading--large {
+  font-size: clamp(2.1rem, 4.2vw, 5.2rem);
+}
+
+.heading-italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.lead {
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.15vw, 1.4rem);
+  line-height: 1.8;
+}
+
+/* ---------- Centered section header ---------- */
+.section-header--center {
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius-btn);
+  padding: 0.82rem 1.6rem;
+  transition: transform 0.35s var(--ease), background-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease), color 0.35s var(--ease);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.btn .btn-arrow {
+  transition: transform 0.35s var(--ease);
+}
+
+.btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Primary — warm coffee */
+.btn--primary {
+  background-color: var(--color-coffee);
+  color: var(--color-white);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-espresso);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Secondary — light translucent neutral */
+.btn--ghost {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.btn--ghost:hover {
+  background-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+}
+
+/* Outline — for light backgrounds */
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-espresso);
+  border: 1px solid var(--color-espresso);
+}
+
+.btn--outline:hover {
+  background-color: var(--color-espresso);
+  color: var(--color-white);
+}
+
+/* Small compact lapel button */
+.btn--small {
+  font-size: 0.82rem;
+  padding: 0.6rem 1.25rem;
+}
+
+/* The dark espresso appointment pill in header */
+.btn--dark {
+  background-color: var(--color-espresso);
+  color: var(--color-white);
+}
+
+.btn--dark:hover {
+  background-color: var(--color-coffee);
+  transform: translateY(-2px);
+}
+
+/* ---------- Entrance animations ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

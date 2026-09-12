@@ -1,0 +1,204 @@
+/* ============================================================
+   HERO — INTRO + EDITORIAL GALLERY CAROUSEL
+   ============================================================ */
+.ostory-hero {
+  background-color: var(--color-white);
+  padding: clamp(72px, 6.5vw, 104px) 0 clamp(72px, 6.5vw, 100px);
+}
+
+.ostory-hero-box {
+  width: min(1920px, 92vw);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.ostory-hero .ostory-eyebrow {
+  margin-left: clamp(0px, 5vw, 72px);
+}
+
+.ostory-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4.2vw, 3.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  color: var(--color-espresso);
+  margin-top: clamp(1.4rem, 2vw, 1.9rem);
+  white-space: nowrap;
+}
+
+.ostory-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.7;
+  color: var(--color-muted);
+  margin-top: clamp(1.1rem, 1.4vw, 1.5rem);
+  white-space: nowrap;
+}
+
+/* ---- Gallery: dominant main image + narrow slices ---- */
+.ostory-gallery {
+  position: relative;
+  display: flex;
+  gap: clamp(10px, 1vw, 14px);
+  margin-top: clamp(2.5rem, 3vw, 3rem);
+}
+
+.ostory-gallery-main {
+  position: relative;
+  flex: 0 0 76.5%;
+  min-width: 0;
+  height: clamp(440px, 41vw, 720px);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  animation: ostoryMainPop 0.7s var(--ease) both;
+}
+
+.ostory-gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  will-change: transform;
+  animation: ostoryKenburns 20s ease-in-out infinite alternate both;
+  animation-delay: -3s;
+}
+
+.ostory-gallery-strip {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  gap: clamp(10px, 1vw, 14px);
+}
+
+.ostory-gallery-panel {
+  flex: 1 1 0;
+  min-width: 0;
+  height: clamp(440px, 41vw, 720px);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ostory-gallery-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  animation: ostoryKenburns 22s ease-in-out infinite alternate both;
+}
+
+.ostory-gallery-panel:nth-child(2) img {
+  animation-duration: 26s;
+  animation-delay: -7s;
+  animation-direction: alternate-reverse;
+}
+
+.ostory-gallery-panel:nth-child(3) img {
+  animation-duration: 24s;
+  animation-delay: -13s;
+}
+
+.ostory-gallery-panel:nth-child(4) img {
+  animation-duration: 28s;
+  animation-delay: -19s;
+  animation-direction: alternate-reverse;
+}
+
+/* Slow cinematic zoom inside the frame */
+@keyframes ostoryKenburns {
+  from {
+    transform: scale(1.02) translateY(0);
+  }
+  to {
+    transform: scale(1.1) translateY(-2.2%);
+  }
+}
+
+/* Crossfade the main image when the slide changes */
+@keyframes ostoryMainPop {
+  from {
+    opacity: 0;
+    transform: scale(1.045);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hover: pause motion + lift the tile */
+.ostory-gallery:hover img {
+  animation-play-state: paused;
+}
+
+.ostory-gallery-main,
+.ostory-gallery-panel {
+  transition: opacity 0.9s var(--ease), transform 0.8s var(--ease), box-shadow 0.8s var(--ease);
+}
+
+.ostory-gallery-main:hover,
+.ostory-gallery-panel:hover {
+  box-shadow: 0 30px 60px -30px rgba(53, 29, 19, 0.5);
+}
+
+.ostory-gallery-main:hover {
+  transform: scale(1.015);
+}
+
+.ostory-gallery-panel:hover {
+  transform: scale(1.03);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1180px) {
+  .ostory-title,
+  .ostory-desc {
+    white-space: normal;
+  }
+
+  .ostory-gallery-main,
+  .ostory-gallery-panel {
+    height: clamp(360px, 40vw, 500px);
+  }
+}
+
+/* Tablet: keep editorial hero layout — big main + thin side panels */
+@media (max-width: 900px) {
+  .ostory-gallery-main,
+  .ostory-gallery-panel {
+    height: clamp(300px, 46vw, 420px);
+  }
+}
+
+/* Phone: big main image + 2 slimmer side panels (same layout, scaled) */
+@media (max-width: 640px) {
+  .ostory-gallery {
+    flex-direction: row;
+  }
+
+  .ostory-gallery-main {
+    flex: 0 0 68%;
+    height: clamp(240px, 62vw, 360px);
+    border-radius: var(--radius-md);
+  }
+
+  .ostory-gallery-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ostory-gallery-panel:nth-child(n + 3) {
+    display: none;
+  }
+
+  .ostory-gallery-panel {
+    height: clamp(150px, 34vw, 210px);
+  }
+}

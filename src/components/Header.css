@@ -1,0 +1,333 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-white);
+  border-bottom: 1px solid transparent;
+  transition: box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 10px 30px -24px rgba(53, 29, 19, 0.4);
+  border-color: var(--color-border);
+}
+
+.header-inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  height: 78px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Left navigation */
+.nav-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(0.6rem, 1.4vw, 1.6rem);
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-espresso);
+  position: relative;
+  padding: 0.35rem 0.1rem;
+  transition: color 0.3s var(--ease);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-coffee);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+
+.nav-link:hover {
+  color: var(--color-coffee);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Center logo */
+.header-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  color: var(--color-espresso);
+  line-height: 1;
+}
+
+.logo-badge {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-espresso);
+  /* Slight overlap so it feels integrated into header */
+  margin-top: -6px;
+  box-shadow: 0 6px 16px -10px rgba(53, 29, 19, 0.3);
+  transition: box-shadow 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.logo-badge .logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+  display: block;
+}
+
+.header-logo:hover .logo-badge {
+  box-shadow: 0 10px 22px -12px rgba(53, 29, 19, 0.4);
+  transform: translateY(-2px);
+}
+
+.logo-word {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.02rem;
+  letter-spacing: 0.02em;
+  position: relative;
+  top: -2px;
+}
+
+/* Right */
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.9rem;
+}
+
+.header-cta {
+  white-space: nowrap;
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-espresso);
+  box-shadow: 0 2px 10px -6px rgba(53, 29, 19, 0.25);
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease), transform 0.2s var(--ease);
+}
+
+.menu-toggle:hover {
+  background-color: var(--color-bg);
+  border-color: var(--color-coffee);
+  box-shadow: 0 4px 14px -8px rgba(53, 29, 19, 0.35);
+}
+
+.menu-toggle:active {
+  transform: scale(0.92);
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+.menu-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---------- Mobile drawer ---------- */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(340px, 88vw);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-white) 100%);
+  z-index: 200;
+  transform: translateX(100%);
+  transition: transform 0.5s var(--ease);
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 1.6rem calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: -20px 0 50px -28px rgba(53, 29, 19, 0.55);
+  overscroll-behavior: contain;
+}
+
+.mobile-drawer.is-open {
+  transform: translateX(0);
+}
+
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.drawer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--color-espresso);
+}
+
+.drawer-logo .logo-badge {
+  width: 54px;
+  height: 54px;
+}
+
+.drawer-logo .logo-word {
+  font-size: 0.95rem;
+}
+
+.menu-toggle.close {
+  box-shadow: 0 2px 8px -6px rgba(53, 29, 19, 0.3);
+}
+
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  margin-bottom: 2rem;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-espresso);
+  padding: 0.8rem 0.25rem;
+  border-bottom: 1px solid var(--color-border);
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), color 0.3s var(--ease);
+}
+
+.drawer-link::after {
+  content: '→';
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-coffee);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.mobile-drawer.is-open .drawer-link {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.05s * var(--i, 0) + 0.1s);
+}
+
+.drawer-link:hover {
+  color: var(--color-coffee);
+}
+
+.drawer-link:hover::after {
+  opacity: 1;
+  transform: none;
+}
+
+.drawer-cta {
+  margin-top: auto;
+  width: 100%;
+  justify-content: center;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(53, 29, 19, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 150;
+  animation: drawerFadeIn 0.3s var(--ease) both;
+}
+
+@keyframes drawerFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Larger screens — step the nav up once the layout has room */
+@media (min-width: 1441px) {
+  .nav-link {
+    font-size: 18px;
+  }
+}
+
+/* ---------- Responsive ---------- */
+/* Tighten the desktop nav below 1180px so it clears the centered logo
+   before the mobile drawer takes over at 1024px. */
+@media (max-width: 1180px) {
+  .nav-left {
+    gap: 0.6rem;
+  }
+
+  .nav-link {
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-left {
+    display: none;
+  }
+
+  .header-inner {
+    grid-template-columns: auto 1fr;
+    height: 66px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .header-logo {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .header-right {
+    grid-column: 2;
+  }
+
+  .logo-badge {
+    width: 52px;
+    height: 52px;
+  }
+
+  .header-cta {
+    display: none;
+  }
+}

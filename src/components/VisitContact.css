@@ -1,0 +1,483 @@
+/* ============================================================
+   Visit & Contact — Page body styles
+   ============================================================ */
+
+.visit-page {
+  background-color: var(--color-white);
+}
+
+/* ── Hero (boxed banner — same structure as Menu hero) ────── */
+.visit-hero {
+  position: relative;
+  margin: clamp(2.75rem, 5vw, 3.5rem) auto 0;
+  width: min(1920px, 93.5vw);
+  min-height: clamp(200px, 22vw, 240px);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-white);
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.visit-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.visit-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visit-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(53, 29, 19, 0.72) 0%,
+    rgba(67, 39, 25, 0.5) 48%,
+    rgba(67, 39, 25, 0.26) 100%
+  );
+}
+
+.visit-hero-word {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(4.5rem, 15vw, 11rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+}
+
+.visit-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.visit-hero-copy {
+  max-width: 60%;
+}
+
+.visit-hero-eyebrow {
+  color: var(--color-coffee-light);
+  margin-bottom: 0.9rem;
+}
+
+.visit-hero-title {
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.65rem, 3.1vw, 3.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.9rem;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
+}
+
+.visit-hero-title em {
+  color: var(--color-coffee-light);
+}
+
+.visit-hero-desc {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  line-height: 1.65;
+  max-width: 520px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Contact + Location grid ──────────────────────────────── */
+.visit-contact {
+  background-color: var(--color-bg);
+  padding-inline: var(--gutter);
+}
+
+.visit-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.75rem, 3vw, 2.75rem);
+  align-items: stretch;
+  max-width: 1920px;
+  margin-inline: auto;
+}
+
+.visit-card {
+  background: var(--color-white);
+  border-radius: var(--radius-soft);
+  padding: clamp(2.25rem, 3.5vw, 3.25rem);
+}
+
+.visit-card-title {
+  font-style: italic;
+  font-size: clamp(2.4rem, 3.4vw, 3.4rem);
+  margin-bottom: clamp(1.5rem, 2vw, 2.25rem);
+}
+
+/* ── Form ─────────────────────────────────────────────────── */
+.visit-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.visit-field {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.visit-field input,
+.visit-field textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  color: var(--color-espresso);
+  background: rgba(247, 243, 235, 0.55);
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: var(--radius-md) 10px 0 0;
+  padding-inline: 1.1rem;
+  outline: none;
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+  resize: none;
+}
+
+.visit-field input {
+  height: 60px;
+}
+
+.visit-field textarea {
+  min-height: 150px;
+  padding-top: 1.1rem;
+}
+
+.visit-field input::placeholder,
+.visit-field textarea::placeholder {
+  color: var(--color-muted);
+}
+
+.visit-field input:focus,
+.visit-field textarea:focus {
+  border-bottom-color: var(--color-coffee);
+  background: rgba(247, 243, 235, 0.85);
+}
+
+/* Checkbox */
+.visit-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: clamp(0.95rem, 1vw, 1.05rem);
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 1.1rem 0 1.5rem;
+}
+
+.visit-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.visit-checkbox-box {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--color-coffee-light);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  display: grid;
+  place-items: center;
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.visit-checkbox input:checked + .visit-checkbox-box {
+  background-color: var(--color-coffee);
+  border-color: var(--color-coffee);
+}
+
+.visit-checkbox input:checked + .visit-checkbox-box::after {
+  content: '';
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--color-white);
+  border-bottom: 2px solid var(--color-white);
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.visit-checkbox input:focus-visible + .visit-checkbox-box {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 2px;
+}
+
+.visit-submit-btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* ── Info card ────────────────────────────────────────────── */
+.visit-info-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.visit-info-intro {
+  color: var(--color-muted);
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  line-height: 1.7;
+  margin-bottom: clamp(1.4rem, 2vw, 1.9rem);
+}
+
+.visit-map-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(400px, 30vw, 520px);
+  border-radius: var(--radius-soft);
+  overflow: hidden;
+  margin-bottom: clamp(1.4rem, 2vw, 2rem);
+  border: 1px solid var(--color-border);
+}
+
+.visit-map {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.visit-map-card {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  max-width: 230px;
+  padding: 0.9rem 1.15rem;
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-soft);
+}
+
+.visit-map-card-name {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-espresso);
+  line-height: 1.25;
+}
+
+.visit-map-card-address {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.visit-info-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: auto;
+  padding-top: clamp(1.4rem, 2vw, 2.25rem);
+}
+
+.visit-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.visit-info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.visit-info-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-coffee);
+}
+
+.visit-info-value {
+  font-size: clamp(1.02rem, 1.25vw, 1.2rem);
+  color: var(--color-espresso);
+}
+
+.visit-social {
+  display: flex;
+  gap: 0.85rem;
+}
+
+/* Visible social icons on the light card (footer's base style is dark-on-dark) */
+.visit-social .social-link {
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-espresso);
+}
+
+.visit-social .social-link:hover {
+  background-color: var(--color-coffee);
+  border-color: var(--color-coffee);
+  color: var(--color-white);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -12px rgba(169, 110, 63, 0.6);
+}
+
+/* ── CTA ──────────────────────────────────────────────────── */
+.visit-cta {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+.visit-cta-stripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-soft-green) 0,
+    var(--color-soft-green) 62px,
+    transparent 62px,
+    transparent 124px
+  );
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.visit-cta-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 720px;
+}
+
+.visit-cta-title {
+  margin: 1rem auto 1.2rem;
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+}
+
+.visit-cta-title em {
+  font-style: italic;
+  color: var(--color-coffee);
+}
+
+.visit-cta-desc {
+  color: var(--color-muted);
+  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto 2rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .visit-contact-grid {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+
+  .visit-map-wrap {
+    height: clamp(360px, 42vw, 480px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .visit-hero {
+    margin: clamp(1.5rem, 3vw, 2.5rem) auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .visit-hero {
+    min-height: 200px;
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  .visit-hero {
+    min-height: 190px;
+    margin: 1.25rem auto;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .visit-hero-word {
+    right: 3%;
+    font-size: clamp(4rem, 22vw, 7rem);
+  }
+
+  .visit-hero-title {
+    font-size: 1.5rem;
+  }
+
+  .visit-hero-desc {
+    font-size: 0.86rem;
+  }
+
+  .visit-card {
+    padding: 1.75rem;
+  }
+
+  .visit-field input {
+    height: 54px;
+  }
+
+  .visit-field textarea {
+    min-height: 130px;
+  }
+
+  .visit-map-wrap {
+    height: 300px;
+  }
+
+  .visit-info-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition-duration: 0.001ms;
+  }
+}
+
+/* ── Accessibility helpers ────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

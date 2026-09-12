@@ -1,0 +1,100 @@
+/* ============================================================
+   ORIGIN STORY — cream · image on the right
+   ============================================================ */
+.ostory-origin {
+  position: relative;
+  background-color: var(--color-bg);
+  padding: clamp(92px, 9vw, 128px) 0;
+  overflow: hidden;
+}
+
+.ostory-origin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 44%) 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+}
+
+.ostory-origin-copy {
+  max-width: 600px;
+}
+
+.ostory-origin-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-espresso);
+  margin: 1.1rem 0 1.5rem;
+}
+
+.ostory-origin-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-coffee);
+}
+
+.ostory-origin-text {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--color-muted);
+  margin-top: 1.15rem;
+  max-width: 540px;
+}
+
+.ostory-emblem-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.ostory-line-art {
+  position: absolute;
+  left: clamp(-40px, -3vw, -10px);
+  bottom: -52px;
+  width: 250px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ostory-line-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ostory-emblem-photo {
+  position: relative;
+  width: clamp(300px, 32vw, 580px);
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.ostory-emblem-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .ostory-origin-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(3rem, 7vw, 5rem);
+  }
+
+  .ostory-origin-copy {
+    max-width: 640px;
+  }
+
+  .ostory-line-art {
+    display: none;
+  }
+}
