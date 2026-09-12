@@ -504,6 +504,22 @@
   }
 }
 
+/* ── Mobile spacing ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .gal-section {
+    padding-block: var(--section-pad-mobile);
+  }
+
+  .gal-hero {
+    padding-top: 48px;
+    padding-bottom: 44px;
+  }
+
+  .gal-grid {
+    margin-top: 1.6rem;
+  }
+}
+
 /* ── Reduced motion ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .gal-card,
