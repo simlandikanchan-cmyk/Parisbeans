@@ -211,34 +211,29 @@
   }
 }
 
-/* ---------- Mobile: center + a peeking card on each side ---------- */
+/* ---------- Mobile: bigger center card + a peek on each side ---------- */
 @media (max-width: 640px) {
   .gallery-stage {
-    --side-x: 15vw;
-    --mid-x: 33vw;
+    --side-x: 26vw;
     --side-y: 10px;
-    --side-s: 0.66;
+    --side-s: 0.78;
   }
 
   .carousel {
-    height: clamp(200px, 60vw, 280px);
+    height: clamp(320px, 66vw, 460px);
+    max-width: 100%;
   }
 
   .carousel-item {
-    width: 30vw;
+    width: 48vw;
   }
 
   .carousel-item.mid-left,
   .carousel-item.mid-right {
-    transform: translate(-50%, -50%)
-      translate3d(calc(-1 * var(--mid-x)), var(--side-y), 8px)
-      rotate(-4deg) scale(0.66);
-  }
-
-  .carousel-item.mid-right {
-    transform: translate(-50%, -50%)
-      translate3d(var(--mid-x), var(--side-y), 8px)
-      rotate(4deg) scale(0.66);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(4px) brightness(0.9);
   }
 
   .polaroid-photo {
