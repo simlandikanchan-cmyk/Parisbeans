@@ -190,11 +190,17 @@
 
 @media (max-width: 480px) {
   .menu-grid {
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
   }
 
   .menu-thumb {
     aspect-ratio: 0.9 / 1;
+  }
+
+  .menu-caption {
+    min-height: 44px;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.55rem;
   }
 }

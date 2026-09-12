@@ -1,7 +1,6 @@
 import OurStoryHero from '../components/OurStoryHero'
 import OurStoryOrigin from '../components/OurStoryOrigin'
 import OurStoryImageRow from '../components/OurStoryImageRow'
-import OurStoryExperience from '../components/OurStoryExperience'
 import OurStoryCta from '../components/OurStoryCta'
 import './OurStory.css'
 
