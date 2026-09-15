@@ -43,7 +43,7 @@ export default function Header() {
 
         {/* Right — appointment + mobile trigger */}
         <div className="header-right">
-          <a href="#book" className="btn btn--dark btn--small header-cta">
+          <a href="/visit-contact" className="btn btn--dark btn--small header-cta">
             Book Appointment
           </a>
           <button
@@ -89,7 +89,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="#book"
+            href="/visit-contact"
             className="btn btn--primary drawer-cta"
             onClick={() => setOpen(false)}
           >

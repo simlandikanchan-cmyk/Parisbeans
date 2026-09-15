@@ -39,7 +39,7 @@ export default function CafeMenu() {
             around your appointment.
           </p>
           <div className="reveal reveal-delay-3">
-            <Button href="/gallery" variant="primary" arrow>
+            <Button href="/menu" variant="primary" arrow>
               View the Menu
             </Button>
           </div>

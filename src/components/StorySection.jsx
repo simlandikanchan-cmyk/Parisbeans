@@ -43,7 +43,7 @@ export default function StorySection() {
             break into the heart of HAIR RAP BY YOYO.
           </p>
           <div className="reveal">
-            <Button href="#story-more" variant="outline" arrow>
+            <Button href="/story" variant="outline" arrow>
               Read Our Story
             </Button>
           </div>

@@ -30,7 +30,7 @@ export default function VisitCTA() {
           Book your Hair Rap by Yoyo appointment and enjoy your complimentary
           coffee at Paris Beans.
         </p>
-        <Button href="#book" variant="primary" arrow>
+        <Button href="#visit-contact" variant="primary" arrow>
           Book Your Salon Appointment
         </Button>
       </div>

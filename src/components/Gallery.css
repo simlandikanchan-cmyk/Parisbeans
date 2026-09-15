@@ -125,35 +125,35 @@
 .gal-card.left {
   transform: translate(-50%, -50%)
     translate3d(calc(-1 * var(--side-x)), var(--side-y), 0)
-    rotate(-2.5deg) scale(var(--side-s));
+    scale(var(--side-s));
   z-index: 6;
 }
 
 .gal-card.right {
   transform: translate(-50%, -50%)
     translate3d(var(--side-x), var(--side-y), 0)
-    rotate(2.5deg) scale(var(--side-s));
+    scale(var(--side-s));
   z-index: 6;
 }
 
 .gal-card.far-left {
   transform: translate(-50%, -50%)
     translate3d(calc(-1 * var(--far-x)), var(--far-y), 0)
-    rotate(-4deg) scale(var(--far-s));
+    scale(var(--far-s));
   z-index: 3;
 }
 
 .gal-card.far-right {
   transform: translate(-50%, -50%)
     translate3d(var(--far-x), var(--far-y), 0)
-    rotate(4deg) scale(var(--far-s));
+    scale(var(--far-s));
   z-index: 3;
 }
 
 .gal-card.hidden-left {
   transform: translate(-50%, -50%)
     translate3d(calc(-1 * var(--far-x)), var(--far-y), 0)
-    rotate(-4deg) scale(var(--far-s));
+    scale(var(--far-s));
   z-index: 1;
   opacity: 0;
   pointer-events: none;
@@ -162,7 +162,7 @@
 .gal-card.hidden-right {
   transform: translate(-50%, -50%)
     translate3d(var(--far-x), var(--far-y), 0)
-    rotate(4deg) scale(var(--far-s));
+    scale(var(--far-s));
   z-index: 1;
   opacity: 0;
   pointer-events: none;

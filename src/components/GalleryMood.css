@@ -26,10 +26,14 @@
   margin-top: clamp(1.4rem, 3vw, 2.4rem);
   touch-action: pan-y;
   /* Arc geometry per positional state */
-  --side-x: clamp(150px, 15vw, 270px);
-  --mid-x: clamp(260px, 26vw, 470px);
-  --far-x: clamp(380px, 34vw, 630px);
-  --hide-x: clamp(500px, 44vw, 800px);
+  --side-x: clamp(170px, 17vw, 310px);
+  --mid-x: clamp(300px, 30vw, 540px);
+  --far-x: clamp(440px, 40vw, 700px);
+  --hide-x: clamp(560px, 50vw, 900px);
+  --side-y: 30px;
+  --far-y: 50px;
+  --side-s: 0.85;
+  --far-s: 0.55;
   --side-y: 26px;
   --far-y: 44px;
   --hide-y: 70px;
@@ -39,7 +43,7 @@
 
 .carousel {
   position: relative;
-  height: clamp(360px, 40vw, 520px);
+  height: clamp(420px, 46vw, 640px);
   max-width: min(1920px, 96vw);
   margin-inline: auto;
   user-select: none;
@@ -51,7 +55,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(340px, 28vw);
+  width: min(400px, 32vw);
   cursor: pointer;
   will-change: transform, opacity, filter;
   transform-style: preserve-3d;
@@ -101,7 +105,7 @@
 .carousel-item.left {
   transform: translate(-50%, -50%)
     translate3d(calc(-1 * var(--side-x)), var(--side-y), 18px)
-    rotate(-3deg) scale(var(--side-s));
+    scale(var(--side-s));
   z-index: 3;
   opacity: 0.95;
   filter: none;
@@ -110,7 +114,7 @@
 .carousel-item.right {
   transform: translate(-50%, -50%)
     translate3d(var(--side-x), var(--side-y), 18px)
-    rotate(3deg) scale(var(--side-s));
+    scale(var(--side-s));
   z-index: 3;
   opacity: 0.95;
   filter: none;
@@ -119,7 +123,7 @@
 .carousel-item.far-left {
   transform: translate(-50%, -50%)
     translate3d(calc(-1 * var(--far-x)), var(--far-y), 0)
-    rotate(-5deg) scale(0.5);
+    scale(var(--far-s, 0.55));
   z-index: 0;
   opacity: 0;
   pointer-events: none;
@@ -129,7 +133,7 @@
 .carousel-item.far-right {
   transform: translate(-50%, -50%)
     translate3d(var(--far-x), var(--far-y), 0)
-    rotate(5deg) scale(0.5);
+    scale(var(--far-s, 0.55));
   z-index: 0;
   opacity: 0;
   pointer-events: none;
@@ -139,7 +143,7 @@
 .carousel-item.mid-left {
   transform: translate(-50%, -50%)
     translate3d(calc(-1 * var(--mid-x)), var(--side-y), 8px)
-    rotate(-4deg) scale(var(--mid-s, 0.65));
+    scale(var(--mid-s, 0.7));
   z-index: 2;
   opacity: 0.88;
   filter: none;
@@ -148,7 +152,7 @@
 .carousel-item.mid-right {
   transform: translate(-50%, -50%)
     translate3d(var(--mid-x), var(--side-y), 8px)
-    rotate(4deg) scale(var(--mid-s, 0.65));
+    scale(var(--mid-s, 0.7));
   z-index: 2;
   opacity: 0.88;
   filter: none;
@@ -182,39 +186,49 @@
 /* ---------- Tablet (builds down, outer cards drop away) ---------- */
 @media (max-width: 1100px) {
   .gallery-stage {
-    --side-x: 12vw;
-    --mid-x: 26vw;
-    --far-x: 40vw;
-    --hide-x: 52vw;
-    --side-y: 18px;
-    --far-y: 34px;
+    --side-x: 14vw;
+    --mid-x: 30vw;
+    --far-x: 44vw;
+    --hide-x: 58vw;
+    --side-y: 20px;
+    --far-y: 38px;
   }
 
   .carousel {
-    height: clamp(300px, 38vw, 380px);
+    height: clamp(340px, 42vw, 480px);
   }
 }
 
 @media (max-width: 900px) {
   .gallery-stage {
-    --side-x: 14vw;
-    --mid-x: 30vw;
-    --side-y: 16px;
-    --side-s: 0.7;
-    --mid-s: 0.6;
+    --side-x: 16vw;
+    --mid-x: 34vw;
+    --side-y: 18px;
+    --side-s: 0.72;
+    --mid-s: 0.62;
+  }
+}
+
+/* ---------- Desktop: reveal the full 7-image arc (far slides come into view) ---------- */
+@media (min-width: 901px) {
+  .carousel-item.far-left,
+  .carousel-item.far-right {
+    opacity: 0.9;
+    pointer-events: auto;
+    filter: brightness(0.97);
   }
 }
 
 /* ---------- Mobile: bigger center card + a peek on each side ---------- */
 @media (max-width: 640px) {
   .gallery-stage {
-    --side-x: 26vw;
-    --side-y: 10px;
-    --side-s: 0.78;
+    --side-x: 28vw;
+    --side-y: 12px;
+    --side-s: 0.8;
   }
 
   .carousel {
-    height: clamp(320px, 66vw, 460px);
+    height: clamp(360px, 72vw, 520px);
     max-width: 100%;
   }
 

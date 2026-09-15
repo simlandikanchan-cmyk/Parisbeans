@@ -16,7 +16,7 @@ export default function OurStoryCta() {
           It is a small Parisian ritual built into your Hair Rap by Yoyo
           experience.
         </p>
-        <Button href="#book" variant="primary" arrow className="ostory-cta-btn">
+        <Button href="/visit-contact" variant="primary" arrow className="ostory-cta-btn">
           Book Your Salon Appointment
         </Button>
       </div>

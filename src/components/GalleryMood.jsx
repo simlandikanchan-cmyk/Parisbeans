@@ -144,7 +144,7 @@ export default function GalleryMood() {
       </div>
 
       <div className="gallery-cta reveal reveal-delay-2">
-        <Button href="#gallery-more" variant="outline" arrow>
+        <Button href="/gallery" variant="outline" arrow>
           See the Gallery
         </Button>
       </div>

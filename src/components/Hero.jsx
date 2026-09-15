@@ -57,7 +57,7 @@ export default function Hero() {
           </p>
 
           <div className="hero-actions reveal reveal-delay-3">
-            <Button href="#book" variant="primary" arrow>
+            <Button href="/visit-contact" variant="primary" arrow>
               Book Your Salon Appointment
             </Button>
             <Button href="/menu" variant="ghost">

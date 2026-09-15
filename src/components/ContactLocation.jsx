@@ -20,7 +20,7 @@ export default function ContactLocation() {
   }, [])
 
   return (
-    <section className="visit-contact section" ref={ref}>
+    <section id="visit-contact" className="visit-contact section" ref={ref}>
       <div className="visit-contact-grid">
 
         {/* Left — Contact form */}

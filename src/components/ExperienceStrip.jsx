@@ -32,7 +32,7 @@ export default function ExperienceStrip() {
           your Hair Rap by Yoyo experience.
         </p>
         <div className="reveal reveal-delay-3">
-          <Button href="#book" variant="primary" arrow>
+          <Button href="/visit-contact" variant="primary" arrow>
             Reserve Your Spot
           </Button>
         </div>
