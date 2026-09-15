@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { navLinks } from '../data/siteData'
+import Button from './Button'
 import './Header.css'
 
 export default function Header() {
@@ -24,7 +25,6 @@ export default function Header() {
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="header-inner">
-        {/* Left nav — desktop */}
         <nav className="nav-left" aria-label="Primary navigation">
           {navLinks.map((link) => (
             <a key={link.label} className="nav-link" href={link.href}>
@@ -33,19 +33,14 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Center logo */}
         <a href="/" className="header-logo" aria-label="Paris Beans — home">
-          <span className="logo-badge">
-            <img src="/logo (2).svg" alt="" className="logo-img" />
-          </span>
-          {/* <span className="logo-word">Paris Beans</span> */}
+          <img src="/logo (2).svg" alt="" className="logo-img" />
         </a>
 
-        {/* Right — appointment + mobile trigger */}
         <div className="header-right">
-          <a href="/visit-contact" className="btn btn--dark btn--small header-cta">
+          <Button href="/visit-contact" variant="dark" size="small" className="header-cta">
             Book Appointment
-          </a>
+          </Button>
           <button
             type="button"
             className="menu-toggle"
@@ -58,13 +53,10 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
       <div className={`mobile-drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         <div className="drawer-head">
           <a href="/" className="drawer-logo" onClick={() => setOpen(false)}>
-            <span className="logo-badge">
-              <img src="/logo (2).svg" alt="" className="logo-img" />
-            </span>
+            <img src="/logo (2).svg" alt="" className="logo-img" />
             <span className="logo-word">Paris Beans</span>
           </a>
           <button
@@ -88,11 +80,7 @@ export default function Header() {
               {link.label}
             </a>
           ))}
-          <a
-            href="/visit-contact"
-            className="btn btn--primary drawer-cta"
-            onClick={() => setOpen(false)}
-          >
+          <a href="/visit-contact" className="btn btn--primary drawer-cta" onClick={() => setOpen(false)}>
             Book Appointment
           </a>
         </nav>

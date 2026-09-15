@@ -24,9 +24,9 @@
   align-items: center;
   gap: 12px;
   color: var(--color-gold);
-  font-size: 0.72rem;
+  font-size: var(--fs-eyebrow);
   font-weight: var(--fw-medium);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -41,7 +41,7 @@
 .legal-title {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   font-size: clamp(2.2rem, 4.5vw, 3.6rem);
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
@@ -64,9 +64,9 @@
   flex-wrap: wrap;
   gap: 0.75rem 1.5rem;
   margin-top: 1.4rem;
-  font-size: 0.8rem;
+  font-size: var(--fs-label);
   font-weight: var(--fw-medium);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-muted);
 }
@@ -98,7 +98,7 @@
 
 .legal-h2 {
   font-family: var(--font-serif);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-medium);
   font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   line-height: var(--lh-heading-sm);
   color: var(--color-espresso);
@@ -152,7 +152,7 @@
 .legal-contact h3 {
   font-family: var(--font-serif);
   font-size: 1.3rem;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-medium);
   margin-bottom: 0.6rem;
   color: var(--color-espresso);
 }

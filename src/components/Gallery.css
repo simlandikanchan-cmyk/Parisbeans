@@ -278,7 +278,6 @@
 
 .gal-section-title {
   font-size: var(--fs-section);
-  font-style: italic;
   margin: 1rem 0 1.2rem;
   max-width: 640px;
 }

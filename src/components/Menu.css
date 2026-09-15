@@ -85,7 +85,7 @@
 .menu-hero-title {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
   font-size: clamp(1.65rem, 3.1vw, 3.8rem);
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);

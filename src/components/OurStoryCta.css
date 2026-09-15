@@ -26,7 +26,7 @@
 
 .ostory-cta-title {
   font-family: var(--font-serif);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-medium);
   font-size: var(--fs-section);
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
