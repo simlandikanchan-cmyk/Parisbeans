@@ -20,9 +20,37 @@
   /* Footer dark */
   --color-footer: #3B2217;
 
-  /* Typography */
-  --font-serif: 'Fraunces',sans-serif;
+  /* Typography — fonts */
+  --font-serif: 'Fraunces', serif;
   --font-sans: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Font sizes */
+  --fs-eyebrow: clamp(0.66rem, 0.8vw, 0.72rem);
+  --fs-text: clamp(0.98rem, 1.1vw, 1.06rem);
+  --fs-lead: clamp(1rem, 1.15vw, 1.4rem);
+  --fs-btn: 0.92rem;
+  --fs-btn-sm: 0.82rem;
+  --fs-section: clamp(1.9rem, 3.8vw, 2.9rem);
+
+  /* Line heights */
+  --lh-heading: 1.1;
+  --lh-heading-sm: 1.2;
+  --lh-body: 1.6;
+  --lh-text: 1.7;
+  --lh-small: 1.6;
+  --lh-lead: 1.8;
+  --lh-ui: 1.2;
+
+  /* Letter spacing */
+  --tracking-tight: -0.01em;
+  --tracking-btn: 0.01em;
+  --tracking-eyebrow: 0.32em;
 
   /* Spacing */
   --container-max: 1920px;
@@ -79,8 +107,8 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-espresso);
-  line-height: 1.6;
-  font-weight: 400;
+  line-height: var(--lh-body);
+  font-weight: var(--fw-regular);
   overflow-x: hidden;
 }
 
@@ -146,42 +174,34 @@ button {
 /* ---------- Typography ---------- */
 .eyebrow {
   font-family: var(--font-sans);
-  font-size: clamp(0.66rem, 0.8vw, 0.72rem);
-  font-weight: 500;
-  letter-spacing: 0.32em;
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--color-coffee);
 }
 
 h1, h2, h3, h4, .display {
   font-family: var(--font-serif);
-  font-weight: 500;
-  line-height: 1.12;
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-heading);
   color: var(--color-espresso);
-  letter-spacing: -0.01em;
-}
-
-.h-display {
-  font-size: clamp(2.4rem, 5.2vw, 6.4rem);
+  letter-spacing: var(--tracking-tight);
 }
 
 .section-heading {
-  font-size: clamp(1.9rem, 3.6vw, 4.4rem);
-}
-
-.section-heading--large {
-  font-size: clamp(2.1rem, 4.2vw, 5.2rem);
+  font-size: var(--fs-section);
 }
 
 .heading-italic {
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
 }
 
 .lead {
   color: var(--color-muted);
-  font-size: clamp(1rem, 1.15vw, 1.4rem);
-  line-height: 1.8;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
 }
 
 /* ---------- Centered section header ---------- */
@@ -197,15 +217,15 @@ h1, h2, h3, h4, .display {
   align-items: center;
   gap: 0.55rem;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-size: var(--fs-btn);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-btn);
   border-radius: var(--radius-btn);
   padding: 0.82rem 1.6rem;
   transition: transform 0.35s var(--ease), background-color 0.35s var(--ease),
     box-shadow 0.35s var(--ease), color 0.35s var(--ease);
   white-space: nowrap;
-  line-height: 1.2;
+  line-height: var(--lh-ui);
 }
 
 .btn .btn-arrow {
@@ -255,7 +275,7 @@ h1, h2, h3, h4, .display {
 
 /* Small compact lapel button */
 .btn--small {
-  font-size: 0.82rem;
+  font-size: var(--fs-btn-sm);
   padding: 0.6rem 1.25rem;
 }
 

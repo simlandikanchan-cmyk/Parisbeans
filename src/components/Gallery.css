@@ -18,24 +18,24 @@
 .gal-hero-title {
   color: var(--color-espresso);
   font-size: clamp(2rem, 4.2vw, 3.75rem);
-  line-height: 1.15;
-  font-weight: 700;
+  line-height: var(--lh-heading);
+  font-weight: var(--fw-bold);
   font-style: italic;
-  letter-spacing: -0.015em;
+  letter-spacing: var(--tracking-tight);
   margin: 1rem 0 1.2rem;
   max-width: 700px;
 }
 
 .gal-hero-title em {
   font-style: italic;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   color: var(--color-coffee);
 }
 
 .gal-hero-desc {
   max-width: 560px;
-  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
-  line-height: 1.65;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
 }
 
 /* ---------- Hero composition — centered, overlapping, focal-card carousel ---------- */
@@ -277,7 +277,7 @@
 }
 
 .gal-section-title {
-  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  font-size: var(--fs-section);
   font-style: italic;
   margin: 1rem 0 1.2rem;
   max-width: 640px;
@@ -290,8 +290,8 @@
 
 .gal-section-desc {
   max-width: 560px;
-  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
-  line-height: 1.65;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
 }
 
 /* ---------- Image grids ---------- */

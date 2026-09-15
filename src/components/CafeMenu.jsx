@@ -25,7 +25,7 @@ export default function CafeMenu() {
         {/* Left — text */}
         <div className="cafe-copy">
           <p className="eyebrow reveal">From the Café</p>
-          <h2 className="section-heading--large cafe-title reveal reveal-delay-1">
+          <h2 className="cafe-title reveal reveal-delay-1">
             Coffee,
             <br />
             <em>Breakfast</em> &amp;

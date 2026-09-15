@@ -41,7 +41,7 @@ export default function StorySection() {
         {/* Left — text */}
         <div className="story-copy">
           <div className="pb-story-eyebrow eyebrow">OUR STORY</div>
-          <h2 className="section-heading--large story-title">
+          <h2 className="story-title">
             Inspired by Paris
             <br />
             <em>Streets.</em> Crafted for

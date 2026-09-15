@@ -140,8 +140,8 @@ export default function Footer() {
           <div className="footer-legal">
             <span>© 2026 Paris Beans. All rights reserved.</span>
             <span className="legal-links">
-              <a href="#privacy">Privacy Policy</a>
-              <a href="#terms">Terms &amp; Conditions</a>
+              <a href="/privacy-policy">Privacy Policy</a>
+              <a href="/terms-and-conditions">Terms &amp; Conditions</a>
             </span>
           </div>
           <a href="/" className="back-to-top" aria-label="Back to top">

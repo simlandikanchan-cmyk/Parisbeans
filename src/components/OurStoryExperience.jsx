@@ -82,7 +82,7 @@ export default function OurStoryExperience() {
                 letterSpacing="3"
                 fontSize="14"
                 fill="#F7F3EB"
-                style={{ fontFamily: "'Fraunces', serif" }}
+                style={{ fontFamily: 'var(--font-serif)' }}
                 opacity="0.94"
               >
                 PARIS BEANS
@@ -94,7 +94,7 @@ export default function OurStoryExperience() {
                 letterSpacing="1.5"
                 fontSize="5"
                 fill="#C18A5B"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
+                style={{ fontFamily: 'var(--font-sans)' }}
               >
                 HAIR RAP BY YOYO
               </text>

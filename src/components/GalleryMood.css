@@ -6,7 +6,7 @@
 
 .gallery-title {
   margin: 1rem auto 1.2rem;
-  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  font-size: var(--fs-section);
 }
 
 .gallery-title em {
@@ -17,8 +17,8 @@
 .gallery-desc {
   max-width: 620px;
   margin-inline: auto;
-  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
-  line-height: 1.65;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
 }
 
 /* ---------- Carousel stage ---------- */

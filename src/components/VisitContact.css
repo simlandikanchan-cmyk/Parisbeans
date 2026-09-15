@@ -50,7 +50,7 @@
   transform: translateY(-50%);
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   font-size: clamp(4.5rem, 15vw, 11rem);
   line-height: 1;
   letter-spacing: -0.02em;
@@ -78,10 +78,10 @@
   color: var(--color-white);
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   font-size: clamp(1.65rem, 3.1vw, 3.8rem);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking-tight);
   margin-bottom: 0.9rem;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
 }
@@ -93,7 +93,7 @@
 .visit-hero-desc {
   color: rgba(255, 255, 255, 0.88);
   font-size: clamp(0.9rem, 1.05vw, 1rem);
-  line-height: 1.65;
+  line-height: var(--lh-text);
   max-width: 520px;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
 }
@@ -236,7 +236,7 @@
 .visit-info-intro {
   color: var(--color-muted);
   font-size: clamp(1.05rem, 1.35vw, 1.2rem);
-  line-height: 1.7;
+  line-height: var(--lh-text);
   margin-bottom: clamp(1.4rem, 2vw, 1.9rem);
 }
 
@@ -274,9 +274,9 @@
 .visit-map-card-name {
   display: block;
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   color: var(--color-espresso);
-  line-height: 1.25;
+  line-height: var(--lh-heading-sm);
 }
 
 .visit-map-card-address {
@@ -352,7 +352,7 @@
 .visit-cta {
   position: relative;
   overflow: hidden;
-  background-color: var(--color-surface);
+  background-color: #ffffff;
 }
 
 .visit-cta-stripes {
@@ -378,7 +378,7 @@
 
 .visit-cta-title {
   margin: 1rem auto 1.2rem;
-  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  font-size: var(--fs-section);
 }
 
 .visit-cta-title em {
@@ -389,7 +389,7 @@
 .visit-cta-desc {
   color: var(--color-muted);
   font-size: clamp(0.98rem, 1.1vw, 1.06rem);
-  line-height: 1.8;
+  line-height: var(--lh-lead);
   max-width: 560px;
   margin: 0 auto 2rem;
 }

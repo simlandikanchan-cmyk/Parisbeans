@@ -1,0 +1,183 @@
+/* ============================================================
+   Paris Beans — Legal pages (Privacy Policy / Terms & Conditions)
+   ============================================================ */
+
+.legal-page {
+  background-color: var(--color-white);
+}
+
+.legal-shell {
+  width: min(880px, 91%);
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-block: clamp(64px, 7vw, 120px) clamp(84px, 8vw, 140px);
+}
+
+/* ── Title block ─────────────────────────────────────────── */
+.legal-hero {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  animation: legalFadeUp 0.9s var(--ease) both;
+}
+
+.legal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-gold);
+  font-size: 0.72rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.legal-eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.legal-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-semibold);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking-tight);
+  margin: 1.1rem 0 1.2rem;
+}
+
+.legal-title em {
+  color: var(--color-coffee);
+}
+
+.legal-lede {
+  max-width: 640px;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: var(--lh-text);
+  color: var(--color-muted);
+}
+
+.legal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.4rem;
+  font-size: 0.8rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.legal-meta span {
+  color: var(--color-coffee-light);
+}
+
+/* ── Content sections ────────────────────────────────────── */
+.legal-section {
+  padding-block: clamp(1.8rem, 3vw, 2.6rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.legal-section-top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.legal-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--color-coffee-light);
+  flex-shrink: 0;
+}
+
+.legal-h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semibold);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  line-height: var(--lh-heading-sm);
+  color: var(--color-espresso);
+}
+
+.legal-section p {
+  max-width: 680px;
+  font-size: clamp(0.98rem, 1.05vw, 1.05rem);
+  line-height: var(--lh-text);
+  color: var(--color-muted);
+}
+
+.legal-section p + p {
+  margin-top: 0.9rem;
+}
+
+.legal-section p strong,
+.legal-section p b {
+  color: var(--color-espresso);
+  font-weight: var(--fw-semibold);
+}
+
+.legal-list {
+  margin: 0.9rem 0 0;
+  padding-left: 1.25rem;
+  max-width: 680px;
+}
+
+.legal-list li {
+  font-size: clamp(0.98rem, 1.05vw, 1.05rem);
+  line-height: var(--lh-text);
+  color: var(--color-muted);
+  margin-bottom: 0.55rem;
+}
+
+.legal-list li::marker {
+  color: var(--color-coffee);
+  font-weight: var(--fw-semibold);
+}
+
+/* ── Contact card at the end ─────────────────────────────── */
+.legal-contact {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-coffee-light);
+  border-radius: var(--radius-soft) var(--radius-sm) var(--radius-sm) var(--radius-soft);
+  background-color: var(--color-surface);
+}
+
+.legal-contact h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: var(--fw-semibold);
+  margin-bottom: 0.6rem;
+  color: var(--color-espresso);
+}
+
+.legal-contact p {
+  max-width: 680px;
+  font-size: 1rem;
+  line-height: var(--lh-text);
+  color: var(--color-muted);
+}
+
+/* ── Entrance animation ──────────────────────────────────── */
+@keyframes legalFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legal-hero {
+    animation: none;
+  }
+}

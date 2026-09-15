@@ -84,7 +84,7 @@ export default function GalleryMood() {
       <div className="container">
         <div className="section-header--center gallery-head reveal">
           <p className="eyebrow">The ParisBeans Mood</p>
-          <h2 className="section-heading--large gallery-title">
+          <h2 className="gallery-title">
             A Corner of <em>Paris,</em> Inside
             <br />
             <em>Hair Rap by Yoyo.</em>

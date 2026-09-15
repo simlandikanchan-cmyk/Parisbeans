@@ -28,7 +28,7 @@
 }
 
 .story-title {
-  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  font-size: var(--fs-section);
   margin: 1rem auto 1.2rem;
   max-width: 640px;
 }
@@ -43,8 +43,8 @@
   margin: 30px 0 0;
   color: var(--color-muted);
   font-family: var(--font-sans);
-  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
-  line-height: 1.7;
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
 }
 
 .story-paragraph + .reveal {
@@ -255,7 +255,7 @@
 
   .story-paragraph {
     font-size: 0.98rem;
-    line-height: 1.5;
+    line-height: var(--lh-text);
     margin-top: 25px;
   }
 

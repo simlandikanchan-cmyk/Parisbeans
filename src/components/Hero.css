@@ -87,7 +87,7 @@
 .hero-eyebrow {
   color: var(--color-coffee-light);
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   letter-spacing: 0.12em;
   margin-bottom: 0;
 }
@@ -95,17 +95,17 @@
 .hero-title {
   color: var(--color-white);
   font-size: clamp(2rem, 4.2vw, 5rem);
-  line-height: 1.15;
-  font-weight: 700;
+  line-height: var(--lh-heading);
+  font-weight: var(--fw-bold);
   font-style: italic;
-  letter-spacing: -0.015em;
+  letter-spacing: var(--tracking-tight);
   margin-bottom: 1.2rem;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
 }
 
 .hero-title em {
   font-style: italic;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   color: var(--color-coffee-light);
 }
 
@@ -123,7 +123,7 @@
   color: rgba(255, 255, 255, 0.88);
   max-width: 700px;
   font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  line-height: 1.6;
+  line-height: var(--lh-text);
   margin-bottom: 1.8rem;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
 }
@@ -137,8 +137,6 @@
 .hero-actions .btn {
   height: 44px;
   padding: 0 1.4rem;
-  font-size: 0.9rem;
-  line-height: 1.2;
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
     background-color 0.35s var(--ease), border-color 0.35s var(--ease);
 }
@@ -173,7 +171,7 @@
 .hero-scroll-text {
   font-family: var(--font-sans);
   font-size: 0.65rem;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
@@ -310,7 +308,6 @@
 
   .hero-actions .btn {
     height: 48px;
-    font-size: 0.85rem;
   }
 }
 

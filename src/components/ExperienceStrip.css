@@ -29,7 +29,7 @@
 }
 
 .experience-title {
-  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  font-size: var(--fs-section);
   margin: 1rem auto 1.2rem;
   max-width: 640px;
 }
@@ -41,8 +41,8 @@
 
 .experience-desc {
   color: var(--color-muted);
-  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
-  line-height: 1.8;
+  font-size: var(--fs-text);
+  line-height: var(--lh-lead);
   max-width: 560px;
   margin: 0 auto 2.2rem;
 }

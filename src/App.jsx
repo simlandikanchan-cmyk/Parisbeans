@@ -7,12 +7,16 @@ import VisitContact from './pages/VisitContact.jsx'
 import Gallery from './pages/Gallery.jsx'
 import MenuPage from './pages/MenuPage.jsx'
 import OurStory from './pages/OurStory.jsx'
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
+import TermsConditions from './pages/TermsConditions.jsx'
 
 function getPath() {
   return window.location.pathname.replace(/\/+$/, '') || '/'
 }
 
 function matchRoute(path) {
+  if (path === '/privacy-policy' || path === '/privacy') return 'privacy'
+  if (path === '/terms-and-conditions' || path === '/terms') return 'terms'
   if (path === '/our-story' || path === '/story') return 'story'
   if (path === '/menu') return 'menu'
   if (path === '/gallery') return 'gallery'
@@ -62,6 +66,10 @@ export default function App() {
         <MenuPage />
       ) : route === 'story' ? (
         <OurStory />
+      ) : route === 'privacy' ? (
+        <PrivacyPolicy />
+      ) : route === 'terms' ? (
+        <TermsConditions />
       ) : (
         <Home />
       )}
