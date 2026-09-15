@@ -1,9 +1,17 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from './Button'
 import './StorySection.css'
 
+const storyImages = [
+  '/images/story/Rectangle 71.svg',
+  '/images/story/Rectangle 69.svg',
+  '/images/story/Rectangle 72.svg',
+]
+
 export default function StorySection() {
   const ref = useRef(null)
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   useEffect(() => {
     const el = ref.current
@@ -18,11 +26,14 @@ export default function StorySection() {
     return () => io.disconnect()
   }, [])
 
-  const storyImages = [
-    '/images/story/Rectangle 71.svg',
-    '/images/story/Rectangle 69.svg',
-    '/images/story/Rectangle 72.svg',
-  ]
+  // Slideshow loop: the story images appear one by one, over and over
+  useEffect(() => {
+    if (paused || typeof window === 'undefined') return
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) return
+    const t = setInterval(() => setActive((p) => (p + 1) % storyImages.length), 3000)
+    return () => clearInterval(t)
+  }, [paused, active])
 
   return (
     <section id="story" className="section story" ref={ref}>
@@ -49,13 +60,20 @@ export default function StorySection() {
           </div>
         </div>
 
-        {/* Right — animated image stack */}
-        <div className="story-media" aria-label="Paris Beans story gallery">
+        {/* Right — animated image slideshow */}
+        <div
+          className="story-media"
+          aria-label="Paris Beans story gallery"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           <div className="story-image-stack">
             {storyImages.map((src, i) => (
               <div
                 key={src}
-                className={`story-image-card story-image-card--${i + 1}`}
+                className={`story-image-card story-image-card--${i + 1}${
+                  i === active ? ' is-active' : ''
+                }`}
               >
                 <img src={src} alt="Paris Beans salon" />
               </div>

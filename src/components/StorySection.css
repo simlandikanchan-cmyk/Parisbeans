@@ -81,15 +81,17 @@
   border-radius: var(--radius-sm);
   background: transparent;
   box-shadow: 0 12px 28px rgba(45, 26, 16, 0.16);
-  will-change: transform;
+  will-change: transform, opacity;
   transform-origin: center center;
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+              box-shadow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   backface-visibility: hidden;
   opacity: 0;
 }
 
-.story-media.is-visible .story-image-card {
+/* Only one image shows at a time — they appear one after another */
+.story-image-card.is-active {
   opacity: 1;
 }
 
@@ -106,41 +108,39 @@
 .story-image-card--1 {
   z-index: 4;
   transform: translate3d(0, 0, 40px) scale(1);
-  animation: pbCardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards,
-             pbMainFloat 6s ease-in-out 1.2s infinite;
+  animation: pbMainFloat 6s ease-in-out 0.2s infinite;
 }
 
 /* SECOND IMAGE */
 .story-image-card--2 {
   z-index: 3;
   transform: translate3d(20px, 20px, 20px) scale(0.975);
-  animation: pbCardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards,
-             pbSecondaryFloat 7s ease-in-out 1.5s infinite;
+  animation: pbSecondaryFloat 7s ease-in-out 0.45s infinite;
 }
 
 /* THIRD IMAGE */
 .story-image-card--3 {
   z-index: 2;
   transform: translate3d(40px, 40px, 0) scale(0.95);
-  animation: pbCardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards,
-             pbTertiaryFloat 7.5s ease-in-out 1.8s infinite;
+  animation: pbTertiaryFloat 7.5s ease-in-out 0.7s infinite;
 }
 
 /* HOVER ANIMATION */
+.story-media:hover .story-image-card.is-active {
+  animation-play-state: paused;
+}
+
 .story-media:hover .story-image-card--1 {
   transform: translate3d(-12px, -18px, 70px) scale(1.018);
   box-shadow: 0 25px 55px rgba(45, 26, 16, 0.23);
-  animation-play-state: paused;
 }
 
 .story-media:hover .story-image-card--2 {
   transform: translate3d(25px, 28px, 35px) scale(0.985);
-  animation-play-state: paused;
 }
 
 .story-media:hover .story-image-card--3 {
   transform: translate3d(62px, 64px, 5px) scale(0.955);
-  animation-play-state: paused;
 }
 
 /* IMAGE ZOOM */
@@ -189,49 +189,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes pbCardEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes pbCardEntrance1 {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 50px, 40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 40px) scale(1);
-  }
-}
-
-@keyframes pbCardEntrance2 {
-  from {
-    opacity: 0;
-    transform: translate3d(20px, 50px, 20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(20px, 20px, 20px) scale(0.975);
-  }
-}
-
-@keyframes pbCardEntrance3 {
-  from {
-    opacity: 0;
-    transform: translate3d(40px, 50px, 0) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(40px, 40px, 0) scale(0.95);
   }
 }
 
@@ -343,14 +300,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .story-copy,
-  .story-image-card {
+  .story-copy {
     animation: none;
-    opacity: 1;
   }
 
   .story-image-card {
     transition: none;
+    opacity: 1;
   }
 
   .story-image-card img {

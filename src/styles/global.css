@@ -41,6 +41,24 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* ---------- Night mode ---------- */
+[data-theme='dark'] {
+  --color-bg: #23150E;
+  --color-surface: #2E1C11;
+  --color-white: #F6F0E6;
+  --color-espresso: #F1E4D2;
+  --color-espresso-dark: #FAF2E6;
+  --color-coffee: #C9966A;
+  --color-coffee-light: #D9A87E;
+  --color-gold: #D2A25F;
+  --color-muted: #BBA68F;
+  --color-border: #46331F;
+  --color-soft-green: #26312C;
+
+  --shadow-soft: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 24px 50px -26px rgba(0, 0, 0, 0.65);
+}
+
 /* ---------- Reset ---------- */
 *,
 *::before,

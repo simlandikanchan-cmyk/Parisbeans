@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Preloader from './components/Preloader'
 import Home from './pages/Home.jsx'
 import VisitContact from './pages/VisitContact.jsx'
 import Gallery from './pages/Gallery.jsx'
@@ -51,6 +52,7 @@ export default function App() {
 
   return (
     <>
+      <Preloader />
       <Header />
       {route === 'gallery' ? (
         <Gallery />
