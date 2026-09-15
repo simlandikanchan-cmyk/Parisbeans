@@ -178,6 +178,14 @@
 
 /* Phone: big main image + 2 slimmer side panels (same layout, scaled) */
 @media (max-width: 640px) {
+  .ostory-title {
+    font-size: 1.5rem;
+  }
+
+  .ostory-desc {
+    font-size: 0.86rem;
+  }
+
   .ostory-gallery {
     flex-direction: row;
   }

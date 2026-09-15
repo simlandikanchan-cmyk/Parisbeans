@@ -6,6 +6,7 @@
   /* Colors */
   --color-bg: #F7F3EB;          /* cream */
   --color-surface: #FBF9F4;     /* cream-light */
+  --color-card: #F8F4EC;        /* menu card caption */
   --color-white: #FFFFFF;
   --color-espresso: #432719;
   --color-espresso-dark: #351D13;
@@ -45,6 +46,7 @@
 [data-theme='dark'] {
   --color-bg: #23150E;
   --color-surface: #2E1C11;
+  --color-card: var(--color-surface);
   --color-white: #F6F0E6;
   --color-espresso: #F1E4D2;
   --color-espresso-dark: #FAF2E6;

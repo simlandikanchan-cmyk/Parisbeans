@@ -207,6 +207,14 @@
     --side-s: 0.72;
     --mid-s: 0.62;
   }
+
+  .carousel-item.mid-left,
+  .carousel-item.mid-right {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(4px) brightness(0.9);
+  }
 }
 
 /* ---------- Desktop: reveal the full 7-image arc (far slides come into view) ---------- */
