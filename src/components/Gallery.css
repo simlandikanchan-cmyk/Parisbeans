@@ -339,6 +339,13 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   background-color: var(--color-bg);
+  box-shadow: 0 6px 18px -12px rgba(53, 29, 19, 0.25);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.gal-tile:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 44px -20px rgba(53, 29, 19, 0.4);
 }
 
 .gal-tile img {
@@ -350,7 +357,7 @@
 }
 
 .gal-tile:hover img {
-  transform: scale(1.03);
+  transform: scale(1.045);
 }
 
 /* Section grid layouts */

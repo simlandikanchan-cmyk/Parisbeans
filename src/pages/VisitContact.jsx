@@ -4,7 +4,7 @@ import VisitCTA from '../components/VisitCTA'
 
 export default function VisitContact() {
   return (
-    <main className="visit-page">
+    <main id="main" className="visit-page">
       <VisitHero />
       <ContactLocation />
       <VisitCTA />

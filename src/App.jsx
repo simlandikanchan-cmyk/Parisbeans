@@ -57,8 +57,11 @@ export default function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Preloader />
-      <Header story={route === 'story'} />
+      <Header story={route === 'story'} route={route} />
       {route === 'gallery' ? (
         <Gallery />
       ) : route === 'visit' ? (
@@ -74,7 +77,7 @@ export default function App() {
       ) : (
         <Home />
       )}
-      <Footer />
+      <Footer route={route} />
       <FloatingWhatsApp />
     </>
   )

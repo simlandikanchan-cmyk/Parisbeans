@@ -63,6 +63,14 @@
   color: var(--color-coffee);
 }
 
+.nav-link.is-active {
+  color: var(--color-coffee);
+}
+
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
 .nav-link:hover::after {
   transform: scaleX(1);
 }
@@ -277,6 +285,16 @@
 .drawer-link:focus-visible {
   outline: 2px solid var(--color-coffee);
   outline-offset: 2px;
+}
+
+.drawer-link.is-active {
+  color: var(--color-coffee);
+  background-color: rgba(169, 110, 63, 0.08);
+}
+
+.drawer-link.is-active::after {
+  opacity: 1;
+  transform: none;
 }
 
 .drawer-cta {

@@ -294,6 +294,14 @@
   transform: scaleX(1);
 }
 
+.footer-link.is-active {
+  color: var(--color-white);
+}
+
+.footer-link.is-active::before {
+  transform: scaleX(1);
+}
+
 /* Contact column */
 .footer-contact {
   display: flex;

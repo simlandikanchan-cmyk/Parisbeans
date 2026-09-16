@@ -7,7 +7,7 @@ import GalleryMood from '../components/GalleryMood'
 
 export default function Home() {
   return (
-    <main>
+    <main id="main">
       <Hero />
       <ExperienceStrip />
       <StorySection />

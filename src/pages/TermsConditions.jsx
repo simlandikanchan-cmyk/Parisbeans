@@ -56,7 +56,7 @@ export default function TermsConditions() {
   }, [])
 
   return (
-    <main className="legal-page" ref={pageRef}>
+    <main id="main" className="legal-page" ref={pageRef}>
       <div className="legal-progress" aria-hidden="true">
         <span className="legal-progress-bar" style={{ width: `${progress}%` }} />
       </div>

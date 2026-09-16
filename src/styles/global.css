@@ -357,6 +357,32 @@ h1, h2, h3, h4, .display {
 }
 
 /* ---------- Accessibility helpers ---------- */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 500;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--radius-btn);
+  background-color: var(--color-espresso);
+  color: var(--color-white);
+  font-size: var(--fs-btn-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  box-shadow: 0 12px 30px -14px rgba(53, 29, 19, 0.6);
+  transition: top 0.3s var(--ease);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.skip-link:focus-visible {
+  outline: 2px solid var(--color-coffee-light);
+  outline-offset: 3px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

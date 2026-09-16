@@ -6,7 +6,7 @@ import GallerySalon from '../components/GallerySalon'
 
 export default function Gallery() {
   return (
-    <main>
+    <main id="main">
       <GalleryHero />
       <GalleryAtmosphere />
       <GalleryWallArt />

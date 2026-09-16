@@ -3,8 +3,15 @@ import { exploreLinks } from '../data/siteData'
 import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon, WhatsAppIcon } from './Icons'
 import './Footer.css'
 
-export default function Footer() {
+export default function Footer({ route }) {
   const ref = useRef(null)
+  const activeHref = {
+    home: '/',
+    story: '/our-story',
+    menu: '/menu',
+    gallery: '/gallery',
+    visit: '/visit-contact',
+  }[route]
 
   useEffect(() => {
     const footer = ref.current
@@ -80,7 +87,11 @@ export default function Footer() {
           <ul className="footer-links">
             {exploreLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="footer-link">
+                <a
+                  href={link.href}
+                  className={`footer-link${link.href === activeHref ? ' is-active' : ''}`}
+                  aria-current={link.href === activeHref ? 'page' : undefined}
+                >
                   {link.label}
                 </a>
               </li>

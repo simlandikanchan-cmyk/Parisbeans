@@ -520,6 +520,13 @@
   background: var(--color-white);
   border-radius: var(--radius-sm);
   overflow: visible;
+  box-shadow: 0 8px 20px -14px rgba(53, 29, 19, 0.25);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px -22px rgba(53, 29, 19, 0.4);
 }
 
 .menu-card-accent {

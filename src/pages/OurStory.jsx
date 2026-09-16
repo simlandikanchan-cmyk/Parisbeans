@@ -6,7 +6,7 @@ import './OurStory.css'
 
 export default function OurStory() {
   return (
-    <main id="our-story" className="ostory-page">
+    <main id="main" className="ostory-page">
       <OurStoryHero />
       <OurStoryOrigin />
       <OurStoryImageRow />

@@ -11,7 +11,7 @@ export default function MenuPage() {
   const category = menuCategories.find((c) => c.id === activeId) ?? menuCategories[0]
 
   return (
-    <main className="menu-page">
+    <main id="main" className="menu-page">
       <MenuHero />
       <MenuCategories activeId={activeId} onSelect={setActiveId} />
       <MenuSpecialty category={category} />
