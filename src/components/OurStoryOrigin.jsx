@@ -39,15 +39,9 @@ export default function OurStoryOrigin() {
             experience — a place to pause before an appointment, enjoy a
             coffee during your visit, or simply take in the surroundings.
           </p>
-          <p className="ostory-origin-text">
-            The core origin story is directly supported by the supplied brief.
-          </p>
         </div>
 
         <div className="ostory-emblem-wrap reveal reveal-delay-1">
-          <div className="ostory-line-art" aria-hidden="true">
-            <img src="/images/hero/Frame 48096466.png" alt="" />
-          </div>
           <div className="ostory-emblem">
             <div className="ostory-emblem-photo">
               <img src="/images/story/photo.svg" alt="Paris Beans environment" />

@@ -50,22 +50,6 @@
   justify-content: center;
 }
 
-.ostory-line-art {
-  position: absolute;
-  left: clamp(-40px, -3vw, -10px);
-  bottom: -52px;
-  width: 250px;
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.ostory-line-art img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .ostory-emblem-photo {
   position: relative;
   width: clamp(300px, 32vw, 580px);
@@ -92,9 +76,5 @@
 
   .ostory-origin-copy {
     max-width: 640px;
-  }
-
-  .ostory-line-art {
-    display: none;
   }
 }

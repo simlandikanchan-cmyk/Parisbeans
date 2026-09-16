@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { galleryImage, galleryAlt } from '../data/siteData'
 import './Gallery.css'
 
@@ -92,16 +91,6 @@ export default function GalleryHero() {
         onFocus={() => setPaused(true)}
         onBlur={() => setPaused(false)}
       >
-        {/* Previous */}
-        <button
-          type="button"
-          className="gal-arrow gal-arrow--prev"
-          aria-label="Previous slide"
-          onClick={() => go(-1)}
-        >
-          <ChevronLeft />
-        </button>
-
         {/* Slides */}
         <div aria-live="polite" className="gal-slides">
           {collage.map((key, i) => {
@@ -130,31 +119,6 @@ export default function GalleryHero() {
               </button>
             )
           })}
-        </div>
-
-        {/* Next */}
-        <button
-          type="button"
-          className="gal-arrow gal-arrow--next"
-          aria-label="Next slide"
-          onClick={() => go(1)}
-        >
-          <ChevronRight />
-        </button>
-
-        {/* Dots */}
-        <div className="gal-dots" role="tablist" aria-label="Slides">
-          {collage.map((key, i) => (
-            <button
-              type="button"
-              key={key}
-              className={`gal-dot${i === active ? ' is-active' : ''}`}
-              role="tab"
-              aria-selected={i === active}
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => setActive(i)}
-            />
-          ))}
         </div>
       </div>
     </section>

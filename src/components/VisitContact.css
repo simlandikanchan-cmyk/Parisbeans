@@ -233,6 +233,20 @@
   margin-top: auto;
 }
 
+.visit-status {
+  margin-top: 1.25rem;
+  font-size: 0.92rem;
+  line-height: var(--lh-small);
+}
+
+.visit-status--success {
+  color: #3d7a4f;
+}
+
+.visit-status--error {
+  color: #a03a2b;
+}
+
 /* ── Info card ────────────────────────────────────────────── */
 .visit-info-card {
   display: flex;

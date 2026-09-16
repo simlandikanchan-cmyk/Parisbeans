@@ -129,7 +129,6 @@ export const gallerySections = [
 ]
 
 export const heroImage = '/images/hero/salon-interior.svg'
-export const storyImage = '/images/story/salon-story.svg'
 
 export const navLinks = [
   { label: 'Home', href: '/' },

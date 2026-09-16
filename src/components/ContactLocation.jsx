@@ -1,10 +1,17 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
 import Button from './Button'
 import { MapPinIcon, PhoneIcon, MailIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from './Icons'
 import './VisitContact.css'
 
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
 export default function ContactLocation() {
   const ref = useRef(null)
+  const formRef = useRef(null)
+  const [status, setStatus] = useState('idle')
 
   useEffect(() => {
     const el = ref.current
@@ -19,6 +26,21 @@ export default function ContactLocation() {
     return () => io.disconnect()
   }, [])
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (status === 'sending') return
+
+    setStatus('sending')
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, { publicKey: PUBLIC_KEY })
+      setStatus('sent')
+      e.target.reset()
+    } catch (error) {
+      console.error('EmailJS send failed:', error)
+      setStatus('error')
+    }
+  }
+
   return (
     <section id="visit-contact" className="visit-contact section" ref={ref}>
       <div className="visit-contact-grid">
@@ -27,34 +49,40 @@ export default function ContactLocation() {
         <div className="visit-card visit-form-card reveal">
           <h2 className="visit-card-title">Get in touch</h2>
 
-          <form className="visit-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="visit-form" ref={formRef} onSubmit={handleSubmit}>
             <label className="visit-field">
               <span className="sr-only">Name</span>
-              <input type="text" name="name" placeholder="Name" required autoComplete="name" />
+              <input type="text" name="from_name" placeholder="Name" required autoComplete="name" />
             </label>
             <label className="visit-field">
               <span className="sr-only">Email</span>
-              <input type="email" name="email" placeholder="Email" required autoComplete="email" />
+              <input type="email" name="reply_to" placeholder="Email" required autoComplete="email" />
             </label>
             <label className="visit-field">
               <span className="sr-only">Message</span>
               <textarea name="message" placeholder="Message" rows="4" required />
             </label>
 
-              <label className="visit-field">
-              <span className="sr-only">Message</span>
-              <textarea name="message" placeholder="Comment Box" rows="4" required />
-            </label>
-
             <label className="visit-checkbox">
-              <input type="checkbox" name="newsletter" />
+              <input type="checkbox" name="newsletter" value="yes" />
               <span className="visit-checkbox-box" aria-hidden="true" />
               <span>I would like to receive the newsletter.</span>
             </label>
 
             <Button as="button" type="submit" variant="primary" arrow className="visit-submit-btn">
-              Submit
+              {status === 'sending' ? 'Sending…' : 'Submit'}
             </Button>
+
+            {status === 'sent' && (
+              <p className="visit-status visit-status--success" role="status">
+                Thank you — your message has been sent.
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="visit-status visit-status--error" role="alert">
+                Something went wrong. Please try again.
+              </p>
+            )}
           </form>
         </div>
 
@@ -95,7 +123,7 @@ export default function ContactLocation() {
                 <span className="visit-info-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
                 </span>
-                <span className="visit-info-value">000111222333</span>
+                <span className="visit-info-value">+91 98765 43210</span>
               </li>
               <li className="visit-info-item">
                 <span className="visit-info-icon" aria-hidden="true">
