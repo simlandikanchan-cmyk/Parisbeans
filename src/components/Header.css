@@ -134,16 +134,34 @@
   top: 0;
   right: 0;
   height: 100dvh;
-  width: min(340px, 88vw);
+  width: min(360px, 90vw);
   background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-white) 100%);
   z-index: 200;
   transform: translateX(100%);
-  transition: transform 0.5s var(--ease);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: column;
-  padding: 1.4rem 1.6rem calc(1.4rem + env(safe-area-inset-bottom, 0px));
-  box-shadow: -20px 0 50px -28px rgba(53, 29, 19, 0.55);
+  padding: 1.5rem 1.8rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: -30px 0 70px -30px rgba(53, 29, 19, 0.6);
   overscroll-behavior: contain;
+  border-top-left-radius: 26px;
+  border-bottom-left-radius: 26px;
+}
+
+/* Coffee accent stripe along the drawer's entry edge */
+.mobile-drawer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--color-coffee-light) 0%,
+    var(--color-coffee) 40%,
+    rgba(169, 110, 63, 0.12) 100%
+  );
 }
 
 .mobile-drawer.is-open {
@@ -155,8 +173,17 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 1.1rem;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.2rem;
   border-bottom: 1px solid var(--color-border);
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.mobile-drawer.is-open .drawer-head {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.08s;
 }
 
 .drawer-logo {
@@ -182,6 +209,10 @@
   box-shadow: 0 2px 8px -6px rgba(53, 29, 19, 0.3);
 }
 
+.menu-toggle.close:hover {
+  transform: rotate(90deg);
+}
+
 .drawer-nav {
   display: flex;
   flex-direction: column;
@@ -192,28 +223,32 @@
 }
 
 .drawer-link {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.9rem;
   font-family: var(--font-serif);
   font-size: 1.1rem;
   font-weight: var(--fw-medium);
   color: var(--color-espresso);
-  padding: 0.7rem 0.25rem;
+  padding: 0.75rem 0.5rem;
   border-bottom: 1px solid var(--color-border);
+  border-radius: 12px;
   opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), color 0.3s var(--ease);
+  transform: translateX(24px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease),
+    color 0.3s var(--ease), background-color 0.3s var(--ease);
+  transition-delay: calc(0.05s * (6 - var(--i, 0)));
 }
 
 .drawer-link::after {
   content: '→';
+  margin-left: auto;
   font-family: var(--font-sans);
   font-size: 0.9rem;
   color: var(--color-coffee);
   opacity: 0;
-  transform: translateX(-6px);
+  transform: translateX(-8px);
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
@@ -223,8 +258,15 @@
   transition-delay: calc(0.05s * var(--i, 0) + 0.1s);
 }
 
+.mobile-drawer.is-open .drawer-cta {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.05s * var(--i, 0) + 0.12s);
+}
+
 .drawer-link:hover {
   color: var(--color-coffee);
+  background-color: rgba(169, 110, 63, 0.07);
 }
 
 .drawer-link:hover::after {
@@ -232,10 +274,18 @@
   transform: none;
 }
 
+.drawer-link:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 2px;
+}
+
 .drawer-cta {
   margin-top: auto;
   width: 100%;
   justify-content: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
 }
 
 .drawer-backdrop {
@@ -244,12 +294,14 @@
   background: rgba(53, 29, 19, 0.45);
   backdrop-filter: blur(2px);
   z-index: 150;
-  animation: drawerFadeIn 0.3s var(--ease) both;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
 }
 
-@keyframes drawerFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.drawer-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @media (min-width: 1441px) {
@@ -294,5 +346,36 @@
 
   .header-cta {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-drawer,
+  .drawer-head,
+  .drawer-link,
+  .drawer-cta,
+  .drawer-backdrop,
+  .menu-toggle.close {
+    transition: none;
+  }
+
+  .mobile-drawer.is-open .drawer-link,
+  .mobile-drawer.is-open .drawer-cta,
+  .mobile-drawer.is-open .drawer-head {
+    transition-delay: 0s;
+  }
+
+  .drawer-link {
+    opacity: 1;
+    transform: none;
+  }
+
+  .drawer-cta {
+    opacity: 1;
+    transform: none;
+  }
+
+  .drawer-backdrop {
+    opacity: 1;
   }
 }

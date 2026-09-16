@@ -40,20 +40,20 @@ export default function StorySection() {
       <div className="story-grid">
         {/* Left — text */}
         <div className="story-copy">
-          <div className="pb-story-eyebrow eyebrow">OUR STORY</div>
-          <h2 className="story-title">
+          <div className="pb-story-eyebrow eyebrow reveal">OUR STORY</div>
+          <h2 className="story-title reveal reveal-delay-1">
             Inspired by Paris
             <br />
             <em>Streets.</em> Crafted for
             <br />
             Your <em>Salon Day.</em>
           </h2>
-          <p className="lead story-paragraph">
+          <p className="lead story-paragraph reveal reveal-delay-2">
             Born from a love for the café culture of Paris, Paris
             Beans brings the rhythm of a street-side coffee
             break into the heart of HAIR RAP BY YOYO.
           </p>
-          <div className="reveal">
+          <div className="reveal reveal-delay-3">
             <Button href="/story" variant="outline" arrow>
               Read Our Story
             </Button>
@@ -62,7 +62,7 @@ export default function StorySection() {
 
         {/* Right — animated image slideshow */}
         <div
-          className="story-media"
+          className="story-media reveal reveal-delay-1"
           aria-label="Paris Beans story gallery"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}

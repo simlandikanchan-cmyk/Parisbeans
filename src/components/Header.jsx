@@ -80,13 +80,22 @@ export default function Header({ story = false }) {
               {link.label}
             </a>
           ))}
-          <a href="/visit-contact" className="btn btn--primary drawer-cta" onClick={() => setOpen(false)}>
+          <a
+            href="/visit-contact"
+            className="btn btn--primary drawer-cta"
+            style={{ '--i': navLinks.length }}
+            onClick={() => setOpen(false)}
+          >
             Book Appointment
           </a>
         </nav>
       </div>
 
-      {open && <div className="drawer-backdrop" onClick={() => setOpen(false)} />}
+      <div
+        className={`drawer-backdrop ${open ? 'is-open' : ''}`}
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+      />
     </header>
   )
 }
