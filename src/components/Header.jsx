@@ -4,7 +4,7 @@ import { navLinks } from '../data/siteData'
 import Button from './Button'
 import './Header.css'
 
-export default function Header() {
+export default function Header({ story = false }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -23,7 +23,7 @@ export default function Header() {
   }, [open])
 
   return (
-    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${story ? 'is-story' : ''}`}>
       <div className="header-inner">
         <nav className="nav-left" aria-label="Primary navigation">
           {navLinks.map((link) => (

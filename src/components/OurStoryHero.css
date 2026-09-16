@@ -176,12 +176,14 @@
   }
 }
 
+@media (max-width: 768px) {
+  .ostory-title {
+    font-size: clamp(1.5rem, 6vw, 2.6rem);
+  }
+}
+
 /* Phone: big main image + 2 slimmer side panels (same layout, scaled) */
 @media (max-width: 640px) {
-  .ostory-title {
-    font-size: 1.5rem;
-  }
-
   .ostory-desc {
     font-size: 0.86rem;
   }
@@ -208,5 +210,11 @@
 
   .ostory-gallery-panel {
     height: clamp(150px, 34vw, 210px);
+  }
+}
+
+@media (max-width: 480px) {
+  .ostory-title {
+    font-size: 1.5rem;
   }
 }

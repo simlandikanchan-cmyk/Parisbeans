@@ -687,6 +687,10 @@
     max-width: 78%;
   }
 
+  .menu-hero-title {
+    font-size: clamp(1.5rem, 6vw, 2.6rem);
+  }
+
   /* Cards become a horizontal snap scroll */
   .menu-cards {
     display: flex;
@@ -719,7 +723,7 @@
   }
 
   .menu-hero-title {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 6vw, 2.6rem);
   }
 
   .menu-hero-desc {
@@ -773,6 +777,12 @@
   .menu-item-name {
     white-space: normal;
     overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-hero-title {
+    font-size: 1.5rem;
   }
 }
 

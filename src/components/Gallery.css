@@ -514,8 +514,18 @@
     padding-bottom: 44px;
   }
 
+  .gal-hero-title {
+    font-size: clamp(1.5rem, 6vw, 2.6rem);
+  }
+
   .gal-grid {
     margin-top: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gal-hero-title {
+    font-size: 1.5rem;
   }
 }
 

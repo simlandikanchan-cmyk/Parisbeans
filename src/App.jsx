@@ -57,7 +57,7 @@ export default function App() {
   return (
     <>
       <Preloader />
-      <Header />
+      <Header story={route === 'story'} />
       {route === 'gallery' ? (
         <Gallery />
       ) : route === 'visit' ? (
