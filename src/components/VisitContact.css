@@ -79,7 +79,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-bold);
-  font-size: clamp(1.65rem, 3.1vw, 3.8rem);
+  font-size: clamp(2rem, 4.2vw, 5rem);
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
   margin-bottom: 0.9rem;
@@ -92,7 +92,7 @@
 
 .visit-hero-desc {
   color: rgba(255, 255, 255, 0.88);
-  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
   line-height: var(--lh-text);
   max-width: 520px;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
@@ -442,7 +442,7 @@
 
 @media (max-width: 768px) {
   .visit-hero-title {
-    font-size: clamp(1.5rem, 6vw, 2.6rem);
+    font-size: clamp(2rem, 8vw, 2.9rem);
   }
 }
 
@@ -460,11 +460,12 @@
   }
 
   .visit-hero-title {
-    font-size: clamp(1.5rem, 6vw, 2.6rem);
+    font-size: clamp(1.8rem, 8.5vw, 2.4rem);
   }
 
   .visit-hero-desc {
-    font-size: 0.86rem;
+    font-size: 1rem;
+    line-height: 1.65;
   }
 
   .visit-card {
@@ -491,7 +492,7 @@
 
 @media (max-width: 480px) {
   .visit-hero-title {
-    font-size: 1.5rem;
+    font-size: clamp(1.8rem, 8.5vw, 2.4rem);
   }
 }
 
