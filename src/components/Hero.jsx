@@ -17,7 +17,7 @@ export default function Hero() {
       },
       { threshold: 0.08 }
     )
-    el.querySelectorAll('.reveal').forEach((node) => io.observe(node))
+    el.querySelectorAll('.reveal, .hero-title').forEach((node) => io.observe(node))
     return () => io.disconnect()
   }, [])
 
@@ -41,11 +41,21 @@ export default function Hero() {
             <p className="eyebrow hero-eyebrow">Paris Beans · Hair Rap by Yoyo</p>
           </div>
 
-          <h1 className="hero-title reveal reveal-delay-1">
-            Your Salon 
-            <br />Appointment,
-            With a <br />
-            <em>Taste of Paris.</em>
+          <h1 className="hero-title">
+            <span className="hero-title-line">
+              <span className="hero-title-line-inner">Your Salon</span>
+            </span>
+            <span className="hero-title-line">
+              <span className="hero-title-line-inner">Appointment,</span>
+            </span>
+            <span className="hero-title-line">
+              <span className="hero-title-line-inner">With a</span>
+            </span>
+            <span className="hero-title-line">
+              <span className="hero-title-line-inner">
+                <em className="hero-title-accent">Taste of Paris.</em>
+              </span>
+            </span>
           </h1>
 
           <div className="hero-divider reveal reveal-delay-2" aria-hidden="true" />
