@@ -126,7 +126,7 @@ export default function Footer({ route }) {
               </a>
             </li>
             <li className="contact-item">
-              <WhatsAppIcon />
+              <WhatsAppIcon className="contact-icon contact-icon--whatsapp" />
               <a
                 className="contact-body"
                 href={`https://wa.me/${contact.phoneTel}`}

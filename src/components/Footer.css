@@ -347,6 +347,20 @@
   color: var(--color-coffee-light);
 }
 
+/* WhatsApp — gentle pulse-glow to draw attention */
+.contact-icon--whatsapp {
+  animation: contactFloat 6s ease-in-out infinite, contactPulseGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes contactPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(193, 138, 91, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(193, 138, 91, 0);
+  }
+}
+
 .contact-body {
   display: flex;
   flex-direction: column;
