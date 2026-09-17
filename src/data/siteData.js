@@ -2,14 +2,14 @@
 // Replace placeholder SVG paths with real project assets when available.
 
 export const menuItems = [
-  { title: 'Hummus', image: '/images/menu/hummus.svg' },
-  { title: 'Virgin Mojito', image: '/images/menu/virgin-mojito.svg' },
-  { title: 'Lemon Mint Elixir', image: '/images/menu/lemon-mint.svg' },
-  { title: 'Espresso Martini', image: '/images/menu/espresso-martini.svg' },
-  { title: 'Galaxy Cocktail', image: '/images/menu/galaxy.svg' },
-  { title: 'Aglio E Olio', image: '/images/menu/aglio-olio.svg' },
-  { title: 'Sundowner Mocktail', image: '/images/menu/sundowner.svg' },
-  { title: 'Blush Sunset', image: '/images/menu/blush-sunset.svg' },
+  { title: 'Hummus', image: '/images/menu/hummus.svg', price: '₹199' },
+  { title: 'Virgin Mojito', image: '/images/menu/virgin-mojito.svg', price: '₹229' },
+  { title: 'Lemon Mint Elixir', image: '/images/menu/lemon-mint.svg', price: '₹249' },
+  { title: 'Espresso Martini', image: '/images/menu/espresso-martini.svg', price: '₹299' },
+  { title: 'Galaxy Cocktail', image: '/images/menu/galaxy.svg', price: '₹329' },
+  { title: 'Aglio E Olio', image: '/images/menu/aglio-olio.svg', price: '₹349' },
+  { title: 'Sundowner Mocktail', image: '/images/menu/sundowner.svg', price: '₹279' },
+  { title: 'Blush Sunset', image: '/images/menu/blush-sunset.svg', price: '₹269' },
 ]
 
 export const hotCoffeeMenu = [
@@ -138,10 +138,36 @@ export const navLinks = [
   { label: 'Visit & Contact', href: '/visit-contact' },
 ]
 
-export const exploreLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Story', href: '/our-story' },
-  { label: 'Menu', href: '/menu' },
-  { label: 'Gallery', href: '/gallery' },
-  { label: 'Visit & Contact', href: '/visit-contact' },
-]
+export const exploreLinks = navLinks
+
+// ── Contact (single source of truth) ────────────────────────────────
+export const contact = {
+  location: 'Paris Beans at Hair Rap by Yoyo',
+  address: '12 Rue du Salon, Ahmedabad, Gujarat 380001, India',
+  city: 'Ahmedabad, Gujarat',
+  country: 'India',
+  phone: '+91 98765 43210',
+  phoneTel: '+919876543210',
+  email: 'hello@parisbeans.com',
+  hours: {
+    monSat: '10:00 AM – 8:00 PM',
+    sunday: '11:00 AM – 5:00 PM',
+  },
+  social: {
+    instagram: 'https://instagram.com/parisbeans',
+    youtube: 'https://www.youtube.com/@parisbeans',
+    facebook: 'https://www.facebook.com/parisbeans',
+  },
+  mapBbox: '72.50, 22.90, 72.65, 23.10',
+  mapCenter: '72.57, 23.02',
+  mapZoom: '13',
+}
+
+export const cafeCardPrices = {
+  'Hummus': '₹199',
+  'Virgin Mojito': '₹229',
+  'Lemon Mint Elixir': '₹249',
+  'Blush Sunset': '₹269',
+  'Aglio E Olio': '₹349',
+  'Sundowner Mocktail': '₹279',
+}

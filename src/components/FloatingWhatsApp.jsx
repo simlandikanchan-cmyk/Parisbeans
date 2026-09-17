@@ -28,7 +28,7 @@ export default function FloatingWhatsApp() {
 
   return (
     <div className={`wa-widget${mounted ? ' is-visible' : ''}${hasTip ? ' has-tip' : ''}`}>
-      <div className="wa-tip" role="status">
+      <div className="wa-tip" role="status" aria-live="polite">
         <button
           type="button"
           className="wa-tip-close"

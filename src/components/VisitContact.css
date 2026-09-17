@@ -305,7 +305,7 @@
   font-size: 0.88rem;
   line-height: 1.45;
   color: var(--color-muted);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .visit-info-footer {

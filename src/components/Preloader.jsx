@@ -31,7 +31,15 @@ export default function Preloader() {
     >
       <div className="preloader-inner">
         <div className="preloader-emblem">
-          <img className="preloader-logo" src="/logo (2).svg" alt="" draggable={false} />
+          <video
+            className="preloader-logo"
+            src="/images/story/logo.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
         </div>
 
         <h1 className="preloader-wordmark" aria-label="Paris Beans">

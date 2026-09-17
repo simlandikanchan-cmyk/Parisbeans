@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import Button from './Button'
+import { contact } from '../data/siteData'
 import { MapPinIcon, PhoneIcon, MailIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from './Icons'
 import './VisitContact.css'
 
@@ -40,6 +41,8 @@ export default function ContactLocation() {
       setStatus('error')
     }
   }
+
+  const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${contact.mapBbox}&layer=mapnik`
 
   return (
     <section id="visit-contact" className="visit-contact section" ref={ref}>
@@ -95,17 +98,15 @@ export default function ContactLocation() {
 
           <div className="visit-map-wrap">
             <div className="visit-map-card">
-              <span className="visit-map-card-name">Paris Beans</span>
+              <span className="visit-map-card-name">{contact.location}</span>
               <span className="visit-map-card-address">
-                315 W 36th St.
-                <br />
-                NY 10018
+                {contact.address}
               </span>
             </div>
             <iframe
               title="Paris Beans location"
               className="visit-map"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-74.015,40.710,-73.990,40.725&layer=mapnik"
+              src={mapSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
@@ -117,30 +118,30 @@ export default function ContactLocation() {
                 <span className="visit-info-icon" aria-hidden="true">
                   <MapPinIcon size={18} />
                 </span>
-                <span className="visit-info-value">NYC, United States</span>
+                <span className="visit-info-value">{contact.city}</span>
               </li>
               <li className="visit-info-item">
                 <span className="visit-info-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
                 </span>
-                <span className="visit-info-value">+91 98765 43210</span>
+                <span className="visit-info-value">{contact.phone}</span>
               </li>
               <li className="visit-info-item">
                 <span className="visit-info-icon" aria-hidden="true">
                   <MailIcon size={18} />
                 </span>
-                <span className="visit-info-value">somebody@gmail.com</span>
+                <span className="visit-info-value">{contact.email}</span>
               </li>
             </ul>
 
             <div className="visit-social" aria-label="Social media">
-              <a href="#youtube" aria-label="YouTube" className="social-link">
+              <a href={contact.social.youtube} aria-label="YouTube" className="social-link" target="_blank" rel="noopener noreferrer">
                 <YoutubeIcon size={22} />
               </a>
-              <a href="#instagram" aria-label="Instagram" className="social-link">
+              <a href={contact.social.instagram} aria-label="Instagram" className="social-link" target="_blank" rel="noopener noreferrer">
                 <InstagramIcon size={22} />
               </a>
-              <a href="#facebook" aria-label="Facebook" className="social-link">
+              <a href={contact.social.facebook} aria-label="Facebook" className="social-link" target="_blank" rel="noopener noreferrer">
                 <FacebookIcon size={22} />
               </a>
             </div>

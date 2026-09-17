@@ -21,7 +21,7 @@ export default function MenuHero() {
     <section className="menu-hero" ref={ref}>
       <div className="menu-hero-media">
         <img
-          src="/images/menu-page/hero.svg"
+          src="/images/menu/hero.svg"
           alt="Warm Parisian café corner"
           className="menu-hero-img"
         />

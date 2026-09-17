@@ -10,6 +10,12 @@ const sections = [
   { id: 'privacy-rights', num: '06', title: 'Your Rights' },
 ]
 
+const contact = {
+  email: 'hello@parisbeans.com',
+  phone: '+91 98765 43210',
+  phoneTel: '+919876543210',
+}
+
 export default function PrivacyPolicy() {
   const pageRef = useRef(null)
   const [progress, setProgress] = useState(0)
@@ -178,14 +184,14 @@ export default function PrivacyPolicy() {
             <h3>Questions? We&apos;re here.</h3>
             <p>
               Contact the Paris Beans team at{' '}
-              <strong>somebody@gmail.com</strong> or by phone at{' '}
-              <strong>+91 98765 43210</strong>. We&apos;ll be happy to help.
+              <strong>{contact.email}</strong> or by phone at{' '}
+              <strong>{contact.phone}</strong>. We&apos;ll be happy to help.
             </p>
             <div className="legal-contact-actions">
-              <a className="btn btn--primary" href="mailto:somebody@gmail.com">
+              <a className="btn btn--primary" href={`mailto:${contact.email}`}>
                 Email the team
               </a>
-              <a className="btn btn--outline" href="tel:+919876543210">
+              <a className="btn btn--outline" href={`tel:${contact.phoneTel}`}>
                 Call us
               </a>
             </div>

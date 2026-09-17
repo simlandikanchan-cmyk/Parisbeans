@@ -25,7 +25,7 @@ export default function OurStoryExperience() {
         <div className="ostory-cup-wrap">
           <img
             className="ostory-splash"
-            src="/Frame 48096320.svg"
+            src="/images/story/frame-48096320.svg"
             alt=""
             aria-hidden="true"
           />

@@ -9,8 +9,8 @@
   place-items: center;
   background-color: var(--color-bg);
   background-image: radial-gradient(
-    820px 440px at 50% 46%,
-    rgba(201, 147, 89, 0.1),
+    1100px 580px at 50% 46%,
+    rgba(201, 147, 89, 0.12),
     transparent 64%
   );
   overflow: hidden;
@@ -49,14 +49,14 @@
 .preloader-emblem {
   display: grid;
   place-items: center;
-  width: 132px;
-  height: 132px;
+  width: 220px;
+  height: 220px;
   animation: preloaderEmblemIn 1.1s var(--ease) both;
 }
 
 .preloader-logo {
-  width: 104px;
-  height: 104px;
+  width: 172px;
+  height: 172px;
   object-fit: contain;
   filter: drop-shadow(0 16px 30px rgba(67, 39, 25, 0.18));
 }
@@ -67,11 +67,11 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-medium);
-  font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+  font-size: clamp(3.4rem, 9vw, 6.4rem);
   line-height: 1.08;
   letter-spacing: 0.01em;
   color: var(--color-espresso);
-  margin-top: 1.4rem;
+  margin-top: 1.8rem;
   overflow: hidden;
 }
 
@@ -88,10 +88,10 @@
 
 /* ---------- Gold rule ---------- */
 .preloader-line {
-  width: 84px;
-  height: 1px;
+  width: 116px;
+  height: 2px;
   background: linear-gradient(90deg, var(--color-gold), #d9ae77);
-  margin-top: 1.5rem;
+  margin-top: 1.7rem;
   transform: scaleX(0);
   transform-origin: center;
   animation: preloaderLineGrow 0.9s var(--ease) 0.85s both;
@@ -100,13 +100,13 @@
 /* ---------- Tagline ---------- */
 .preloader-tagline {
   font-family: var(--font-sans);
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: var(--fw-medium);
   text-transform: uppercase;
   letter-spacing: 0.4em;
   padding-left: 0.4em;
   color: var(--color-coffee);
-  margin-top: 1.1rem;
+  margin-top: 1.3rem;
   opacity: 0;
   animation: preloaderTaglineIn 0.9s var(--ease) 1.15s both;
 }

@@ -3,17 +3,17 @@ import './BenefitsSection.css'
 
 const benefits = [
   {
-    img: '/moment_pause.svg',
+    img: '/images/icons/moment_pause.svg',
     title: 'A Moment to Pause',
     lines: ['Slow down. Settle in.', 'Enjoy the atmosphere.'],
   },
   {
-    img: '/paris.svg',
+    img: '/images/icons/paris.svg',
     title: 'Parisian Atmosphere',
     lines: ['Inspired by the charm', 'of Parisian café culture.'],
   },
   {
-    img: '/coffe.svg',
+    img: '/images/icons/coffe.svg',
     title: 'Complimentary Coffee',
     lines: ['A little Parisian ritual', 'with your appointment.'],
   },
@@ -42,7 +42,7 @@ export default function BenefitsSection() {
           return (
             <div className="benefit reveal" style={{ '--i': i }} key={b.title}>
               <span className="benefit-icon" aria-hidden="true">
-                <img src={b.img} alt={b.title} width={40} height={40} />
+                <img src={b.img} alt="" width={40} height={40} />
               </span>
               <h3 className="benefit-title">{b.title}</h3>
               <p className="benefit-text">

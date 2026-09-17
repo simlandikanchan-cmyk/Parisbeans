@@ -13,6 +13,12 @@ const sections = [
   { id: 'terms-changes', num: '09', title: 'Changes to These Terms' },
 ]
 
+const contact = {
+  email: 'hello@parisbeans.com',
+  phone: '+91 98765 43210',
+  phoneTel: '+919876543210',
+}
+
 export default function TermsConditions() {
   const pageRef = useRef(null)
   const [progress, setProgress] = useState(0)
@@ -219,14 +225,14 @@ export default function TermsConditions() {
             <h3>Still curious?</h3>
             <p>
               Reach out to the Paris Beans team at{' '}
-              <strong>somebody@gmail.com</strong> or by phone at{' '}
-              <strong>+91 98765 43210</strong>. We&apos;ll be happy to answer.
+              <strong>{contact.email}</strong> or by phone at{' '}
+              <strong>{contact.phone}</strong>. We&apos;ll be happy to answer.
             </p>
             <div className="legal-contact-actions">
-              <a className="btn btn--primary" href="mailto:somebody@gmail.com">
+              <a className="btn btn--primary" href={`mailto:${contact.email}`}>
                 Email the team
               </a>
-              <a className="btn btn--outline" href="tel:+919876543210">
+              <a className="btn btn--outline" href={`tel:${contact.phoneTel}`}>
                 Call us
               </a>
             </div>

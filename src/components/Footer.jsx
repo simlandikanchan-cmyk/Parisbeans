@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { exploreLinks } from '../data/siteData'
+import { exploreLinks, contact } from '../data/siteData'
 import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon, WhatsAppIcon } from './Icons'
 import './Footer.css'
 
@@ -60,7 +60,7 @@ export default function Footer({ route }) {
         {/* Brand */}
         <div className="footer-brand footer-reveal footer-reveal--0">
           <span className="footer-logo">
-            <img src="/logo (2).svg" alt="Paris Beans logo" className="logo-img" />
+            <img src="/images/logo.svg" alt="Paris Beans logo" className="logo-img" />
           </span>
           <span className="footer-brand-name">Paris Beans</span>
           <p className="footer-desc">
@@ -69,13 +69,13 @@ export default function Footer({ route }) {
             contemporary salon setting.
           </p>
           <div className="footer-social" aria-label="Social media">
-            <a href="https://instagram.com/parisbeans" aria-label="Instagram" className="social-link" target="_blank" rel="noopener noreferrer">
+            <a href={contact.social.instagram} aria-label="Instagram" className="social-link" target="_blank" rel="noopener noreferrer">
               <InstagramIcon />
             </a>
-            <a href="https://www.youtube.com/@parisbeans" aria-label="YouTube" className="social-link" target="_blank" rel="noopener noreferrer">
+            <a href={contact.social.youtube} aria-label="YouTube" className="social-link" target="_blank" rel="noopener noreferrer">
               <YoutubeIcon />
             </a>
-            <a href="https://www.facebook.com/parisbeans" aria-label="Facebook" className="social-link" target="_blank" rel="noopener noreferrer">
+            <a href={contact.social.facebook} aria-label="Facebook" className="social-link" target="_blank" rel="noopener noreferrer">
               <FacebookIcon />
             </a>
           </div>
@@ -106,35 +106,35 @@ export default function Footer({ route }) {
             <li className="contact-item">
               <MapPinIcon />
               <div className="contact-body">
-                <span className="contact-label">Paris Beans at Hair Rap by Yoyo</span>
-                <span className="contact-sub">12 Rue du Salon, Mumbai, India</span>
+                <span className="contact-label">{contact.location}</span>
+                <span className="contact-sub">{contact.address}</span>
               </div>
             </li>
             <li className="contact-item">
               <ClockIcon />
               <div className="contact-body">
                 <span className="contact-label">Opening Hours</span>
-                <span className="contact-sub">Mon – Sat: 10:00 AM – 8:00 PM</span>
-                <span className="contact-sub">Sunday: 11:00 AM – 5:00 PM</span>
+                <span className="contact-sub">{contact.hours.monSat}</span>
+                <span className="contact-sub">{contact.hours.sunday}</span>
               </div>
             </li>
             <li className="contact-item">
               <PhoneIcon />
-              <a className="contact-body" href="tel:+919876543210">
+              <a className="contact-body" href={`tel:${contact.phoneTel}`}>
                 <span className="contact-label">Phone</span>
-                <span className="contact-sub">+91 98765 43210</span>
+                <span className="contact-sub">{contact.phone}</span>
               </a>
             </li>
             <li className="contact-item">
               <WhatsAppIcon />
               <a
                 className="contact-body"
-                href="https://wa.me/919876543210"
+                href={`https://wa.me/${contact.phoneTel}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <span className="contact-label">WhatsApp</span>
-                <span className="contact-sub">+91 98765 43210</span>
+                <span className="contact-sub">{contact.phone}</span>
               </a>
             </li>
           </ul>
@@ -155,7 +155,7 @@ export default function Footer({ route }) {
               <a href="/terms-and-conditions">Terms &amp; Conditions</a>
             </span>
           </div>
-          <a href="/" className="back-to-top" aria-label="Back to top">
+          <a href="#" className="back-to-top" aria-label="Back to top">
             Back to top
           </a>
         </div>
