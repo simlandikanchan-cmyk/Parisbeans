@@ -22,16 +22,17 @@ export default function VisitCTA() {
     <section className="visit-cta section" ref={ref}>
       <div className="visit-cta-stripes" aria-hidden="true" />
       <div className="visit-cta-content container reveal">
-        <span className="eyebrow">— PARIS BEANS</span>
+        <span className="eyebrow">The Paris Beans Experience</span>
         <h2 className="visit-cta-title section-heading">
-          Make Your Next Visit a Little More <em>Parisian.</em>
+          More Than a Coffee. <em>Part of Your Appointment.</em>
         </h2>
         <p className="visit-cta-desc">
-          Book your Hair Rap by Yoyo appointment and enjoy your complimentary
-          coffee at Paris Beans.
+          Whether you arrive early, take a break during your service, or simply
+          want to enjoy the atmosphere, ParisBeans adds a warm café moment to
+          your Hair Rap by Yoyo experience.
         </p>
         <Button href="#visit-contact" variant="primary" arrow>
-          Book Your Salon Appointment
+          Reserve Your Spot
         </Button>
       </div>
     </section>

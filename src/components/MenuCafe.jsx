@@ -21,9 +21,15 @@ export default function MenuCafe() {
   return (
     <section className="menu-cafe" ref={ref}>
       <div className="container">
-        <p className="eyebrow menu-cafe-eyebrow reveal">— From the Café</p>
+        <p className="eyebrow menu-cafe-eyebrow reveal">From the Café</p>
         <h2 className="menu-cafe-title reveal reveal-delay-1">
-          A Few Things Worth Staying For.
+          Coffee,
+          <br />
+          <em>Breakfast</em> &amp;
+          <br />
+          Little
+          <br />
+          <em>Indulgences.</em>
         </h2>
         <p className="menu-cafe-desc reveal reveal-delay-2">
           Discover a simple, satisfying café offering curated for the moments

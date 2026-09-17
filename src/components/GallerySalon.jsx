@@ -26,9 +26,16 @@ export default function GallerySalon() {
     <section className="gal-section gal-section--bookend" ref={ref}>
       <div className="container">
         <div className="gal-section-head reveal">
-          <span className="eyebrow gal-section-eyebrow">{section.eyebrow}</span>
-          <h2 className="gal-section-title">{section.title}</h2>
-          <p className="gal-section-desc lead">{section.description}</p>
+          <span className="eyebrow gal-section-eyebrow">The ParisBeans Mood</span>
+          <h2 className="gal-section-title">
+            A Corner of <em>Paris,</em> Inside
+            <br />
+            <em>Hair Rap by Yoyo.</em>
+          </h2>
+          <p className="gal-section-desc lead">
+            Paris-inspired details, warm coffee, beautiful surroundings and the
+            little moments that make your salon visit feel different.
+          </p>
         </div>
 
         <div className="gal-grid gal-grid--salon reveal reveal-delay-1">

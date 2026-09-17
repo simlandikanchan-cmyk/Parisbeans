@@ -26,9 +26,20 @@ export default function GalleryFood() {
     <section className="gal-section" ref={ref}>
       <div className="container">
         <div className="gal-section-head reveal">
-          <span className="eyebrow gal-section-eyebrow">{section.eyebrow}</span>
-          <h2 className="gal-section-title">{section.title}</h2>
-          <p className="gal-section-desc lead">{section.description}</p>
+          <span className="eyebrow gal-section-eyebrow">From the Café</span>
+          <h2 className="gal-section-title">
+            Coffee,
+            <br />
+            <em>Breakfast</em> &amp;
+            <br />
+            Little
+            <br />
+            <em>Indulgences.</em>
+          </h2>
+          <p className="gal-section-desc lead">
+            Discover a simple, satisfying café offering curated for the moments
+            around your appointment.
+          </p>
         </div>
 
         <div className="gal-grid gal-grid--food reveal reveal-delay-1">

@@ -21,13 +21,13 @@ export default function OurStoryOrigin() {
     <section className="ostory-origin" ref={ref}>
       <div className="ostory-shell ostory-origin-grid">
         <div className="ostory-origin-copy reveal">
-          <p className="eyebrow ostory-eyebrow">FROM PARIS TO HAIR RAP BY YOYO</p>
+          <p className="eyebrow ostory-eyebrow">OUR STORY</p>
           <h2 className="ostory-origin-title">
-            From a Parisian
+            Inspired by Paris
             <br />
-            Feeling to a Salon
+            <em>Streets.</em> Crafted for
             <br />
-            <em>Experience.</em>
+            Your <em>Salon Day.</em>
           </h2>
           <p className="ostory-origin-text">
             ParisBeans was created inside Hair Rap by Yoyo as a café corner

@@ -7,17 +7,22 @@ export default function OurStoryCta() {
       <div className="ostory-shell ostory-cta-inner">
         <p className="eyebrow ostory-eyebrow">
           <span className="ostory-dash" aria-hidden="true" />
-          THE PARISBEANS EXPERIENCE
+          OUR STORY
         </p>
         <h2 className="ostory-cta-title">
-          ParisBeans Is Not Just a Café Corner.
+          Inspired by Paris
+          <br />
+          <em>Streets.</em> Crafted for
+          <br />
+          Your <em>Salon Day.</em>
         </h2>
         <p className="ostory-cta-desc">
-          It is a small Parisian ritual built into your Hair Rap by Yoyo
-          experience.
+          Born from a love for the café culture of Paris, Paris
+          Beans brings the rhythm of a street-side coffee
+          break into the heart of HAIR RAP BY YOYO.
         </p>
         <Button href="/visit-contact" variant="primary" arrow className="ostory-cta-btn">
-          Book Your Salon Appointment
+          Read Our Story
         </Button>
       </div>
     </section>
