@@ -1,0 +1,16 @@
+{
+  "name": "Paris Beans",
+  "short_name": "Paris Beans",
+  "description": "A Paris-inspired café experience inside Hair Rap by Yoyo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F3EB",
+  "theme_color": "#432719",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -3,15 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Primary meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Paris Beans — a Paris-inspired café experience inside Hair Rap by Yoyo. Pause, sip, enjoy." />
+    <meta name="theme-color" content="#432719" />
+    <meta name="author" content="Paris Beans" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://parisbeans.com" />
+
+    <!-- Dynamic SEO tags injected by <SEO> component -->
     <title>Paris Beans · Hair Rap by Yoyo</title>
+    <meta name="description" content="Paris Beans — a Paris-inspired café experience inside Hair Rap by Yoyo. Pause, sip, enjoy." />
+    <meta name="keywords" content="Paris Beans, Hair Rap by Yoyo, Parisian café, salon café, coffee, café experience, Paris-inspired" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Paris Beans" />
+    <meta property="og:title" content="Paris Beans · Hair Rap by Yoyo" />
+    <meta property="og:description" content="Paris Beans — a Paris-inspired café experience inside Hair Rap by Yoyo. Pause, sip, enjoy." />
+    <meta property="og:image" content="https://parisbeans.com/images/hero.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://parisbeans.com" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Paris Beans · Hair Rap by Yoyo" />
+    <meta name="twitter:description" content="Paris Beans — a Paris-inspired café experience inside Hair Rap by Yoyo. Pause, sip, enjoy." />
+    <meta name="twitter:image" content="https://parisbeans.com/images/hero.svg" />
+
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured data: Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Paris Beans",
+        "url": "https://parisbeans.com",
+        "logo": "https://parisbeans.com/images/logo.svg",
+        "description": "A Paris-inspired café experience inside Hair Rap by Yoyo.",
+        "sameAs": [
+          "https://www.instagram.com/parisbeans",
+          "https://www.youtube.com/parisbeans",
+          "https://www.facebook.com/parisbeans"
+        ]
+      }
+    </script>
+
+    <!-- Structured data: LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Cafe",
+        "name": "Paris Beans",
+        "image": "https://parisbeans.com/images/hero.svg",
+        "url": "https://parisbeans.com",
+        "telephone": "+919876543210",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Hair Rap by Yoyo",
+          "addressLocality": "Bangalore",
+          "addressRegion": "KA",
+          "postalCode": "560100",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 12.9716,
+          "longitude": 77.5946
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "21:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "10:00",
+            "closes": "18:00"
+          }
+        ],
+        "servesCuisine": ["Café", "Coffee", "Tea", "Light Bites"],
+        "menu": "https://parisbeans.com/menu"
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
