@@ -18,13 +18,12 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--color-gold);
 }
 
 .ostory-dash {
   width: 28px;
   height: 1px;
-  background: var(--color-gold);
+  background: var(--color-coffee);
   flex-shrink: 0;
 }
 
