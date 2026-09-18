@@ -16,6 +16,7 @@ try {
 export default function Preloader() {
   const [visible] = useState(!playedThisSession)
   const [hidden, setHidden] = useState(false)
+  const [logoError, setLogoError] = useState(false)
 
   useEffect(() => {
     if (!visible) return
@@ -45,15 +46,27 @@ export default function Preloader() {
     >
       <div className="preloader-inner">
         <div className="preloader-emblem">
-          <video
-            className="preloader-logo"
-            src="/images/story/logo.webm"
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden="true"
-          />
+          {logoError ? (
+            <img
+              className="preloader-logo"
+              src="/images/story/parisbeans.gif"
+              alt=""
+              aria-hidden="true"
+            />
+          ) : (
+            <video
+              className="preloader-logo"
+              src="/images/story/logo.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+              disablePictureInPicture
+              disableRemotePlayback
+              aria-hidden="true"
+              onError={() => setLogoError(true)}
+            />
+          )}
         </div>
 
         <h1 className="preloader-wordmark" aria-label="Paris Beans">
