@@ -148,8 +148,8 @@ export const contact = {
   address: '12 Rue du Salon, Ahmedabad, Gujarat 380001, India',
   city: 'Ahmedabad, Gujarat',
   country: 'India',
-  phone: '+91 98765 43210',
-  phoneTel: '+919876543210',
+  phone: '+91 90999 38886',
+  phoneTel: '+919099938886',
   email: 'hello@parisbeans.com',
   hours: {
     monSat: '10:00 AM – 8:00 PM',

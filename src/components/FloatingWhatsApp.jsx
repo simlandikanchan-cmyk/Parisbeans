@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './FloatingWhatsApp.css'
 
-const WHATSAPP_NUMBER = '919876543210'
+const WHATSAPP_NUMBER = '919099938886'
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   'Hi Paris Beans! I would like to know more.'
 )}`
