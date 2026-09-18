@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import { navLinks } from '../data/siteData'
+import { navLinks, contact } from '../data/siteData'
+import {
+  InstagramIcon,
+  YoutubeIcon,
+  FacebookIcon,
+  ClockIcon,
+  PhoneIcon,
+} from './Icons'
 import Button from './Button'
 import './Header.css'
 
@@ -10,6 +16,16 @@ const routeHrefs = {
   menu: '/menu',
   gallery: '/gallery',
   visit: '/visit-contact',
+}
+
+function Hamburger({ open = false }) {
+  return (
+    <span className={`hamburger-box${open ? ' is-open' : ''}`} aria-hidden="true">
+      <span className="hamburger-line" />
+      <span className="hamburger-line" />
+      <span className="hamburger-line" />
+    </span>
+  )
 }
 
 export default function Header({ story = false, route }) {
@@ -101,15 +117,20 @@ export default function Header({ story = false, route }) {
             className="menu-toggle"
             aria-label="Open menu"
             aria-expanded={open}
+            aria-controls="mobile-drawer"
             onClick={() => setOpen(true)}
           >
-            <Menu />
+            <Hamburger open={open} />
           </button>
         </div>
       </div>
 
       <div
         ref={drawerRef}
+        id="mobile-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
         className={`mobile-drawer ${open ? 'is-open' : ''}`}
         aria-hidden={!open}
         inert={!open}
@@ -124,12 +145,15 @@ export default function Header({ story = false, route }) {
             type="button"
             className="menu-toggle close"
             aria-label="Close menu"
+            aria-controls="mobile-drawer"
             onClick={() => setOpen(false)}
           >
-            <X />
+            <Hamburger open />
           </button>
         </div>
+
         <nav className="drawer-nav" aria-label="Mobile navigation">
+          <span className="drawer-eyebrow">— Menu</span>
           {navLinks.map((link, i) => (
             <a
               key={link.label}
@@ -139,18 +163,70 @@ export default function Header({ story = false, route }) {
               aria-current={link.href === activeHref ? 'page' : undefined}
               onClick={() => setOpen(false)}
             >
-              {link.label}
+              <span className="drawer-index" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span className="drawer-label">{link.label}</span>
+              <span className="drawer-arrow" aria-hidden="true">
+                →
+              </span>
             </a>
           ))}
+        </nav>
+
+        <div className="drawer-footer">
+          <div className="drawer-meta">
+            <a href={`tel:${contact.phoneTel}`}>
+              <PhoneIcon size={16} />
+              <span>{contact.phone}</span>
+            </a>
+            <span className="drawer-meta-sep" aria-hidden="true">
+              ·
+            </span>
+            <span>
+              <ClockIcon size={16} />
+              <span>{contact.hours.monSat}</span>
+            </span>
+          </div>
+
           <a
             href="/visit-contact"
             className="btn btn--primary drawer-cta"
-            style={{ '--i': navLinks.length }}
             onClick={() => setOpen(false)}
           >
             Book Appointment
+            <span className="btn-arrow" aria-hidden="true">
+              →
+            </span>
           </a>
-        </nav>
+
+          <div className="drawer-social" aria-label="Follow Paris Beans">
+            <a
+              href={contact.social.instagram}
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramIcon size={18} />
+            </a>
+            <a
+              href={contact.social.youtube}
+              aria-label="YouTube"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YoutubeIcon size={18} />
+            </a>
+            <a
+              href={contact.social.facebook}
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FacebookIcon size={18} />
+            </a>
+          </div>
+        </div>
       </div>
 
       <div
