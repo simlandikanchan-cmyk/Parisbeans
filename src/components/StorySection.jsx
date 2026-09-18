@@ -9,6 +9,8 @@ const storyImages = [
   '/images/story/Rectangle 72.svg',
 ]
 
+const storyBackImage = '/images/story/Rectangle 74.svg'
+
 export default function StorySection() {
   const ref = useRef(null)
   const [active, setActive] = useState(0)
@@ -49,7 +51,7 @@ export default function StorySection() {
           </div>
         </div>
 
-        {/* Right — animated image slideshow */}
+        {/* Right — layered editorial image with cycling main photo */}
         <div
           className="story-media reveal reveal-delay-1"
           aria-label="Paris Beans story gallery"
@@ -57,16 +59,22 @@ export default function StorySection() {
           onMouseLeave={() => setPaused(false)}
         >
           <div className="story-image-stack">
-            {storyImages.map((src, i) => (
-              <div
-                key={src}
-                className={`story-image-card story-image-card--${i + 1}${
-                  i === active ? ' is-active' : ''
-                }`}
-              >
-                <img src={src} alt="Paris Beans salon" />
-              </div>
-            ))}
+            {/* Back — dark brown photo card peeking out behind the main image */}
+            <div className="story-image-back" aria-hidden="true">
+              <img src={storyBackImage} alt="" />
+            </div>
+
+            {/* Front — main image, cycles through the story images */}
+            <div className="story-image-main">
+              {storyImages.map((src, i) => (
+                <div
+                  key={src}
+                  className={`story-image-card${i === active ? ' is-active' : ''}`}
+                >
+                  <img src={src} alt="Paris Beans salon" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

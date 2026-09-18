@@ -1,44 +1,34 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import { useCarousel } from '../hooks/useCarousel'
 import { galleryImage, galleryAlt } from '../data/siteData'
 import './Gallery.css'
 
-const collage = ['g2', 'g7', 'g3', 'g1', 'g4']
+const collage = ['g2', 'g7', 'g3', 'g4', 'g1']
 
-const n = collage.length
-const half = Math.floor(n / 2)
-
-const offset = (i, active) => {
-  let d = i - active
-  if (d > half) d -= n
-  if (d < -half) d += n
-  return d
-}
-
-const stateClass = (d) => {
-  if (d === 0) return 'center'
-  if (d === 1) return 'right'
-  if (d === -1) return 'left'
-  if (d === 2) return 'far-right'
-  if (d === -2) return 'far-left'
-  return d > 0 ? 'hidden-right' : 'hidden-left'
+function renderSet(duplicate) {
+  return collage.map((key, i) => (
+    <figure
+      key={key}
+      className={`gallery-image image-${i + 1}${duplicate ? '' : ' reveal'}`}
+      style={{ '--dl': `${i * 130}ms` }}
+    >
+      <img
+        src={galleryImage(key)}
+        alt={galleryAlt(key)}
+        loading={!duplicate && i === 0 ? 'eager' : 'lazy'}
+        fetchPriority={!duplicate && i === 0 ? 'high' : 'auto'}
+        draggable={false}
+      />
+    </figure>
+  ))
 }
 
 export default function GalleryHero() {
   const ref = useRef(null)
   useReveal(ref, { selector: '.reveal', threshold: 0.08 })
-  const carousel = useCarousel({ itemCount: n, interval: 5000 })
-
-  const go = (dir) => carousel.go(dir)
-
-  const handleKey = (e) => {
-    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1) }
-    if (e.key === 'ArrowRight') { e.preventDefault(); go(1) }
-  }
 
   return (
-    <section className="gal-hero" ref={ref} onKeyDown={handleKey} tabIndex={-1}>
+    <section className="gal-hero" ref={ref}>
       <div className="container">
         <div className="gal-hero-copy reveal">
           <span className="eyebrow gal-hero-eyebrow">— THE PARIS BEANS EXPERIENCE</span>
@@ -52,44 +42,12 @@ export default function GalleryHero() {
         </div>
       </div>
 
-      <div
-        className="gal-stage reveal reveal-delay-1"
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Gallery"
-        onMouseEnter={carousel.pause}
-        onMouseLeave={carousel.resume}
-        onFocus={carousel.pause}
-        onBlur={carousel.resume}
-      >
-        {/* Slides */}
-        <div aria-live="polite" className="gal-slides">
-          {collage.map((key, i) => {
-            const d = offset(i, carousel.active)
-            const state = stateClass(d)
-            const isCenter = d === 0
-            return (
-              <button
-                type="button"
-                key={key}
-                className={`gal-card ${state}`}
-                onClick={() => carousel.setActive(i)}
-                aria-label={galleryAlt(key)}
-                aria-current={isCenter}
-                style={{ '--i': i }}
-              >
-                <div className="gal-card-media">
-                  <img
-                    src={galleryImage(key)}
-                    alt={galleryAlt(key)}
-                    loading={isCenter ? 'eager' : 'lazy'}
-                    fetchPriority={isCenter ? 'high' : 'auto'}
-                    draggable={false}
-                  />
-                </div>
-              </button>
-            )
-          })}
+      <div className="gal-hero-collage" role="region" aria-label="Gallery">
+        <div className="gallery-track">
+          <div className="gallery-set">{renderSet(false)}</div>
+          <div className="gallery-set" aria-hidden="true">
+            {renderSet(true)}
+          </div>
         </div>
       </div>
     </section>
