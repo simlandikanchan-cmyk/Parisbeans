@@ -18,7 +18,7 @@ export default function ExperienceStrip() {
         <p className="experience-desc reveal reveal-delay-2">
           Whether you arrive early, take a break during your service, or simply
           want to enjoy the atmosphere, ParisBeans adds a warm café moment to
-          your Hair Rap by Yoyo experience.
+          your HAIR RAP BY YOYO experience.
         </p>
         <div className="reveal reveal-delay-3">
           <Button href="/visit-contact" variant="primary" arrow>

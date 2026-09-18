@@ -19,7 +19,7 @@ export default function OurStoryOrigin() {
             Your <em>Salon Day.</em>
           </h2>
           <p className="ostory-origin-text">
-            ParisBeans was created inside Hair Rap by Yoyo as a café corner
+            ParisBeans was created inside HAIR RAP BY YOYO as a café corner
             where guests can enjoy coffee surrounded by Paris-inspired wall
             art and atmosphere.
           </p>

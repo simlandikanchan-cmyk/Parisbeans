@@ -29,24 +29,24 @@ export const routePathsList = {
 
 const ROUTE_SEO = {
   home: {
-    title: 'Paris Beans \u00b7 Hair Rap by Yoyo',
+    title: 'Paris Beans \u00b7 HAIR RAP BY YOYO',
     description:
-      'Paris Beans \u2014 a Paris-inspired caf\u00e9 experience inside Hair Rap by Yoyo. Pause, sip, enjoy.',
+      'Paris Beans \u2014 a Paris-inspired caf\u00e9 experience inside HAIR RAP BY YOYO. Pause, sip, enjoy.',
   },
   story: {
     title: 'Our Story \u2014 Paris Beans',
     description:
-      'Paris Beans was created inside Hair Rap by Yoyo as a caf\u00e9 corner where guests can enjoy coffee surrounded by Paris-inspired wall art and atmosphere.',
+      'Paris Beans was created inside HAIR RAP BY YOYO as a caf\u00e9 corner where guests can enjoy coffee surrounded by Paris-inspired wall art and atmosphere.',
   },
   menu: {
     title: 'Menu \u2014 Paris Beans',
     description:
-      'From comforting coffee to simple caf\u00e9 favourites, discover the offerings available at ParisBeans inside Hair Rap by Yoyo.',
+      'From comforting coffee to simple caf\u00e9 favourites, discover the offerings available at ParisBeans inside HAIR RAP BY YOYO.',
   },
   gallery: {
     title: 'Gallery \u2014 Paris Beans',
     description:
-      'Step inside Paris Beans and discover the details, atmosphere and moments that make Hair Rap by Yoyo feel different.',
+      'Step inside Paris Beans and discover the details, atmosphere and moments that make HAIR RAP BY YOYO feel different.',
   },
   visit: {
     title: 'Visit & Contact \u2014 Paris Beans',
@@ -76,7 +76,7 @@ export function routeJsonLd(route) {
         '@type': 'Article',
         headline: 'Our Story \u2014 Paris Beans',
         description:
-          'Paris Beans was created inside Hair Rap by Yoyo as a caf\u00e9 corner where guests can enjoy coffee surrounded by Paris-inspired wall art and atmosphere.',
+          'Paris Beans was created inside HAIR RAP BY YOYO as a caf\u00e9 corner where guests can enjoy coffee surrounded by Paris-inspired wall art and atmosphere.',
         author: { '@type': 'Organization', name: 'Paris Beans' },
         publisher: { '@type': 'Organization', name: 'Paris Beans' },
         datePublished: '2026-09-17',
@@ -88,7 +88,7 @@ export function routeJsonLd(route) {
         '@type': 'Menu',
         name: 'Paris Beans Menu',
         description:
-          'From comforting coffee to simple caf\u00e9 favourites, discover the offerings available at ParisBeans inside Hair Rap by Yoyo.',
+          'From comforting coffee to simple caf\u00e9 favourites, discover the offerings available at ParisBeans inside HAIR RAP BY YOYO.',
         hasMenuSection: [
           { '@type': 'MenuSection', name: 'Coffee' },
           { '@type': 'MenuSection', name: 'Breakfast & Light Bites' },
@@ -102,7 +102,7 @@ export function routeJsonLd(route) {
         '@type': 'ImageGallery',
         name: 'Paris Beans Gallery',
         description:
-          'Step inside Paris Beans and discover the details, atmosphere and moments that make Hair Rap by Yoyo feel different.',
+          'Step inside Paris Beans and discover the details, atmosphere and moments that make HAIR RAP BY YOYO feel different.',
         mainEntityOfPage: 'https://parisbeans.com/gallery',
       }
     case 'visit':

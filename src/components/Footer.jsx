@@ -60,7 +60,7 @@ export default function Footer({ route }) {
           </span>
           <span className="footer-brand-name">Paris Beans</span>
           <p className="footer-desc">
-            A Paris-inspired café experience inside Hair Rap by Yoyo. A space
+            A Paris-inspired café experience inside HAIR RAP BY YOYO. A space
             to pause, enjoy good coffee, and experience the charm of Paris in a
             contemporary salon setting.
           </p>
@@ -134,7 +134,7 @@ export default function Footer({ route }) {
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
           <p className="footer-bottom-brand">
-            Paris Beans · <span>Hair Rap by Yoyo</span>
+            Paris Beans · <span>HAIR RAP BY YOYO</span>
           </p>
           <p className="footer-tagline">Pause. Sip. Enjoy.</p>
           <div className="footer-legal">

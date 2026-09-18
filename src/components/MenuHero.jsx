@@ -30,7 +30,7 @@ export default function MenuHero() {
           </h1>
           <p className="menu-hero-desc">
             From comforting coffee to simple café favourites, discover the
-            offerings available at ParisBeans inside Hair Rap by Yoyo.
+            offerings available at ParisBeans inside HAIR RAP BY YOYO.
           </p>
         </div>
       </div>

@@ -30,7 +30,7 @@ export default function GalleryAtmosphere() {
           <h2 className="gal-section-title">
             A Corner of <em>Paris,</em> Inside
             <br />
-            <em>Hair Rap by Yoyo.</em>
+            <em>HAIR RAP BY YOYO.</em>
           </h2>
           <p className="gal-section-desc lead">
             Paris-inspired details, warm coffee, beautiful surroundings and the

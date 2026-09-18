@@ -102,7 +102,7 @@ export const gallerySections = [
     eyebrow: '— PARISIAN ATMOSPHERE',
     title: 'Moments Worth Slowing Down For.',
     description:
-      'A little time to pause, enjoy your coffee, and take in the Paris-inspired atmosphere at Hair Rap by Yoyo.',
+      'A little time to pause, enjoy your coffee, and take in the Paris-inspired atmosphere at HAIR RAP BY YOYO.',
     images: ['g1', 'g4', 'g5', 'g7'],
   },
   {
@@ -110,7 +110,7 @@ export const gallerySections = [
     eyebrow: '— PARIS WALL ART',
     title: 'A Little Corner of Paris.',
     description:
-      'Paris-inspired artwork brings the feeling of a Parisian street into the heart of Hair Rap by Yoyo.',
+      'Paris-inspired artwork brings the feeling of a Parisian street into the heart of HAIR RAP BY YOYO.',
     images: ['g4', 'g1', 'g7', 'g2', 'g6'],
   },
   {
@@ -144,7 +144,7 @@ export const exploreLinks = navLinks
 
 // ── Contact (single source of truth) ────────────────────────────────
 export const contact = {
-  location: 'Paris Beans at Hair Rap by Yoyo',
+  location: 'Paris Beans at HAIR RAP BY YOYO',
   address: '1st floor, Shilp Satved, Sindhubhavan Rd, Bodakdev, Ahmedabad, Gujarat 380059',
   city: 'Ahmedabad, Gujarat',
   country: 'India',

@@ -17,24 +17,24 @@ const ROUTE_PATHS = {
 
 const ROUTE_SEO = {
   home: {
-    title: 'Paris Beans · Hair Rap by Yoyo',
+    title: 'Paris Beans · HAIR RAP BY YOYO',
     description:
-      'Paris Beans — a Paris-inspired café experience inside Hair Rap by Yoyo. Pause, sip, enjoy.',
+      'Paris Beans — a Paris-inspired café experience inside HAIR RAP BY YOYO. Pause, sip, enjoy.',
   },
   story: {
     title: 'Our Story — Paris Beans',
     description:
-      'Paris Beans was created inside Hair Rap by Yoyo as a café corner where guests can enjoy coffee surrounded by Paris-inspired wall art and atmosphere.',
+      'Paris Beans was created inside HAIR RAP BY YOYO as a café corner where guests can enjoy coffee surrounded by Paris-inspired wall art and atmosphere.',
   },
   menu: {
     title: 'Menu — Paris Beans',
     description:
-      'From comforting coffee to simple café favourites, discover the offerings available at ParisBeans inside Hair Rap by Yoyo.',
+      'From comforting coffee to simple café favourites, discover the offerings available at ParisBeans inside HAIR RAP BY YOYO.',
   },
   gallery: {
     title: 'Gallery — Paris Beans',
     description:
-      'Step inside Paris Beans and discover the details, atmosphere and moments that make Hair Rap by Yoyo feel different.',
+      'Step inside Paris Beans and discover the details, atmosphere and moments that make HAIR RAP BY YOYO feel different.',
   },
   visit: {
     title: 'Visit & Contact — Paris Beans',
@@ -81,7 +81,7 @@ export default function SEO({ route = 'home', title, description, image, canonic
 
     document.title = t
     setTag('name', 'description', d)
-    setTag('name', 'keywords', 'Paris Beans, Hair Rap by Yoyo, Parisian café, salon café, coffee, café experience, Paris-inspired')
+    setTag('name', 'keywords', 'Paris Beans, HAIR RAP BY YOYO, Parisian café, salon café, coffee, café experience, Paris-inspired')
     setTag('property', 'og:title', t)
     setTag('property', 'og:description', d)
     setTag('property', 'og:image', img)

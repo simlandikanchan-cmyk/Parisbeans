@@ -18,7 +18,7 @@ export default function TermsConditions() {
     <LegalPage
       title={<>The Fine Print, <em>Made Friendly.</em></>}
       eyebrow="Terms &amp; Conditions"
-      lede="These terms outline the simple ground rules for enjoying Paris Beans — online and in person, inside Hair Rap by Yoyo. By visiting or ordering from us, you agree to them."
+      lede="These terms outline the simple ground rules for enjoying Paris Beans — online and in person, inside HAIR RAP BY YOYO. By visiting or ordering from us, you agree to them."
       sections={sections}
     >
       <section id="terms-acceptance" className="legal-section">
@@ -27,7 +27,7 @@ export default function TermsConditions() {
           <h2 className="legal-h2">Acceptance of Terms</h2>
         </div>
         <p>
-          By accessing the Paris Beans website or visiting our café corner at Hair Rap by Yoyo, you agree to be bound by these Terms &amp; Conditions. If you do not agree with any part of them, please do not use our services.
+          By accessing the Paris Beans website or visiting our café corner at HAIR RAP BY YOYO, you agree to be bound by these Terms &amp; Conditions. If you do not agree with any part of them, please do not use our services.
         </p>
       </section>
 
@@ -93,7 +93,7 @@ export default function TermsConditions() {
           <h2 className="legal-h2">Liability</h2>
         </div>
         <p>
-          To the fullest extent permitted by law, Paris Beans and Hair Rap by Yoyo shall not be held liable for any indirect, incidental or consequential loss arising from use of our website or services. Consuming beverages served hot is at your own risk — please take care.
+          To the fullest extent permitted by law, Paris Beans and HAIR RAP BY YOYO shall not be held liable for any indirect, incidental or consequential loss arising from use of our website or services. Consuming beverages served hot is at your own risk — please take care.
         </p>
       </section>
 

@@ -18,7 +18,7 @@ export default function VisitCTA() {
         <p className="visit-cta-desc">
           Whether you arrive early, take a break during your service, or simply
           want to enjoy the atmosphere, ParisBeans adds a warm café moment to
-          your Hair Rap by Yoyo experience.
+          your HAIR RAP BY YOYO experience.
         </p>
         <Button href="#visit-contact" variant="primary" arrow>
           Reserve Your Spot

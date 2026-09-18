@@ -13,7 +13,7 @@ export default function Hero() {
       <div className="hero-media">
         <img
           src={heroImage}
-          alt="Hair Rap by Yoyo salon interior with a warm Parisian café corner"
+          alt="HAIR RAP BY YOYO salon interior with a warm Parisian café corner"
           className="hero-image"
         />
       </div>
@@ -25,7 +25,7 @@ export default function Hero() {
         <div className="hero-copy">
           <div className="hero-eyebrow-wrap reveal">
             <span className="hero-eyebrow-dot" aria-hidden="true" />
-            <p className="eyebrow hero-eyebrow">Paris Beans · Hair Rap by Yoyo</p>
+            <p className="eyebrow hero-eyebrow">Paris Beans · HAIR RAP BY YOYO</p>
           </div>
 
           <h1 className="hero-title">
@@ -48,7 +48,7 @@ export default function Hero() {
           <div className="hero-divider reveal reveal-delay-2" aria-hidden="true" />
 
           <p className="hero-desc reveal reveal-delay-2">
-            Step into Hair Rap by Yoyo and discover Paris Beans — a Paris
+            Step into HAIR RAP BY YOYO and discover Paris Beans — a Paris
             inspired café corner where every salon visit comes with a
             complimentary coffee and a little time to pause.
           </p>

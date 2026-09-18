@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
     <LegalPage
       title={<>Your Privacy, <em>Respected.</em></>}
       eyebrow="Privacy Policy"
-      lede="At Paris Beans — the café corner inside Hair Rap by Yoyo — we treat the information you share with us with care, transparency and respect. This policy explains what we collect, why, and the choices you have."
+      lede="At Paris Beans — the café corner inside HAIR RAP BY YOYO — we treat the information you share with us with care, transparency and respect. This policy explains what we collect, why, and the choices you have."
       sections={sections}
     >
       <section id="privacy-collect" className="legal-section">

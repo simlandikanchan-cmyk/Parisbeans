@@ -47,7 +47,7 @@ export default function GalleryHero() {
           </h1>
           <p className="gal-hero-desc lead">
             Step inside Paris Beans and discover the details, atmosphere and moments
-            that make Hair Rap by Yoyo feel different.
+            that make HAIR RAP BY YOYO feel different.
           </p>
         </div>
       </div>

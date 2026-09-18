@@ -6,7 +6,7 @@ const IMAGES = [
   { src: '/images/story/Rectangle 75.svg', pos: '50% 25%', alt: 'Salon interior detail' },
   { src: '/images/story/Rectangle 74.svg', pos: '50% 60%', alt: 'Café corner detail' },
   // { src: '/images/story/Rectangle 60.svg', pos: '50% 40%', alt: 'Paris Beans interior detail' },
-  { src: '/images/story/Rectangle 73.svg', pos: '50% 30%', alt: 'Hair Rap by Yoyo environment' },
+  { src: '/images/story/Rectangle 73.svg', pos: '50% 30%', alt: 'HAIR RAP BY YOYO environment' },
 ]
 
 const reduceMotion =
