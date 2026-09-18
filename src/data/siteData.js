@@ -77,11 +77,6 @@ export const cafeCardTitles = [
   'Sundowner Mocktail',
 ]
 
-export const galleryImage = (key) => `/images/gallery/${key}.svg`
-
-export const galleryAlt = (key) =>
-  (gallery.find((i) => i.key === key) || { alt: key }).alt
-
 export const gallery = [
   { key: 'g1', alt: 'Warm Parisian café corner' },
   { key: 'g2', alt: 'Espresso being poured' },
@@ -91,6 +86,13 @@ export const gallery = [
   { key: 'g6', alt: 'Coffee and pastry flat lay' },
   { key: 'g7', alt: 'Paris inspired decor' },
 ]
+
+export const galleryImage = (key) => `/images/gallery/${key}.svg`
+
+export const galleryAlt = (key) => {
+  const item = gallery.find((i) => i.key === key)
+  return item ? item.alt : key
+}
 
 // Gallery page content. Ordered `images` drive each section's grid layout
 // (position is derived from index in the section component).

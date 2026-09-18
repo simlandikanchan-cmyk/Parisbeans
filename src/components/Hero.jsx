@@ -1,25 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { useReveal } from '../hooks/useReveal'
 import { heroImage } from '../data/siteData'
 import Button from './Button'
 import './Hero.css'
 
 export default function Hero() {
   const ref = useRef(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('is-visible')
-        })
-      },
-      { threshold: 0.08 }
-    )
-    el.querySelectorAll('.reveal, .hero-title').forEach((node) => io.observe(node))
-    return () => io.disconnect()
-  }, [])
+  useReveal(ref, { selector: '.reveal, .hero-title', threshold: 0.08 })
 
   return (
     <section id="home" className="hero" ref={ref}>

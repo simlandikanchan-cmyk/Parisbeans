@@ -1,39 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { useReveal } from '../hooks/useReveal'
 import './Menu.css'
 
 export default function MenuSpecialty({ category }) {
   const ref = useRef(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const reveal = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible'))
-      },
-      { threshold: 0.1 }
-    )
-    el.querySelectorAll('.reveal').forEach((n) => reveal.observe(n))
-
-    const gate = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            el.classList.add('is-in-view')
-            gate.disconnect()
-          }
-        })
-      },
-      { threshold: 0.2 }
-    )
-    gate.observe(el)
-
-    return () => {
-      reveal.disconnect()
-      gate.disconnect()
-    }
-  }, [])
+  useReveal(ref, { threshold: 0.1 })
 
   return (
     <section className="menu-special" ref={ref}>
@@ -47,7 +18,7 @@ export default function MenuSpecialty({ category }) {
             {category.heading} <span className="menu-special-size">{category.size}</span>
           </h2>
 
-          <ul className="menu-list" key={category.id}>
+          <ul className="menu-list">
             {category.items.map((item, i) => (
               <li className="menu-row" key={item.name} style={{ '--i': i }}>
                 <div className="menu-row-top">
@@ -82,7 +53,6 @@ export default function MenuSpecialty({ category }) {
           </div>
 
           <img
-            key={category.id}
             src={category.image}
             alt={category.imageAlt}
             className="menu-cup"

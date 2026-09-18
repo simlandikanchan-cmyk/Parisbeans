@@ -288,7 +288,7 @@
   transition-delay: calc(0.12s + var(--i, 0) * 0.055s);
 }
 
-.menu-special.is-in-view .menu-row {
+.menu-special-list.is-visible .menu-row {
   opacity: 1;
   transform: none;
 }

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import { useReveal } from '../hooks/useReveal'
 import emailjs from '@emailjs/browser'
 import Button from './Button'
 import { contact } from '../data/siteData'
@@ -13,19 +14,7 @@ export default function ContactLocation() {
   const ref = useRef(null)
   const formRef = useRef(null)
   const [status, setStatus] = useState('idle')
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible'))
-      },
-      { threshold: 0.12 }
-    )
-    el.querySelectorAll('.reveal').forEach((n) => io.observe(n))
-    return () => io.disconnect()
-  }, [])
+  useReveal(ref, { threshold: 0.12 })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -36,8 +25,7 @@ export default function ContactLocation() {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, { publicKey: PUBLIC_KEY })
       setStatus('sent')
       e.target.reset()
-    } catch (error) {
-      console.error('EmailJS send failed:', error)
+    } catch {
       setStatus('error')
     }
   }

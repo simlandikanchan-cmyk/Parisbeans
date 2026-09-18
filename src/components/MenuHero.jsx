@@ -1,21 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { useReveal } from '../hooks/useReveal'
 import './Menu.css'
 
 export default function MenuHero() {
   const ref = useRef(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible'))
-      },
-      { threshold: 0.08 }
-    )
-    el.querySelectorAll('.reveal').forEach((n) => io.observe(n))
-    return () => io.disconnect()
-  }, [])
+  useReveal(ref, { threshold: 0.08 })
 
   return (
     <section className="menu-hero" ref={ref}>

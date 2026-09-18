@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
+import { useReveal } from '../hooks/useReveal'
+import { useCarousel } from '../hooks/useCarousel'
 import { gallery, galleryImage } from '../data/siteData'
 import Button from './Button'
 import './GalleryMood.css'
@@ -6,40 +8,15 @@ import './GalleryMood.css'
 export default function GalleryMood() {
   const ref = useRef(null)
   const stageRef = useRef(null)
-  const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
   const dragRef = useRef({ x: 0, dragging: false, moved: false })
-  const reduceMotion = useRef(
-    typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  )
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible'))
-      },
-      { threshold: 0.08 }
-    )
-    el.querySelectorAll('.reveal').forEach((n) => io.observe(n))
-    return () => io.disconnect()
-  }, [])
-
-  // Auto-advance: loops forever, restarts whenever the slide or pause state changes
-  useEffect(() => {
-    if (paused || reduceMotion.current) return
-    const t = setInterval(() => setActive((p) => (p + 1) % gallery.length), 3100)
-    return () => clearInterval(t)
-  }, [paused, active])
+  useReveal(ref, { selector: '.reveal', threshold: 0.08 })
+  const carousel = useCarousel({ itemCount: gallery.length, interval: 3100 })
 
   const n = gallery.length
   const half = Math.floor(n / 2)
 
-  // Wrapped signed distance from the active slide (centre), in -half..half
   const offset = (i) => {
-    let d = i - active
+    let d = i - carousel.active
     if (d > half) d -= n
     if (d < -half) d += n
     return d
@@ -56,12 +33,11 @@ export default function GalleryMood() {
     return d > 0 ? 'hidden-right' : 'hidden-left'
   }
 
-  const advance = (dir) => setActive((p) => (p + dir + n) % n)
+  const advance = (dir) => carousel.go(dir)
 
-  // --- lightweight drag / swipe (secondary; autoplay stays primary) ---
   const onPointerDown = (e) => {
     dragRef.current = { x: e.clientX, y: e.clientY, dragging: true, moved: false }
-    setPaused(true)
+    carousel.pause()
   }
 
   const onPointerMove = (e) => {
@@ -76,7 +52,7 @@ export default function GalleryMood() {
     d.dragging = false
     const dx = e.clientX - d.x
     if (d.moved && Math.abs(dx) > 40) advance(dx < 0 ? 1 : -1)
-    setPaused(false)
+    carousel.resume()
   }
 
   return (
@@ -100,11 +76,11 @@ export default function GalleryMood() {
       <div
         className="gallery-stage reveal reveal-delay-1"
         ref={stageRef}
-        onMouseEnter={() => setPaused(true)}
+        onMouseEnter={carousel.pause}
         onMouseLeave={() => {
           dragRef.current.dragging = false
           dragRef.current.moved = false
-          setPaused(false)
+          carousel.resume()
         }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -123,7 +99,7 @@ export default function GalleryMood() {
                     dragRef.current.moved = false
                     return
                   }
-                  setActive(i)
+                  carousel.setActive(i)
                 }}
                 aria-label={img.alt}
               >

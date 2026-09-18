@@ -3,10 +3,22 @@ import './Preloader.css'
 
 const WORDMARK = ['P', 'a', 'r', 'i', 's', ' ', 'B', 'e', 'a', 'n', 's']
 
+const PRELOADER_KEY = 'parisbeans:preloader-played'
+
+let playedThisSession = false
+try {
+  playedThisSession = sessionStorage.getItem(PRELOADER_KEY) === '1'
+  if (!playedThisSession) sessionStorage.setItem(PRELOADER_KEY, '1')
+} catch {
+  playedThisSession = false
+}
+
 export default function Preloader() {
+  const [visible] = useState(!playedThisSession)
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
+    if (!visible) return
     document.body.style.overflow = 'hidden'
     const hide = setTimeout(() => {
       setHidden(true)
@@ -21,7 +33,9 @@ export default function Preloader() {
       clearTimeout(remove)
       document.body.style.overflow = ''
     }
-  }, [])
+  }, [visible])
+
+  if (!visible) return null
 
   return (
     <div

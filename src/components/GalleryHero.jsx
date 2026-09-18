@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
+import { useReveal } from '../hooks/useReveal'
+import { useCarousel } from '../hooks/useCarousel'
 import { galleryImage, galleryAlt } from '../data/siteData'
 import './Gallery.css'
 
@@ -25,41 +27,10 @@ const stateClass = (d) => {
 
 export default function GalleryHero() {
   const ref = useRef(null)
-  const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
-  const reduceMotion = useRef(
-    typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  )
+  useReveal(ref, { selector: '.reveal', threshold: 0.08 })
+  const carousel = useCarousel({ itemCount: n, interval: 5000 })
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible'))
-      },
-      { threshold: 0.08 }
-    )
-    el.querySelectorAll('.reveal').forEach((node) => io.observe(node))
-    return () => io.disconnect()
-  }, [])
-
-  // Auto-advance: 5s interval, restarts on active change, respects reduced-motion
-  useEffect(() => {
-    if (paused || reduceMotion.current) return
-    const t = setInterval(() => setActive((p) => (p + 1) % n), 5000)
-    return () => clearInterval(t)
-  }, [paused, active])
-
-  // Pause while the tab is hidden, resume on return
-  useEffect(() => {
-    const onVisibility = () => setPaused(document.hidden)
-    document.addEventListener('visibilitychange', onVisibility, { passive: true })
-    return () => document.removeEventListener('visibilitychange', onVisibility)
-  }, [])
-
-  const go = (dir) => setActive((p) => (p + dir + n) % n)
+  const go = (dir) => carousel.go(dir)
 
   const handleKey = (e) => {
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1) }
@@ -67,7 +38,7 @@ export default function GalleryHero() {
   }
 
   return (
-    <section className="gal-hero" ref={ref} onKeyDown={handleKey}>
+    <section className="gal-hero" ref={ref} onKeyDown={handleKey} tabIndex={-1}>
       <div className="container">
         <div className="gal-hero-copy reveal">
           <span className="eyebrow gal-hero-eyebrow">— THE PARIS BEANS EXPERIENCE</span>
@@ -86,15 +57,15 @@ export default function GalleryHero() {
         role="region"
         aria-roledescription="carousel"
         aria-label="Gallery"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
+        onMouseEnter={carousel.pause}
+        onMouseLeave={carousel.resume}
+        onFocus={carousel.pause}
+        onBlur={carousel.resume}
       >
         {/* Slides */}
         <div aria-live="polite" className="gal-slides">
           {collage.map((key, i) => {
-            const d = offset(i, active)
+            const d = offset(i, carousel.active)
             const state = stateClass(d)
             const isCenter = d === 0
             return (
@@ -102,7 +73,7 @@ export default function GalleryHero() {
                 type="button"
                 key={key}
                 className={`gal-card ${state}`}
-                onClick={() => setActive(i)}
+                onClick={() => carousel.setActive(i)}
                 aria-label={galleryAlt(key)}
                 aria-current={isCenter}
                 style={{ '--i': i }}

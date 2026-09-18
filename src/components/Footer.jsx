@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { exploreLinks, contact } from '../data/siteData'
 import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon, WhatsAppIcon } from './Icons'
+import { useScroll } from '../hooks/useScroll'
 import './Footer.css'
 
 export default function Footer({ route }) {
@@ -30,27 +31,22 @@ export default function Footer({ route }) {
       { threshold: 0.12 }
     )
     io.observe(footer)
-
-    // Animate watermark drift on scroll
-    const onScroll = () => {
-      const r = footer.getBoundingClientRect()
-      if (r.bottom < 0 || r.top > window.innerHeight) return
-      footer.style.setProperty(
-        '--watermark-drift',
-        `${Math.max(0, Math.min(40, (1 - r.top / window.innerHeight) * 40))}px`
-      )
-    }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-
-    return () => {
-      io.disconnect()
-      window.removeEventListener('scroll', onScroll)
-    }
+    return () => io.disconnect()
   }, [])
 
+  useScroll(() => {
+    const footer = ref.current
+    if (!footer) return
+    const r = footer.getBoundingClientRect()
+    if (r.bottom < 0 || r.top > window.innerHeight) return
+    footer.style.setProperty(
+      '--watermark-drift',
+      `${Math.max(0, Math.min(40, (1 - r.top / window.innerHeight) * 40))}px`
+    )
+  })
+
   return (
-    <footer id="visit" className="footer" ref={ref}>
+    <footer id="footer" className="footer" ref={ref}>
       {/* Oversized editorial watermark */}
       <span className="footer-watermark" aria-hidden="true">
         Paris Beans
@@ -155,7 +151,15 @@ export default function Footer({ route }) {
               <a href="/terms-and-conditions">Terms &amp; Conditions</a>
             </span>
           </div>
-          <a href="#" className="back-to-top" aria-label="Back to top">
+          <a
+            href="#"
+            className="back-to-top"
+            aria-label="Back to top"
+            onClick={(e) => {
+              e.preventDefault()
+              window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+            }}
+          >
             Back to top
           </a>
         </div>

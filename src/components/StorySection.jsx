@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { useReveal } from '../hooks/useReveal'
 import Button from './Button'
 import './StorySection.css'
 
@@ -12,19 +13,7 @@ export default function StorySection() {
   const ref = useRef(null)
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible'))
-      },
-      { threshold: 0.12 }
-    )
-    el.querySelectorAll('.reveal').forEach((n) => io.observe(n))
-    return () => io.disconnect()
-  }, [])
+  useReveal(ref)
 
   // Slideshow loop: the story images appear one by one, over and over
   useEffect(() => {
