@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { exploreLinks, contact } from '../data/siteData'
-import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon, WhatsAppIcon } from './Icons'
+import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon } from './Icons'
 import { useScroll } from '../hooks/useScroll'
 import './Footer.css'
 
@@ -121,19 +121,7 @@ export default function Footer({ route }) {
                 <span className="contact-sub">{contact.phone}</span>
               </a>
             </li>
-            <li className="contact-item">
-              <WhatsAppIcon className="contact-icon contact-icon--whatsapp" />
-              <a
-                className="contact-body"
-                href={`https://wa.me/${contact.phoneTel}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="contact-label">WhatsApp</span>
-                <span className="contact-sub">{contact.phone}</span>
-              </a>
-            </li>
-          </ul>
+            </ul>
         </div>
       </div>
 
