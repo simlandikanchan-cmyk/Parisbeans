@@ -101,17 +101,22 @@ export default function Footer({ route }) {
           <ul className="footer-contact">
             <li className="contact-item">
               <MapPinIcon />
-              <div className="contact-body">
+              <a
+                className="contact-body"
+                href={contact.mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <span className="contact-label">{contact.location}</span>
                 <span className="contact-sub">{contact.address}</span>
-              </div>
+              </a>
             </li>
             <li className="contact-item">
               <ClockIcon />
               <div className="contact-body">
                 <span className="contact-label">Opening Hours</span>
-                <span className="contact-sub">{contact.hours.monSat}</span>
-                <span className="contact-sub">{contact.hours.sunday}</span>
+                <span className="contact-sub">{contact.hours.days}</span>
+                <span className="contact-sub">{contact.hours.allWeek}</span>
               </div>
             </li>
             <li className="contact-item">

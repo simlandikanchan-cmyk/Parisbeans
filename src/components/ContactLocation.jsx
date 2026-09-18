@@ -85,12 +85,19 @@ export default function ContactLocation() {
           </p>
 
           <div className="visit-map-wrap">
-            <div className="visit-map-card">
+            <a
+              className="visit-map-card"
+              href={contact.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open location in Google Maps"
+            >
               <span className="visit-map-card-name">{contact.location}</span>
               <span className="visit-map-card-address">
                 {contact.address}
               </span>
-            </div>
+              <span className="visit-map-card-link">Open in Google Maps →</span>
+            </a>
             <iframe
               title="Paris Beans location"
               className="visit-map"

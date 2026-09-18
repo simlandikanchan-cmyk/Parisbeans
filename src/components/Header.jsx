@@ -185,7 +185,7 @@ export default function Header({ story = false, route }) {
             </span>
             <span>
               <ClockIcon size={16} />
-              <span>{contact.hours.monSat}</span>
+              <span>{contact.hours.allWeek}</span>
             </span>
           </div>
 

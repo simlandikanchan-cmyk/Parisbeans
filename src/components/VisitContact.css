@@ -284,11 +284,27 @@
   top: 16px;
   right: 16px;
   z-index: 2;
+  display: block;
   max-width: 230px;
   padding: 0.9rem 1.15rem;
   border-radius: var(--radius-md);
   background: var(--color-white);
   box-shadow: var(--shadow-soft);
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.visit-map-card:hover {
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
+}
+
+.visit-map-card-link {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-coffee);
 }
 
 .visit-map-card-name {

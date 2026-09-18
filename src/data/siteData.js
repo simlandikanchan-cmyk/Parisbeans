@@ -145,21 +145,22 @@ export const exploreLinks = navLinks
 // ── Contact (single source of truth) ────────────────────────────────
 export const contact = {
   location: 'Paris Beans at Hair Rap by Yoyo',
-  address: '12 Rue du Salon, Ahmedabad, Gujarat 380001, India',
+  address: '1st floor, Shilp Satved, Sindhubhavan Rd, Bodakdev, Ahmedabad, Gujarat 380059',
   city: 'Ahmedabad, Gujarat',
   country: 'India',
   phone: '+91 90999 38886',
   phoneTel: '+919099938886',
   email: 'hello@parisbeans.com',
   hours: {
-    monSat: '10:00 AM – 8:00 PM',
-    sunday: '11:00 AM – 5:00 PM',
+    allWeek: '10:00 AM – 9:00 PM',
+    days: 'Monday – Sunday',
   },
   social: {
     instagram: 'https://instagram.com/parisbeans',
     youtube: 'https://www.youtube.com/@parisbeans',
     facebook: 'https://www.facebook.com/parisbeans',
   },
+  mapLink: 'https://maps.app.goo.gl/GRAojmhWejJByVhY6',
   mapBbox: '72.50, 22.90, 72.65, 23.10',
   mapCenter: '72.57, 23.02',
   mapZoom: '13',
