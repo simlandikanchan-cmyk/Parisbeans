@@ -59,7 +59,10 @@ export default function StorySection() {
           onMouseLeave={() => setPaused(false)}
         >
           <div className="story-image-stack">
-            {/* Back — dark brown photo card peeking out behind the main image */}
+            {/* Back — two dark brown photo cards stacked behind the main image */}
+            <div className="story-image-back story-image-back--alt" aria-hidden="true">
+              <img src="/images/story/Rectangle 75.svg" alt="" />
+            </div>
             <div className="story-image-back" aria-hidden="true">
               <img src={storyBackImage} alt="" />
             </div>

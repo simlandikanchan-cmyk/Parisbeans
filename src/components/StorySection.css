@@ -80,7 +80,7 @@
 /* FRONT / MAIN IMAGE — sits in the foreground, top-left of the stack */
 .story-image-main {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   width: var(--main-w);
   aspect-ratio: 675 / 605;
   border-radius: 8px;
@@ -93,12 +93,20 @@
   will-change: transform;
 }
 
-/* BACK / DARK-BROWN IMAGE CARD — offset right & down, partly hidden */
+/* BACK #2 — deepest dark card, peeks out bottom-right with a thin sliver */
+.story-image-back--alt {
+  top: calc(var(--back-off-y) * 0.5);
+  left: calc(var(--back-off-x) * 0.5);
+  z-index: 2;
+  box-shadow: 0 6px 16px rgba(45, 26, 16, 0.1);
+}
+
+/* BACK #1 / DARK-BROWN IMAGE CARD — offset right & down, partly hidden */
 .story-image-back {
   position: absolute;
   top: var(--back-off-y);
   left: var(--back-off-x);
-  z-index: 2;
+  z-index: 3;
   width: var(--main-w);
   aspect-ratio: 675 / 605;
   border-radius: 8px;
@@ -184,6 +192,10 @@
 
 .story-media:hover .story-image-back {
   transform: translate3d(8px, 10px, 0);
+}
+
+.story-media:hover .story-image-back--alt {
+  transform: translate3d(4px, 5px, 0);
 }
 
 .story-media:hover::after {
