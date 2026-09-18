@@ -289,7 +289,7 @@
   font-family: var(--font-sans);
   font-size: 0.68rem;
   font-weight: var(--fw-semibold);
-  letter-spacing: 0.28em;
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
   text-transform: uppercase;
   color: var(--color-coffee);

@@ -20,7 +20,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-bold);
-  font-size: clamp(2.4rem, 4.2vw, 5rem);
+  font-size: clamp(2rem, 4.2vw, 5rem);
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
   color: var(--color-espresso);
@@ -186,35 +186,36 @@
   }
 }
 
+/* Mobile-only composed phone gallery */
+.ostory-gallery-mobile {
+  display: none;
+}
+
 /* Phone: big main image + 2 slimmer side panels (same layout, scaled) */
 @media (max-width: 640px) {
-  .ostory-desc {
-    font-size: 1rem;
-    line-height: 1.65;
-  }
-
-  .ostory-gallery {
-    flex-direction: row;
-  }
-
-  .ostory-gallery-main {
-    flex: 0 0 68%;
-    height: clamp(240px, 62vw, 360px);
-    border-radius: var(--radius-md);
-  }
-
+  /* Swap the interactive carousel for the composed phone gallery image */
+  .ostory-gallery-main,
   .ostory-gallery-strip {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .ostory-gallery-panel:nth-child(n + 3) {
     display: none;
   }
 
-  .ostory-gallery-panel {
-    height: clamp(150px, 34vw, 210px);
+  .ostory-gallery {
+    display: block;
+  }
+
+  .ostory-gallery-mobile {
+    display: block;
+    width: 100%;
+    max-width: 390px;
+    margin-inline: auto;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .ostory-gallery-mobile img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 }
 

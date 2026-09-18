@@ -80,6 +80,9 @@ export default function OurStoryHero() {
               </figure>
             ))}
           </div>
+          <figure className="ostory-gallery-mobile reveal" aria-label="Paris Beans story gallery">
+            <img src="/images/story/phonegallery.png" alt="Paris Beans story gallery" />
+          </figure>
         </div>
       </div>
     </section>

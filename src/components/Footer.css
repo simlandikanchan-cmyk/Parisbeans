@@ -566,7 +566,14 @@ a.contact-body:focus-visible,
   }
 }
 
+/* Hide the oversized editorial watermark backdrop on phone — it's decoration,
+   and on small screens it dominates the viewport */
 @media (max-width: 560px) {
+  .footer-watermark,
+  .footer-watermark:hover {
+    display: none;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
   }
