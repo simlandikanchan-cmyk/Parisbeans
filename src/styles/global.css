@@ -216,12 +216,13 @@ button {
   color: var(--color-coffee);
 }
 
-h1, h2, h3, h4, .display {
+h1, h2, h3, h4, h5, h6, .display {
   font-family: var(--font-serif);
   font-weight: var(--fw-medium);
   line-height: var(--lh-heading);
   color: var(--color-espresso);
   letter-spacing: var(--tracking-tight);
+  text-transform: capitalize;
 }
 
 .section-heading {

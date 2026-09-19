@@ -78,7 +78,6 @@
   overflow: hidden;
   border-radius: var(--radius-sm);
   background-color: var(--color-bg);
-  box-shadow: 0 18px 44px -18px rgba(53, 29, 19, 0.38);
 }
 
 .gallery-image img {
@@ -163,9 +162,20 @@
 }
 
 .gal-section-title {
+  font-style: italic;
   font-size: var(--fs-section);
   margin: 1rem 0 1.2rem;
   max-width: 640px;
+}
+
+/* Keep gallery headings + descriptions on a single line on desktop */
+@media (min-width: 1200px) {
+  .gal-hero-title,
+  .gal-hero-desc,
+  .gal-section-title,
+  .gal-section-desc {
+    white-space: nowrap;
+  }
 }
 
 .gal-section-title em {

@@ -12,13 +12,9 @@ export default function MenuCafe() {
       <div className="container">
         <p className="eyebrow menu-cafe-eyebrow reveal">From the Café</p>
         <h2 className="menu-cafe-title reveal reveal-delay-1">
-          Coffee,
+          A Few Things Worth
           <br />
-          <em>Breakfast</em> &amp;
-          <br />
-          Little
-          <br />
-          <em>Indulgences.</em>
+          <em>Staying For.</em>
         </h2>
         <p className="menu-cafe-desc reveal reveal-delay-2">
           Discover a simple, satisfying café offering curated for the moments

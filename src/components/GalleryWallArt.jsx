@@ -26,15 +26,13 @@ export default function GalleryWallArt() {
     <section className="gal-section" ref={ref}>
       <div className="container">
         <div className="gal-section-head reveal">
-          <span className="eyebrow gal-section-eyebrow">The ParisBeans Mood</span>
+          <span className="eyebrow gal-section-eyebrow">Paris Wall Art</span>
           <h2 className="gal-section-title">
             A Corner of <em>Paris,</em> Inside
-            <br />
             <em>HAIR RAP BY YOYO.</em>
           </h2>
           <p className="gal-section-desc lead">
-            Paris-inspired details, warm coffee, beautiful surroundings and the
-            little moments that make your salon visit feel different.
+            Paris-inspired artwork brings the feeling of a Parisian street into the heart of HAIR RAP BY YOYO
           </p>
         </div>
 

@@ -26,19 +26,12 @@ export default function GalleryFood() {
     <section className="gal-section" ref={ref}>
       <div className="container">
         <div className="gal-section-head reveal">
-          <span className="eyebrow gal-section-eyebrow">From the Café</span>
+          <span className="eyebrow gal-section-eyebrow">Coffee & Food</span>
           <h2 className="gal-section-title">
-            Coffee,
-            <br />
-            <em>Breakfast</em> &amp;
-            <br />
-            Little
-            <br />
-            <em>Indulgences.</em>
+            Made for <em>the Moment.</em>
           </h2>
           <p className="gal-section-desc lead">
-            Discover a simple, satisfying café offering curated for the moments
-            around your appointment.
+            Simple café pleasures designed to complement your salon experience.
           </p>
         </div>
 

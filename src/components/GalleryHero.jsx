@@ -36,8 +36,7 @@ export default function GalleryHero() {
             A Parisian Mood. A <em>Salon</em> Experience.
           </h1>
           <p className="gal-hero-desc lead">
-            Step inside Paris Beans and discover the details, atmosphere and moments
-            that make HAIR RAP BY YOYO feel different.
+            Step inside Paris Beans and discover the details, atmosphere and moments that make HAIR RAP BY YOYO feel different.
           </p>
         </div>
       </div>

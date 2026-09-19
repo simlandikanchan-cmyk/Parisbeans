@@ -51,7 +51,7 @@ export default function OurStoryHero() {
           OUR STORY
         </p>
         <h1 className="ostory-title">
-          A Little Paris, Created for Your Salon Day.
+          A Little <em>Paris</em>, Created for Your Salon Day.
         </h1>
         <p className="ostory-desc">
           Paris Beans began with a simple idea — what if a salon appointment

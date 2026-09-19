@@ -10,13 +10,11 @@ export default function OurStoryOrigin() {
     <section className="ostory-origin" ref={ref}>
       <div className="ostory-shell ostory-origin-grid">
         <div className="ostory-origin-copy reveal">
-          <p className="eyebrow ostory-eyebrow">OUR STORY</p>
+          <p className="eyebrow ostory-eyebrow">From Paris to HAIR RAP BY YOYO</p>
           <h2 className="ostory-origin-title">
-            Inspired by Paris
+            From a <em>Parisian <br />Feeling</em> to a Salon 
             <br />
-            <em>Streets.</em> Crafted for
-            <br />
-            Your <em>Salon Day.</em>
+            <em>Experience.</em>
           </h2>
           <p className="ostory-origin-text">
             ParisBeans was created inside HAIR RAP BY YOYO as a café corner
@@ -27,6 +25,9 @@ export default function OurStoryOrigin() {
             It became more than a waiting space. It became part of the
             experience — a place to pause before an appointment, enjoy a
             coffee during your visit, or simply take in the surroundings.
+          </p>
+          <p className="ostory-origin-text">
+            The core origin story is directly supported by the supplied brief.
           </p>
         </div>
 

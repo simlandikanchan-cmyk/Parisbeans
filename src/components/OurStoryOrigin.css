@@ -3,12 +3,16 @@
    ============================================================ */
 .ostory-origin {
   position: relative;
-  background-color: var(--color-bg);
-  padding: clamp(92px, 9vw, 128px) 0;
   overflow: hidden;
+  padding: clamp(92px, 9vw, 128px) 0;
+  background-image: url('/images/hero/Frame 48096466.png');
+  background-repeat: no-repeat;
+  background-position: 50% 45%;
+  background-size: min(100vw, 1920px) auto;
 }
 
 .ostory-origin-grid {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 44%) 1fr;
   align-items: center;
@@ -20,6 +24,7 @@
 }
 
 .ostory-origin-title {
+  font-style: italic;
   font-size: var(--fs-section);
   margin: 1rem auto 1.2rem;
   max-width: 640px;
@@ -64,6 +69,10 @@
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1024px) {
+  .ostory-origin {
+    background-position: 50% 42%;
+  }
+
   .ostory-origin-grid {
     grid-template-columns: 1fr;
     gap: clamp(3rem, 7vw, 5rem);
@@ -71,5 +80,12 @@
 
   .ostory-origin-copy {
     max-width: 640px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ostory-origin {
+    background-position: 50% 38%;
+    background-size: 120% auto;
   }
 }

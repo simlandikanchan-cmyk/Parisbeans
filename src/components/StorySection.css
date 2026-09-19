@@ -28,6 +28,7 @@
 }
 
 .story-title {
+  font-style: italic;
   font-size: var(--fs-section);
   margin: 1rem auto 1.2rem;
   max-width: 640px;

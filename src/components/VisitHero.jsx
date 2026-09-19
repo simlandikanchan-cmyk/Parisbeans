@@ -22,8 +22,7 @@ export default function VisitHero() {
         <div className="visit-hero-copy reveal">
           <span className="eyebrow visit-hero-eyebrow">— VISIT PARIS BEANS</span>
           <h1 className="visit-hero-title">
-            Find Your Little<br />
-            Corner of <em>Paris.</em>
+            Find Your Little Corner of <em>Paris.</em>
           </h1>
           <p className="visit-hero-desc">
             Paris Beans is located inside HAIR RAP BY YOYO, bringing a

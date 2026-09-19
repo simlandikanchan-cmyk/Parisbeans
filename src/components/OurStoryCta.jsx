@@ -10,16 +10,10 @@ export default function OurStoryCta() {
           OUR STORY
         </p>
         <h2 className="ostory-cta-title">
-          Inspired by Paris
-          <br />
-          <em>Streets.</em> Crafted for
-          <br />
-          Your <em>Salon Day.</em>
+          ParisBeans Is Not Just a <em>Café Corner.</em>
         </h2>
         <p className="ostory-cta-desc">
-          Born from a love for the café culture of Paris, Paris
-          Beans brings the rhythm of a street-side coffee
-          break into the heart of HAIR RAP BY YOYO.
+          It is a small Parisian ritual built into your HAIR RAP BY YOYO experience.
         </p>
         <Button href="/visit-contact" variant="primary" arrow className="ostory-cta-btn">
           Read Our Story
