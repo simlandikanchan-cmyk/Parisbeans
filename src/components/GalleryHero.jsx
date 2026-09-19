@@ -1,20 +1,48 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import { galleryImage, galleryAlt } from '../data/siteData'
 import './Gallery.css'
 
-const collage = ['g2', 'g7', 'g3', 'g4', 'g1']
+const collageImages = [
+  {
+    src: '/images/gallery_hero/Photo rectangle.svg',
+    alt: 'Warm Parisian café corner at Paris Beans',
+  },
+  {
+    src: '/images/gallery_hero/Photo rectangle (1).svg',
+    alt: 'Interior detail of the Paris inspired salon café',
+  },
+  {
+    src: '/images/gallery_hero/Photo rectangle (2).svg',
+    alt: 'Espresso and pastry detail at the salon café',
+  },
+  {
+    src: '/images/gallery_hero/Photo rectangle (3).svg',
+    alt: 'Styling session at HAIR RAP BY YOYO salon',
+  },
+  {
+    src: '/images/gallery_hero/Photo rectangle (4).svg',
+    alt: 'Paris inspired decor inside the café corner',
+  },
+  {
+    src: '/images/gallery_hero/Photo rectangle (5).svg',
+    alt: 'Coffee moment served in the salon café',
+  },
+  {
+    src: '/images/gallery_hero/Photo rectangle (6).svg',
+    alt: 'Relaxed pause over coffee at Paris Beans',
+  },
+]
 
 function renderSet(duplicate) {
-  return collage.map((key, i) => (
+  return collageImages.map((img, i) => (
     <figure
-      key={key}
+      key={img.src}
       className={`gallery-image image-${i + 1}${duplicate ? '' : ' reveal'}`}
       style={{ '--dl': `${i * 130}ms` }}
     >
       <img
-        src={galleryImage(key)}
-        alt={galleryAlt(key)}
+        src={img.src}
+        alt={img.alt}
         loading={!duplicate && i === 0 ? 'eager' : 'lazy'}
         fetchPriority={!duplicate && i === 0 ? 'high' : 'auto'}
         draggable={false}
