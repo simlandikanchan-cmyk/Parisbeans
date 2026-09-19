@@ -60,34 +60,6 @@
   50% { opacity: 1; }
 }
 
-/* Oversized editorial watermark — drifts subtly upward on scroll */
-.footer-watermark {
-  position: absolute;
-  left: 50%;
-  bottom: -0.14em;
-  transform: translateX(-50%) translateY(calc(var(--watermark-drift, 0) * -1));
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: var(--fw-bold);
-  font-size: clamp(6rem, 16vw, 15rem);
-  line-height: 1;
-  white-space: nowrap;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.028);
-  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.1);
-  text-shadow: 0 0 40px rgba(193, 138, 91, 0.12);
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-  transition: transform 0.6s var(--ease);
-  animation: watermarkGlow 6s ease-in-out infinite;
-}
-
-@keyframes watermarkGlow {
-  0%, 100% { text-shadow: 0 0 40px rgba(193, 138, 91, 0.12); }
-  50% { text-shadow: 0 0 95px rgba(193, 138, 91, 0.32); }
-}
-
 /* Staggered column reveal */
 .footer-reveal {
   opacity: 0;
@@ -534,7 +506,6 @@ a.contact-body:focus-visible,
 @media (prefers-reduced-motion: reduce) {
   .footer::before,
   .footer::after,
-  .footer-watermark,
   .footer-brand-name::after,
   .social-link svg,
   .contact-item > svg,
@@ -560,20 +531,9 @@ a.contact-body:focus-visible,
   .footer-brand {
     grid-column: 1 / -1;
   }
-
-  .footer-watermark {
-    font-size: clamp(5rem, 20vw, 9rem);
-  }
 }
 
-/* Hide the oversized editorial watermark backdrop on phone — it's decoration,
-   and on small screens it dominates the viewport */
 @media (max-width: 560px) {
-  .footer-watermark,
-  .footer-watermark:hover {
-    display: none;
-  }
-
   .footer-grid {
     grid-template-columns: 1fr;
   }

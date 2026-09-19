@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { exploreLinks, contact } from '../data/siteData'
 import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon } from './Icons'
-import { useScroll } from '../hooks/useScroll'
 import './Footer.css'
 
 export default function Footer({ route }) {
@@ -34,24 +33,8 @@ export default function Footer({ route }) {
     return () => io.disconnect()
   }, [])
 
-  useScroll(() => {
-    const footer = ref.current
-    if (!footer) return
-    const r = footer.getBoundingClientRect()
-    if (r.bottom < 0 || r.top > window.innerHeight) return
-    footer.style.setProperty(
-      '--watermark-drift',
-      `${Math.max(0, Math.min(40, (1 - r.top / window.innerHeight) * 40))}px`
-    )
-  })
-
   return (
     <footer id="footer" className="footer" ref={ref}>
-      {/* Oversized editorial watermark */}
-      <span className="footer-watermark" aria-hidden="true">
-        Paris Beans
-      </span>
-
       <div className="container footer-grid">
         {/* Brand */}
         <div className="footer-brand footer-reveal footer-reveal--0">
