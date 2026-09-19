@@ -45,6 +45,8 @@
   height: clamp(470px, 38vw, 600px);
   margin: clamp(2.2rem, 4.5vw, 3.4rem) auto 0;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
 
 /* Seamless right→left loop: two identical sets, track translated -50% */
@@ -53,18 +55,26 @@
   width: 200%;
   height: 100%;
   will-change: transform;
-  animation: galMarquee 30s linear infinite;
+  backface-visibility: hidden;
+  animation: galMarquee 46s linear infinite;
+}
+
+/* Slow luxurious drift — linear keeps the loop perfectly seamless */
+@keyframes galMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Living vertical bob for each frame — makes the collage feel organic */
+@keyframes galFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
 .gallery-set {
   position: relative;
   flex: 0 0 50%;
   height: 100%;
-}
-
-@keyframes galMarquee {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
 }
 
 /* Pause the drift while inspecting */
@@ -78,6 +88,9 @@
   overflow: hidden;
   border-radius: var(--radius-sm);
   background-color: var(--color-bg);
+  will-change: transform;
+  box-shadow: 0 16px 38px -24px rgba(67, 39, 25, 0.45);
+  animation: galFloat 8s ease-in-out infinite;
 }
 
 .gallery-image img {
@@ -88,24 +101,30 @@
   pointer-events: none;
   user-select: none;
   transform-origin: center;
-  transition: transform 0.6s var(--ease);
+  backface-visibility: hidden;
+  transform: scale(1.001);
+  transition: transform 0.9s var(--ease);
+}
+
+.gallery-image:hover {
+  z-index: 2;
 }
 
 .gallery-image:hover img {
-  transform: scale(1.02);
+  transform: scale(1.08);
 }
 
-/* Entrance: soft staggered fade only (no movement) */
+/* Entrance: soft staggered curtain reveal — clip-path so it never fights the float */
 .gallery-image.reveal {
   opacity: 0;
-  transform: none;
-  transition: opacity 0.9s var(--ease);
+  clip-path: inset(0 0 6% 0);
+  transition: opacity 1.1s var(--ease), clip-path 1.1s var(--ease);
   transition-delay: var(--dl, 0ms);
 }
 
 .gallery-image.reveal.is-visible {
   opacity: 1;
-  transform: none;
+  clip-path: inset(0 0 0 0);
 }
 
 /* ---------- Collage positions — desktop staggered composition ---------- */
@@ -114,6 +133,8 @@
   height: clamp(205px, 20vw, 288px);
   left: clamp(6px, 0.9vw, 14px);
   top: clamp(200px, 17.5vw, 258px);
+  animation-duration: 7s;
+  animation-delay: 0s;
 }
 
 .image-2 {
@@ -121,6 +142,8 @@
   height: clamp(265px, 26.4vw, 382px);
   left: clamp(220px, 18vw, 262px);
   top: clamp(12px, 2vw, 32px);
+  animation-duration: 9s;
+  animation-delay: -2.5s;
 }
 
 .image-3 {
@@ -128,6 +151,8 @@
   height: clamp(190px, 20vw, 290px);
   left: clamp(455px, 37.5vw, 542px);
   top: clamp(170px, 16.5vw, 244px);
+  animation-duration: 8.5s;
+  animation-delay: -4s;
 }
 
 .image-4 {
@@ -135,6 +160,8 @@
   height: clamp(280px, 27vw, 390px);
   left: clamp(755px, 62vw, 895px);
   top: clamp(10px, 1.8vw, 28px);
+  animation-duration: 7.5s;
+  animation-delay: -1.5s;
 }
 
 .image-5 {
@@ -142,6 +169,8 @@
   height: clamp(205px, 20vw, 288px);
   right: clamp(6px, 0.9vw, 14px);
   top: clamp(200px, 17.5vw, 258px);
+  animation-duration: 9.5s;
+  animation-delay: -3s;
 }
 
 /* ── White gallery sections ───────────────────────────────── */
@@ -311,7 +340,7 @@
 
   .gallery-track {
     height: auto;
-    animation-duration: 26s;
+    animation-duration: 36s;
   }
 
   .gallery-set {
@@ -380,7 +409,7 @@
   .gallery-track {
     width: max-content;
     height: auto;
-    animation-duration: 26s;
+    animation-duration: 28s;
   }
 
   .gallery-set {

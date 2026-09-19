@@ -47,6 +47,22 @@
   perspective: 1100px;
 }
 
+/* Warm halo behind the arc so the centre card feels spotlit */
+.carousel::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(600px, 48vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(169, 110, 63, 0.18), transparent 62%);
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ---------- Slide: one element per gallery image, positioned by state class ---------- */
 .carousel-item {
   position: absolute;
@@ -57,9 +73,9 @@
   will-change: transform, opacity, filter;
   transform-style: preserve-3d;
   transition:
-    transform 900ms cubic-bezier(0.24, 1.08, 0.34, 1),
-    opacity 650ms ease,
-    filter 650ms ease,
+    transform 1s var(--ease),
+    opacity 0.8s var(--ease),
+    filter 0.8s var(--ease),
     z-index 0s;
   transform: translate(-50%, -50%);
 }
@@ -85,6 +101,25 @@
   object-fit: cover;
   display: block;
   pointer-events: none;
+  will-change: transform;
+  animation: moodKenBurns 16s ease-in-out infinite alternate;
+}
+
+.carousel-item:nth-child(even) .polaroid-photo img {
+  animation-duration: 20s;
+  animation-delay: -8s;
+  animation-direction: alternate-reverse;
+}
+
+.carousel-item:nth-child(3n) .polaroid-photo img {
+  animation-duration: 18s;
+  animation-delay: -4s;
+}
+
+/* Slow cinematic zoom inside every frame — continuous, so slides never pop */
+@keyframes moodKenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
 }
 
 /* ---------- Positional states form the arc ---------- */
@@ -175,9 +210,62 @@
   filter: blur(4px) brightness(0.9);
 }
 
+/* ---------- Caption + slide indicator ---------- */
+.gallery-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: clamp(1.4rem, 2.4vw, 2rem);
+  text-align: center;
+}
+
+.gallery-caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  color: var(--color-espresso);
+  animation: moodCaptionIn 0.7s var(--ease) both;
+}
+
+@keyframes moodCaptionIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gallery-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.gallery-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--color-border);
+  cursor: pointer;
+  transition:
+    background-color 0.4s var(--ease),
+    transform 0.4s var(--ease),
+    width 0.4s var(--ease);
+}
+
+.gallery-dot:hover {
+  background: var(--color-coffee-light);
+  transform: translateY(-1px);
+}
+
+.gallery-dot.is-active {
+  width: 26px;
+  border-radius: 99px;
+  background: var(--color-coffee);
+}
+
 .gallery-cta {
   text-align: center;
-  margin-top: 2.2rem;
+  margin-top: 1.8rem;
 }
 
 /* ---------- Tablet (builds down, outer cards drop away) ---------- */

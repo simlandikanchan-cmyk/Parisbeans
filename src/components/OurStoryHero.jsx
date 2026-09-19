@@ -33,7 +33,7 @@ export default function OurStoryHero() {
 
   useEffect(() => {
     if (paused || reduceMotion) return
-    const t = setInterval(() => setActive((a) => (a + 1) % IMAGES.length), 3400)
+    const t = setInterval(() => setActive((a) => (a + 1) % IMAGES.length), 6000)
     return () => clearInterval(t)
   }, [paused, active])
 
@@ -68,6 +68,7 @@ export default function OurStoryHero() {
         >
           <figure className="ostory-gallery-main reveal" key={main.src}>
             <img src={main.src} style={{ objectPosition: main.pos }} alt={main.alt} />
+            {!paused && <span className="ostory-progress" aria-hidden="true" />}
           </figure>
           <div className="ostory-gallery-strip reveal reveal-delay-1">
             {strip.map((p) => (

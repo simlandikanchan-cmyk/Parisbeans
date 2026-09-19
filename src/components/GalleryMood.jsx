@@ -10,7 +10,7 @@ export default function GalleryMood() {
   const stageRef = useRef(null)
   const dragRef = useRef({ x: 0, dragging: false, moved: false })
   useReveal(ref, { selector: '.reveal', threshold: 0.08 })
-  const carousel = useCarousel({ itemCount: gallery.length, interval: 3100 })
+  const carousel = useCarousel({ itemCount: gallery.length, interval: 4500 })
 
   const n = gallery.length
   const half = Math.floor(n / 2)
@@ -116,6 +116,27 @@ export default function GalleryMood() {
               </figure>
             )
           })}
+        </div>
+      </div>
+
+      <div className="gallery-meta reveal reveal-delay-2">
+        <p className="gallery-caption" key={gallery[carousel.active].key}>
+          {gallery[carousel.active].alt}
+        </p>
+        <div className="gallery-dots" role="group" aria-label="Gallery slideshow">
+          {gallery.map((img, i) => (
+            <button
+              key={img.key}
+              type="button"
+              className={`gallery-dot${i === carousel.active ? ' is-active' : ''}`}
+              aria-label={`Go to slide: ${img.alt}`}
+              aria-current={i === carousel.active}
+              onClick={() => {
+                carousel.setActive(i)
+                carousel.resume()
+              }}
+            />
+          ))}
         </div>
       </div>
 

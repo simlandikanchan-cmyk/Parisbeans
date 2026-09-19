@@ -22,7 +22,7 @@ export default function StorySection() {
     if (paused || typeof window === 'undefined') return
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
-    const t = setInterval(() => setActive((p) => (p + 1) % storyImages.length), 3000)
+    const t = setInterval(() => setActive((p) => (p + 1) % storyImages.length), 6000)
     return () => clearInterval(t)
   }, [paused, active])
 

@@ -58,7 +58,21 @@
   height: clamp(440px, 41vw, 720px);
   border-radius: var(--radius-md);
   overflow: hidden;
-  animation: ostoryMainPop 0.7s var(--ease) both;
+  animation: ostoryCrossfade 1.1s var(--ease) both;
+}
+
+/* Cinematic entrance — new slide melts in with a soft blur + settle */
+@keyframes ostoryCrossfade {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
 }
 
 .ostory-gallery-main img {
@@ -68,8 +82,37 @@
   object-position: center;
   display: block;
   will-change: transform;
-  animation: ostoryKenburns 20s ease-in-out infinite alternate both;
-  animation-delay: -3s;
+  animation: ostoryKenburns 22s ease-in-out infinite alternate both;
+  animation-delay: -4s;
+}
+
+/* Autoplay progress indicator — hidden while the carousel is paused */
+.ostory-progress {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ostory-progress::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  border-radius: inherit;
+  background: var(--color-gold);
+  animation: ostoryProgress 6s linear forwards;
+}
+
+@keyframes ostoryProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 .ostory-gallery-strip {
@@ -86,6 +129,12 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
+  animation: ostoryPanelIn 0.9s var(--ease) both;
+}
+
+@keyframes ostoryPanelIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .ostory-gallery-panel img {
@@ -124,21 +173,13 @@
   }
 }
 
-/* Crossfade the main image when the slide changes */
-@keyframes ostoryMainPop {
-  from {
-    opacity: 0;
-    transform: scale(1.045);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Hover: pause motion + lift the tile */
+/* Hover: pause motion + lift the main frame */
 .ostory-gallery:hover img {
   animation-play-state: paused;
+}
+
+.ostory-gallery:hover .ostory-progress {
+  opacity: 0;
 }
 
 .ostory-gallery-main,
@@ -149,10 +190,6 @@
 .ostory-gallery-main:hover,
 .ostory-gallery-panel:hover {
   box-shadow: 0 30px 60px -30px rgba(53, 29, 19, 0.5);
-}
-
-.ostory-gallery-main:hover {
-  transform: scale(1.015);
 }
 
 .ostory-gallery-panel:hover {
