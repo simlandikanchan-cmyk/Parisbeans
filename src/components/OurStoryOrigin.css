@@ -5,10 +5,7 @@
   position: relative;
   overflow: hidden;
   padding: clamp(92px, 9vw, 128px) 0;
-  background-image: url('/images/hero/Frame 48096466.png');
-  background-repeat: no-repeat;
-  background-position: 50% 45%;
-  background-size: min(100vw, 1920px) auto;
+  background-color: #f7f3eb;
 }
 
 .ostory-origin-grid {
@@ -69,10 +66,6 @@
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1024px) {
-  .ostory-origin {
-    background-position: 50% 42%;
-  }
-
   .ostory-origin-grid {
     grid-template-columns: 1fr;
     gap: clamp(3rem, 7vw, 5rem);
@@ -84,8 +77,4 @@
 }
 
 @media (max-width: 640px) {
-  .ostory-origin {
-    background-position: 50% 38%;
-    background-size: 120% auto;
-  }
 }
