@@ -503,6 +503,18 @@
   outline-offset: 2px;
 }
 
+/* Hide the floating concierge while the mobile drawer is open so it never
+   overlaps the drawer (the header's z-index:100 stacking context sits below
+   the concierge's --z-fixed:300). */
+body.drawer-open .ai-widget {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease),
+    visibility 0s linear 0.3s;
+}
+
 /* ---------- Keyframes ---------- */
 @keyframes aiFloatIn {
   to {
