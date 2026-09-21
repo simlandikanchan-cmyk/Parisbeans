@@ -30,17 +30,48 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Slow cinematic breathe so the hero never feels static */
+  animation: visitHeroBreathe 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes visitHeroBreathe {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12);
+  }
 }
 
 .visit-hero-overlay {
   position: absolute;
   inset: 0;
+  /* Deep espresso wash: darkest where the light text lives, lifting
+     toward the photo edge so the composition stays airy */
   background: linear-gradient(
     100deg,
-    rgba(53, 29, 19, 0.72) 0%,
-    rgba(67, 39, 25, 0.5) 48%,
-    rgba(67, 39, 25, 0.26) 100%
+    rgba(35, 19, 12, 0.85) 0%,
+    rgba(53, 30, 19, 0.72) 34%,
+    rgba(67, 39, 23, 0.5) 58%,
+    rgba(67, 39, 23, 0.3) 82%,
+    rgba(67, 39, 23, 0.16) 100%
   );
+  animation: visitHeroWash 24s ease-in-out infinite alternate;
+}
+
+/* The deep colour slowly breathes darker/lighter so the hero stays
+   alive and the light text keeps its contrast throughout the cycle */
+@keyframes visitHeroWash {
+  from {
+    opacity: 0.86;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.9;
+  }
 }
 
 .visit-hero-word {

@@ -183,7 +183,7 @@ export default function Header({ story = false, route }) {
             <span className="drawer-meta-sep" aria-hidden="true">
               ·
             </span>
-            <span>
+            <span className="drawer-meta-icon">
               <ClockIcon size={16} />
               <span>{contact.hours.allWeek}</span>
             </span>
@@ -201,6 +201,7 @@ export default function Header({ story = false, route }) {
           </a>
 
           <div className="drawer-social" aria-label="Follow Paris Beans">
+            <span className="drawer-social-label">Follow us</span>
             <a
               href={contact.social.instagram}
               aria-label="Instagram"

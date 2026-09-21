@@ -437,7 +437,15 @@
   color: var(--color-coffee);
 }
 
-.drawer-meta a svg {
+.drawer-meta a,
+.drawer-meta-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.drawer-meta a svg,
+.drawer-meta-icon svg {
   color: var(--color-coffee);
 }
 
@@ -466,8 +474,20 @@
 
 .drawer-social {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
+}
+
+.drawer-social-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-right: auto;
 }
 
 .drawer-social a {
