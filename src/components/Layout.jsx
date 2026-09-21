@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Preloader from './Preloader'
-import FloatingWhatsApp from './FloatingWhatsApp'
+import AiAssistant from './AiAssistant'
 import SEO from './SEO'
 import { routeByPath, routeJsonLd } from '../router'
 
@@ -32,7 +32,7 @@ export default function Layout() {
       <Header story={route === 'story'} route={route} />
       <Outlet />
       <Footer route={route} />
-      <FloatingWhatsApp />
+      <AiAssistant />
     </>
   )
 }

@@ -402,8 +402,47 @@ a.contact-body:focus-visible,
   color: var(--color-white);
 }
 
+/* HAIR RAP BY YOYO — golden shimmer sweep with a breathing glow */
 .footer-bottom-brand span {
+  display: inline-block;
   color: var(--color-coffee-light);
+  color: transparent;
+  background-image: linear-gradient(
+    100deg,
+    #b3825a 0%,
+    #d9a87e 18%,
+    #f3dcc0 40%,
+    #fff6e6 50%,
+    #f3dcc0 60%,
+    #d9a87e 82%,
+    #b3825a 100%
+  );
+  background-size: 240% auto;
+  background-position: 200% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation:
+    shimmerSweep 7.5s ease-in-out infinite alternate,
+    brandGlowBreath 3.6s ease-in-out infinite;
+  will-change: background-position, filter;
+}
+
+/* A light band glides across the letters, alternately */
+@keyframes shimmerSweep {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* Warm ember glow breathing behind the wordmark */
+@keyframes brandGlowBreath {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(193, 138, 91, 0.25));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 14px rgba(217, 168, 126, 0.7))
+      drop-shadow(0 0 30px rgba(169, 110, 63, 0.35));
+  }
 }
 
 .footer-tagline {
@@ -507,6 +546,7 @@ a.contact-body:focus-visible,
   .footer::before,
   .footer::after,
   .footer-brand-name::after,
+  .footer-bottom-brand span,
   .social-link svg,
   .contact-item > svg,
   .back-to-top::after {
