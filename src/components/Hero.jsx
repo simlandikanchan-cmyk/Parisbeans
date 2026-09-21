@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import { heroImage } from '../data/siteData'
+import { heroImage, srcSize } from '../data/siteData'
 import Button from './Button'
 import './Hero.css'
 
@@ -15,6 +15,7 @@ export default function Hero() {
           src={heroImage}
           alt="HAIR RAP BY YOYO salon interior with a warm Parisian café corner"
           className="hero-image"
+          {...srcSize(heroImage)}
         />
       </div>
 

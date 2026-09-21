@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { menuItems } from '../data/siteData'
+import { menuItems, srcSize } from '../data/siteData'
 import Button from './Button'
 import './CafeMenu.css'
 
@@ -52,7 +52,7 @@ export default function CafeMenu() {
               <figure className="menu-item reveal" style={{ '--i': i }} key={item.title}>
                 <span className="menu-accent" aria-hidden="true" />
                 <div className="menu-thumb">
-                  <img src={item.image} alt={item.title} loading="lazy" />
+                  <img src={item.image} alt={item.title} loading="lazy" {...srcSize(item.image)} />
                 </div>
                 <figcaption className="menu-caption">
                   <span className="menu-dot" aria-hidden="true" />

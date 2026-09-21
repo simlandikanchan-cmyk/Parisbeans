@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import { useCarousel } from '../hooks/useCarousel'
-import { gallery, galleryImage } from '../data/siteData'
+import { gallery, galleryImage, galleryDims } from '../data/siteData'
 import Button from './Button'
 import './GalleryMood.css'
 
@@ -90,6 +90,7 @@ export default function GalleryMood() {
         <div className="carousel">
           {gallery.map((img, i) => {
             const state = stateClass(offset(i))
+            const dims = galleryDims[img.key]
             return (
               <figure
                 key={img.key}
@@ -108,6 +109,8 @@ export default function GalleryMood() {
                     <img
                       src={galleryImage(img.key)}
                       alt={img.alt}
+                      width={dims.width}
+                      height={dims.height}
                       loading="lazy"
                       draggable={false}
                     />

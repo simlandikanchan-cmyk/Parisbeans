@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import { srcSize } from '../data/siteData'
 import './Menu.css'
 
 export default function MenuSpecialty({ category }) {
@@ -11,7 +12,7 @@ export default function MenuSpecialty({ category }) {
       <div className="container menu-special-grid">
         <div className="menu-special-list reveal">
           <div className="menu-special-ghost" aria-hidden="true">
-            <img src={category.image} alt="" className="menu-special-ghost-cup" />
+            <img src={category.image} alt="" className="menu-special-ghost-cup" {...srcSize(category.image)} />
           </div>
 
           <h2 className="menu-special-title">
@@ -49,13 +50,14 @@ export default function MenuSpecialty({ category }) {
           </div>
 
           <div className="menu-cup-echo" aria-hidden="true">
-            <img src={category.image} alt="" className="menu-echo-cup" aria-hidden="true" />
+            <img src={category.image} alt="" className="menu-echo-cup" aria-hidden="true" {...srcSize(category.image)} />
           </div>
 
           <img
             src={category.image}
             alt={category.imageAlt}
             className="menu-cup"
+            {...srcSize(category.image)}
           />
         </div>
       </div>

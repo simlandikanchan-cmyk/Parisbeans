@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import { srcSize } from '../data/siteData'
 import './OurStoryOrigin.css'
 
 export default function OurStoryOrigin() {
@@ -34,7 +35,11 @@ export default function OurStoryOrigin() {
         <div className="ostory-emblem-wrap reveal reveal-delay-1">
           <div className="ostory-emblem">
             <div className="ostory-emblem-photo">
-              <img src="/images/story/photo.svg" alt="Paris Beans environment" />
+              <img
+                src="/images/story/photo.svg"
+                alt="Paris Beans environment"
+                {...srcSize('/images/story/photo.svg')}
+              />
             </div>
           </div>
         </div>

@@ -39,7 +39,7 @@ export default function Footer({ route }) {
         {/* Brand */}
         <div className="footer-brand footer-reveal footer-reveal--0">
           <span className="footer-logo">
-            <img src="/images/logo.svg" alt="Paris Beans logo" className="logo-img" />
+            <img src="/images/logo.svg" alt="Paris Beans logo" width={113} height={112} className="logo-img" />
           </span>
           <span className="footer-brand-name">Paris Beans</span>
           <p className="footer-desc">

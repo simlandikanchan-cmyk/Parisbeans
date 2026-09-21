@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { srcSize } from '../data/siteData'
 import './OurStoryHero.css'
 
 const PANELS = [
@@ -128,6 +129,7 @@ export default function OurStoryHero() {
                   style={{ objectPosition: panel.pos }}
                   alt={panel.alt}
                   draggable={false}
+                  {...srcSize(panel.src)}
                 />
               </button>
             )

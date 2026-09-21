@@ -6,30 +6,44 @@ const collageImages = [
   {
     src: '/images/gallery_hero/Photo rectangle.svg',
     alt: 'Warm Parisian café corner at Paris Beans',
+    width: 274,
+    height: 284,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (1).svg',
     alt: 'Interior detail of the Paris inspired salon café',
+    width: 282,
+    height: 333,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (2).svg',
     alt: 'Espresso and pastry detail at the salon café',
+    width: 209,
+    height: 217,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (3).svg',
     alt: 'Styling session at HAIR RAP BY YOYO salon',
+    width: 330,
+    height: 390,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (4).svg',
     alt: 'Paris inspired decor inside the café corner',
+    width: 282,
+    height: 333,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (5).svg',
     alt: 'Coffee moment served in the salon café',
+    width: 282,
+    height: 333,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (6).svg',
     alt: 'Relaxed pause over coffee at Paris Beans',
+    width: 197,
+    height: 333,
   },
 ]
 
@@ -43,6 +57,8 @@ function renderSet(duplicate) {
       <img
         src={img.src}
         alt={img.alt}
+        width={img.width}
+        height={img.height}
         loading={!duplicate && i === 0 ? 'eager' : 'lazy'}
         fetchPriority={!duplicate && i === 0 ? 'high' : 'auto'}
         draggable={false}

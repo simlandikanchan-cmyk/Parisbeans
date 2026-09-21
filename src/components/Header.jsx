@@ -107,7 +107,7 @@ export default function Header({ story = false, route }) {
         </nav>
 
         <a href="/" className="header-logo" aria-label="Paris Beans — home">
-          <img src="/images/logo.svg" alt="Paris Beans" className="logo-img" />
+          <img src="/images/logo.svg" alt="Paris Beans" width={113} height={112} className="logo-img" />
         </a>
 
         <div className="header-right">
@@ -139,7 +139,7 @@ export default function Header({ story = false, route }) {
       >
         <div className="drawer-head">
           <a href="/" className="drawer-logo" onClick={() => setOpen(false)} aria-label="Paris Beans — home">
-            <img src="/images/logo.svg" alt="" className="logo-img" />
+            <img src="/images/logo.svg" alt="" width={113} height={112} className="logo-img" />
             <span className="logo-word">Paris Beans</span>
           </a>
           <button

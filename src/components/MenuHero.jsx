@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import { srcSize } from '../data/siteData'
 import './Menu.css'
 
 export default function MenuHero() {
@@ -13,6 +14,7 @@ export default function MenuHero() {
           src="/images/menu/hero.svg"
           alt="Warm Parisian café corner"
           className="menu-hero-img"
+          {...srcSize('/images/menu/hero.svg')}
         />
       </div>
       <div className="menu-hero-overlay" aria-hidden="true" />

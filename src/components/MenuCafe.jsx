@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import { menuItems, cafeCardTitles } from '../data/siteData'
+import { menuItems, cafeCardTitles, srcSize } from '../data/siteData'
 import './Menu.css'
 
 export default function MenuCafe() {
@@ -29,7 +29,7 @@ export default function MenuCafe() {
               <figure className="menu-card" key={item.title}>
                 <span className="menu-card-accent" aria-hidden="true" />
                 <div className="menu-card-thumb">
-                  <img src={item.image} alt={item.title} loading="lazy" />
+                  <img src={item.image} alt={item.title} loading="lazy" {...srcSize(item.image)} />
                 </div>
                 <figcaption className="menu-card-caption">{item.title}</figcaption>
               </figure>

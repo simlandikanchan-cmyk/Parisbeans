@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import { srcSize } from '../data/siteData'
 import Button from './Button'
 import './StorySection.css'
 
@@ -61,10 +62,10 @@ export default function StorySection() {
           <div className="story-image-stack">
             {/* Back — two dark brown photo cards stacked behind the main image */}
             <div className="story-image-back story-image-back--alt" aria-hidden="true">
-              <img src="/images/story/Rectangle 75.svg" alt="" />
+              <img src="/images/story/Rectangle 75.svg" alt="" {...srcSize('/images/story/Rectangle 75.svg')} />
             </div>
             <div className="story-image-back" aria-hidden="true">
-              <img src={storyBackImage} alt="" />
+              <img src={storyBackImage} alt="" {...srcSize(storyBackImage)} />
             </div>
 
             {/* Front — main image, cycles through the story images */}
@@ -74,7 +75,7 @@ export default function StorySection() {
                   key={src}
                   className={`story-image-card${i === active ? ' is-active' : ''}`}
                 >
-                  <img src={src} alt="Paris Beans salon" />
+                  <img src={src} alt="Paris Beans salon" {...srcSize(src)} />
                 </div>
               ))}
             </div>

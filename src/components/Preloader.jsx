@@ -51,6 +51,8 @@ export default function Preloader() {
               className="preloader-logo"
               src="/images/story/parisbeans.gif"
               alt=""
+              width={720}
+              height={720}
               aria-hidden="true"
             />
           ) : (

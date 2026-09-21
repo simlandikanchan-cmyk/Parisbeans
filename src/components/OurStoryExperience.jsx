@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import { srcSize } from '../data/siteData'
 import './OurStoryExperience.css'
 
 export default function OurStoryExperience() {
@@ -17,6 +18,7 @@ export default function OurStoryExperience() {
             src="/images/story/frame-48096320.svg"
             alt=""
             aria-hidden="true"
+            {...srcSize('/images/story/frame-48096320.svg')}
           />
           <div className="ostory-cup">
             <svg

@@ -182,7 +182,7 @@ export default function AiAssistant() {
       >
         <header className="ai-head">
           <span className="ai-head-avatar" aria-hidden="true">
-            <img src="/images/logo.svg" alt="" className="ai-head-logo" />
+            <img src="/images/logo.svg" alt="" width={113} height={112} className="ai-head-logo" />
           </span>
           <div className="ai-head-meta">
             <p className="ai-head-title">Paris Beans Concierge</p>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { menuCategories } from '../data/siteData'
+import { menuCategories, srcSize } from '../data/siteData'
 import './Menu.css'
 
 export default function MenuCategories({ activeId, onSelect }) {
@@ -58,7 +58,7 @@ export default function MenuCategories({ activeId, onSelect }) {
               aria-current={cat.id === activeId ? 'true' : undefined}
               onClick={() => onSelect(cat.id)}
             >
-              <img src={cat.image} alt="" className="menu-tab-thumb" />
+              <img src={cat.image} alt="" className="menu-tab-thumb" {...srcSize(cat.image)} />
               <span>{cat.label}</span>
             </button>
           ))}

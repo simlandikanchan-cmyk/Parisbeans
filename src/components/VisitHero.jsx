@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import { heroImage } from '../data/siteData'
+import { heroImage, srcSize } from '../data/siteData'
 import './VisitContact.css'
 
 export default function VisitHero() {
@@ -10,7 +10,7 @@ export default function VisitHero() {
   return (
     <section className="visit-hero" ref={ref}>
       <div className="visit-hero-media">
-        <img src={heroImage} alt="Paris Beans salon interior" className="visit-hero-img" />
+        <img src={heroImage} alt="Paris Beans salon interior" className="visit-hero-img" {...srcSize(heroImage)} />
         <div className="visit-hero-overlay" />
       </div>
 

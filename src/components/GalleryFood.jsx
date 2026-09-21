@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gallerySections, galleryImage, galleryAlt } from '../data/siteData'
+import { gallerySections, galleryImage, galleryAlt, galleryDims } from '../data/siteData'
 import './Gallery.css'
 
 const section = gallerySections.find((s) => s.id === 'coffee-food')
@@ -21,6 +21,7 @@ export default function GalleryFood() {
   }, [])
 
   const [a, feature, b, c, d, e, g] = section.images.map(galleryImage)
+  const dims = section.images.map((key) => galleryDims[key])
 
   return (
     <section className="gal-section" ref={ref}>
@@ -37,25 +38,25 @@ export default function GalleryFood() {
 
         <div className="gal-grid gal-grid--food reveal reveal-delay-1">
           <figure className="gal-tile gal-tile--a">
-            <img src={a} alt={galleryAlt(section.images[0])} loading="lazy" />
+            <img src={a} alt={galleryAlt(section.images[0])} width={dims[0].width} height={dims[0].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--b">
-            <img src={b} alt={galleryAlt(section.images[2])} loading="lazy" />
+            <img src={b} alt={galleryAlt(section.images[2])} width={dims[2].width} height={dims[2].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--c">
-            <img src={c} alt={galleryAlt(section.images[3])} loading="lazy" />
+            <img src={c} alt={galleryAlt(section.images[3])} width={dims[3].width} height={dims[3].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--d">
-            <img src={d} alt={galleryAlt(section.images[4])} loading="lazy" />
+            <img src={d} alt={galleryAlt(section.images[4])} width={dims[4].width} height={dims[4].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--e">
-            <img src={e} alt={galleryAlt(section.images[5])} loading="lazy" />
+            <img src={e} alt={galleryAlt(section.images[5])} width={dims[5].width} height={dims[5].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--g">
-            <img src={g} alt={galleryAlt(section.images[6])} loading="lazy" />
+            <img src={g} alt={galleryAlt(section.images[6])} width={dims[6].width} height={dims[6].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--feature">
-            <img src={feature} alt={galleryAlt(section.images[1])} loading="lazy" />
+            <img src={feature} alt={galleryAlt(section.images[1])} width={dims[1].width} height={dims[1].height} loading="lazy" />
           </figure>
         </div>
       </div>

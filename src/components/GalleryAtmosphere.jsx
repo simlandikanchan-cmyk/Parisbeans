@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gallerySections, galleryImage, galleryAlt } from '../data/siteData'
+import { gallerySections, galleryImage, galleryAlt, galleryDims } from '../data/siteData'
 import './Gallery.css'
 
 const section = gallerySections.find((s) => s.id === 'atmosphere')
@@ -21,6 +21,7 @@ export default function GalleryAtmosphere() {
   }, [])
 
   const [a, b, feature, wide] = section.images.map(galleryImage)
+  const dims = section.images.map((key) => galleryDims[key])
 
   return (
     <section className="gal-section" ref={ref}>
@@ -37,16 +38,16 @@ export default function GalleryAtmosphere() {
 
         <div className="gal-grid gal-grid--atmosphere reveal reveal-delay-1">
           <figure className="gal-tile gal-tile--a">
-            <img src={a} alt={galleryAlt(section.images[0])} loading="lazy" />
+            <img src={a} alt={galleryAlt(section.images[0])} width={dims[0].width} height={dims[0].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--b">
-            <img src={b} alt={galleryAlt(section.images[1])} loading="lazy" />
+            <img src={b} alt={galleryAlt(section.images[1])} width={dims[1].width} height={dims[1].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--feature">
-            <img src={feature} alt={galleryAlt(section.images[2])} loading="lazy" />
+            <img src={feature} alt={galleryAlt(section.images[2])} width={dims[2].width} height={dims[2].height} loading="lazy" />
           </figure>
           <figure className="gal-tile gal-tile--wide">
-            <img src={wide} alt={galleryAlt(section.images[3])} loading="lazy" />
+            <img src={wide} alt={galleryAlt(section.images[3])} width={dims[3].width} height={dims[3].height} loading="lazy" />
           </figure>
         </div>
       </div>
