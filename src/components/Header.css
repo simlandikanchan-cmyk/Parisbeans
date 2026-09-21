@@ -287,8 +287,8 @@
 
 .drawer-eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
   text-transform: uppercase;
@@ -481,8 +481,8 @@
 
 .drawer-social-label {
   font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
   text-transform: uppercase;

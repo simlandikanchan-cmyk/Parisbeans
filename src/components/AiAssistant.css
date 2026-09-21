@@ -72,86 +72,6 @@
   pointer-events: none;
 }
 
-/* ---------- Tooltip bubble ---------- */
-.ai-tip {
-  position: relative;
-  max-width: 250px;
-  padding: 0.85rem 2.6rem 0.85rem 1.05rem;
-  border-radius: var(--radius-soft);
-  background: var(--color-white);
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--color-border);
-  opacity: 0;
-  transform: translateY(10px) scale(0.96);
-  transform-origin: bottom right;
-  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
-  pointer-events: none;
-}
-
-.ai-widget.has-tip .ai-tip {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-.ai-tip-title {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.98rem;
-  color: var(--color-coffee);
-  margin-bottom: 0.2rem;
-}
-
-.ai-tip-text {
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  line-height: 1.5;
-  color: var(--color-muted);
-}
-
-.ai-tip-arrow {
-  position: absolute;
-  right: 26px;
-  bottom: -7px;
-  width: 14px;
-  height: 14px;
-  background: var(--color-white);
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  transform: rotate(45deg);
-}
-
-.ai-tip-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 26px;
-  height: 26px;
-  display: grid;
-  place-items: center;
-  border: none;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--color-muted);
-  cursor: pointer;
-  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
-}
-
-.ai-tip-close svg {
-  width: 13px;
-  height: 13px;
-}
-
-.ai-tip-close:hover {
-  background: var(--color-bg);
-  color: var(--color-espresso);
-}
-
-.ai-tip-close:focus-visible {
-  outline: 2px solid var(--color-coffee);
-  outline-offset: 1px;
-}
-
 /* ---------- Chat panel ---------- */
 .ai-panel {
   width: min(368px, calc(100vw - 32px));
@@ -581,16 +501,11 @@ body.drawer-open .ai-widget {
     width: calc(100vw - 28px);
     height: min(560px, 78vh);
   }
-
-  .ai-tip {
-    max-width: 220px;
-  }
 }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .ai-widget.is-visible .ai-float,
-  .ai-tip,
   .ai-float-pulse,
   .ai-head-avatar,
   .ai-head-dot,
@@ -600,8 +515,7 @@ body.drawer-open .ai-widget {
     transition: none;
   }
 
-  .ai-widget.is-visible .ai-float,
-  .ai-tip {
+  .ai-widget.is-visible .ai-float {
     opacity: 1 !important;
     transform: none !important;
   }

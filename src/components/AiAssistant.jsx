@@ -84,8 +84,6 @@ export default function AiAssistant() {
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState([GREETING])
   const [busy, setBusy] = useState(false)
-  const [showTip, setShowTip] = useState(false)
-  const [tipDismissed, setTipDismissed] = useState(false)
 
   const listRef = useRef(null)
   const inputRef = useRef(null)
@@ -94,12 +92,6 @@ export default function AiAssistant() {
   useEffect(() => {
     const entrance = setTimeout(() => {
       setMounted(true)
-      const tip = setTimeout(() => setShowTip(true), 900)
-      const hide = setTimeout(() => setShowTip(false), 11000)
-      return () => {
-        clearTimeout(tip)
-        clearTimeout(hide)
-      }
     }, 2400)
     return () => clearTimeout(entrance)
   }, [])
@@ -124,8 +116,6 @@ export default function AiAssistant() {
       window.removeEventListener('keydown', onKey)
     }
   }, [open])
-
-  const hasTip = showTip && !tipDismissed && !open
 
   const send = async (raw) => {
     const text = (raw ?? input).trim()
@@ -182,26 +172,8 @@ export default function AiAssistant() {
 
   return (
     <div
-      className={`ai-widget${mounted ? ' is-visible' : ''}${open ? ' is-open' : ''}${
-        hasTip ? ' has-tip' : ''
-      }`}
+      className={`ai-widget${mounted ? ' is-visible' : ''}${open ? ' is-open' : ''}`}
     >
-      <div className="ai-tip" role="status" aria-live="polite">
-        <button
-          type="button"
-          className="ai-tip-close"
-          aria-label="Dismiss message"
-          onClick={() => setTipDismissed(true)}
-        >
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </button>
-        <p className="ai-tip-title">Paris Beans</p>
-        <p className="ai-tip-text">{'Ask me anything about the café \u2014 open 24/7.'}</p>
-        <span className="ai-tip-arrow" aria-hidden="true" />
-      </div>
-
       <section
         className="ai-panel"
         role="dialog"

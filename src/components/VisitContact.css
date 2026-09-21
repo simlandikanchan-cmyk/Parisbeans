@@ -116,7 +116,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-bold);
-  font-size: clamp(2rem, 4.2vw, 5rem);
+  font-size: var(--fs-h1);
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
   margin-bottom: 0.9rem;
@@ -511,12 +511,6 @@
   }
 }
 
-@media (max-width: 768px) {
-  .visit-hero-title {
-    font-size: clamp(2rem, 8vw, 2.9rem);
-  }
-}
-
 @media (max-width: 560px) {
   .visit-hero {
     min-height: 190px;
@@ -528,10 +522,6 @@
   .visit-hero-word {
     right: 3%;
     font-size: clamp(4rem, 22vw, 7rem);
-  }
-
-  .visit-hero-title {
-    font-size: clamp(1.8rem, 8.5vw, 2.4rem);
   }
 
   .visit-hero-desc {
@@ -558,12 +548,6 @@
   .visit-info-footer {
     flex-direction: column;
     align-items: flex-start;
-  }
-}
-
-@media (max-width: 480px) {
-  .visit-hero-title {
-    font-size: clamp(1.8rem, 8.5vw, 2.4rem);
   }
 }
 

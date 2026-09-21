@@ -204,9 +204,9 @@
 
 .footer-heading {
   font-family: var(--font-sans);
-  font-size: var(--fs-label);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--tracking-label);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--color-coffee-light);
   margin-bottom: 1.4rem;
