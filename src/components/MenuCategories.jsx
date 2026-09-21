@@ -5,6 +5,7 @@ import './Menu.css'
 export default function MenuCategories({ activeId, onSelect }) {
   const ref = useRef(null)
   const navRef = useRef(null)
+  const resizeObserverRef = useRef(null)
 
   useEffect(() => {
     const el = ref.current
@@ -31,13 +32,18 @@ export default function MenuCategories({ activeId, onSelect }) {
 
   useEffect(() => {
     moveIndicator()
-  }, [activeId])
+    const nav = navRef.current
+    if (!nav) return
+    // Use ResizeObserver to handle layout changes (font load, resize, etc.)
+    const ro = new ResizeObserver(moveIndicator)
+    ro.observe(nav)
+    resizeObserverRef.current = ro
+    return () => ro.disconnect()
+  }, [])
 
   useEffect(() => {
     moveIndicator()
-    window.addEventListener('resize', moveIndicator)
-    return () => window.removeEventListener('resize', moveIndicator)
-  }, [])
+  }, [activeId])
 
   return (
     <section className="menu-cats" ref={ref}>

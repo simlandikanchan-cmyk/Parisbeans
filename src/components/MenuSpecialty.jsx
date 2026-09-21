@@ -49,7 +49,7 @@ export default function MenuSpecialty({ category }) {
           </div>
 
           <div className="menu-cup-echo" aria-hidden="true">
-            <img src={category.image} alt="" className="menu-echo-cup" />
+            <img src={category.image} alt="" className="menu-echo-cup" aria-hidden="true" />
           </div>
 
           <img

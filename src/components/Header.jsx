@@ -138,7 +138,7 @@ export default function Header({ story = false, route }) {
         inert={!open}
       >
         <div className="drawer-head">
-          <a href="/" className="drawer-logo" onClick={() => setOpen(false)}>
+          <a href="/" className="drawer-logo" onClick={() => setOpen(false)} aria-label="Paris Beans — home">
             <img src="/images/logo.svg" alt="" className="logo-img" />
             <span className="logo-word">Paris Beans</span>
           </a>

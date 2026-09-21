@@ -78,7 +78,8 @@
 }
 
 /* Pause the drift while inspecting */
-.gal-hero-collage:hover .gallery-track {
+.gal-hero-collage:hover .gallery-track,
+.gal-hero-collage:focus-within .gallery-track {
   animation-play-state: paused;
 }
 

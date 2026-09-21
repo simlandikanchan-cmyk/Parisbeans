@@ -124,46 +124,6 @@
   animation-delay: -4s;
 }
 
-/* ---------- Museum plate: label rests inside the frame, fades in on the active card ---------- */
-.polaroid-label {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  max-width: calc(100% - 20px);
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: rgba(255, 250, 244, 0.86);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(53, 29, 19, 0.1);
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(0.7rem, 0.95vw, 0.84rem);
-  letter-spacing: 0.01em;
-  color: var(--color-espresso);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 600ms var(--ease) 300ms, transform 600ms var(--ease) 300ms;
-}
-
-.carousel-item.center .polaroid-label {
-  opacity: 1;
-  transform: none;
-}
-
-@media (max-width: 640px) {
-  .polaroid-label {
-    display: none;
-  }
-}
-
 /* Slow cinematic zoom inside every frame — continuous, so slides never pop */
 @keyframes moodKenBurns {
   from { transform: scale(1); }

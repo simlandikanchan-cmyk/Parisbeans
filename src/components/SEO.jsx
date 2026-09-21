@@ -1,62 +1,17 @@
 /* eslint-disable react/no-danger-with-children */
 import { useEffect } from 'react'
+import { routeSeo, routePaths } from '../router'
 
 const DEFAULTS = {
   image: 'https://parisbeans.com/images/hero.svg',
 }
 
-const ROUTE_PATHS = {
-  home: '',
-  story: 'our-story',
-  menu: 'menu',
-  gallery: 'gallery',
-  visit: 'visit-contact',
-  privacy: 'privacy-policy',
-  terms: 'terms-and-conditions',
-}
-
-const ROUTE_SEO = {
-  home: {
-    title: 'Paris Beans · HAIR RAP BY YOYO',
-    description:
-      'Paris Beans — a Paris-inspired café experience inside HAIR RAP BY YOYO. Pause, sip, enjoy.',
-  },
-  story: {
-    title: 'Our Story — Paris Beans',
-    description:
-      'Paris Beans was created inside HAIR RAP BY YOYO as a café corner where guests can enjoy coffee surrounded by Paris-inspired wall art and atmosphere.',
-  },
-  menu: {
-    title: 'Menu — Paris Beans',
-    description:
-      'From comforting coffee to simple café favourites, discover the offerings available at ParisBeans inside HAIR RAP BY YOYO.',
-  },
-  gallery: {
-    title: 'Gallery — Paris Beans',
-    description:
-      'Step inside Paris Beans and discover the details, atmosphere and moments that make HAIR RAP BY YOYO feel different.',
-  },
-  visit: {
-    title: 'Visit & Contact — Paris Beans',
-    description:
-      'Find Paris Beans inside HAIR RAP BY YOYO. Visit our Paris-inspired café corner, book an appointment, or get in touch.',
-  },
-  privacy: {
-    title: 'Privacy Policy — Paris Beans',
-    description: 'Paris Beans privacy policy — how we collect, use, and protect your information.',
-  },
-  terms: {
-    title: 'Terms & Conditions — Paris Beans',
-    description: 'Paris Beans terms and conditions of service for café visits and salon appointments.',
-  },
-}
-
 export default function SEO({ route = 'home', title, description, image, canonical, jsonLd }) {
-  const data = ROUTE_SEO[route] || ROUTE_SEO.home
+  const data = routeSeo(route)
   const t = title || data.title
   const d = description || data.description
   const img = image || DEFAULTS.image
-  const url = canonical || `https://parisbeans.com${route === 'home' ? '' : '/' + ROUTE_PATHS[route]}`
+  const url = canonical || `https://parisbeans.com${route === 'home' ? '' : '/' + routePaths[route]}`
 
   useEffect(() => {
     const setTag = (attr, key, value) => {

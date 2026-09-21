@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs'
-import { join } from 'node:path'
+import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
