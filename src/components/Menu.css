@@ -120,11 +120,15 @@
 .menu-tab-indicator {
   position: absolute;
   top: 4px;
-  left: 4px;
+  left: 0;
+  width: var(--ind-base-w, 0px);
   height: calc(100% - 8px);
   border-radius: var(--radius-sm);
   background: var(--color-espresso);
-  transition: left 0.4s var(--ease), width 0.4s var(--ease);
+  transform-origin: left center;
+  transform: translateX(var(--ind-x, 0px)) scaleX(var(--ind-s, 1));
+  transition: transform 0.4s var(--ease);
+  will-change: transform;
   z-index: 0;
   pointer-events: none;
 }

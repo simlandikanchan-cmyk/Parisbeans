@@ -31,7 +31,7 @@ export default function LegalPage({ title, eyebrow, lede, sections, children }) 
   return (
     <main id="main" className="legal-page" ref={pageRef}>
       <div className="legal-progress" aria-hidden="true">
-        <span className="legal-progress-bar" style={{ width: `${progress}%` }} />
+        <span className="legal-progress-bar" style={{ transform: `scaleX(${progress / 100})` }} />
       </div>
 
       <div className="legal-wrap">

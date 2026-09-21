@@ -68,6 +68,7 @@
   border-radius: 50%;
   background: rgba(217, 168, 126, 0.9);
   opacity: 0;
+  will-change: transform, opacity;
   animation: aiFloatPulse 2.6s var(--ease) 3s infinite;
   pointer-events: none;
 }

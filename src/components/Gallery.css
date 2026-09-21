@@ -114,17 +114,15 @@
   transform: scale(1.08);
 }
 
-/* Entrance: soft staggered curtain reveal — clip-path so it never fights the float */
+/* Entrance: soft staggered fade — opacity is composited, so it never disturbs the float */
 .gallery-image.reveal {
   opacity: 0;
-  clip-path: inset(0 0 6% 0);
-  transition: opacity 1.1s var(--ease), clip-path 1.1s var(--ease);
+  transition: opacity 1.1s var(--ease);
   transition-delay: var(--dl, 0ms);
 }
 
 .gallery-image.reveal.is-visible {
   opacity: 1;
-  clip-path: inset(0 0 0 0);
 }
 
 /* ---------- Collage positions — desktop staggered composition ---------- */

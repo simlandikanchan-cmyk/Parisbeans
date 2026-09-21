@@ -5,42 +5,49 @@ import './Gallery.css'
 const collageImages = [
   {
     src: '/images/gallery_hero/Photo rectangle.svg',
+    base: 'Photo rectangle',
     alt: 'Warm Parisian café corner at Paris Beans',
     width: 274,
     height: 284,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (1).svg',
+    base: 'Photo rectangle 1',
     alt: 'Interior detail of the Paris inspired salon café',
     width: 282,
     height: 333,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (2).svg',
+    base: 'Photo rectangle 2',
     alt: 'Espresso and pastry detail at the salon café',
     width: 209,
     height: 217,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (3).svg',
+    base: 'Photo rectangle 3',
     alt: 'Styling session at HAIR RAP BY YOYO salon',
     width: 330,
     height: 390,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (4).svg',
+    base: 'Photo rectangle 4',
     alt: 'Paris inspired decor inside the café corner',
     width: 282,
     height: 333,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (5).svg',
+    base: 'Photo rectangle 5',
     alt: 'Coffee moment served in the salon café',
     width: 282,
     height: 333,
   },
   {
     src: '/images/gallery_hero/Photo rectangle (6).svg',
+    base: 'Photo rectangle 6',
     alt: 'Relaxed pause over coffee at Paris Beans',
     width: 197,
     height: 333,
@@ -54,15 +61,29 @@ function renderSet(duplicate) {
       className={`gallery-image image-${i + 1}${duplicate ? '' : ' reveal'}`}
       style={{ '--dl': `${i * 130}ms` }}
     >
-      <img
-        src={img.src}
-        alt={img.alt}
-        width={img.width}
-        height={img.height}
-        loading={!duplicate && i === 0 ? 'eager' : 'lazy'}
-        fetchPriority={!duplicate && i === 0 ? 'high' : 'auto'}
-        draggable={false}
-      />
+      <picture>
+        <source
+          type="image/webp"
+          srcSet={
+            '/images/gallery_hero/' +
+            img.base +
+            '-800.webp 800w, /images/gallery_hero/' +
+            img.base +
+            '-480.webp 480w'
+          }
+          sizes="(min-width: 768px) 30vw, 60vw"
+        />
+        <img
+          src={img.src}
+          alt={img.alt}
+          width={img.width}
+          height={img.height}
+          loading={!duplicate && i === 0 ? 'eager' : 'lazy'}
+          fetchPriority={!duplicate && i === 0 ? 'high' : 'auto'}
+          decoding="async"
+          draggable={false}
+        />
+      </picture>
     </figure>
   ))
 }

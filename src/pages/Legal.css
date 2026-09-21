@@ -25,11 +25,13 @@
 .legal-progress-bar {
   display: block;
   height: 100%;
-  width: 0;
+  width: 100%;
   border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
   background: linear-gradient(90deg, var(--color-coffee-light), var(--color-coffee) 60%, var(--color-espresso));
   box-shadow: 0 0 12px rgba(169, 110, 63, 0.6);
-  transition: width 0.1s linear;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.1s linear;
 }
 
 /* ── Two-column layout ────────────────────────────────────── */
@@ -77,10 +79,12 @@
 }
 
 .legal-toc::after {
-  height: var(--toc-progress, 0%);
+  height: 100%;
   background: linear-gradient(180deg, var(--color-coffee-light), var(--color-coffee));
   box-shadow: 0 0 8px rgba(169, 110, 63, 0.5);
-  transition: height 0.12s linear;
+  transform-origin: top left;
+  transform: scaleY(var(--toc-progress, 0%));
+  transition: transform 0.12s linear;
 }
 
 .legal-toc-label {

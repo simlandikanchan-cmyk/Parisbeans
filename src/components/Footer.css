@@ -179,6 +179,7 @@
 
 .social-link svg {
   display: block;
+  will-change: transform;
   animation: socialBob 5s ease-in-out infinite;
 }
 
@@ -298,6 +299,7 @@
   background: rgba(193, 138, 91, 0.1);
   border: 1px solid rgba(193, 138, 91, 0.18);
   border-radius: 10px;
+  will-change: transform;
   transition: background-color 0.35s var(--ease), border-color 0.35s var(--ease),
     color 0.35s var(--ease);
   animation: contactFloat 6s ease-in-out infinite;

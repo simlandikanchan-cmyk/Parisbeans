@@ -147,21 +147,20 @@
   border-radius: 2px;
   background: currentColor;
   transform-origin: center;
-  transition: transform 0.35s var(--ease), width 0.35s var(--ease), opacity 0.25s var(--ease);
+  transition: transform 0.35s var(--ease), opacity 0.25s var(--ease);
 }
 
 .menu-toggle:hover .hamburger-line:nth-child(1) {
-  width: 66%;
+  transform: scaleX(0.66);
 }
 
 .menu-toggle:hover .hamburger-line:nth-child(3) {
-  width: 66%;
+  transform: scaleX(0.66);
 }
 
 /* Turn into an ✕ when the drawer is open */
 .hamburger-box.is-open .hamburger-line:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
-  width: 100%;
 }
 
 .hamburger-box.is-open .hamburger-line:nth-child(2) {
@@ -171,7 +170,6 @@
 
 .hamburger-box.is-open .hamburger-line:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
-  width: 100%;
 }
 
 /* Mobile drawer */

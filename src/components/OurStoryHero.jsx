@@ -1,27 +1,27 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { srcSize } from '../data/siteData'
 import './OurStoryHero.css'
 
 const PANELS = [
   {
-    src: '/images/hero/salon-interior.svg',
-    pos: '50% 50%',
-    alt: 'Paris Beans interior with wooden wall logo and café counter',
-  },
-  {
-    src: '/images/story/Rectangle 73.svg',
+    base: 'Rectangle 73',
     pos: '50% 30%',
     alt: 'HAIR RAP BY YOYO environment',
   },
   {
-    src: '/images/story/Rectangle 75.svg',
+    base: 'Rectangle 75',
     pos: '50% 25%',
     alt: 'Salon interior detail',
   },
   {
-    src: '/images/story/Rectangle 74.svg',
+    base: 'Rectangle 74',
     pos: '50% 60%',
     alt: 'Café corner detail',
+  },
+  {
+    base: 'salon-interior',
+    pos: '50% 50%',
+    alt: 'Paris Beans interior with wooden wall logo and café counter',
+    sizes: [480, 800, 1200, 1600],
   },
 ]
 
@@ -33,6 +33,36 @@ const MOBILE_SLIDE_COUNT = 3
 const reduceMotion =
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+function PanelPicture({ base, alt, pos }) {
+  return (
+    <picture>
+      <source
+        type="image/webp"
+        srcSet={
+          '/images/story/' +
+          base +
+          '-1600.webp 1600w, /images/story/' +
+          base +
+          '-1200.webp 1200w, /images/story/' +
+          base +
+          '-800.webp 800w, /images/story/' +
+          base +
+          '-480.webp 480w'
+        }
+        sizes="(min-width: 768px) 25vw, 50vw"
+      />
+      <img
+        src={'/images/story/' + base + '.svg'}
+        style={{ objectPosition: pos }}
+        alt={alt}
+        draggable={false}
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  )
+}
 
 export default function OurStoryHero() {
   const ref = useRef(null)
@@ -112,7 +142,7 @@ export default function OurStoryHero() {
             const isActive = index === safeIndex
             return (
               <button
-                key={panel.src}
+                key={panel.base}
                 type="button"
                 className={`ostory-panel${isActive ? ' is-active' : ''}`}
                 onMouseEnter={() => setActiveIndex(index)}
@@ -124,13 +154,7 @@ export default function OurStoryHero() {
                   transition: 'flex 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
               >
-                <img
-                  src={panel.src}
-                  style={{ objectPosition: panel.pos }}
-                  alt={panel.alt}
-                  draggable={false}
-                  {...srcSize(panel.src)}
-                />
+                <PanelPicture base={panel.base} alt={panel.alt} pos={panel.pos} />
               </button>
             )
           })}

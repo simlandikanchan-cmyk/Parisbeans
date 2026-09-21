@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import { heroImage, srcSize } from '../data/siteData'
 import Button from './Button'
 import './Hero.css'
 
@@ -11,12 +10,22 @@ export default function Hero() {
   return (
     <section id="home" className="hero" ref={ref}>
       <div className="hero-media">
-        <img
-          src={heroImage}
-          alt="HAIR RAP BY YOYO salon interior with a warm Parisian café corner"
-          className="hero-image"
-          {...srcSize(heroImage)}
-        />
+        <picture>
+          <source
+            type="image/webp"
+            srcSet="/images/hero/salon-interior-1600.webp 1600w, /images/hero/salon-interior-1200.webp 1200w, /images/hero/salon-interior-800.webp 800w, /images/hero/salon-interior-480.webp 480w"
+            sizes="(min-width: 1200px) 100vw, 100vw"
+          />
+          <img
+            src="/images/hero/salon-interior.svg"
+            alt="HAIR RAP BY YOYO salon interior with a warm Parisian café corner"
+            className="hero-image"
+            loading="eager"
+            fetchPriority="high"
+            width={1920}
+            height={1280}
+          />
+        </picture>
       </div>
 
       <div className="hero-overlay" />
