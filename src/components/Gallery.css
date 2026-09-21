@@ -147,10 +147,10 @@
 }
 
 .image-3 {
-  width: clamp(300px, 29vw, 420px);
-  height: clamp(190px, 20vw, 290px);
-  left: clamp(455px, 37.5vw, 542px);
-  top: clamp(170px, 16.5vw, 244px);
+  width: clamp(282px, 24vw, 360px);
+  height: clamp(333px, 28.4vw, 426px);
+  left: clamp(430px, 34vw, 510px);
+  top: clamp(120px, 13vw, 200px);
   animation-duration: 8.5s;
   animation-delay: -4s;
 }
