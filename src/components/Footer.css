@@ -119,7 +119,7 @@
 .footer-brand-name {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.9rem;
+  font-size: var(--fs-h3);
   line-height: var(--lh-heading);
   color: var(--color-white);
   margin-bottom: 0.9rem;

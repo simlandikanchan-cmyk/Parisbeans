@@ -142,7 +142,7 @@
   justify-content: center;
   text-align: center;
   color: var(--color-espresso);
-  font-size: 1.05rem;
+  font-size: var(--fs-text);
   line-height: var(--lh-heading-sm);
   border-radius: 0 0 4px 4px;
 }
@@ -184,7 +184,7 @@
 
   .menu-caption {
     min-height: 48px;
-    font-size: 0.98rem;
+    font-size: var(--fs-text);
   }
 }
 
@@ -200,7 +200,7 @@
 
   .menu-caption {
     min-height: 44px;
-    font-size: 0.9rem;
+    font-size: var(--fs-text);
     padding: 0.5rem 0.55rem;
   }
 }

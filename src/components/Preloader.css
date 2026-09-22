@@ -67,7 +67,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-medium);
-  font-size: clamp(3.4rem, 9vw, 6.4rem);
+  font-size: var(--fs-wordmark);
   line-height: 1.08;
   letter-spacing: 0.01em;
   color: var(--color-espresso);
@@ -100,7 +100,7 @@
 /* ---------- Tagline ---------- */
 .preloader-tagline {
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: var(--fs-micro);
   font-weight: var(--fw-medium);
   text-transform: uppercase;
   letter-spacing: 0.4em;
@@ -199,7 +199,7 @@
   }
 
   .preloader-tagline {
-    font-size: 0.68rem;
+    font-size: var(--fs-eyebrow);
     letter-spacing: 0.3em;
     padding-left: 0.3em;
     margin-top: 1rem;

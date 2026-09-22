@@ -79,7 +79,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-semibold);
-  font-size: 1.3rem;
+  font-size: var(--fs-lead);
   line-height: var(--lh-heading);
   color: var(--color-espresso);
   margin-bottom: 0.45rem;
@@ -87,7 +87,7 @@
 
 .ostory-callout-text {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: var(--fs-micro);
   line-height: var(--lh-small);
   color: var(--color-muted);
 }

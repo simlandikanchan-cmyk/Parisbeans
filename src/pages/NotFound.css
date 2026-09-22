@@ -1,0 +1,91 @@
+/* ============================================================
+   Paris Beans — 404 page
+   ============================================================ */
+
+.nf-page {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: calc(100svh - 78px);
+  padding-block: clamp(4rem, 10vh, 7rem);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  background-image:
+    radial-gradient(720px 300px at 10% 0%, rgba(201, 147, 89, 0.12), transparent 65%),
+    radial-gradient(640px 360px at 100% 100%, rgba(67, 39, 25, 0.06), transparent 70%);
+}
+
+.nf-word {
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-word);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-espresso);
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
+}
+
+.nf-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+  padding-inline: var(--gutter);
+}
+
+.nf-eyebrow {
+  margin-bottom: 1.2rem;
+}
+
+.nf-code {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-wordmark);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-coffee);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.nf-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  margin: 0.6rem 0 1rem;
+}
+
+.nf-title em {
+  font-style: italic;
+  color: var(--color-coffee);
+}
+
+.nf-desc {
+  max-width: 520px;
+  margin: 0 auto 2.2rem;
+  font-size: var(--fs-text);
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .nf-page {
+    min-height: calc(100svh - 66px);
+  }
+
+  .nf-word {
+    display: none;
+  }
+}

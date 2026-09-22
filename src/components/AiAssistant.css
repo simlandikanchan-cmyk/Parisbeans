@@ -139,7 +139,7 @@
 
 .ai-head-title {
   font-family: var(--font-serif);
-  font-size: 1.02rem;
+  font-size: var(--fs-text);
   font-weight: 500;
   letter-spacing: 0.01em;
   margin-bottom: 0.1rem;
@@ -161,6 +161,12 @@
   background: #5fd68a;
   box-shadow: 0 0 0 0 rgba(95, 214, 138, 0.6);
   animation: aiStatusPing 2.2s ease-in-out infinite;
+}
+
+.ai-head-dot.is-offline {
+  background: #c9c2b6;
+  box-shadow: none;
+  animation: none;
 }
 
 .ai-head-actions {

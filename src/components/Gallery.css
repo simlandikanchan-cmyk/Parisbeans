@@ -34,7 +34,7 @@
 
 .gal-hero-desc {
   max-width: 560px;
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-text);
 }
 
@@ -405,7 +405,7 @@
   }
 
   .gal-hero-desc {
-    font-size: clamp(0.9rem, 4.1vw, 0.98rem);
+    font-size: var(--fs-text);
     line-height: 1.45;
     max-width: 350px;
   }

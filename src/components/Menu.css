@@ -59,7 +59,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-bold);
-  font-size: clamp(4.5rem, 15vw, 11rem);
+  font-size: var(--fs-word);
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--color-white);
@@ -96,7 +96,7 @@
 
 .menu-hero-desc {
   max-width: 520px;
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-text);
   color: rgba(255, 255, 255, 0.88);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
@@ -140,7 +140,7 @@
   align-items: center;
   gap: 0.4rem;
   font-family: var(--font-sans);
-  font-size: clamp(0.92rem, 1.05vw, 0.98rem);
+  font-size: var(--fs-text);
   font-weight: var(--fw-medium);
   padding: 0.45rem 1.15rem 0.45rem 0.85rem;
   border-radius: var(--radius-sm);
@@ -217,7 +217,7 @@
   font-family: var(--font-sans);
   font-style: normal;
   font-weight: var(--fw-medium);
-  font-size: 0.85rem;
+  font-size: var(--fs-label);
   color: var(--color-coffee);
   background: rgba(169, 110, 63, 0.1);
   border: 1px solid rgba(169, 110, 63, 0.32);
@@ -335,7 +335,7 @@
 .menu-item-name {
   font-family: var(--font-serif);
   font-weight: var(--fw-semibold);
-  font-size: clamp(1.05rem, 1.3vw, 1.16rem);
+  font-size: var(--fs-sub);
   color: var(--color-espresso);
   white-space: nowrap;
 }
@@ -350,7 +350,7 @@
   flex: 0 0 auto;
   font-family: var(--font-serif);
   font-weight: var(--fw-semibold);
-  font-size: clamp(1.02rem, 1.25vw, 1.1rem);
+  font-size: var(--fs-sub);
   color: var(--color-coffee);
   white-space: nowrap;
   transition: color 0.35s var(--ease);
@@ -362,7 +362,7 @@
 
 .menu-item-desc {
   margin-top: 0.3rem;
-  font-size: clamp(0.9rem, 1.05vw, 0.98rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-small);
   color: var(--color-muted);
   max-width: 44ch;
@@ -507,7 +507,7 @@
 
 .menu-cafe-desc {
   max-width: 620px;
-  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-text);
   color: var(--color-muted);
   margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
@@ -579,7 +579,7 @@
   text-align: center;
   font-family: var(--font-serif);
   font-weight: var(--fw-medium);
-  font-size: 0.98rem;
+  font-size: var(--fs-text);
   color: var(--color-espresso);
   white-space: nowrap;
   overflow: hidden;
@@ -629,7 +629,7 @@
 .menu-cta-desc {
   max-width: 800px;
   margin: 0 auto 2.2rem;
-  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-text);
   color: var(--color-muted);
 }
@@ -749,11 +749,11 @@
 
   .menu-hero-word {
     right: 3%;
-    font-size: clamp(4rem, 22vw, 7rem);
+    font-size: var(--fs-word-sm);
   }
 
   .menu-hero-desc {
-    font-size: 1rem;
+    font-size: var(--fs-text);
     line-height: 1.65;
   }
 
@@ -769,7 +769,7 @@
 
   .menu-tab {
     padding: 0.42rem 0.95rem 0.42rem 0.72rem;
-    font-size: 0.94rem;
+    font-size: var(--fs-text);
     white-space: nowrap;
   }
 

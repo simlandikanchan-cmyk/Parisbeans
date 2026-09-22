@@ -231,7 +231,7 @@
 .gallery-caption {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  font-size: var(--fs-lead);
   color: var(--color-espresso);
   animation: moodCaptionIn 0.7s var(--ease) both;
 }

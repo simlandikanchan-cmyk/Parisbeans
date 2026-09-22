@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { routeSeo, routePaths } from '../router'
 
 const DEFAULTS = {
-  image: 'https://parisbeans.com/images/hero.svg',
+  image: 'https://parisbeans.com/images/og-image.jpg',
 }
 
 export default function SEO({ route = 'home', title, description, image, canonical, jsonLd }) {

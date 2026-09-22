@@ -95,6 +95,14 @@
   will-change: transform;
 }
 
+/* BACK #3 — furthest card, cascades most out of the bottom-right corner */
+.story-image-back--far {
+  top: calc(var(--back-off-y) * 1.7);
+  left: calc(var(--back-off-x) * 1.7);
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(45, 26, 16, 0.08);
+}
+
 /* BACK #2 — deepest dark card, peeks out bottom-right with a thin sliver */
 .story-image-back--alt {
   top: calc(var(--back-off-y) * 0.5);
@@ -196,6 +204,10 @@
   transform: translate3d(8px, 10px, 0);
 }
 
+.story-media:hover .story-image-back--far {
+  transform: translate3d(12px, 15px, 0);
+}
+
 .story-media:hover .story-image-back--alt {
   transform: translate3d(4px, 5px, 0);
 }
@@ -251,7 +263,7 @@
   }
 
   .story-paragraph {
-    font-size: 0.98rem;
+    font-size: var(--fs-text);
     line-height: var(--lh-text);
     margin-top: 25px;
   }

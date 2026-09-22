@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { cafeCardPrices, contact } from '../data/siteData'
 import './AiAssistant.css'
 
+const AI_ENABLED = Boolean(import.meta.env.VITE_AI_ENDPOINT)
+
 const SUGGESTIONS = [
   {
     label: 'Opening hours',
@@ -26,9 +28,13 @@ const SUGGESTIONS = [
 
 const GREETING = {
   role: 'assistant',
-  content:
-    'Bonjour! I\u2019m the Paris Beans concierge \u2014 an AI that knows the café, the salon and the menu. Ask me about opening hours, what to try, or how to find us.',
+  content: AI_ENABLED
+    ? 'Bonjour! I\u2019m the Paris Beans concierge \u2014 an AI that knows the café, the salon and the menu. Ask me about opening hours, what to try, or how to find us.'
+    : 'Bonjour! I\u2019m the Paris Beans concierge. Ask me about opening hours, menu highlights, or how to find us \u2014 or tap a quick topic below.',
 }
+
+const OFFLINE_REPLY =
+  'I\u2019m not connected to live answers right now, but I can help with opening hours, menu highlights, and finding us \u2014 tap a quick topic below, or explore the Menu and Visit & Contact pages.'
 
 function AiAvatar() {
   return (
@@ -123,6 +129,10 @@ export default function AiAssistant() {
     setInput('')
     const history = [...messages, { role: 'user', content: text }]
     setMessages(history)
+    if (!AI_ENABLED) {
+      setMessages((m) => [...m, { role: 'assistant', content: OFFLINE_REPLY }])
+      return
+    }
     setBusy(true)
     try {
       const res = await fetch('/api/ai/chat', {
@@ -141,7 +151,7 @@ export default function AiAssistant() {
         {
           role: 'assistant',
           content:
-            'Sorry, I couldn\u2019t reach my assistant brain right now. Check that the AI endpoint is configured in .env, then try again.',
+            'Excusez-moi, I couldn\u2019t reach my assistant brain right now. Please try again in a moment, or tap one of the quick topics below.',
         },
       ])
     } finally {
@@ -187,8 +197,8 @@ export default function AiAssistant() {
           <div className="ai-head-meta">
             <p className="ai-head-title">Paris Beans Concierge</p>
             <p className="ai-head-status">
-              <span className="ai-head-dot" aria-hidden="true" />
-              Online
+              <span className={`ai-head-dot${AI_ENABLED ? '' : ' is-offline'}`} aria-hidden="true" />
+              {AI_ENABLED ? 'Online' : 'Offline'}
             </p>
           </div>
           <div className="ai-head-actions">

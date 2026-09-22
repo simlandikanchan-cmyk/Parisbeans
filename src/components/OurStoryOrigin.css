@@ -34,7 +34,7 @@
 
 .ostory-origin-text {
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: var(--fs-body-sm);
   line-height: var(--lh-text);
   color: var(--color-muted);
   margin-top: 1.15rem;

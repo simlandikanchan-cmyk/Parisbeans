@@ -39,7 +39,7 @@
 
 .ostory-desc {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-text);
   color: var(--color-muted);
   margin-top: clamp(1.1rem, 1.4vw, 1.5rem);
@@ -123,7 +123,7 @@
   }
 
   .ostory-desc {
-    font-size: clamp(1rem, 2.6vw, 1.15rem);
+    font-size: var(--fs-text);
   }
 
   .ostory-caption-note {
@@ -133,7 +133,7 @@
 
 @media (max-width: 640px) {
   .ostory-desc {
-    font-size: 1rem;
+    font-size: var(--fs-text);
     line-height: 1.65;
   }
 

@@ -48,7 +48,7 @@
 
 .benefit-text {
   color: var(--color-muted);
-  font-size: 0.98rem;
+  font-size: var(--fs-text);
   line-height: var(--lh-text);
 }
 

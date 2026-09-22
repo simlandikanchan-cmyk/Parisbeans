@@ -82,7 +82,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: var(--fw-bold);
-  font-size: clamp(4.5rem, 15vw, 11rem);
+  font-size: var(--fs-word);
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--color-white);
@@ -129,7 +129,7 @@
 
 .visit-hero-desc {
   color: rgba(255, 255, 255, 0.88);
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-text);
   max-width: 520px;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
@@ -158,7 +158,7 @@
 
 .visit-card-title {
   font-style: italic;
-  font-size: clamp(2.4rem, 3.4vw, 3.4rem);
+  font-size: var(--fs-display);
   margin-bottom: clamp(1.5rem, 2vw, 2.25rem);
 }
 
@@ -184,7 +184,7 @@
 .visit-field textarea {
   width: 100%;
   font-family: var(--font-sans);
-  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  font-size: var(--fs-text);
   color: var(--color-espresso);
   background: rgba(247, 243, 235, 0.55);
   border: 1px solid transparent;
@@ -221,7 +221,7 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  font-size: clamp(0.95rem, 1vw, 1.05rem);
+  font-size: var(--fs-text);
   color: var(--color-muted);
   cursor: pointer;
   padding: 1.1rem 0 1.5rem;
@@ -272,7 +272,7 @@
 
 .visit-status {
   margin-top: 1.25rem;
-  font-size: 0.92rem;
+  font-size: var(--fs-body-sm);
   line-height: var(--lh-small);
 }
 
@@ -292,7 +292,7 @@
 
 .visit-info-intro {
   color: var(--color-muted);
-  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  font-size: var(--fs-sub);
   line-height: var(--lh-text);
   margin-bottom: clamp(1.4rem, 2vw, 1.9rem);
 }
@@ -339,14 +339,14 @@
 .visit-map-card-link {
   display: block;
   margin-top: 0.45rem;
-  font-size: 0.85rem;
+  font-size: var(--fs-label);
   font-weight: var(--fw-bold);
   color: var(--color-coffee);
 }
 
 .visit-map-card-name {
   display: block;
-  font-size: 1.05rem;
+  font-size: var(--fs-text);
   font-weight: var(--fw-bold);
   color: var(--color-espresso);
   line-height: var(--lh-heading-sm);
@@ -355,7 +355,7 @@
 .visit-map-card-address {
   display: block;
   margin-top: 0.3rem;
-  font-size: 0.88rem;
+  font-size: var(--fs-body-sm);
   line-height: 1.45;
   color: var(--color-muted);
   white-space: normal;
@@ -395,7 +395,7 @@
 }
 
 .visit-info-value {
-  font-size: clamp(1.02rem, 1.25vw, 1.2rem);
+  font-size: var(--fs-sub);
   color: var(--color-espresso);
 }
 
@@ -462,7 +462,7 @@
 
 .visit-cta-desc {
   color: var(--color-muted);
-  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  font-size: var(--fs-text);
   line-height: var(--lh-lead);
   max-width: 560px;
   margin: 0 auto 2rem;
@@ -521,11 +521,11 @@
 
   .visit-hero-word {
     right: 3%;
-    font-size: clamp(4rem, 22vw, 7rem);
+    font-size: var(--fs-word-sm);
   }
 
   .visit-hero-desc {
-    font-size: 1rem;
+    font-size: var(--fs-text);
     line-height: 1.65;
   }
 
