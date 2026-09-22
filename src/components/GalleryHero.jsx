@@ -56,23 +56,11 @@ const collageImages = [
 
 function renderSet(duplicate) {
   return collageImages.map((img, i) => (
-    <figure
-      key={img.src}
-      className={`gallery-image image-${i + 1}${duplicate ? '' : ' reveal'}`}
-      style={{ '--dl': `${i * 130}ms` }}
-    >
-      <picture>
-        <source
-          type="image/webp"
-          srcSet={
-            '/images/gallery_hero/' +
-            img.base +
-            '-800.webp 800w, /images/gallery_hero/' +
-            img.base +
-            '-480.webp 480w'
-          }
-          sizes="(min-width: 768px) 30vw, 60vw"
-        />
+<figure
+        key={img.src}
+        className={`gallery-image image-${i + 1}${duplicate ? '' : ' reveal'}`}
+        style={{ '--dl': `${i * 130}ms` }}
+      >
         <img
           src={img.src}
           alt={img.alt}
@@ -83,8 +71,7 @@ function renderSet(duplicate) {
           decoding="async"
           draggable={false}
         />
-      </picture>
-    </figure>
+      </figure>
   ))
 }
 

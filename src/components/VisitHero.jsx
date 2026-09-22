@@ -9,22 +9,15 @@ export default function VisitHero() {
   return (
     <section className="visit-hero" ref={ref}>
       <div className="visit-hero-media">
-        <picture>
-          <source
-            type="image/webp"
-            srcSet="/images/hero/salon-interior-1600.webp 1600w, /images/hero/salon-interior-1200.webp 1200w, /images/hero/salon-interior-800.webp 800w, /images/hero/salon-interior-480.webp 480w"
-            sizes="(min-width: 1200px) 100vw, 100vw"
-          />
-          <img
-            src="/images/hero/salon-interior.svg"
-            alt="Paris Beans salon interior"
-            className="visit-hero-img"
-            loading="eager"
-            fetchPriority="high"
-            width={1920}
-            height={1280}
-          />
-        </picture>
+        <img
+          src="/images/hero/salon-interior.svg"
+          alt="Paris Beans salon interior"
+          className="visit-hero-img"
+          loading="eager"
+          fetchPriority="high"
+          width={1920}
+          height={1280}
+        />
         <div className="visit-hero-overlay" />
       </div>
 
