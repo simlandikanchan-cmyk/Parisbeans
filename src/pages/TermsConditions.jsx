@@ -1,5 +1,5 @@
-import LegalPage from '../components/LegalPage'
-import './Legal.css'
+import LegalPage from '../features/legal/LegalPage'
+import '../features/legal/Legal.css'
 
 const sections = [
   { id: 'terms-acceptance', num: '01', title: 'Acceptance of Terms' },

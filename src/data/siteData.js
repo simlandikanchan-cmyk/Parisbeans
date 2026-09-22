@@ -101,40 +101,6 @@ export const galleryDims = {
   g7: { width: 248, height: 360 },
 }
 
-// Intrinsic pixel dimensions of the remaining site images, keyed by file
-// name. Returns { width, height } so components can give <img> explicit
-// dimensions (no layout shift) while CSS controls the rendered size.
-const srcSizeMap = {
-  'salon-interior.svg': [1920, 1280],
-  'frame-48096320.svg': [1920, 1029],
-  'img.webp': [1935, 939],
-  'photo.svg': [627, 624],
-  'Rectangle 71.svg': [675, 605],
-  'Rectangle 69.svg': [675, 605],
-  'Rectangle 72.svg': [675, 605],
-  'Rectangle 73.svg': [1312, 735],
-  'Rectangle 74.svg': [1312, 735],
-  'Rectangle 75.svg': [1312, 735],
-  'tab1.svg': [1125, 1013],
-  'tab2.svg': [1450, 1442],
-  'tab3.svg': [1903, 1878],
-  'hero.svg': [248, 360],
-  'aglio-olio.svg': [267, 320],
-  'blush-sunset.svg': [267, 320],
-  'espresso-martini.svg': [267, 320],
-  'galaxy.svg': [267, 320],
-  'hummus.svg': [267, 320],
-  'lemon-mint.svg': [267, 320],
-  'sundowner.svg': [267, 320],
-  'virgin-mojito.svg': [268, 320],
-}
-
-export const srcSize = (src = '') => {
-  const base = String(src).split('/').pop() || ''
-  const size = srcSizeMap[base]
-  return size ? { width: size[0], height: size[1] } : {}
-}
-
 export const galleryAlt = (key) => {
   const item = gallery.find((i) => i.key === key)
   return item ? item.alt : key
@@ -175,8 +141,6 @@ export const gallerySections = [
     images: ['g2', 'g6', 'g5', 'g1', 'g4'],
   },
 ]
-
-export const heroImage = '/images/hero/salon-interior.svg'
 
 export const navLinks = [
   { label: 'Home', href: '/' },

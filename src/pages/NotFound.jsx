@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
-import Button from '../components/Button'
+import Button from '../ui/Button'
 import './NotFound.css'
 
 export default function NotFound() {

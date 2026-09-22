@@ -13,7 +13,7 @@ function aiChatProxy() {
 
         const env = loadEnv(server.config.mode, process.cwd(), '')
         const endpoint = env.VITE_AI_ENDPOINT
-        const apiKey = env.VITE_AI_API_KEY
+        const apiKey = env.AI_API_KEY
         const model = env.VITE_AI_MODEL
 
         if (!endpoint || !apiKey || !model) {
@@ -22,7 +22,7 @@ function aiChatProxy() {
           res.end(
             JSON.stringify({
               error:
-                'AI assistant is not configured yet. Add VITE_AI_ENDPOINT, VITE_AI_API_KEY and VITE_AI_MODEL to .env, then restart the dev server.',
+                'AI assistant is not configured yet. Add VITE_AI_ENDPOINT, AI_API_KEY and VITE_AI_MODEL to .env, then restart the dev server.',
             })
           )
           return
