@@ -57,7 +57,7 @@ export default function Footer({ route }) {
 
         {/* Explore */}
         <div className="footer-col footer-reveal footer-reveal--1">
-          <h4 className="footer-heading">Explore</h4>
+          <h3 className="footer-heading">Explore</h3>
           <ul className="footer-links">
             {exploreLinks.map((link) => (
               <li key={link.label}>
@@ -75,7 +75,7 @@ export default function Footer({ route }) {
 
         {/* Visit & Contact */}
         <div className="footer-col footer-col--contact footer-reveal footer-reveal--2">
-          <h4 className="footer-heading">Visit &amp; Contact</h4>
+          <h3 className="footer-heading">Visit &amp; Contact</h3>
           <ul className="footer-contact">
             <li className="contact-item">
               <MapPinIcon />

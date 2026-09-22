@@ -60,11 +60,11 @@
 }
 
 .nav-link:hover {
-  color: var(--color-coffee);
+  color: var(--color-coffee-strong);
 }
 
 .nav-link.is-active {
-  color: var(--color-coffee);
+  color: var(--color-coffee-strong);
 }
 
 .nav-link.is-active::after {
