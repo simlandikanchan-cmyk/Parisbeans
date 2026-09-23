@@ -143,7 +143,7 @@ export default function Header({ story = false, route }) {
             aria-controls="mobile-drawer"
             onClick={() => setOpen(false)}
           >
-            <Hamburger open />
+            <span className="drawer-close-x" aria-hidden="true" />
           </button>
         </div>
 
