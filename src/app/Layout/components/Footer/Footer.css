@@ -542,3 +542,11 @@ a.contact-body:focus-visible,
     gap: 0.5rem;
   }
 }
+
+/* Keep the back-to-top clear of the fixed AI concierge FAB
+   (bottom-right) wherever the footer edges reach into that corner. */
+@media (min-width: 561px) and (max-width: 1400px) {
+  .back-to-top {
+    margin-right: 92px;
+  }
+}

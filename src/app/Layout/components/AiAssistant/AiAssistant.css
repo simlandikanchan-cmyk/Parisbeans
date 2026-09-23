@@ -176,8 +176,8 @@
 }
 
 .ai-head-btn {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
   border: none;
@@ -189,8 +189,8 @@
 }
 
 .ai-head-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .ai-head-btn:hover {
@@ -334,7 +334,8 @@
   font-size: var(--fs-micro);
   font-weight: var(--fw-medium);
   letter-spacing: 0.02em;
-  padding: 0.5rem 0.9rem;
+  padding: 0.55rem 0.9rem;
+  min-height: 40px;
   border-radius: var(--radius-btn);
   border: 1px solid var(--color-border);
   background: var(--color-white);

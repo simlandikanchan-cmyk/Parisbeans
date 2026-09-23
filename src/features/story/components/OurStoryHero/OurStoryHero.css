@@ -59,7 +59,7 @@
 .ostory-panel {
   position: relative;
   flex: 0.3 1 0%;
-  min-width: 0;
+  min-width: 36px;
   height: 100%;
   padding: 0;
   border: 0;

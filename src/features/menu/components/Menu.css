@@ -121,13 +121,13 @@
   position: absolute;
   top: 4px;
   left: 0;
-  width: var(--ind-base-w, 0px);
+  width: var(--ind-w, 0px);
   height: calc(100% - 8px);
   border-radius: var(--radius-sm);
   background: var(--color-espresso);
   transform-origin: left center;
-  transform: translateX(var(--ind-x, 0px)) scaleX(var(--ind-s, 1));
-  transition: transform 0.4s var(--ease);
+  transform: translateX(var(--ind-x, 0px));
+  transition: transform 0.4s var(--ease), width 0.4s var(--ease);
   will-change: transform;
   z-index: 0;
   pointer-events: none;
@@ -810,7 +810,7 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 1.1rem;
-    padding: 0.5rem 0.25rem 1.25rem;
+    padding: 0.95rem 0.25rem 1.25rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
   }
@@ -874,6 +874,24 @@
   .menu-item-name {
     white-space: normal;
     overflow-wrap: break-word;
+  }
+
+  .menu-glow {
+    width: min(88%, 360px);
+    right: 6%;
+    opacity: 0.85;
+  }
+
+  .menu-ring {
+    width: min(82%, 330px);
+    right: 9%;
+    opacity: 0.85;
+  }
+
+  .menu-cup-frame {
+    width: 88%;
+    margin-left: auto;
+    margin-right: 0;
   }
 }
 

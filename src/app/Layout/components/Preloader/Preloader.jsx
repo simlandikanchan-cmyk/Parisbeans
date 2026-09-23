@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import preloaderVideo from '../../../../shared/assets/images/story/logo.webm'
-import preloaderFallback from '../../../../shared/assets/images/story/parisbeans.gif'
 import './Preloader.css'
 
 const WORDMARK = ['P', 'a', 'r', 'i', 's', ' ', 'B', 'e', 'a', 'n', 's']
@@ -19,6 +18,7 @@ export default function Preloader() {
   const [visible] = useState(!playedThisSession)
   const [hidden, setHidden] = useState(false)
   const [logoError, setLogoError] = useState(false)
+  const [fallbackSrc, setFallbackSrc] = useState(null)
 
   useEffect(() => {
     if (!visible) return
@@ -38,6 +38,13 @@ export default function Preloader() {
     }
   }, [visible])
 
+  useEffect(() => {
+    if (!logoError || fallbackSrc) return
+    import('../../../../shared/assets/images/story/parisbeans.gif').then((m) =>
+      setFallbackSrc(m.default)
+    )
+  }, [logoError, fallbackSrc])
+
   if (!visible) return null
 
   return (
@@ -49,14 +56,16 @@ export default function Preloader() {
       <div className="preloader-inner">
         <div className="preloader-emblem">
           {logoError ? (
-            <img
-              className="preloader-logo"
-              src={preloaderFallback}
-              alt=""
-              width={720}
-              height={720}
-              aria-hidden="true"
-            />
+            fallbackSrc && (
+              <img
+                className="preloader-logo"
+                src={fallbackSrc}
+                alt=""
+                width={720}
+                height={720}
+                aria-hidden="true"
+              />
+            )
           ) : (
             <video
               className="preloader-logo"

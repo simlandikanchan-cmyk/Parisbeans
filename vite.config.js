@@ -44,7 +44,7 @@ function aiChatProxy() {
           '- Address: 1st floor, Shilp Satved, Sindhubhavan Rd, Bodakdev, Ahmedabad, Gujarat 380059.',
           '- Hours: 10:00 AM - 9:00 PM, Monday to Sunday.',
           '- Phone / WhatsApp: +91 90999 38886',
-          '- Email: hello@parisbeans.com',
+          '- Email: support@parisbeans.com',
           '- Site pages: Home (/), Our Story (/our-story), Menu (/menu), Gallery (/gallery), Visit & Contact (/visit-contact).',
           'Answer warmly and concisely in plain text with short paragraphs. If you do not know something, say so honestly and suggest contacting the café directly.',
         ]

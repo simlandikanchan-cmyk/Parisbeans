@@ -248,6 +248,7 @@
 }
 
 .gallery-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   padding: 0;
@@ -258,6 +259,17 @@
     background-color 0.4s var(--ease),
     transform 0.4s var(--ease),
     width 0.4s var(--ease);
+}
+
+/* Expand the touch/click target beyond the small visual dot */
+.gallery-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
 }
 
 .gallery-dot:hover {
@@ -322,8 +334,12 @@
 
 /* ---------- Mobile: bigger center card + a peek on each side ---------- */
 @media (max-width: 640px) {
+  .gallery {
+    padding-block: var(--section-pad-mobile);
+  }
+
   .gallery-stage {
-    --side-x: 28vw;
+    --side-x: 22vw;
     --side-y: 12px;
     --side-s: 0.8;
   }

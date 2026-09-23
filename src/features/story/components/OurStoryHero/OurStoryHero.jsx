@@ -123,7 +123,7 @@ export default function OurStoryHero() {
                 onClick={() => setActiveIndex(index)}
                 aria-label={panel.alt}
                 style={{
-                  flex: isActive ? '4 1 0%' : '0.3 1 0%',
+                  flex: isActive ? '4 1 0%' : 'var(--ostory-inactive-flex, 0.3 1 0%)',
                   transition: 'flex 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
               >

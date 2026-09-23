@@ -200,6 +200,10 @@
 }
 
 @media (max-width: 768px) {
+  .cafe {
+    padding-block: var(--section-pad-mobile);
+  }
+
   .menu-grid {
     gap: 1.2rem;
   }

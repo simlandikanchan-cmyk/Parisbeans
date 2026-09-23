@@ -17,16 +17,10 @@ export default function MenuCategories({ activeId, onSelect }) {
     const btn = nav.querySelector('.menu-tab.is-active')
     const indicator = nav.querySelector('.menu-tab-indicator')
     if (!btn || !indicator) return
-    const baseX = Number(indicator.dataset.baseX)
-    const baseW = Number(indicator.dataset.baseW)
-    if (!Number.isFinite(baseX) || !Number.isFinite(baseW)) {
-      indicator.style.setProperty('--ind-base-w', `${btn.offsetWidth}px`)
-      indicator.dataset.baseX = String(btn.offsetLeft)
-      indicator.dataset.baseW = String(btn.offsetWidth)
-      return
-    }
-    indicator.style.setProperty('--ind-x', `${btn.offsetLeft - baseX}px`)
-    indicator.style.setProperty('--ind-s', btn.offsetWidth / baseW)
+    const navRect = nav.getBoundingClientRect()
+    const btnRect = btn.getBoundingClientRect()
+    indicator.style.setProperty('--ind-x', `${btnRect.left - navRect.left}px`)
+    indicator.style.setProperty('--ind-w', `${btnRect.width}px`)
   }
 
   useEffect(() => {

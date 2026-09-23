@@ -54,6 +54,10 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
+  .benefits {
+    padding-block: var(--section-pad-mobile);
+  }
+
   .benefits-grid {
     grid-template-columns: 1fr;
     gap: 3.2rem;

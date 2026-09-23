@@ -380,6 +380,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  min-width: 0;
 }
 
 .visit-info-icon {
@@ -395,8 +396,10 @@
 }
 
 .visit-info-value {
+  min-width: 0;
   font-size: var(--fs-sub);
   color: var(--color-espresso);
+  overflow-wrap: anywhere;
 }
 
 .visit-social {
@@ -548,6 +551,13 @@
   .visit-info-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 400px) {
+  .visit-info-value {
+    font-size: clamp(0.95rem, 4.4vw, 1.25rem);
+    line-height: 1.3;
   }
 }
 

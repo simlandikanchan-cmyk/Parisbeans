@@ -6,13 +6,13 @@ import g5 from './gallery/g5.svg'
 import g6 from './gallery/g6.svg'
 import g7 from './gallery/g7.svg'
 
-import photoRectangle from './gallery_hero/Photo rectangle.svg'
-import photoRectangle1 from './gallery_hero/Photo rectangle (1).svg'
-import photoRectangle2 from './gallery_hero/Photo rectangle (2).svg'
-import photoRectangle3 from './gallery_hero/Photo rectangle (3).svg'
-import photoRectangle4 from './gallery_hero/Photo rectangle (4).svg'
-import photoRectangle5 from './gallery_hero/Photo rectangle (5).svg'
-import photoRectangle6 from './gallery_hero/Photo rectangle (6).svg'
+import photoRectangle from './gallery_hero/Photo rectangle.webp'
+import photoRectangle1 from './gallery_hero/Photo rectangle (1).webp'
+import photoRectangle2 from './gallery_hero/Photo rectangle (2).webp'
+import photoRectangle3 from './gallery_hero/Photo rectangle (3).webp'
+import photoRectangle4 from './gallery_hero/Photo rectangle (4).webp'
+import photoRectangle5 from './gallery_hero/Photo rectangle (5).webp'
+import photoRectangle6 from './gallery_hero/Photo rectangle (6).webp'
 
 import salonInterior from './hero/salon-interior.svg'
 import frame48096466 from './hero/Frame 48096466.png'
@@ -33,7 +33,6 @@ import virginMojito from './menu/virgin-mojito.svg'
 import storyFrame48096320 from './story/frame-48096320.svg'
 import storyImg from './story/img.webp'
 import logoWebm from './story/logo.webm'
-import parisbeansGif from './story/parisbeans.gif'
 import phonegallery from './story/phonegallery.png'
 import photo from './story/photo.svg'
 import rectangle69 from './story/Rectangle 69.svg'
@@ -87,7 +86,6 @@ export const storyImages = {
   frame48096320: storyFrame48096320,
   img: storyImg,
   logoWebm,
-  parisbeansGif,
   phonegallery,
   photo,
   rectangle69,

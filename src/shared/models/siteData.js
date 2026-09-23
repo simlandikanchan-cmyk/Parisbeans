@@ -163,7 +163,7 @@ export const contact = {
   country: 'India',
   phone: '+91 90999 38886',
   phoneTel: '+919099938886',
-  email: 'hello@parisbeans.com',
+  email: 'support@parisbeans.com',
   hours: {
     allWeek: '10:00 AM – 9:00 PM',
     days: 'Monday – Sunday',

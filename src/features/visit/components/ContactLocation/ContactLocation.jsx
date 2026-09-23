@@ -8,20 +8,23 @@ import '../VisitContact.css'
 
 export default function ContactLocation() {
   const ref = useRef(null)
-  const formRef = useRef(null)
+  const submittingRef = useRef(false)
   const [status, setStatus] = useState('idle')
   useReveal(ref, { threshold: 0.12 })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (status === 'sending') return
+    if (submittingRef.current) return
 
+    submittingRef.current = true
     setStatus('sending')
     try {
       await sendContactMessage(e.target)
       setStatus('sent')
     } catch {
       setStatus('error')
+    } finally {
+      submittingRef.current = false
     }
   }
 
@@ -35,7 +38,8 @@ export default function ContactLocation() {
         <div className="visit-card visit-form-card reveal">
           <h2 className="visit-card-title">Get in touch</h2>
 
-          <form className="visit-form" ref={formRef} onSubmit={handleSubmit}>
+          <form className="visit-form" onSubmit={handleSubmit}>
+            <input type="hidden" name="to_email" value={contact.email} />
             <label className="visit-field">
               <span className="sr-only">Name</span>
               <input type="text" name="from_name" placeholder="Name" required autoComplete="name" />
@@ -49,18 +53,13 @@ export default function ContactLocation() {
               <textarea name="message" placeholder="Message" rows="4" required />
             </label>
 
-                  <label className="visit-field">
-              <span className="sr-only">Message</span>
-              <textarea name="message" placeholder="Post Your Comment" rows="4" required />
-            </label>
-
             <label className="visit-checkbox">
               <input type="checkbox" name="newsletter" value="yes" />
               <span className="visit-checkbox-box" aria-hidden="true" />
               <span>I would like to receive the newsletter.</span>
             </label>
 
-            <Button as="button" type="submit" variant="primary" arrow className="visit-submit-btn">
+            <Button as="button" type="submit" variant="primary" arrow className="visit-submit-btn" disabled={status === 'sending'}>
               {status === 'sending' ? 'Sending…' : 'Submit'}
             </Button>
 
@@ -77,7 +76,7 @@ export default function ContactLocation() {
           </form>
         </div>
 
-        {/* Right — Location / Info */}
+{/* Right — Location / Info */}
         <div className="visit-card visit-info-card reveal reveal-delay-1">
           <p className="visit-info-intro">
             Paris Beans at HAIR RAP BY YOYO — a little Parisian escape, right
