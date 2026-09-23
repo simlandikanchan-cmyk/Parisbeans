@@ -49,6 +49,11 @@ export default function ContactLocation() {
               <textarea name="message" placeholder="Message" rows="4" required />
             </label>
 
+                  <label className="visit-field">
+              <span className="sr-only">Message</span>
+              <textarea name="message" placeholder="Post Your Comment" rows="4" required />
+            </label>
+
             <label className="visit-checkbox">
               <input type="checkbox" name="newsletter" value="yes" />
               <span className="visit-checkbox-box" aria-hidden="true" />

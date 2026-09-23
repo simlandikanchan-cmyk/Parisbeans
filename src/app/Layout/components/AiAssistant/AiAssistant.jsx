@@ -270,6 +270,8 @@ export default function AiAssistant() {
         >
           <textarea
             ref={inputRef}
+            id="ai-message"
+            name="ai-message"
             className="ai-input"
             rows={1}
             placeholder="Ask about the menu, hours, location\u2026"

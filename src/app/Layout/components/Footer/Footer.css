@@ -99,14 +99,12 @@
   border-radius: 18px;
   background: rgba(193, 138, 91, 0.12);
   border: 1px solid rgba(193, 138, 91, 0.22);
-  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease),
-    transform 0.4s var(--ease);
+  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease);
 }
 
 .footer-logo:hover {
   background: rgba(193, 138, 91, 0.2);
   border-color: rgba(193, 138, 91, 0.4);
-  transform: translateY(-2px);
 }
 
 .footer-logo .logo-img {
@@ -165,31 +163,18 @@
   background: rgba(255, 255, 255, 0.04);
   color: var(--color-white);
   transition: background-color 0.3s var(--ease), color 0.3s var(--ease),
-    transform 0.3s var(--ease), border-color 0.3s var(--ease),
-    box-shadow 0.3s var(--ease);
+    border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
 .social-link:hover {
   background-color: var(--color-coffee);
   border-color: var(--color-coffee-light);
   color: var(--color-white);
-  transform: translateY(-3px);
   box-shadow: 0 12px 24px -12px rgba(169, 110, 63, 0.6);
 }
 
 .social-link svg {
   display: block;
-  will-change: transform;
-  animation: socialBob 5s ease-in-out infinite;
-}
-
-.social-link:nth-child(1) svg { animation-delay: 0s; }
-.social-link:nth-child(2) svg { animation-delay: 0.5s; }
-.social-link:nth-child(3) svg { animation-delay: 1s; }
-
-@keyframes socialBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
 }
 
 .social-link:focus-visible {
@@ -299,40 +284,14 @@
   background: rgba(193, 138, 91, 0.1);
   border: 1px solid rgba(193, 138, 91, 0.18);
   border-radius: 10px;
-  will-change: transform;
   transition: background-color 0.35s var(--ease), border-color 0.35s var(--ease),
     color 0.35s var(--ease);
-  animation: contactFloat 6s ease-in-out infinite;
-}
-
-.contact-item:nth-child(1) > svg { animation-delay: 0s; }
-.contact-item:nth-child(2) > svg { animation-delay: 0.6s; }
-.contact-item:nth-child(3) > svg { animation-delay: 1.2s; }
-.contact-item:nth-child(4) > svg { animation-delay: 1.8s; }
-
-@keyframes contactFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
 }
 
 .contact-item:hover > svg {
   background: rgba(193, 138, 91, 0.2);
   border-color: rgba(193, 138, 91, 0.4);
   color: var(--color-coffee-light);
-}
-
-/* WhatsApp — gentle pulse-glow to draw attention */
-.contact-icon--whatsapp {
-  animation: contactFloat 6s ease-in-out infinite, contactPulseGlow 2.4s ease-in-out infinite;
-}
-
-@keyframes contactPulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(193, 138, 91, 0.35);
-  }
-  50% {
-    box-shadow: 0 0 0 6px rgba(193, 138, 91, 0);
-  }
 }
 
 .contact-body {
@@ -522,12 +481,6 @@ a.contact-body:focus-visible,
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  animation: arrowBob 2.4s ease-in-out infinite;
-}
-
-@keyframes arrowBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
 }
 
 .back-to-top:hover {
