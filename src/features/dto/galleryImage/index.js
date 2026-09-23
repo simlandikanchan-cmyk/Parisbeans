@@ -1,0 +1,1 @@
+export { toGalleryImage, toGalleryImageList } from './galleryImage.dto.js'

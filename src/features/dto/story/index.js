@@ -1,0 +1,1 @@
+export { storyPageData } from './storyPage.dto.js'

@@ -1,0 +1,1 @@
+export { toLegalDocument } from './legalDocument.dto.js'

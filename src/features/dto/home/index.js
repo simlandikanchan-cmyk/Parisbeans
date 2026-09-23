@@ -1,0 +1,1 @@
+export { homePageData } from './homePage.dto.js'

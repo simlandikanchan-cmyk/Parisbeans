@@ -1,0 +1,1 @@
+export { galleryPageData } from './galleryPage.dto.js'

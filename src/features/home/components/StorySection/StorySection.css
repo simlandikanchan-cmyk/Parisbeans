@@ -1,0 +1,314 @@
+.story {
+  background-color: var(--color-white);
+  background-image: url('../../../../shared/assets/images/hero/Frame 48096466.png');
+  background-repeat: no-repeat;
+  background-size: 1040px auto;
+  background-position: 110px 280px;
+  position: relative;
+  padding: 70px 0 80px;
+}
+
+.story-grid {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 160px);
+  max-width: 1920px;
+  min-height: 700px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  align-items: center;
+  gap: 0;
+}
+
+.story-copy {
+  position: relative;
+  z-index: 10;
+  padding-right: 25px;
+}
+
+.story-title {
+  font-style: italic;
+  font-size: var(--fs-section);
+  margin: 1rem auto 1.2rem;
+  max-width: 640px;
+}
+
+.story-title em {
+  font-style: italic;
+  color: var(--color-coffee);
+}
+
+.story-paragraph {
+  max-width: 520px;
+  margin: 30px 0 0;
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: var(--fs-text);
+  line-height: var(--lh-text);
+}
+
+.story-paragraph + .reveal {
+  margin-top: 38px;
+}
+
+.pb-story-eyebrow {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Layered editorial image composition ---------- */
+.story-media {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  padding: 0 0 calc(var(--frame-off-y) + 24px);
+
+  --frame-off-x: clamp(30px, 4.2vw, 60px);
+  --frame-off-y: clamp(30px, 4.2vw, 60px);
+  --back-off-x: clamp(18px, 2.5vw, 36px);
+  --back-off-y: clamp(20px, 2.9vw, 42px);
+  --main-w: calc(100% - var(--frame-off-x) - 10px);
+}
+
+.story-image-stack {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  will-change: transform;
+  animation: pbCompositionFloat 9s ease-in-out infinite;
+}
+
+/* FRONT / MAIN IMAGE — sits in the foreground, top-left of the stack */
+.story-image-main {
+  position: relative;
+  z-index: 4;
+  width: var(--main-w);
+  aspect-ratio: 675 / 605;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-espresso-dark);
+  box-shadow: 0 14px 34px rgba(45, 26, 16, 0.18);
+  transition:
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* BACK #3 — furthest card, cascades most out of the bottom-right corner */
+.story-image-back--far {
+  top: calc(var(--back-off-y) * 1.7);
+  left: calc(var(--back-off-x) * 1.7);
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(45, 26, 16, 0.08);
+}
+
+/* BACK #2 — deepest dark card, peeks out bottom-right with a thin sliver */
+.story-image-back--alt {
+  top: calc(var(--back-off-y) * 0.5);
+  left: calc(var(--back-off-x) * 0.5);
+  z-index: 2;
+  box-shadow: 0 6px 16px rgba(45, 26, 16, 0.1);
+}
+
+/* BACK #1 / DARK-BROWN IMAGE CARD — offset right & down, partly hidden */
+.story-image-back {
+  position: absolute;
+  top: var(--back-off-y);
+  left: var(--back-off-x);
+  z-index: 3;
+  width: var(--main-w);
+  aspect-ratio: 675 / 605;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-espresso-dark);
+  box-shadow: 0 10px 24px rgba(45, 26, 16, 0.14);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.story-image-back img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Warm brown wash so the back card reads as dark/brown and secondary */
+.story-image-back::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(67, 39, 25, 0.42),
+    rgba(53, 29, 19, 0.66)
+  );
+  pointer-events: none;
+}
+
+/* THIN ORANGE OUTLINE FRAME — furthest back, peeks out bottom-right */
+.story-media::after {
+  content: '';
+  position: absolute;
+  top: var(--frame-off-y);
+  left: var(--frame-off-x);
+  z-index: 1;
+  width: var(--main-w);
+  aspect-ratio: 675 / 605;
+  border: 1px solid var(--color-gold);
+  border-radius: 8px;
+  background: transparent;
+  pointer-events: none;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cycling slideshow layers inside the main frame */
+.story-image-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+  will-change: opacity;
+}
+
+.story-image-card.is-active {
+  opacity: 1;
+}
+
+.story-image-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Slow editorial zoom that completes during each 6s slide */
+.story-image-card.is-active img {
+  transform: scale(1.1);
+}
+
+/* ---------- Hover — pause the float and separate the layers ---------- */
+.story-media:hover .story-image-stack {
+  animation-play-state: paused;
+}
+
+.story-media:hover .story-image-main {
+  transform: translate3d(-10px, -14px, 0) scale(1.012);
+  box-shadow: 0 24px 52px rgba(45, 26, 16, 0.22);
+}
+
+.story-media:hover .story-image-back {
+  transform: translate3d(8px, 10px, 0);
+}
+
+.story-media:hover .story-image-back--far {
+  transform: translate3d(12px, 15px, 0);
+}
+
+.story-media:hover .story-image-back--alt {
+  transform: translate3d(4px, 5px, 0);
+}
+
+.story-media:hover::after {
+  transform: translate3d(10px, 12px, 0);
+}
+
+.story-media:hover .story-image-card.is-active img {
+  transform: scale(1.11);
+}
+
+@keyframes pbCompositionFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .story {
+    padding: 60px 0 70px;
+    background-size: 760px auto;
+    background-position: 20px 260px;
+  }
+
+  .story-grid {
+    width: calc(100% - 70px);
+  }
+}
+
+@media (max-width: 768px) {
+  .story {
+    padding: 60px 22px 110px;
+    background-size: 700px auto;
+    background-position: -40px 100%;
+  }
+
+  .story-grid {
+    width: 100%;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 55px;
+  }
+
+  .story-copy {
+    padding-right: 0;
+  }
+
+  .story-paragraph {
+    font-size: var(--fs-text);
+    line-height: var(--lh-text);
+    margin-top: 25px;
+  }
+
+  .story-media {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-media {
+    --frame-off-x: 22px;
+    --frame-off-y: 22px;
+    --back-off-x: 13px;
+    --back-off-y: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-media {
+    --frame-off-x: 16px;
+    --frame-off-y: 16px;
+    --back-off-x: 9px;
+    --back-off-y: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-image-stack {
+    animation: none;
+  }
+
+  .story-image-card {
+    transition: none;
+    opacity: 1;
+  }
+
+  .story-image-card.is-active img {
+    transition: none;
+    transform: none;
+  }
+
+  .story-image-main,
+  .story-image-back,
+  .story-media::after {
+    transition: none;
+  }
+}

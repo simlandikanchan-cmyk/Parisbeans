@@ -1,0 +1,1 @@
+export { menuPageData } from './menuPage.dto.js'

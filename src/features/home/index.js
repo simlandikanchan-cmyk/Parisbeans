@@ -1,0 +1,5 @@
+export { default as Hero } from './components/Hero'
+export { default as StorySection } from './components/StorySection'
+export { default as BenefitsSection } from './components/BenefitsSection'
+export { default as CafeMenu } from './components/CafeMenu'
+export { default as GalleryMood } from './components/GalleryMood'

@@ -1,0 +1,1 @@
+export { notFoundPageData } from './notFoundPage.dto.js'
