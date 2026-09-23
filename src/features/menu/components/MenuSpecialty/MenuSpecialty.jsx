@@ -16,7 +16,7 @@ export default function MenuSpecialty({ category }) {
           </div>
 
           <h2 className="menu-special-title">
-            {category.heading} <span className="menu-special-size">{category.size}</span>
+            {category.heading} {category.size && <span className="menu-special-size">{category.size}</span>}
           </h2>
 
           <ul className="menu-list">
@@ -34,31 +34,22 @@ export default function MenuSpecialty({ category }) {
         </div>
 
         <div className="menu-special-visual reveal reveal-delay-1">
-          <div className="menu-beans" aria-hidden="true">
-            <svg className="menu-bean menu-bean--1" viewBox="0 0 48 48">
-              <ellipse cx="24" cy="24" rx="13" ry="19" transform="rotate(-30 24 24)" fill="currentColor" opacity="0.5" />
-              <path d="M24 6 C15 16, 15 32, 24 42" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="2" />
-            </svg>
-            <svg className="menu-bean menu-bean--2" viewBox="0 0 48 48">
-              <ellipse cx="24" cy="24" rx="13" ry="19" transform="rotate(-30 24 24)" fill="currentColor" opacity="0.5" />
-              <path d="M24 6 C15 16, 15 32, 24 42" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="2" />
-            </svg>
-            <svg className="menu-bean menu-bean--3" viewBox="0 0 48 48">
-              <ellipse cx="24" cy="24" rx="13" ry="19" transform="rotate(-30 24 24)" fill="currentColor" opacity="0.5" />
-              <path d="M24 6 C15 16, 15 32, 24 42" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="2" />
-            </svg>
-          </div>
+          <div className="menu-glow" aria-hidden="true" />
+          <div className="menu-ring" aria-hidden="true" />
 
           <div className="menu-cup-echo" aria-hidden="true">
             <img src={category.image} alt="" className="menu-echo-cup" aria-hidden="true" {...srcSize(category.image)} />
           </div>
 
-          <img
-            src={category.image}
-            alt={category.imageAlt}
-            className="menu-cup"
-            {...srcSize(category.image)}
-          />
+          <div className="menu-cup-frame">
+            <img
+              src={category.image}
+              alt={category.imageAlt}
+              className="menu-cup"
+              {...srcSize(category.image)}
+            />
+            <span className="menu-shine" aria-hidden="true" />
+          </div>
         </div>
       </div>
     </section>
