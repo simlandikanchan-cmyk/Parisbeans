@@ -10,6 +10,10 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 0.85rem;
+  /* The closed panel is invisible (opacity: 0) but would still capture
+     taps across its whole ~368x540px box unless the container lets hits
+     pass through. Children opt back in with pointer-events: auto. */
+  pointer-events: none;
 }
 
 /* ---------- Floating launcher ---------- */
@@ -28,6 +32,7 @@
   box-shadow: 0 14px 30px -8px rgba(169, 110, 63, 0.55),
     0 0 0 1px rgba(217, 168, 126, 0.35) inset;
   opacity: 0;
+  pointer-events: auto;
   transform: translateY(22px) scale(0.85);
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
     filter 0.35s var(--ease);

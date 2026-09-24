@@ -48,10 +48,10 @@ export default function ContactLocation() {
               <span className="sr-only">Email</span>
               <input type="email" name="reply_to" placeholder="Email" required autoComplete="email" />
             </label>
-            <label className="visit-field">
-              <span className="sr-only">Message</span>
-              <textarea name="message" placeholder="Message" rows="4" required />
-            </label>
+<label className="visit-field">
+  <span className="sr-only">Message</span>
+  <textarea name="message" placeholder="Message" rows="4" required enterKeyHint="send" />
+</label>
 
             <label className="visit-checkbox">
               <input type="checkbox" name="newsletter" value="yes" />
@@ -70,7 +70,12 @@ export default function ContactLocation() {
             )}
             {status === 'error' && (
               <p className="visit-status visit-status--error" role="alert">
-                Something went wrong. Please try again.
+                Something went wrong and your message didn&apos;t send. Please try
+                again, or email us directly at{' '}
+                <a className="visit-status-link" href={`mailto:${contact.email}`}>
+                  {contact.email}
+                </a>
+                .
               </p>
             )}
           </form>
@@ -84,6 +89,14 @@ export default function ContactLocation() {
           </p>
 
           <div className="visit-map-wrap">
+            <a
+              className="visit-map-open"
+              href={contact.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open location in Google Maps"
+              tabIndex={-1}
+            />
             <a
               className="visit-map-card"
               href={contact.mapLink}
@@ -112,19 +125,30 @@ export default function ContactLocation() {
                 <span className="visit-info-icon" aria-hidden="true">
                   <MapPinIcon size={18} />
                 </span>
-                <span className="visit-info-value">{contact.city}</span>
+                <a
+                  className="visit-info-link"
+                  href={contact.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {contact.city}
+                </a>
               </li>
               <li className="visit-info-item">
                 <span className="visit-info-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
                 </span>
-                <span className="visit-info-value">{contact.phone}</span>
+                <a className="visit-info-link" href={`tel:${contact.phoneTel}`}>
+                  {contact.phone}
+                </a>
               </li>
               <li className="visit-info-item">
                 <span className="visit-info-icon" aria-hidden="true">
                   <MailIcon size={18} />
                 </span>
-                <span className="visit-info-value">{contact.email}</span>
+                <a className="visit-info-link" href={`mailto:${contact.email}`}>
+                  {contact.email}
+                </a>
               </li>
             </ul>
 

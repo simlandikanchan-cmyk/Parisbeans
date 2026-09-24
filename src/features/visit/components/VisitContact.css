@@ -284,6 +284,18 @@
   color: #a03a2b;
 }
 
+.visit-status-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+}
+
+.visit-status-link:hover {
+  color: var(--color-coffee);
+}
+
 /* ── Info card ────────────────────────────────────────────── */
 .visit-info-card {
   display: flex;
@@ -314,6 +326,19 @@
   height: 100%;
   border: 0;
   display: block;
+}
+
+/* Full-map tap target — only active on touch devices so the whole
+   map opens in Google Maps instead of being swallowed by the iframe */
+.visit-map-open {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  cursor: pointer;
+  display: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .visit-map-card {
@@ -402,6 +427,30 @@
   overflow-wrap: anywhere;
 }
 
+/* Tappable info rows (city / phone / email) */
+.visit-info-link {
+  min-width: 0;
+  font-size: var(--fs-sub);
+  color: var(--color-espresso);
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: rgba(169, 110, 63, 0.45);
+  text-underline-offset: 3px;
+  transition: color 0.25s var(--ease), text-decoration-color 0.25s var(--ease);
+  touch-action: manipulation;
+}
+
+.visit-info-link:hover {
+  color: var(--color-coffee);
+  text-decoration-color: var(--color-coffee);
+}
+
+.visit-info-link:focus-visible {
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 .visit-social {
   display: flex;
   gap: 0.85rem;
@@ -414,6 +463,7 @@
   border: 1px solid var(--color-border);
   background: var(--color-bg);
   color: var(--color-espresso);
+  touch-action: manipulation;
 }
 
 .visit-social .social-link:hover {
@@ -554,13 +604,52 @@
   }
 }
 
+/* Touch devices — the embedded map iframe would otherwise capture
+   taps/swipes, making this whole section feel unclickable. Disable
+   iframe interaction so the page scrolls normally and the tap target
+   (Google Maps card + full-map overlay) stays responsive. Also bump
+   form fields to 16px so iOS/iPadOS don't zoom into every input
+   (focus anywhere on a sub-16px input triggers browser zoom). */
+@media (hover: none) and (pointer: coarse) {
+  .visit-map {
+    pointer-events: none;
+  }
+
+  .visit-map-open {
+    display: block;
+  }
+
+  .visit-map-card {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .visit-field input,
+  .visit-field textarea {
+    font-size: 16px;
+  }
+
+  .visit-form-card {
+    padding-bottom: calc(1.75rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 @media (max-width: 400px) {
   .visit-info-value {
     font-size: clamp(0.95rem, 4.4vw, 1.25rem);
     line-height: 1.3;
   }
+
+  .visit-info-link {
+    font-size: clamp(0.95rem, 4.4vw, 1.25rem);
+    line-height: 1.3;
+  }
 }
 
+/* Touch devices — the embedded map iframe would otherwise capture
+   taps/swipes, making this whole section feel unclickable. Disable
+   iframe interaction so the page scrolls normally and the tap target
+   (Google Maps card + full-map overlay) stays responsive. */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     transition-duration: 0.001ms;
