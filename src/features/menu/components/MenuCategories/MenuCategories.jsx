@@ -11,6 +11,9 @@ export default function MenuCategories({ activeId, onSelect }) {
 
   useReveal(ref, { threshold: 0.08 })
 
+  const activeCategory =
+    menuCategories.find((cat) => cat.id === activeId) ?? menuCategories[0]
+
   const moveIndicator = () => {
     const nav = navRef.current
     if (!nav) return
@@ -56,6 +59,45 @@ export default function MenuCategories({ activeId, onSelect }) {
             </button>
           ))}
         </nav>
+
+        {/* Mobile: category dropdown (shown ≤560px, tabs hidden) */}
+        <div className="menu-cats-dropdown">
+          <label className="sr-only" htmlFor="menu-category-select">
+            Select menu category
+          </label>
+          <div className="menu-select-wrap">
+            <img
+              src={activeCategory.image}
+              alt=""
+              className="menu-select-thumb"
+              {...srcSize(activeCategory.image)}
+            />
+            <select
+              id="menu-category-select"
+              className="menu-select"
+              value={activeId}
+              onChange={(e) => onSelect(e.target.value)}
+            >
+              {menuCategories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.label}
+                </option>
+              ))}
+            </select>
+            <span className="menu-select-chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+
         <div className="menu-cats-divider" aria-hidden="true" />
       </div>
     </section>

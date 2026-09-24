@@ -188,6 +188,79 @@
   background: var(--color-border);
 }
 
+/* Mobile category dropdown — hidden on tablet/desktop */
+.menu-cats-dropdown {
+  display: none;
+  margin-bottom: 0.7rem;
+}
+
+.menu-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.menu-select-thumb {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(169, 110, 63, 0.08);
+  border: 1px solid rgba(169, 110, 63, 0.25);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.menu-select {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  font-family: var(--font-sans);
+  /* 16px keeps iOS/iPadOS from zooming into the control on focus */
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  color: var(--color-espresso);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 3rem 0.9rem 3.15rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s var(--ease);
+}
+
+.menu-select:hover {
+  border-color: var(--color-coffee-light);
+}
+
+.menu-select:focus-visible {
+  border-color: var(--color-coffee);
+  outline: 2px solid var(--color-coffee);
+  outline-offset: 2px;
+}
+
+.menu-select-chevron {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: var(--color-coffee);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.menu-select-chevron svg {
+  width: 100%;
+  height: 100%;
+}
+
 /* ── Specialty hot coffees ───────────────────────────────── */
 .menu-special {
   background-color: var(--color-white);
@@ -844,16 +917,13 @@
     padding-top: 2.5rem;
   }
 
+  /* Swap the tab row for a native dropdown on phones */
   .menu-cats-tabs {
-    gap: 0.6rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    display: none;
   }
 
-  .menu-tab {
-    padding: 0.42rem 0.95rem 0.42rem 0.72rem;
-    font-size: var(--fs-text);
-    white-space: nowrap;
+  .menu-cats-dropdown {
+    display: block;
   }
 
   .menu-special {
