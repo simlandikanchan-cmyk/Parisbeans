@@ -5,6 +5,12 @@
   overflow: hidden;
 }
 
+.cafe .container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .cafe-grid {
   position: relative;
   z-index: 2;
@@ -50,7 +56,12 @@
   font-size: var(--fs-text);
 }
 
-.cafe-copy .btn--primary {
+.cafe-cta {
+  margin-top: 2.4rem;
+  text-align: left;
+}
+
+.cafe-cta .btn--primary {
   padding: 1rem 2rem;
   border: none;
 }
@@ -190,16 +201,20 @@
 
   .cafe-copy {
     position: static;
-    text-align: center;
+    text-align: left;
   }
 
   .cafe-copy .cafe-paragraph {
-    margin-inline: auto;
+    margin-inline: 0;
   }
 
   .cafe-copy .cafe-title {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .cafe-cta {
+    text-align: left;
   }
 
   .menu-grid {
