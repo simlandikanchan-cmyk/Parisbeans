@@ -124,7 +124,7 @@
 }
 
 .visit-hero-title em {
-  color: var(--color-coffee-light);
+  color: var(--color-white);
 }
 
 .visit-hero-desc {
@@ -214,6 +214,7 @@
 .visit-field textarea:focus {
   border-bottom-color: var(--color-coffee);
   background: rgba(247, 243, 235, 0.85);
+  box-shadow: 0 0 0 3px rgba(193, 138, 91, 0.18);
 }
 
 /* Checkbox */
@@ -510,7 +511,7 @@
 
 .visit-cta-title em {
   font-style: italic;
-  color: var(--color-coffee);
+  color: var(--color-espresso);
 }
 
 .visit-cta-desc {

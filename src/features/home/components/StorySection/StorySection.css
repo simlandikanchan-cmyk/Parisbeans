@@ -36,7 +36,7 @@
 
 .story-title em {
   font-style: italic;
-  color: var(--color-coffee);
+  color: var(--color-espresso);
 }
 
 .story-paragraph {
@@ -246,8 +246,7 @@
 @media (max-width: 768px) {
   .story {
     padding: 60px 22px 110px;
-    background-size: 700px auto;
-    background-position: -40px 100%;
+    background-image: none;
   }
 
   .story-grid {
@@ -255,21 +254,41 @@
     min-height: auto;
     display: flex;
     flex-direction: column;
-    gap: 55px;
+    gap: 0;
+    align-items: stretch;
   }
 
+  /* Flatten story-copy so its children become flex items and can be reordered */
   .story-copy {
-    padding-right: 0;
+    display: contents;
   }
 
-  .story-paragraph {
+  .story-copy > .pb-story-eyebrow {
+    order: 1;
+  }
+
+  .story-copy > .story-title {
+    order: 2;
+    margin: 0;
+  }
+
+  .story-copy > .story-paragraph {
+    order: 3;
     font-size: var(--fs-text);
     line-height: var(--lh-text);
     margin-top: 25px;
   }
 
   .story-media {
+    order: 4;
     width: 100%;
+    margin-top: 55px;
+  }
+
+  /* Button moves after the image on mobile */
+  .story-copy > .story-cta {
+    order: 5;
+    margin-top: 38px;
   }
 }
 

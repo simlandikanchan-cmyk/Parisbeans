@@ -110,6 +110,8 @@ export default function OurStoryHero() {
           aria-label="Paris Beans story gallery"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
+          onFocus={() => setIsHovering(true)}
+          onBlur={() => setIsHovering(false)}
         >
           {visible.map((panel, index) => {
             const isActive = index === safeIndex

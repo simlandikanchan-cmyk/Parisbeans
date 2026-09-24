@@ -17,11 +17,11 @@ export default function CafeMenu() {
           <p className="eyebrow reveal">From the Café</p>
           <h2 className="cafe-title reveal reveal-delay-1">
             Coffee,
-            <br />
+            <br className="cafe-br-desktop" />
             <em>Breakfast</em> &amp;
-            <br />
+            <br className="cafe-br-mobile" />
             Little
-            <br />
+            <br className="cafe-br-desktop" />
             <em>Indulgences.</em>
           </h2>
           <p className="lead cafe-paragraph reveal reveal-delay-2">
@@ -30,7 +30,7 @@ export default function CafeMenu() {
           </p>
           <div className="reveal reveal-delay-3">
             <Button href="/menu" variant="primary" arrow>
-              View the Menu
+              Visit the Menu
             </Button>
           </div>
         </div>

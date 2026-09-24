@@ -29,7 +29,9 @@ export default function OurStoryOrigin() {
             coffee during your visit, or simply take in the surroundings.
           </p>
           <p className="ostory-origin-text">
-            The core origin story is directly supported by the supplied brief.
+            Inspired by the cafés of Paris, it is a small pause with character —
+            somewhere to settle in before your appointment, stay for another cup,
+            and take a little of the atmosphere home with you.
           </p>
         </div>
 

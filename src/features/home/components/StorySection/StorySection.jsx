@@ -46,8 +46,8 @@ export default function StorySection() {
             Beans brings the rhythm of a street-side coffee
             break into the heart of HAIR RAP BY YOYO.
           </p>
-          <div className="reveal reveal-delay-3">
-            <Button href="/story" variant="outline" arrow>
+          <div className="story-cta reveal reveal-delay-3">
+            <Button href="/story" variant="primary" arrow>
               Read Our Story
             </Button>
           </div>

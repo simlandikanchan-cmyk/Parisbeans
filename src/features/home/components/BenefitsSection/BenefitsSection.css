@@ -42,7 +42,7 @@
 .benefit-title {
   font-family: var(--font-serif);
   font-size: var(--fs-h3);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
   margin-bottom: 0.8rem;
 }
 

@@ -224,7 +224,7 @@ button {
 
 h1, h2, h3, h4, h5, h6, .display {
   font-family: var(--font-serif);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
   line-height: var(--lh-heading);
   color: var(--color-espresso);
   letter-spacing: var(--tracking-tight);
@@ -263,6 +263,18 @@ h1, h2, h3, h4, h5, h6, .display {
     box-shadow 0.35s var(--ease), color 0.35s var(--ease);
   white-space: nowrap;
   line-height: var(--lh-ui);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn:disabled,
+.btn:disabled:hover,
+.btn:disabled:active {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: saturate(0.6);
 }
 
 .btn .btn-arrow {

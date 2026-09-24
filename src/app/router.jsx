@@ -25,6 +25,8 @@ export const routePathsList = {
   menu: '/menu',
   gallery: '/gallery',
   visit: '/visit-contact',
+  privacy: '/privacy-policy',
+  terms: '/terms-and-conditions',
 }
 
 const ROUTE_SEO = {

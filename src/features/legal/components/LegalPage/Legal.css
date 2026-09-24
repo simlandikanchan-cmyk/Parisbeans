@@ -30,7 +30,7 @@
   background: linear-gradient(90deg, var(--color-coffee-light), var(--color-coffee) 60%, var(--color-espresso));
   box-shadow: 0 0 12px rgba(169, 110, 63, 0.6);
   transform-origin: left center;
-  transform: scaleX(0);
+  transform: scaleX(var(--legal-progress, 0));
   transition: transform 0.1s linear;
 }
 
@@ -178,7 +178,7 @@
 }
 
 .legal-title em {
-  color: var(--color-coffee);
+  color: var(--color-espresso);
 }
 
 .legal-lede {
@@ -246,7 +246,7 @@
 
 .legal-h2 {
   font-family: var(--font-serif);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
   font-size: var(--fs-h3);
   line-height: var(--lh-heading);
   color: var(--color-espresso);

@@ -56,7 +56,13 @@ export default function GalleryMood() {
   }
 
   return (
-    <section id="gallery" className="gallery" ref={ref}>
+    <section
+      id="gallery"
+      className="gallery"
+      ref={ref}
+      onFocus={carousel.pause}
+      onBlur={carousel.resume}
+    >
       <div className="container">
         <div className="section-header--center gallery-head reveal">
           <p className="eyebrow">The ParisBeans Mood</p>
@@ -95,6 +101,9 @@ export default function GalleryMood() {
               <figure
                 key={img.key}
                 className={`carousel-item ${state}`}
+                role="button"
+                tabIndex={0}
+                aria-label={img.alt}
                 onClick={() => {
                   if (dragRef.current.moved) {
                     dragRef.current.moved = false
@@ -102,13 +111,19 @@ export default function GalleryMood() {
                   }
                   carousel.setActive(i)
                 }}
-                aria-label={img.alt}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    carousel.setActive(i)
+                  }
+                }}
               >
                 <div className="polaroid">
                   <div className="polaroid-photo">
                     <img
                       src={galleryImages[img.key]}
-                      alt={img.alt}
+                      alt=""
+                      aria-hidden="true"
                       width={dims.width}
                       height={dims.height}
                       loading="lazy"
@@ -144,7 +159,7 @@ export default function GalleryMood() {
       </div>
 
       <div className="gallery-cta reveal reveal-delay-2">
-        <Button href="/gallery" variant="outline" arrow>
+        <Button href="/gallery" variant="primary" arrow>
           See the Gallery
         </Button>
       </div>

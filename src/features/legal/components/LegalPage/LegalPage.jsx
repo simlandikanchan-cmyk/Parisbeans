@@ -6,21 +6,20 @@ import './Legal.css'
 
 export default function LegalPage({ title, eyebrow, lede, sections, children }) {
   const pageRef = useRef(null)
-  const [progress, setProgress] = useState(0)
   const [activeId, setActiveId] = useState(sections[0].id)
 
   useScroll(() => {
+    const page = pageRef.current
+    if (!page) return
     const doc = document.documentElement
     const total = doc.scrollHeight - window.innerHeight
-    setProgress(total > 0 ? Math.min(100, Math.max(0, (window.scrollY / total) * 100)) : 0)
+    const progress = total > 0 ? Math.min(100, Math.max(0, (window.scrollY / total) * 100)) : 0
+    page.style.setProperty('--legal-progress', `${progress}%`)
 
-    const page = pageRef.current
-    if (page) {
-      const rect = page.getBoundingClientRect()
-      const span = rect.height - window.innerHeight
-      const frac = span > 0 ? Math.min(1, Math.max(0, -rect.top / span)) : 1
-      page.style.setProperty('--toc-progress', `${frac * 100}%`)
-    }
+    const rect = page.getBoundingClientRect()
+    const span = rect.height - window.innerHeight
+    const frac = span > 0 ? Math.min(1, Math.max(0, -rect.top / span)) : 1
+    page.style.setProperty('--toc-progress', `${frac * 100}%`)
   })
 
   useReveal(pageRef, {
@@ -32,7 +31,7 @@ export default function LegalPage({ title, eyebrow, lede, sections, children }) 
   return (
     <main id="main" className="legal-page" ref={pageRef}>
       <div className="legal-progress" aria-hidden="true">
-        <span className="legal-progress-bar" style={{ transform: `scaleX(${progress / 100})` }} />
+        <span className="legal-progress-bar" />
       </div>
 
       <div className="legal-wrap">

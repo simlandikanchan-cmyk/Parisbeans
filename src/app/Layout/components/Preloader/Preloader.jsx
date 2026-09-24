@@ -18,7 +18,6 @@ export default function Preloader() {
   const [visible] = useState(!playedThisSession)
   const [hidden, setHidden] = useState(false)
   const [logoError, setLogoError] = useState(false)
-  const [fallbackSrc, setFallbackSrc] = useState(null)
 
   useEffect(() => {
     if (!visible) return
@@ -38,13 +37,6 @@ export default function Preloader() {
     }
   }, [visible])
 
-  useEffect(() => {
-    if (!logoError || fallbackSrc) return
-    import('../../../../shared/assets/images/story/parisbeans.gif').then((m) =>
-      setFallbackSrc(m.default)
-    )
-  }, [logoError, fallbackSrc])
-
   if (!visible) return null
 
   return (
@@ -56,16 +48,12 @@ export default function Preloader() {
       <div className="preloader-inner">
         <div className="preloader-emblem">
           {logoError ? (
-            fallbackSrc && (
-              <img
-                className="preloader-logo"
-                src={fallbackSrc}
-                alt=""
-                width={720}
-                height={720}
-                aria-hidden="true"
-              />
-            )
+            <img
+              className="preloader-logo"
+              src="/images/logo.svg"
+              alt=""
+              aria-hidden="true"
+            />
           ) : (
             <video
               className="preloader-logo"
@@ -82,23 +70,21 @@ export default function Preloader() {
           )}
         </div>
 
-        <h1 className="preloader-wordmark" aria-label="Paris Beans">
-          <span aria-hidden="true">
-            {WORDMARK.map((ch, i) =>
-              ch === ' ' ? (
-                <span key={i} className="preloader-letter preloader-letter--space" />
-              ) : (
-                <span
-                  key={i}
-                  className="preloader-letter"
-                  style={{ animationDelay: `${0.55 + i * 0.055}s` }}
-                >
-                  {ch}
-                </span>
-              )
-            )}
-          </span>
-        </h1>
+        <span className="preloader-wordmark" aria-hidden="true">
+          {WORDMARK.map((ch, i) =>
+            ch === ' ' ? (
+              <span key={i} className="preloader-letter preloader-letter--space" />
+            ) : (
+              <span
+                key={i}
+                className="preloader-letter"
+                style={{ animationDelay: `${0.55 + i * 0.055}s` }}
+              >
+                {ch}
+              </span>
+            )
+          )}
+        </span>
 
         <span className="preloader-line" aria-hidden="true" />
 

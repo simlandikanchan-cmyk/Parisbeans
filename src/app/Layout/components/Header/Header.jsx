@@ -171,16 +171,23 @@ export default function Header({ story = false, route }) {
 
         <div className="drawer-footer">
           <div className="drawer-meta">
-            <a href={`tel:${contact.phoneTel}`}>
-              <PhoneIcon size={16} />
-              <span>{contact.phone}</span>
+            <a className="drawer-meta-row" href={`tel:${contact.phoneTel}`}>
+              <span className="drawer-meta-ic" aria-hidden="true">
+                <PhoneIcon size={16} />
+              </span>
+              <span className="drawer-meta-txt">
+                <span className="drawer-meta-label">Call us</span>
+                <span className="drawer-meta-value">{contact.phone}</span>
+              </span>
             </a>
-            <span className="drawer-meta-sep" aria-hidden="true">
-              ·
-            </span>
-            <span className="drawer-meta-icon">
-              <ClockIcon size={16} />
-              <span>{contact.hours.allWeek}</span>
+            <span className="drawer-meta-row">
+              <span className="drawer-meta-ic" aria-hidden="true">
+                <ClockIcon size={16} />
+              </span>
+              <span className="drawer-meta-txt">
+                <span className="drawer-meta-label">Opening hours</span>
+                <span className="drawer-meta-value">{contact.hours.allWeek}</span>
+              </span>
             </span>
           </div>
 

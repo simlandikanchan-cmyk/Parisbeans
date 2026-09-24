@@ -33,7 +33,15 @@
 
 .cafe-title em {
   font-style: italic;
-  color: var(--color-coffee);
+  color: var(--color-espresso);
+}
+
+.cafe-br-mobile {
+  display: none;
+}
+
+.cafe-br-desktop {
+  display: block;
 }
 
 .cafe-paragraph {
@@ -202,6 +210,14 @@
 @media (max-width: 768px) {
   .cafe {
     padding-block: var(--section-pad-mobile);
+  }
+
+  .cafe-br-mobile {
+    display: block;
+  }
+
+  .cafe-br-desktop {
+    display: none;
   }
 
   .menu-grid {

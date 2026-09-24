@@ -365,11 +365,11 @@
 .menu-special-title {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-bold);
   font-size: var(--fs-section);
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
-  color: var(--color-coffee);
+  color: #a96e3f;
   margin-bottom: clamp(1.5rem, 2.2vw, 2.2rem);
 }
 
@@ -745,7 +745,7 @@
 
 .menu-cafe-title em {
   font-style: italic;
-  color: var(--color-coffee);
+  color: var(--color-espresso);
 }
 
 .menu-cafe-desc {
@@ -770,18 +770,25 @@
   gap: clamp(1rem, 1.6vw, 1.6rem);
 }
 
+/* Desktop: the slider track is transparent so cards stay direct grid items */
+.menu-slider-track {
+  display: contents;
+}
+
+.menu-dots {
+  display: none;
+}
+
 .menu-card {
   position: relative;
   background: var(--color-white);
   border-radius: var(--radius-sm);
   overflow: visible;
-  box-shadow: 0 8px 20px -14px rgba(53, 29, 19, 0.25);
-  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+  transition: transform 0.45s var(--ease);
 }
 
 .menu-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 24px 48px -22px rgba(53, 29, 19, 0.4);
 }
 
 .menu-card-accent {
@@ -866,7 +873,7 @@
 
 .menu-cta-title em {
   font-style: italic;
-  color: var(--color-coffee);
+  color: var(--color-espresso);
 }
 
 .menu-cta-desc {
@@ -964,21 +971,59 @@
     max-width: 78%;
   }
 
-  /* Cards become a horizontal snap scroll */
+  /* Cards become an auto-playing carousel on phones */
   .menu-cards {
+    --menu-slide-step: 66.667%;
+    display: block;
+    overflow: hidden;
+  }
+
+  .menu-slider-track {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 1.1rem;
-    padding: 0.95rem 0.25rem 1.25rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    gap: 1rem;
+    transition: transform 0.6s var(--ease);
   }
 
   .menu-card {
-    flex: 0 0 auto;
-    width: 190px;
-    scroll-snap-align: start;
+    flex: 0 0 calc(66.667% - 1rem);
+    width: auto;
+  }
+
+  .menu-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .menu-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-muted);
+    opacity: 0.45;
+    transition: opacity 0.3s var(--ease), background 0.3s var(--ease),
+      transform 0.3s var(--ease);
+    cursor: pointer;
+  }
+
+  /* Expand the touch/click target beyond the small visual dot */
+  .menu-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+  }
+
+  .menu-dot.is-active {
+    background: var(--color-gold);
+    opacity: 1;
   }
 }
 
@@ -1069,5 +1114,9 @@
   .menu-cup-echo,
   .menu-special-ghost-cup {
     animation: none;
+  }
+
+  .menu-slider-track {
+    transition: none;
   }
 }

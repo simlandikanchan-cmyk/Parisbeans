@@ -64,7 +64,7 @@
 
 .nf-title em {
   font-style: italic;
-  color: var(--color-coffee);
+  color: var(--color-espresso);
 }
 
 .nf-desc {
@@ -80,11 +80,15 @@
   gap: 1rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
+  /* Header collapses to 66px at ≤1024px (Header.css), so the page must
+     reserve the matching viewport offset or the block sits 12px low. */
   .nf-page {
     min-height: calc(100svh - 66px);
   }
+}
 
+@media (max-width: 640px) {
   .nf-word {
     display: none;
   }

@@ -94,6 +94,7 @@ export default function AiAssistant() {
   const listRef = useRef(null)
   const inputRef = useRef(null)
   const openerRef = useRef(null)
+  const panelRef = useRef(null)
 
   useEffect(() => {
     const entrance = setTimeout(() => {
@@ -114,6 +115,28 @@ export default function AiAssistant() {
       if (e.key === 'Escape') {
         setOpen(false)
         openerRef.current?.focus()
+        return
+      }
+      // Trap Tab focus inside the open panel so it behaves like a modal.
+      if (e.key === 'Tab' && panelRef.current) {
+        const focusables = Array.from(
+          panelRef.current.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          )
+        ).filter((el) => !el.disabled && el.offsetParent !== null)
+        if (!focusables.length) return
+        const first = focusables[0]
+        const last = focusables[focusables.length - 1]
+        const activeEl = document.activeElement
+        if (e.shiftKey) {
+          if (activeEl === first || !panelRef.current.contains(activeEl)) {
+            e.preventDefault()
+            last.focus()
+          }
+        } else if (activeEl === last || !panelRef.current.contains(activeEl)) {
+          e.preventDefault()
+          first.focus()
+        }
       }
     }
     window.addEventListener('keydown', onKey)
@@ -185,10 +208,13 @@ export default function AiAssistant() {
       className={`ai-widget${mounted ? ' is-visible' : ''}${open ? ' is-open' : ''}`}
     >
       <section
+        ref={panelRef}
         className="ai-panel"
         role="dialog"
         aria-label="Paris Beans AI concierge chat"
+        aria-modal="true"
         aria-hidden={!open}
+        inert={!open}
       >
         <header className="ai-head">
           <span className="ai-head-avatar" aria-hidden="true">
@@ -221,7 +247,10 @@ export default function AiAssistant() {
               className="ai-head-btn"
               aria-label="Close chat"
               title="Close chat"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false)
+                openerRef.current?.focus()
+              }}
             >
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
