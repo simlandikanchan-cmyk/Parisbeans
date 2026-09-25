@@ -5,6 +5,35 @@
   overflow: hidden;
 }
 
+/* Phone (below 748px) */
+.cafe {
+  background-image: url('../../../../shared/assets/images/menu/phone_menu.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Tablet (748px and up) */
+@media (min-width: 748px) {
+  .cafe {
+    background-image: url('../../../../shared/assets/images/menu/tab_menu.svg');
+  }
+}
+
+/* Laptop / desktop up to 1440px */
+@media (min-width: 1024px) {
+  .cafe {
+    background-image: url('../../../../shared/assets/images/menu/from748upto1440.svg');
+  }
+}
+
+/* Wide desktops (above 1440px) use the full 1920px variant */
+@media (min-width: 1441px) {
+  .cafe {
+    background-image: url('../../../../shared/assets/images/menu/menu.svg');
+  }
+}
+
 .cafe .container {
   display: flex;
   flex-direction: column;
