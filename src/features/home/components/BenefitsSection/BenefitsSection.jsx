@@ -31,9 +31,7 @@ export default function BenefitsSection() {
         {benefits.map((b, i) => {
           return (
             <div className="benefit reveal" style={{ '--i': i }} key={b.title}>
-              <span className="benefit-icon" aria-hidden="true">
-                <img src={b.img} alt="" width={40} height={40} />
-              </span>
+              <img className="benefit-icon" src={b.img} alt="" width={44} height={44} />
               <h3 className="benefit-title">{b.title}</h3>
               <p className="benefit-text">
                 {b.lines.map((line) => (

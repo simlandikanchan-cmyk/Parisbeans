@@ -20,23 +20,9 @@
 }
 
 .benefit-icon {
-  display: grid;
-  place-items: center;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
+  display: block;
   color: var(--color-coffee);
-  background-color: var(--color-white);
   margin-bottom: 1.5rem;
-  transition: transform 0.5s var(--ease), color 0.5s var(--ease),
-    border-color 0.5s var(--ease);
-}
-
-.benefit:hover .benefit-icon {
-  transform: translateY(-5px);
-  color: var(--color-espresso);
-  border-color: var(--color-coffee);
 }
 
 .benefit-title {

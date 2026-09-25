@@ -158,7 +158,7 @@
   border: 1px solid rgba(169, 110, 63, 0.35);
   border-radius: 999px;
   background: rgba(201, 147, 89, 0.08);
-  color: var(--color-coffee);
+  color: #c7a45a;
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-eyebrow);

@@ -16,7 +16,7 @@ export default function TermsConditions() {
   return (
     <LegalPage
       title={<>The Fine Print, <em>Made Friendly.</em></>}
-      eyebrow="Terms &amp; Conditions"
+      eyebrow="— Terms &amp; Conditions"
       lede="These terms outline the simple ground rules for enjoying Paris Beans — online and in person, inside HAIR RAP BY YOYO. By visiting or ordering from us, you agree to them."
       sections={sections}
     >

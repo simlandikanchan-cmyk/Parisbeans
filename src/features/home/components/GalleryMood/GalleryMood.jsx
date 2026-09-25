@@ -65,7 +65,7 @@ export default function GalleryMood() {
     >
       <div className="container">
         <div className="section-header--center gallery-head reveal">
-          <p className="eyebrow">The ParisBeans Mood</p>
+          <p className="eyebrow">— The ParisBeans Mood</p>
           <h2 className="gallery-title">
             A Corner of <em>Paris,</em> Inside
             <br />

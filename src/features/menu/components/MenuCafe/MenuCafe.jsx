@@ -32,7 +32,7 @@ export default function MenuCafe() {
   return (
     <section className="menu-cafe" ref={ref}>
       <div className="container">
-        <p className="eyebrow menu-cafe-eyebrow reveal">From the Café</p>
+        <p className="eyebrow menu-cafe-eyebrow reveal">— From the Café</p>
         <h2 className="menu-cafe-title reveal reveal-delay-1">
           A Few Things Worth
           <br />

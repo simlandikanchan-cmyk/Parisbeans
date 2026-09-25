@@ -27,6 +27,7 @@
 
 .cafe-copy .eyebrow {
   margin-bottom: 1.1rem;
+  color: #c7a45a;
 }
 
 .cafe-title {
@@ -75,6 +76,11 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(1.6rem, 2.5vw, 2.5rem);
+}
+
+/* Desktop: the slider track stays transparent so cards remain grid items */
+.cafe-slider-track {
+  display: contents;
 }
 
 .menu-item {
@@ -199,9 +205,22 @@
     gap: 3.5rem;
   }
 
+  /* Flatten the copy so text, carousel and CTA become grid rows in order */
   .cafe-copy {
-    position: static;
-    text-align: left;
+    display: contents;
+  }
+
+  .cafe-copy-inner {
+    order: 1;
+  }
+
+  .cafe-grid-right {
+    order: 2;
+  }
+
+  .cafe-cta {
+    order: 3;
+    margin-top: 0;
   }
 
   .cafe-copy .cafe-paragraph {
@@ -215,6 +234,10 @@
 
   .cafe-cta {
     text-align: left;
+  }
+
+  .menu-accent {
+    display: none;
   }
 
   .menu-grid {
@@ -235,8 +258,38 @@
     display: none;
   }
 
+  /* Cards become an auto-playing, swipeable carousel on phones */
   .menu-grid {
+    --cafe-slide-step: 50%;
+    display: block;
+    overflow: hidden;
+    gap: 0;
+  }
+
+  .cafe-slider-track {
+    display: flex;
     gap: 1.2rem;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .menu-item {
+    flex: 0 0 calc(50% - 0.6rem);
+    width: auto;
+  }
+
+  /* No hover lift/sheen/zoom on touch carousel */
+  .menu-item:hover {
+    transform: none;
+    filter: none;
+    z-index: auto;
+  }
+
+  .menu-item:hover .menu-thumb::after {
+    animation: none;
+  }
+
+  .menu-item:hover .menu-thumb img {
+    transform: none;
   }
 
   .menu-caption {
@@ -246,9 +299,12 @@
 }
 
 @media (max-width: 480px) {
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .cafe-slider-track {
     gap: 1.1rem;
+  }
+
+  .menu-item {
+    flex-basis: calc(50% - 0.55rem);
   }
 
   .menu-thumb {

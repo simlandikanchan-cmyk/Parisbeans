@@ -5,7 +5,7 @@ const sections = [
   {
     id: 'atmosphere',
     gridClass: 'gal-grid--atmosphere',
-    eyebrow: 'PARISIAN ATMOSPHERE',
+    eyebrow: '— PARISIAN ATMOSPHERE',
     title: (
       <>
         Moments Worth <em>Slowing Down</em> For.
@@ -23,7 +23,7 @@ const sections = [
   {
     id: 'wall-art',
     gridClass: 'gal-grid--wall',
-    eyebrow: 'Paris Wall Art',
+    eyebrow: '— Paris Wall Art',
     title: (
       <>
         A Corner of <em>Paris,</em> Inside <em>HAIR RAP BY YOYO.</em>
@@ -42,7 +42,7 @@ const sections = [
   {
     id: 'coffee-food',
     gridClass: 'gal-grid--food',
-    eyebrow: 'Coffee & Food',
+    eyebrow: '— Coffee & Food',
     title: (
       <>
         Made for <em>the Moment.</em>
@@ -63,7 +63,7 @@ const sections = [
     id: 'salon-cafe',
     gridClass: 'gal-grid--salon',
     bookend: true,
-    eyebrow: 'Salon + Café',
+    eyebrow: '— Salon + Café',
     title: (
       <>
         Where <em>Beauty</em> Meets <em>Café Culture.</em>

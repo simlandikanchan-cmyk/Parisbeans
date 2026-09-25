@@ -12,7 +12,7 @@ export default function OurStoryOrigin() {
     <section className="ostory-origin" ref={ref}>
       <div className="ostory-shell ostory-origin-grid">
         <div className="ostory-origin-copy reveal">
-          <p className="eyebrow ostory-eyebrow">From Paris to HAIR RAP BY YOYO</p>
+          <p className="eyebrow ostory-eyebrow">— From Paris to HAIR RAP BY YOYO</p>
           <h2 className="ostory-origin-title">
             From a <em>Parisian <br />Feeling</em> to a Salon 
             <br />

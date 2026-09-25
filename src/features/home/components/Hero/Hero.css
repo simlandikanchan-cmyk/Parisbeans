@@ -86,7 +86,7 @@
 }
 
 .hero-eyebrow {
-  color: var(--color-coffee-light);
+  color: #c7a45a;
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-eyebrow);
@@ -190,46 +190,6 @@
   box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.25);
 }
 
-/* Scroll indicator */
-.hero-scroll {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  opacity: 0;
-  animation: heroFadeIn 1s var(--ease) 1.8s forwards;
-}
-
-.hero-scroll-text {
-  font-family: var(--font-sans);
-  font-size: var(--fs-eyebrow);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.hero-scroll-line {
-  width: 1px;
-  height: 32px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
-  animation: heroScrollPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes heroScrollPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.15); }
-}
-
-@keyframes heroFadeIn {
-  to { opacity: 1; }
-}
-
 /* Reveal animations — defined in global.css */
 
 /* ---------- Responsive ---------- */
@@ -305,10 +265,6 @@
     justify-content: center;
     height: 46px;
   }
-
-  .hero-scroll {
-    bottom: 1.25rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -336,11 +292,6 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
     animation: none;
-  }
-
-  .hero-scroll-line {
-    animation: none;
-    opacity: 0.6;
   }
 
   .hero-title-line-inner {

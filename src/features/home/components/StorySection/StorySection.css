@@ -317,7 +317,14 @@
 
   .story-image-card {
     transition: none;
+  }
+
+  .story-image-card.is-active {
     opacity: 1;
+  }
+
+  .story-image-card:not(.is-active) {
+    opacity: 0;
   }
 
   .story-image-card.is-active img {

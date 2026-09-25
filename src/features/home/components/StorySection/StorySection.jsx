@@ -11,8 +11,6 @@ const storySlides = [
   storyImages.rectangle72,
 ]
 
-const storyBackImage = storyImages.rectangle74
-
 export default function StorySection() {
   const ref = useRef(null)
   const [active, setActive] = useState(0)
@@ -33,7 +31,7 @@ export default function StorySection() {
       <div className="story-grid">
         {/* Left — text */}
         <div className="story-copy">
-          <div className="pb-story-eyebrow eyebrow reveal">OUR STORY</div>
+          <div className="pb-story-eyebrow eyebrow reveal">— OUR STORY</div>
           <h2 className="story-title reveal reveal-delay-1">
             Inspired by Paris
             <br />
@@ -61,15 +59,36 @@ export default function StorySection() {
           onMouseLeave={() => setPaused(false)}
         >
           <div className="story-image-stack">
-            {/* Back — three dark brown photo cards stacked behind the main image */}
+            {/* Back — three cards that cycle through the story images */}
             <div className="story-image-back story-image-back--far" aria-hidden="true">
-              <img src={storyImages.rectangle73} alt="" {...srcSize(storyImages.rectangle73)} />
+              {storySlides.map((src, i) => (
+                <div
+                  key={src}
+                  className={`story-image-card${i === active ? ' is-active' : ''}`}
+                >
+                  <img src={src} alt="" {...srcSize(src)} />
+                </div>
+              ))}
             </div>
             <div className="story-image-back story-image-back--alt" aria-hidden="true">
-              <img src={storyImages.rectangle75} alt="" {...srcSize(storyImages.rectangle75)} />
+              {storySlides.map((src, i) => (
+                <div
+                  key={src}
+                  className={`story-image-card${i === active ? ' is-active' : ''}`}
+                >
+                  <img src={src} alt="" {...srcSize(src)} />
+                </div>
+              ))}
             </div>
             <div className="story-image-back" aria-hidden="true">
-              <img src={storyBackImage} alt="" {...srcSize(storyBackImage)} />
+              {storySlides.map((src, i) => (
+                <div
+                  key={src}
+                  className={`story-image-card${i === active ? ' is-active' : ''}`}
+                >
+                  <img src={src} alt="" {...srcSize(src)} />
+                </div>
+              ))}
             </div>
 
             {/* Front — main image, cycles through the story images */}

@@ -339,7 +339,7 @@
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-coffee);
+  color: #c7a45a;
   padding: 0.25rem 0.55rem 0.75rem;
   opacity: 0;
   transform: translateX(24px);

@@ -17,7 +17,7 @@ export default function MenuPage() {
         baseClass="menu-cta"
         threshold={0.08}
         buttonSize="small"
-        eyebrow="The Paris Beans Experience"
+        eyebrow="— The Paris Beans Experience"
         title={
           <>
             More Than a Coffee. <em>Part of Your Appointment.</em>

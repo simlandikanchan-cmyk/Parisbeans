@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
   return (
     <LegalPage
       title={<>Your Privacy, <em>Respected.</em></>}
-      eyebrow="Privacy Policy"
+      eyebrow="— Privacy Policy"
       lede="At Paris Beans — the café corner inside HAIR RAP BY YOYO — we treat the information you share with us with care, transparency and respect. This policy explains what we collect, why, and the choices you have."
       sections={sections}
     >

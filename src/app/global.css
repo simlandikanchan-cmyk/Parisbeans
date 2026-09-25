@@ -219,7 +219,7 @@ button {
   font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--color-coffee);
+  color: #c7a45a;
 }
 
 h1, h2, h3, h4, h5, h6, .display {

@@ -64,11 +64,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      <div className="hero-scroll reveal reveal-delay-3" aria-hidden="true">
-        <span className="hero-scroll-text">Scroll</span>
-        <span className="hero-scroll-line" />
-      </div>
     </section>
   )
 }
