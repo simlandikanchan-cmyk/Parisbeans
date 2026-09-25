@@ -37,11 +37,11 @@ export default function Hero() {
               <span className="hero-title-line-inner">Your Salon</span>
             </span>
             <span className="hero-title-line">
-              <span className="hero-title-line-inner">Appointment, With a</span>
+              <span className="hero-title-line-inner">Appointment, With A</span>
             </span>
             <span className="hero-title-line">
               <span className="hero-title-line-inner">
-                <em className="hero-title-accent">Taste of Paris.</em>
+                <em className="hero-title-accent">Taste Of Paris.</em>
               </span>
             </span>
           </h1>

@@ -233,37 +233,50 @@
   }
 
   .hero-content {
-    padding-block: 64px 56px;
+    padding-block: 100px 56px;
   }
 
   .hero-content.container {
     padding-inline: 24px;
   }
 
+  .hero-eyebrow-wrap {
+    margin-bottom: 24px;
+  }
+
   .hero-title {
-    margin-bottom: 1rem;
+    font-size: clamp(23px, 6.8vw, 31px);
+    line-height: 0.98;
+    margin-bottom: calc(20px + 0.16em);
+  }
+
+  .hero-title-line,
+  .hero-title-line-inner {
+    white-space: nowrap;
   }
 
   .hero-divider {
     width: 36px;
-    margin-bottom: 1.2rem;
+    margin-bottom: 20px;
   }
 
   .hero-desc {
     max-width: 100%;
     font-size: var(--fs-text);
+    margin-bottom: 24px;
   }
 
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.8rem;
+    gap: 12px;
   }
 
   .hero-actions .btn {
     width: 100%;
     justify-content: center;
-    height: 46px;
+    min-height: 48px;
+    height: 48px;
   }
 }
 
