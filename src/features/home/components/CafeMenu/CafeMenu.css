@@ -279,6 +279,22 @@
     padding-block: var(--section-pad-mobile);
   }
 
+  .cafe-grid {
+    gap: 1.25rem;
+  }
+
+  .cafe-copy-inner {
+    display: flow-root;
+  }
+
+  .cafe-copy .cafe-paragraph {
+    margin-bottom: 0;
+  }
+
+  .cafe-cta {
+    margin-top: 0;
+  }
+
   .cafe-br-mobile {
     display: block;
   }
