@@ -33,8 +33,9 @@ import virginMojito from './menu/virgin-mojito.svg'
 import storyFrame48096320 from './story/frame-48096320.svg'
 import storyImg from './story/img.webp'
 import logoWebm from './story/logo.webm'
-import phonegallery from './story/phonegallery.png'
+import phoneStoryPage from './story/phonestorypage.png'
 import photo from './story/photo.svg'
+import tabletStory from './story/tabletstory.svg'
 import rectangle69 from './story/Rectangle 69.svg'
 import rectangle71 from './story/Rectangle 71.svg'
 import rectangle72 from './story/Rectangle 72.svg'
@@ -86,8 +87,9 @@ export const storyImages = {
   frame48096320: storyFrame48096320,
   img: storyImg,
   logoWebm,
-  phonegallery,
+  phoneStoryPage,
   photo,
+  tabletStory,
   rectangle69,
   rectangle71,
   rectangle72,

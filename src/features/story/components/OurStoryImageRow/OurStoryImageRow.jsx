@@ -5,12 +5,24 @@ import './OurStoryImageRow.css'
 export default function OurStoryImageRow() {
   return (
     <div className="ostory-story-img">
-      <img
-        src={storyImages.img}
-        alt="Paris Beans story image"
-        loading="lazy"
-        {...srcSize(storyImages.img)}
-      />
+      <picture>
+        <source
+          srcSet={storyImages.phoneStoryPage}
+          media="(max-width: 767px)"
+          {...srcSize(storyImages.phoneStoryPage)}
+        />
+        <source
+          srcSet={storyImages.tabletStory}
+          media="(min-width: 768px) and (max-width: 1023px)"
+          {...srcSize(storyImages.tabletStory)}
+        />
+        <img
+          src={storyImages.img}
+          alt="Paris Beans story image"
+          loading="lazy"
+          {...srcSize(storyImages.img)}
+        />
+      </picture>
     </div>
   )
 }

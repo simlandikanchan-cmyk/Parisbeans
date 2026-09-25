@@ -4,6 +4,8 @@
 const srcSizeMap = {
   'salon-interior.svg': [1920, 1280],
   'img.webp': [1935, 939],
+  'phonestorypage.png': [390, 411],
+  'tabletstory.svg': [744, 605],
   'photo.svg': [627, 624],
   'Rectangle 71.svg': [675, 605],
   'Rectangle 69.svg': [675, 605],
