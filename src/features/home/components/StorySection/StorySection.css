@@ -290,14 +290,6 @@
     order: 5;
     margin-top: 38px;
   }
-
-  .story-title {
-    font-size: 20px;
-  }
-
-  .story-copy > .story-paragraph {
-    font-size: 12px;
-  }
 }
 
 @media (max-width: 640px) {

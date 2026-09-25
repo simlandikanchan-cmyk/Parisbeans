@@ -48,12 +48,4 @@
     grid-template-columns: 1fr;
     gap: 3.2rem;
   }
-
-  .benefit-title {
-    font-size: 20px;
-  }
-
-  .benefit-text {
-    font-size: 12px;
-  }
 }

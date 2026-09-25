@@ -366,16 +366,6 @@
   }
 }
 
-@media (max-width: 768px) {
-  .gallery-title {
-    font-size: 20px;
-  }
-
-  .gallery-desc {
-    font-size: 12px;
-  }
-}
-
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .carousel-item {
