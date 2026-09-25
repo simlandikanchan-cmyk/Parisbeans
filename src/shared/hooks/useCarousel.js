@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-export function useCarousel({ itemCount, interval = 3000 } = {}) {
+export function useCarousel({ itemCount, interval = 3000, autoPlay = true } = {}) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const reduceMotion = useRef(
@@ -9,10 +9,10 @@ export function useCarousel({ itemCount, interval = 3000 } = {}) {
   )
 
   useEffect(() => {
-    if (paused || reduceMotion.current || !itemCount) return
+    if (!autoPlay || paused || reduceMotion.current || !itemCount) return
     const t = setInterval(() => setActive((p) => (p + 1) % itemCount), interval)
     return () => clearInterval(t)
-  }, [paused, itemCount, interval])
+  }, [paused, itemCount, interval, autoPlay])
 
   useEffect(() => {
     const onVisibility = () => setPaused(document.hidden)

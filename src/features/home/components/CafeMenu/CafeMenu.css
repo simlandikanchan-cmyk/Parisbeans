@@ -287,9 +287,9 @@
     display: none;
   }
 
-  /* Cards become an auto-playing, swipeable carousel on phones */
+  /* Cards become a user-dragged, swipeable carousel on phones */
   .menu-grid {
-    --cafe-slide-step: 50%;
+    --cafe-slide-step: calc(50% + 0.6rem);
     display: block;
     overflow: hidden;
     gap: 0;
@@ -338,6 +338,10 @@
 }
 
 @media (max-width: 480px) {
+  .menu-grid {
+    --cafe-slide-step: calc(50% + 0.55rem);
+  }
+
   .cafe-slider-track {
     gap: 1.1rem;
   }

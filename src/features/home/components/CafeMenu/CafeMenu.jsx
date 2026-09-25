@@ -11,13 +11,17 @@ export default function CafeMenu() {
   const dragRef = useRef({ x: 0, dragging: false })
   useReveal(ref, { threshold: 0.08 })
 
-  const carousel = useCarousel({ itemCount: menuItems.length, interval: 4000 })
+  const carousel = useCarousel({ itemCount: menuItems.length, interval: 4000, autoPlay: false })
 
   const onPointerUp = (e) => {
     if (!dragRef.current.dragging) return
     dragRef.current.dragging = false
     const dx = e.clientX - dragRef.current.x
-    if (Math.abs(dx) > 40) carousel.go(dx < 0 ? 1 : -1)
+    if (Math.abs(dx) > 40) {
+      const dir = dx < 0 ? 1 : -1
+      const maxIndex = Math.max(menuItems.length - 2, 0)
+      carousel.setActive((p) => Math.min(Math.max(p + dir, 0), maxIndex))
+    }
     carousel.resume()
   }
 
