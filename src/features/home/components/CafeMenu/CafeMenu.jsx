@@ -13,11 +13,6 @@ export default function CafeMenu() {
 
   const carousel = useCarousel({ itemCount: menuItems.length, interval: 4000 })
 
-  const onPointerDown = (e) => {
-    dragRef.current = { x: e.clientX, y: e.clientY, dragging: true }
-    carousel.pause()
-  }
-
   const onPointerUp = (e) => {
     if (!dragRef.current.dragging) return
     dragRef.current.dragging = false
@@ -63,7 +58,15 @@ export default function CafeMenu() {
               onMouseLeave={carousel.resume}
               onFocus={carousel.pause}
               onBlur={carousel.resume}
-              onPointerDown={onPointerDown}
+              onPointerDown={(e) => {
+                dragRef.current = { x: e.clientX, y: e.clientY, dragging: true }
+                try {
+                  e.currentTarget.setPointerCapture(e.pointerId)
+                } catch {
+                  /* capture not available */
+                }
+                carousel.pause()
+              }}
               onPointerUp={onPointerUp}
               onPointerCancel={onPointerUp}
             >
