@@ -73,4 +73,12 @@
   .experience {
     padding-block: var(--section-pad-mobile);
   }
+
+  .experience-title {
+    font-size: 20px;
+  }
+
+  .experience-desc {
+    font-size: 12px;
+  }
 }

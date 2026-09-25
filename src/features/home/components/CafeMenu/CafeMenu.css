@@ -325,6 +325,14 @@
     min-height: 48px;
     font-size: var(--fs-text);
   }
+
+  .cafe-title {
+    font-size: 20px;
+  }
+
+  .cafe-paragraph {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 480px) {
