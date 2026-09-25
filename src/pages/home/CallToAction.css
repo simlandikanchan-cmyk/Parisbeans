@@ -61,12 +61,11 @@
 
 @media (min-width: 1600px) {
   .experience-content {
-    max-width: 1200px;
+    max-width: 1600px;
   }
 
   .experience-desc {
-    white-space: nowrap;
-    max-width: none;
+    max-width: 760px;
   }
 }
 

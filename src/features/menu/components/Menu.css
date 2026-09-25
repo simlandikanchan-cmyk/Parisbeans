@@ -893,8 +893,7 @@
 
 @media (min-width: 1600px) {
   .menu-cta-desc {
-    white-space: nowrap;
-    max-width: none;
+    max-width: 800px;
   }
 }
 

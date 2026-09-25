@@ -534,12 +534,11 @@
 
 @media (min-width: 1600px) {
   .visit-cta-content {
-    max-width: 1200px;
+    max-width: 1600px;
   }
 
   .visit-cta-desc {
-    white-space: nowrap;
-    max-width: none;
+    max-width: 760px;
   }
 }
 
