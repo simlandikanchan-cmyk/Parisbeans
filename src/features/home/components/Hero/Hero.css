@@ -83,6 +83,7 @@
   background: var(--color-coffee-light);
   opacity: 0.9;
   flex-shrink: 0;
+  display: none;
 }
 
 .hero-eyebrow {

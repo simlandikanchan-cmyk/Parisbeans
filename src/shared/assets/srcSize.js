@@ -17,6 +17,7 @@ const srcSizeMap = {
   'tab2.png': [2000, 2000],
   'tab3.png': [2000, 2000],
   'hero.svg': [248, 360],
+  'menu background.jpg': [4096, 2731],
   // 'menu/hero.svg' is byte-identical to 'gallery/g1.svg'; Vite dedupes them
   // into one bundled asset, so the menu hero resolves to 'g1.svg' in prod.
   'g1.svg': [248, 360],

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/app/global.css" />
+    <link rel="stylesheet" href="/src/features/home/components/GalleryMood/GalleryMood.css" />
+    <style>
+      body { margin: 0; }
+      #stage { visibility: hidden; }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <div class="container">
+        <div class="section-header--center gallery-head">
+          <p class="eyebrow">— The ParisBeans Mood</p>
+          <h2 class="gallery-title">A Corner of <em>Paris,</em> Inside <em>HAIR RAP BY YOYO.</em></h2>
+          <p class="lead gallery-desc">Paris-inspired details, warm coffee, beautiful surroundings and the little moments that make your salon visit feel different.</p>
+        </div>
+      </div>
+    </div>
+    <pre id="out">pending</pre>
+    <script>
+      function measure() {
+        const head = document.querySelector('.gallery-head')
+        const h2 = document.querySelector('.gallery-title')
+        const p = document.querySelector('.gallery-desc')
+        const vw = document.documentElement.clientWidth
+
+        const cs = getComputedStyle(h2)
+        const lh = parseFloat(cs.lineHeight)
+
+        // Unwrapped width of each line, using the same computed styles
+        const probe = document.createElement('div')
+        probe.style.cssText =
+          'position:absolute;left:-99999px;top:0;white-space:nowrap;visibility:hidden'
+        document.body.appendChild(probe)
+
+        const h2clone = h2.cloneNode(true)
+        probe.appendChild(h2clone)
+        const h2need = h2clone.getBoundingClientRect().width
+        probe.removeChild(h2clone)
+
+        const pclone = p.cloneNode(true)
+        probe.appendChild(pclone)
+        const pneed = pclone.getBoundingClientRect().width
+        probe.removeChild(pclone)
+        probe.remove()
+
+        const headBox = head.getBoundingClientRect()
+        const h2Box = h2.getBoundingClientRect()
+        const pBox = p.getBoundingClientRect()
+
+        const lines = (el, l) =>
+          Math.round(el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight))
+
+        document.getElementById('out').textContent = JSON.stringify({
+          vw,
+          container: Math.round(head.parentElement.getBoundingClientRect().width - 2 * parseFloat(getComputedStyle(head.parentElement).paddingLeft)),
+          headMaxW: getComputedStyle(head).maxWidth,
+          descMaxW: getComputedStyle(p).maxWidth,
+          h2FontPx: cs.fontSize,
+          h2Lines: lines(h2, lh),
+          h2Need: Math.round(h2need),
+          h2Box: Math.round(h2Box.width),
+          descFontPx: getComputedStyle(p).fontSize,
+          descLines: lines(p),
+          descNeed: Math.round(pneed),
+          descBox: Math.round(pBox.width),
+          h2OverflowPx: Math.round(h2need - h2Box.width),
+          descOverflowPx: Math.round(pneed - pBox.width),
+        })
+      }
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => setTimeout(measure, 50))
+      } else {
+        setTimeout(measure, 800)
+      }
+    </script>
+  </body>
+</html>

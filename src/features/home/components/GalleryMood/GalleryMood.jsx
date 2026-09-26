@@ -68,7 +68,7 @@ export default function GalleryMood() {
           <p className="eyebrow">— The ParisBeans Mood</p>
           <h2 className="gallery-title">
             A Corner of <em>Paris,</em> Inside
-            <br />
+            <br className="gallery-break" />
             <em>HAIR RAP BY YOYO.</em>
           </h2>
           <p className="lead gallery-desc">

@@ -30,7 +30,7 @@ const sections = [
       </>
     ),
     description:
-      'Paris-inspired artwork brings the feeling of a Parisian street into the heart of HAIR RAP BY YOYO',
+      'Paris-inspired details, warm coffee, beautiful surroundings and the little moments that make your salon visit feel different.',
     tiles: [
       { tile: 'gal-tile--a', image: 0 },
       { tile: 'gal-tile--b', image: 1 },

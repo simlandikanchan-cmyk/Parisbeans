@@ -6,17 +6,19 @@
 }
 
 /* Phone (below 748px) */
-.cafe {
-  background-image: url('../../../../shared/assets/images/menu/phone_menu.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+@media (max-width: 747px) {
+  .cafe {
+    background-image: none;
+  }
 }
 
 /* Tablet (748px and up) */
 @media (min-width: 748px) {
   .cafe {
     background-image: url('../../../../shared/assets/images/menu/tab_menu.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 }
 

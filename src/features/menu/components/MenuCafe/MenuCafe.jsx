@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { useReveal } from '../../../../shared/hooks/useReveal'
 import { useCarousel } from '../../../../shared/hooks/useCarousel'
 import { menuItems, cafeCardTitles } from '../../../../shared/models/siteData'
@@ -10,22 +10,25 @@ export default function MenuCafe() {
   const dragRef = useRef({ x: 0, dragging: false })
   useReveal(ref, { threshold: 0.08 })
 
-  const cards = cafeCardTitles
-    .map((title) => menuItems.find((i) => i.title === title))
-    .filter(Boolean)
+  const cards = useMemo(
+    () => cafeCardTitles.map((title) => menuItems.find((i) => i.title === title)).filter(Boolean),
+    []
+  )
+  const count = cards.length
 
-  const carousel = useCarousel({ itemCount: cards.length, interval: 4000 })
-
-  const onPointerDown = (e) => {
-    dragRef.current = { x: e.clientX, y: e.clientY, dragging: true }
-    carousel.pause()
-  }
+  const carousel = useCarousel({ itemCount: count, interval: 4000, autoPlay: false })
 
   const onPointerUp = (e) => {
     if (!dragRef.current.dragging) return
     dragRef.current.dragging = false
     const dx = e.clientX - dragRef.current.x
-    if (Math.abs(dx) > 40) carousel.go(dx < 0 ? 1 : -1)
+    if (Math.abs(dx) > 40) {
+      const dir = dx < 0 ? 1 : -1
+      // Two cards are in view on phones, so the last reachable index keeps the
+      // final card flush to the right edge — no trailing gap.
+      const maxIndex = Math.max(count - 2, 0)
+      carousel.setActive((p) => Math.min(Math.max(p + dir, 0), maxIndex))
+    }
     carousel.resume()
   }
 
@@ -49,38 +52,38 @@ export default function MenuCafe() {
           onMouseLeave={carousel.resume}
           onFocus={carousel.pause}
           onBlur={carousel.resume}
-          onPointerDown={onPointerDown}
+          onPointerDown={(e) => {
+            dragRef.current = { x: e.clientX, y: e.clientY, dragging: true }
+            try {
+              e.currentTarget.setPointerCapture(e.pointerId)
+            } catch {
+              /* capture not available */
+            }
+            carousel.pause()
+          }}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
           <div
             className="menu-slider-track"
-            style={{ transform: `translateX(calc(var(--menu-slide-step) * -${carousel.active}))` }}
+            style={{
+              transform: `translateX(calc(var(--menu-slide-step) * -${carousel.active}))`,
+            }}
           >
             {cards.map((item) => (
               <figure className="menu-card" key={item.title}>
                 <span className="menu-card-accent" aria-hidden="true" />
                 <div className="menu-card-thumb">
-                  <img src={item.image} alt={item.title} loading="lazy" {...srcSize(item.image)} />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                    draggable={false}
+                    {...srcSize(item.image)}
+                  />
                 </div>
                 <figcaption className="menu-card-caption">{item.title}</figcaption>
               </figure>
-            ))}
-          </div>
-
-          <div className="menu-dots" role="group" aria-label="Café favourites">
-            {cards.map((item, i) => (
-              <button
-                key={item.title}
-                type="button"
-                className={`menu-dot${i === carousel.active ? ' is-active' : ''}`}
-                aria-label={`Show ${item.title}`}
-                aria-current={i === carousel.active}
-                onClick={() => {
-                  carousel.setActive(i)
-                  carousel.resume()
-                }}
-              />
             ))}
           </div>
         </div>

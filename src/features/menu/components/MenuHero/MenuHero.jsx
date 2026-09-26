@@ -12,10 +12,10 @@ export default function MenuHero() {
     <section className="menu-hero" ref={ref}>
       <div className="menu-hero-media">
         <img
-          src={menuImages.hero}
+          src={menuImages.background}
           alt="Warm Parisian café corner"
           className="menu-hero-img"
-          {...srcSize(menuImages.hero)}
+          {...srcSize(menuImages.background)}
         />
       </div>
       <div className="menu-hero-overlay" aria-hidden="true" />

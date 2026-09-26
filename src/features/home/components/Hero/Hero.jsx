@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="hero-copy">
           <div className="hero-eyebrow-wrap reveal">
             <span className="hero-eyebrow-dot" aria-hidden="true" />
-            <p className="eyebrow hero-eyebrow">Paris Beans - HAIR RAP BY YOYO</p>
+            <p className="eyebrow hero-eyebrow">- Paris Beans - HAIR RAP BY YOYO</p>
           </div>
 
           <h1 className="hero-title">

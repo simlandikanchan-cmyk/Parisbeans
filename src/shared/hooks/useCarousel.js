@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
-export function useCarousel({ itemCount, interval = 3000, autoPlay = true } = {}) {
-  const [active, setActive] = useState(0)
+export function useCarousel({ itemCount, interval = 3000, autoPlay = true, initialIndex = 0 } = {}) {
+  const [active, setActive] = useState(initialIndex)
   const [paused, setPaused] = useState(false)
   const reduceMotion = useRef(
     typeof window !== 'undefined' &&

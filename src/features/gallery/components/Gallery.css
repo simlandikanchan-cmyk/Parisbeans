@@ -236,9 +236,22 @@
 
 /* ---------- Image grids ---------- */
 .gal-grid {
+  /* Placeholder until the mobile carousel takes over — keeps the track's inline
+     transform inert on the desktop grid. */
+  --gal-slide-step: 0px;
   display: grid;
   gap: clamp(12px, 1.6vw, 20px);
   margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* Desktop: the slider track stays transparent so tiles remain grid items */
+.gal-track {
+  display: contents;
+}
+
+/* Dots belong to the mobile carousel only */
+.gal-dots {
+  display: none;
 }
 
 .gal-tile {
@@ -461,80 +474,96 @@
   .image-7 { top: -16px; }
 }
 
-/* ── Other gallery sections: mobile ────────────────────────── */
-@media (max-width: 640px) {
-  .gal-grid--atmosphere,
-  .gal-grid--wall,
-  .gal-grid--salon {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+/* ── Other gallery sections: mobile — swipeable carousel ────── */
+@media (max-width: 768px) {
+  /* Break the strip out of the container so a tile spans the full viewport
+     width, while the gutter padding still frames the first and last frame. */
+  .gal-grid {
+    --gal-slide-step: calc(100% + var(--gutter));
+    display: block;
+    /* The tablet grid ratios would otherwise cap the height of this block and
+       clip the strip. */
     aspect-ratio: auto;
+    overflow: hidden;
+    gap: 0;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
   }
 
-  .gal-grid--atmosphere .gal-tile--feature,
-  .gal-grid--wall .gal-tile--feature,
-  .gal-grid--salon .gal-tile--feature {
-    grid-column: 1 / -1;
-    grid-row: 1;
+  .gal-grid img {
+    -webkit-user-drag: none;
+    pointer-events: none;
+  }
+
+  .gal-track {
+    display: flex;
+    gap: var(--gutter);
+    transition: transform 0.6s var(--ease);
+  }
+
+  /* One full-width frame per view — grid placement is irrelevant once flexed */
+  .gal-grid .gal-tile {
+    flex: 0 0 100%;
+    width: auto;
     aspect-ratio: 4 / 5;
-    min-height: 320px;
-    order: -1;
+    border-radius: 10px;
   }
 
-  .gal-grid--atmosphere .gal-tile--a,
-  .gal-grid--atmosphere .gal-tile--b {
-    grid-column: auto;
-    grid-row: auto;
-    aspect-ratio: 3 / 4;
+  /* No hover lift/zoom on the touch carousel */
+  .gal-tile:hover {
+    transform: none;
+    box-shadow: 0 6px 18px -12px rgba(53, 29, 19, 0.25);
   }
 
-  .gal-grid--atmosphere .gal-tile--wide {
-    grid-column: 1 / -1;
-    grid-row: auto;
-    aspect-ratio: 4 / 3;
+  .gal-tile:hover img {
+    transform: none;
   }
 
-  .gal-grid--wall .gal-tile--a,
-  .gal-grid--wall .gal-tile--b,
-  .gal-grid--wall .gal-tile--c,
-  .gal-grid--wall .gal-tile--d {
-    grid-column: auto;
-    grid-row: auto;
-    aspect-ratio: 3 / 4;
+  /* Centred in the container, which lines up with the full-bleed frames */
+  .gal-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1.1rem;
   }
 
-  .gal-grid--salon .gal-tile--a,
-  .gal-grid--salon .gal-tile--b,
-  .gal-grid--salon .gal-tile--c,
-  .gal-grid--salon .gal-tile--d {
-    grid-column: auto;
-    grid-row: auto;
-    aspect-ratio: 3 / 4;
+  .gal-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #e8d9c5;
+    opacity: 0.4;
+    cursor: pointer;
+    transition:
+      opacity 0.3s var(--ease),
+      background-color 0.3s var(--ease),
+      transform 0.3s var(--ease);
   }
 
-  .gal-grid--food {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    aspect-ratio: auto;
+  /* Expand the touch/click target beyond the small visual dot */
+  .gal-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 34px;
+    height: 34px;
   }
 
-  .gal-grid--food .gal-tile--feature {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    aspect-ratio: 4 / 5;
-    min-height: 300px;
-    order: -1;
-  }
-
-  .gal-grid--food .gal-tile--a,
-  .gal-grid--food .gal-tile--b,
-  .gal-grid--food .gal-tile--c,
-  .gal-grid--food .gal-tile--d,
-  .gal-grid--food .gal-tile--e,
-  .gal-grid--food .gal-tile--g {
-    grid-column: auto;
-    grid-row: auto;
-    aspect-ratio: 3 / 4;
+  .gal-dot.is-active {
+    background: #e8d9c5;
+    opacity: 1;
+    transform: scale(1.2);
   }
 }
 
@@ -597,6 +626,10 @@
   }
 
   .gal-tile img {
+    transition: none;
+  }
+
+  .gal-track {
     transition: none;
   }
 }

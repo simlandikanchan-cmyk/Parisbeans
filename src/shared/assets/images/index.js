@@ -21,6 +21,7 @@ import aglioOlio from './menu/aglio-olio.svg'
 import blushSunset from './menu/blush-sunset.svg'
 import espressoMartini from './menu/espresso-martini.svg'
 import galaxy from './menu/galaxy.svg'
+import menuBackground from './menu/menu_background.jpg'
 import menuHero from './menu/hero.svg'
 import hummus from './menu/hummus.svg'
 import lemonMint from './menu/lemon-mint.svg'
@@ -74,6 +75,7 @@ export const menuImages = {
   'espresso-martini': espressoMartini,
   galaxy,
   hero: menuHero,
+  background: menuBackground,
   hummus,
   'lemon-mint': lemonMint,
   sundowner,
