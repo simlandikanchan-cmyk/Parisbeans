@@ -7,7 +7,7 @@ export default function OurStoryCta() {
       <div className="ostory-shell ostory-cta-inner">
         <p className="eyebrow ostory-eyebrow">
           <span className="ostory-dash" aria-hidden="true" />
-          OUR STORY
+          THE PARISBEANS EXPERIENCE
         </p>
         <h2 className="ostory-cta-title">
           ParisBeans Is Not Just a <em>Café Corner.</em>
