@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { menuCategories } from '../../../../shared/models/siteData'
-import { srcSize } from '../../../../shared/assets/srcSize'
 import { useReveal } from '../../../../shared/hooks/useReveal'
 import '../Menu.css'
 
@@ -132,7 +131,6 @@ export default function MenuCategories({ activeId, onSelect }) {
               aria-current={cat.id === activeId ? 'true' : undefined}
               onClick={() => onSelect(cat.id)}
             >
-              <img src={cat.image} alt="" className="menu-tab-thumb" {...srcSize(cat.image)} />
               <span>{cat.label}</span>
             </button>
           ))}
@@ -157,12 +155,6 @@ export default function MenuCategories({ activeId, onSelect }) {
             onClick={() => (open ? setOpen(false) : openList())}
             onKeyDown={onTriggerKeyDown}
           >
-            <img
-              src={activeCategory.image}
-              alt=""
-              className="menu-select-thumb"
-              {...srcSize(activeCategory.image)}
-            />
             <span className="menu-select-value" id="menu-category-value">
               {activeCategory.label}
             </span>
@@ -200,12 +192,6 @@ export default function MenuCategories({ activeId, onSelect }) {
                     onMouseEnter={() => setFocusIndex(i)}
                     onClick={() => selectCategory(cat.id)}
                   >
-                    <img
-                      src={cat.image}
-                      alt=""
-                      className="menu-select-option-thumb"
-                      {...srcSize(cat.image)}
-                    />
                     <span>{cat.label}</span>
                     {selected && (
                       <span className="menu-select-check" aria-hidden="true">

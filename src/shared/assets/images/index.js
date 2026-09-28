@@ -6,13 +6,13 @@ import g5 from './gallery/g5.svg'
 import g6 from './gallery/g6.svg'
 import g7 from './gallery/g7.svg'
 
-import photoRectangle from './gallery_hero/Photo rectangle.webp'
-import photoRectangle1 from './gallery_hero/Photo rectangle (1).webp'
-import photoRectangle2 from './gallery_hero/Photo rectangle (2).webp'
-import photoRectangle3 from './gallery_hero/Photo rectangle (3).webp'
-import photoRectangle4 from './gallery_hero/Photo rectangle (4).webp'
-import photoRectangle5 from './gallery_hero/Photo rectangle (5).webp'
-import photoRectangle6 from './gallery_hero/Photo rectangle (6).webp'
+import photoRectangle from './gallery_hero/Photo rectangle_hq.jpg'
+import photoRectangle1 from './gallery_hero/Photo rectangle (1)_hq.jpg'
+import photoRectangle2 from './gallery_hero/Photo rectangle (2)_hq.jpg'
+import photoRectangle3 from './gallery_hero/Photo rectangle (3)_hq.jpg'
+import photoRectangle4 from './gallery_hero/Photo rectangle (4)_hq.jpg'
+import photoRectangle5 from './gallery_hero/Photo rectangle (5)_hq.jpg'
+import photoRectangle6 from './gallery_hero/Photo rectangle (6)_hq.jpg'
 
 import salonInterior from './hero/salon-interior.svg'
 import frame48096466 from './hero/Frame 48096466.png'
@@ -33,10 +33,13 @@ import virginMojito from './menu/virgin-mojito.svg'
 
 import storyFrame48096320 from './story/frame-48096320.svg'
 import storyImg from './story/img.webp'
+// Use public folder for unoptimized images
+const storyImg1 = '/story/img1.png'
+const storyImgPhone = '/story/img_phone.png'
+const tabletStory = '/story/Frame 48096464 (1).png'
 import logoWebm from './story/logo.webm'
 import phoneStoryPage from './story/phonestorypage.png'
 import photo from './story/photo.svg'
-import tabletStory from './story/Frame 48096464 (1).png'
 import rectangle69 from './story/Rectangle 69.svg'
 import rectangle71 from './story/Rectangle 71.svg'
 import rectangle72 from './story/Rectangle 72.svg'
@@ -87,9 +90,9 @@ export const menuImages = {
 
 export const storyImages = {
   frame48096320: storyFrame48096320,
-  img: storyImg,
+  img: storyImg1,
   logoWebm,
-  phoneStoryPage,
+  phoneStoryPage: storyImgPhone,
   photo,
   tabletStory,
   rectangle69,
