@@ -124,6 +124,23 @@
     padding-block: clamp(64px, 8vw, 88px);
   }
 
+  /* The two-column gutter has to be zeroed here, not just narrowed.
+
+     In a single-column stack the gap is a *block* gap, and StoryPage.css has
+     made this container a column flex box, so it lands between every pair of
+     items — not just between the two blocks the desktop grid separated. The
+     six siblings are eyebrow, heading, image and three paragraphs, so a single
+     gap value had to serve three different relationships and served none of
+     them: it pushed the eyebrow 32px off the heading it labels, and added
+     itself to the paragraphs' own 1.15rem so the run of three read as three
+     separate blocks at 50.4px apart instead of one at 18.4px. The block rhythm
+     is set by explicit margins on the blocks instead — the heading's bottom,
+     the emblem's bottom — which is how the desktop and phone tiers already
+     space the same content. */
+  .ostory-origin-grid {
+    gap: 0;
+  }
+
   .ostory-emblem-wrap {
     width: min(100%, 640px);
     /* align-self, not margin-inline: auto, and not justify-self. StoryPage.css
@@ -135,6 +152,24 @@
     /* The emblem is a child of the section grid rather than of the copy, so it
        needs its own order to slot between the heading and the description. */
     order: 3;
+    /* margin-top stays 0: the heading carries the whole title→image gap. The
+       bottom holds image→text, standing in for the 1.15rem the first paragraph
+       gives up below. */
+    margin-block: 0 2rem;
+  }
+
+  /* The photo asked for `width: 100%` and got 627px.
+
+     Its parent .ostory-emblem is a flex item of the wrap, and a flex item is
+     shrink-to-fit in a row container, so the emblem resolved to its content's
+     max-content size — the 627px intrinsic width of the source photo — and the
+     100% resolved against that instead of against the 640px wrap. The image was
+     then 13px narrower than the text above it and its left edge sat 6.5px in,
+     so nothing on the section lined up. Giving the emblem the wrap's full width
+     is the same fix OurStoryImageRow.css applies to <picture> for the same
+     reason. */
+  .ostory-emblem {
+    width: 100%;
   }
 
   .ostory-emblem-photo {
@@ -145,12 +180,26 @@
      Both are overrides of the base scales, not new tokens: --fs-section tops
      out at 2.9rem (46.4px) and --fs-body-sm is 0.92rem (14.7px), so neither can
      reach these on its own. A flat 56px is safe across this band only because
-     the title's own max-width is 640px and the longest line, "From a Parisian
+     the title's own measure is 640px and the longest line, "From a Parisian
      Feeling", measures ~628px in it — roughly 12px of slack. Widening the title
      to 56px without that measured fit would have rewrapped to three lines and
-     undone the two-line break above. */
+     undone the two-line break above.
+
+     The 1rem top is the base value and is what keeps the eyebrow attached to
+     the heading, as on every other tier. The 3rem bottom is the title→image gap
+     the zeroed flex gap used to supply, rounded down from the 51.2px it
+     produced; in this band the image is always the heading's next item, so this
+     margin only ever faces that one edge.
+
+     Balance is a guard, not a correction: the two lines here are forced by
+     .ostory-br-tablet, and balance only applies within a run of text between
+     forced breaks, so the longest line keeps the full 640px it was measured
+     against. It costs nothing if the copy is ever reworded into a segment that
+     would otherwise wrap. */
   .ostory-origin-title {
     font-size: 56px;
+    margin-bottom: 3rem;
+    text-wrap: balance;
   }
 
   .ostory-origin-text {
@@ -178,11 +227,20 @@
 
      Because the copy no longer generates a box, the 640px centred column that
      used to come from `.ostory-origin-copy` is re-applied to its children
-     instead. Without that they would stretch to the full column under the
-     grid's `align-items: stretch` and their left edges would no longer line up
-     with the emblem's. The title's auto inline margins are zeroed for the same
-     reason the old block did it: as a flex item they would re-centre it and
-     undo the 640px measure.
+     instead. The title's auto inline margins are zeroed for the same reason the
+     old block did it: as a flex item they would re-centre it and undo the 640px
+     measure.
+
+     The width is what makes that column real. `align-self: center` alone does
+     not line the children up — on a column flex container it is the INLINE axis
+     property, so it centres every child that shrink-wraps, and only the
+     full-width paragraphs were spared. Measured at 768px, the eyebrow sat at
+     x=238.7 and the heading at x=73.6 against the paragraphs' x=64: three
+     different left edges and a 175px indent on a label that belongs to the
+     heading directly beneath it. Pinning each child to the same
+     `min(100%, 640px)` measure gives one box for all of them, so centring that
+     box in the wider column is a no-op and every left edge lands on the same
+     x — 64px at 768, 229.5px at 1099 — along with the emblem below it.
 
      One consequence, shared with the phone tier: the copy's own `.reveal`
      entrance is inert while the block has no box, so the text is simply present
@@ -194,7 +252,12 @@
 
   .ostory-origin-copy > * {
     align-self: center;
-    max-width: 640px;
+    width: min(100%, 640px);
+    /* The base rule caps .ostory-origin-text at 540px, and a cap beats `width`:
+       the paragraphs came out 540 wide again, which re-centred them 50px in on
+       the measure and dropped them to four lines apiece. Cancelling the cap
+       leaves the 640px above as the only measure in play. */
+    max-width: none;
     margin-inline: 0;
   }
 
@@ -208,13 +271,21 @@
 
   .ostory-origin-copy > .ostory-origin-text {
     order: 4;
+    /* The run of paragraphs gives up its leading 1.15rem, because the emblem
+       above it now owns the image→text gap and flex items do not collapse
+       margins the way the block layout they replaced did. Restored for the two
+       paragraphs that follow another paragraph below.
+
+       Spacing the run off DOM adjacency rather than `:first-of-type` is
+       deliberate: the copy's first <p> is the eyebrow, so the three text
+       paragraphs are the 2nd-4th <p> and `:first-of-type` matches none of them.
+       Plain sibling combinators read as what they are and stay correct however
+       the flattening above is implemented. */
+    margin-top: 0;
   }
 
-  /* Flex items do not collapse margins, so the title's 1.2rem bottom and this
-     paragraph's 1.15rem top would stack to 37.6px instead of 19.2px. Scoped to
-     that one paragraph so the 1.15rem between the paragraphs is untouched. */
-  .ostory-origin-title + .ostory-origin-text {
-    margin-top: 0;
+  .ostory-origin-copy > .ostory-origin-text + .ostory-origin-text {
+    margin-top: 1.15rem;
   }
 }
 

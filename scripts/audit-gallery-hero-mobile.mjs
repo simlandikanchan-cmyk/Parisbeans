@@ -1,13 +1,15 @@
-// Audits the GalleryHero carousel against the Figma spec at <=480px, and proves
+// Audits the GalleryHero strip against the Figma spec at <=480px, and proves
 // the >480px composition is untouched by the same stylesheet change.
 //
 // Run: node scripts/audit-gallery-hero-mobile.mjs
 //
 // The mobile numbers are asserted, not just printed: card 1 flush at x=0 with
-// square corners, card 2 raised 90px and 335 tall, 65px gap, 16px text inset,
-// ~170px above the row, ~130px of clear space below, and a real swipeable
-// scroller (scrollLeft must actually move, and the body must not scroll
-// sideways). Desktop is checked for the opposite of every mobile override.
+// square corners, cards 1 and 2 sharing the top edge, 65px gap, 16px text inset,
+// ~170px above the row, ~130px of clear space below, and a running marquee — the
+// track's transform has to actually move, the loop set has to be displayed, the
+// two sets have to be equal width with a 65px seam between them, the row has to
+// be clipped rather than swipeable, and the body must not scroll sideways.
+// Desktop is checked for the opposite of every mobile override.
 import { spawn } from 'node:child_process'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { writeFileSync } from 'node:fs'
@@ -103,8 +105,9 @@ if (!appeared) throw new Error('gallery collage not found')
 
 /**
  * Everything the Figma spec names, read from computed style and layout boxes.
- * No animation is frozen: the marquee is supposed to be OFF here, so its
- * computed name is itself an assertion, and freezing would hide a regression.
+ * No animation is frozen: the marquee is supposed to be ON here, so the check
+ * that matters is whether the track's transform actually moves, and freezing
+ * would hide a regression.
  */
 const MEASURE = `(async () => {
   await document.fonts.ready;
@@ -132,8 +135,9 @@ const MEASURE = `(async () => {
   const f1s = getComputedStyle(figs[0]);
   const i1s = getComputedStyle(figs[0].querySelector('img'));
 
-  // Does the row actually swipe? scrollLeft only moves if the box is a real
-  // scroll container, not a marquee being dragged by an animation.
+  // scrollLeft only moves if the box is a real scroll container. On this tier it
+  // must NOT move: the row is a marquee, clipped by overflow rather than
+  // swipeable, so a nonzero reading would mean a scroller crept back in.
   const before = collage.scrollLeft;
   collage.scrollLeft = 220;
   await new Promise(r2 => requestAnimationFrame(() => requestAnimationFrame(r2)));
@@ -141,6 +145,17 @@ const MEASURE = `(async () => {
   const maxScroll = collage.scrollWidth - collage.clientWidth;
   collage.scrollLeft = 0;
   await new Promise(r2 => requestAnimationFrame(r2));
+
+  // Is the marquee actually running? A computed animation-name is also true of a
+  // paused or finished animation, so sample the track's transform over time.
+  const tx1 = getComputedStyle(track).transform;
+  await new Promise(r2 => setTimeout(r2, 260));
+  const tx2 = getComputedStyle(track).transform;
+
+  // Seam check: the last card of set 1 and the first card of set 2 have to be
+  // spaced like every other pair, or the -50% loop visibly jumps at the seam.
+  const lastOfSet = set.querySelector('.gallery-image:last-of-type');
+  const firstOfLoop = loop.querySelector('.gallery-image');
 
   return {
     vw: innerWidth,
@@ -165,18 +180,26 @@ const MEASURE = `(async () => {
     heroBg: hs.backgroundColor,
     heroPadBottom: hs.paddingBottom,
     trackAnim: getComputedStyle(track).animationName,
+    trackDur: getComputedStyle(track).animationDuration,
     setGap: getComputedStyle(set).gap,
     trackGap: getComputedStyle(track).gap,
     loopDisplay: getComputedStyle(loop).display,
+    trackW: +r(track).w.toFixed(1),
+    setW: +r(set).w.toFixed(1), loopW: +r(loop).w.toFixed(1),
+    seamGap: +(r(firstOfLoop).x - r(lastOfSet).right).toFixed(1),
     figCount: figs.length,
     f1, f2, f3,
     f1Radius: f1s.borderRadius,
     imgFit: i1s.objectFit,
     imgH: i1s.height, imgW: i1s.width,
     // Derived against the Figma numbers
+    moving: tx1 !== tx2,
     textInset: +r(title).x.toFixed(1),
     gapAbove: +(collage.getBoundingClientRect().y - r(desc).bottom).toFixed(1),
+    // Card 2 no longer rises above card 1 — both sit flush at the top of the row.
     rise: +(f2.y - f1.y).toFixed(1),
+    // Card 3 is the first of the low band, 90px further down.
+    drop: +(f3.y - f2.y).toFixed(1),
     hGap: +(f2.x - f1.right).toFixed(1),
     peek: +(innerWidth - f2.x).toFixed(1),
     sectionPadBelow: parseFloat(hs.paddingBottom),
@@ -201,18 +224,22 @@ for (const w of MOBILE) {
   console.log(`  card 1                : x=${m.f1.x} w=${m.f1.w} h=${m.f1.h}   want x=0 274x284`)
   console.log(`  card 2                : x=${m.f2.x} w=${m.f2.w} h=${m.f2.h}   want 274 wide, 335 tall`)
   console.log(`  card 3 (continues)    : x=${m.f3.x} w=${m.f3.w} h=${m.f3.h}`)
-  console.log(`  stagger (f2.y - f1.y) : ${m.rise}px          want -90 (card 2 higher)`)
+  console.log(`  card1/card2 top delta : ${m.rise}px          want 0 (both flush at top)`)
+  console.log(`  low band (f3.y-f2.y)  : ${m.drop}px          want 90`)
   console.log(`  horizontal gap        : ${m.hGap}px          want 65`)
   console.log(`  right-edge peek       : ${m.peek}px`)
   console.log(`  gap paragraph->row    : ${m.gapAbove}px          want ~170`)
   console.log(`  section pad-bottom    : ${m.sectionPadBelow}px          want 130`)
   console.log(`  corners (figure/img)  : radius ${m.f1Radius} / fit ${m.imgFit} ${m.imgW}x${m.imgH}   want 0 / cover`)
-  console.log(`  scroller              : ${m.collage.overflowX}/${m.collage.overflowY} snap=${m.collage.snap} bar=${m.collage.scrollbarWidth}`)
-  console.log(`  scrollWidth/client    : ${m.scrollWidth}/${m.clientWidth}  max=${m.maxScroll}  swiped=${m.swiped}px`)
+  console.log(`  clipping              : ${m.collage.overflowX}/${m.collage.overflowY} snap=${m.collage.snap} bar=${m.collage.scrollbarWidth}`)
+  console.log(`  track / sets width    : ${m.trackW} = 2 x ${m.setW}  (sets ${m.setW} / ${m.loopW})`)
   console.log(`  body horizontal spill : ${m.bodyOverflowX}px          want <= 0`)
-  console.log(`  track animation       : ${m.trackAnim}   want none (marquee off)`)
-  console.log(`  loop set display      : ${m.loopDisplay}   want none`)
-  console.log(`  set gap / track gap   : ${m.setGap} / ${m.trackGap}   want 65`)
+  console.log(`  track animation       : ${m.trackAnim} ${m.trackDur}   want galMarquee`)
+  console.log(`  track actually drifts : ${m.moving}   want true`)
+  console.log(`  loop set display      : ${m.loopDisplay}   want flex (marquee needs it)`)
+  console.log(`  seam gap              : ${m.seamGap}px          want 65`)
+  console.log(`  set gap / track gap   : ${m.setGap} / ${m.trackGap}   want 0 / 0`)
+  console.log(`  scrollWidth/client    : ${m.scrollWidth}/${m.clientWidth}  max=${m.maxScroll}  scrolled=${m.swiped}px   want 0`)
   console.log(`  title                 : ${m.title.size}/${m.title.lh} ${m.title.color} ${m.title.family}`)
   console.log(`  paragraph             : ${m.desc.size}/${m.desc.lh} ${m.desc.color}`)
   console.log(`  eyebrow               : ${m.eyebrow.color} ${m.eyebrow.transform} ${m.eyebrow.size}`)
@@ -250,19 +277,23 @@ const mobileChecks = [
   ['card 1 flush at x=0', m.every((r) => Math.abs(r.f1.x) < 1.5), m.map((r) => r.f1.x).join(',')],
   ['card 1 274x284', m.every((r) => near(r.f1.w, 274) && near(r.f1.h, 284)), m.map((r) => `${r.f1.w}x${r.f1.h}`).join(',')],
   ['card 2 274x335', m.every((r) => near(r.f2.w, 274) && near(r.f2.h, 335)), m.map((r) => `${r.f2.w}x${r.f2.h}`).join(',')],
-  ['card 2 raised 90px', m.every((r) => near(r.rise, -90)), m.map((r) => r.rise).join(',')],
+  ['cards 1+2 share top edge', m.every((r) => near(r.rise, 0)), m.map((r) => r.rise).join(',')],
+  ['low band 90px down', m.every((r) => near(r.drop, 90)), m.map((r) => r.drop).join(',')],
   ['horizontal gap 65px', m.every((r) => near(r.hGap, 65)), m.map((r) => r.hGap).join(',')],
   ['gap above row ~170px', m.every((r) => r.gapAbove >= 160 && r.gapAbove <= 200), m.map((r) => r.gapAbove).join(',')],
   ['pad below 130px', m.every((r) => near(r.sectionPadBelow, 130)), m.map((r) => r.sectionPadBelow).join(',')],
   ['square corners on figure', m.every((r) => r.f1Radius === '0px'), m.map((r) => r.f1Radius).join(',')],
   ['img object-fit cover', m.every((r) => r.imgFit === 'cover'), m.map((r) => r.imgFit).join(',')],
-  ['row is an x scroller', m.every((r) => r.collage.overflowX === 'auto' && r.collage.overflowY === 'hidden'), ''],
-  ['snap x mandatory', m.every((r) => /x.*mandatory/.test(r.collage.snap)), m.map((r) => r.collage.snap).join(' | ')],
-  ['scrollbar hidden', m.every((r) => r.collage.scrollbarWidth === 'none'), m.map((r) => r.collage.scrollbarWidth).join(',')],
-  ['row actually swipes', m.every((r) => r.swiped > 100), m.map((r) => r.swiped).join(',')],
+  ['row clipped, not scrollable', m.every((r) => r.collage.overflowX === 'hidden' && r.collage.overflowY === 'hidden'), m.map((r) => `${r.collage.overflowX}/${r.collage.overflowY}`).join(',')],
+  ['row does not swipe', m.every((r) => Math.abs(r.swiped) < 1), m.map((r) => r.swiped).join(',')],
   ['no body h-scroll spill', m.every((r) => r.bodyOverflowX <= 0.5), m.map((r) => r.bodyOverflowX).join(',')],
-  ['marquee off', m.every((r) => r.trackAnim === 'none'), m.map((r) => r.trackAnim).join(',')],
-  ['loop set hidden', m.every((r) => r.loopDisplay === 'none'), m.map((r) => r.loopDisplay).join(',')],
+  ['marquee running', m.every((r) => r.trackAnim === 'galMarquee'), m.map((r) => r.trackAnim).join(',')],
+  ['track actually drifts', m.every((r) => r.moving === true), m.map((r) => r.moving).join(',')],
+  ['loop set displayed', m.every((r) => r.loopDisplay !== 'none'), m.map((r) => r.loopDisplay).join(',')],
+  ['both sets equal width', m.every((r) => near(r.setW, r.loopW, 1)), m.map((r) => `${r.setW}/${r.loopW}`).join(',')],
+  ['track is exactly 2 sets', m.every((r) => near(r.trackW, r.setW * 2, 2)), m.map((r) => `${r.trackW}/${r.setW * 2}`).join(',')],
+  ['seam gap 65px', m.every((r) => near(r.seamGap, 65)), m.map((r) => r.seamGap).join(',')],
+  ['no set or track gap', m.every((r) => near(parseFloat(r.setGap), 0) && near(parseFloat(r.trackGap), 0)), m.map((r) => `${r.setGap}/${r.trackGap}`).join(',')],
   ['7 cards remain', m.every((r) => r.figCount === 7), m.map((r) => r.figCount).join(',')],
   ['title 32/1.2 #3b2118', m.every((r) => near(parseFloat(r.title.size), 32) && near(parseFloat(r.title.lh), 38.4, 1) && r.title.color === 'rgb(59, 33, 24)'), m.map((r) => `${r.title.size}/${r.title.lh}/${r.title.color}`).join(' | ')],
   ['paragraph 15/1.5', m.every((r) => near(parseFloat(r.desc.size), 15) && near(parseFloat(r.desc.lh), 22.5, 1)), m.map((r) => `${r.desc.size}/${r.desc.lh}`).join(' | ')],
