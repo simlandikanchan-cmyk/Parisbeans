@@ -807,24 +807,25 @@
   }
 }
 
-/* ── Small mobile: 480px and below — the Figma hero carousel ──
+/* ── Small mobile: 480px and below — the Figma hero strip ──
    Everything above this edge is untouched. Between 481 and 767 the section still
    runs the 767px composition (single bleed frame, 18px gap, rounded, marquee
    drift); this block replaces it wholesale for the narrowest tier.
 
-   Two structural changes, both required by Figma:
+   The drift itself carries over: the row is the same `galMarquee` track the
+   tablet tier runs, so `overflow` stays `hidden` and the second `.gallery-set`
+   stays on screen to give the -50% translation the duplicate it lands on. What
+   changes is the card geometry and the horizontal rhythm:
 
-   1. The row becomes a real scroller instead of a CSS marquee. `galMarquee`
-      drifts the track by -50% forever, which cannot coexist with
-      `scroll-snap-type: x mandatory` — a snap container whose content moves
-      under program control fights the scroll position on every frame. The
-      animation is switched off and the native scroller takes over, so a swipe
-      moves the cards and a release snaps them.
-   2. The second `.gallery-set` is hidden. It exists purely to give the -50%
-      marquee translation a duplicate to land on; with the drift gone it would
-      just double the number of cards and put a seam in the middle of the
-      scroll. It is `aria-hidden` already, so hiding it costs nothing
-      semantically. */
+   1. Cards are a fixed size, cropped by `object-fit: cover`, rather than sized
+      by their own aspect ratio, so the stagger below is a fixed number of
+      pixels and does not drift with the source image.
+   2. The gap between cards is `--gal-gap` — which the base `.gallery-image`
+      rule already spends as a right margin — rather than a flex `gap` on the
+      set. That is what keeps the loop invisible: every card carries its own
+      trailing gap, so the last card of a set and the first card of the next
+      are spaced exactly like every other pair. A `gap` on the set cannot do
+      this, because it puts no gap at all across the seam. */
 @media (max-width: 480px) {
   .gal-hero {
     /* Text keeps a 16px inset; the carousel below deliberately does not. */
@@ -857,54 +858,30 @@
   }
 
   .gal-hero-collage {
-    /* Square corners. The frame wrapper carries a radius from the base rule
-       and clips the img, so both have to be zeroed — a radius on the wrapper
-       with a square img inside still shows rounded corners. */
-    --gal-gap: 0;
-    /* Card 1 hard against the screen edge. The 767px block insets this box by
-       --gal-inset so the first frame lines up with the copy above it; Figma
-       wants the opposite, a frame bleeding off the left. */
+    /* Figma's 65px between cards, spent as the right margin the base
+       `.gallery-image` rule already takes it from. Card 1 hard against the
+       screen edge: the 767px block insets this box by --gal-inset so the first
+       frame lines up with the copy above it, and Figma wants the opposite, a
+       frame bleeding off the left. */
+    --gal-gap: 65px;
     padding-left: 0;
     /* Space between the paragraph and the top of the row, per Figma. */
     margin-top: 170px;
-    /* Native horizontal scroll, replacing the marquee. Both axes are declared:
-       setting only overflow-x makes overflow-y compute to auto, which would let
-       a stray vertical scrollbar appear and eat the height the tallest card
-       needs. */
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    /* No snap inset, so card 1 rests at x = 0 rather than 16px in. */
-    scroll-padding-inline: 0;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    /* Hard-cut edges, as on tablet: the 4%/96% edge mask would fade the
+       outermost card out across its last ~15px, and a fade at the boundary
+       reads as a gap rather than as a card sliced by the screen edge. */
     -webkit-mask-image: none;
     mask-image: none;
-    /* Keep a horizontal fling from chaining into the next page sideways. */
-    overscroll-behavior-x: contain;
-  }
-
-  .gal-hero-collage::-webkit-scrollbar {
-    display: none;
   }
 
   .gallery-track {
-    /* The drift has to go: a snap container cannot also be animated. */
-    animation: none;
-    will-change: auto;
-    /* Figma's 65px between cards. The cards are the children of
-       `.gallery-set`, not of the track, so the set is where the gap actually
-       lands — the track's own gap only separates the two sets, and the second
-       one is hidden below. */
-    gap: 65px;
-  }
-
-  .gallery-set {
-    gap: 65px;
-  }
-
-  .gallery-set--loop {
-    display: none;
+    /* No gap between the two sets: the -50% translation has to land exactly on
+       the start of the second set or the loop visibly jumps by this much. */
+    gap: 0;
+    /* One set is seven 274px cards plus seven 65px margins = 2373px, so the
+       34s the 767px block sets would take 4.8s to cross a single card. 18s
+       puts a card at ~2.6s, still a drift rather than a scroll. */
+    animation-duration: 18s;
   }
 
   .gallery-image {
@@ -912,17 +889,17 @@
        stagger below is a fixed number of pixels instead of drifting with the
        image's own aspect ratio. margin-top only — the base rule's `margin`
        shorthand would otherwise be restated and cancel the margin-left reset
-       the 767px block applies to frames 4 and 7. */
-    scroll-snap-align: start;
+       the 767px block applies to frames 4 and 7.
+       Square corners: the base rule rounds the wrapper, and a radius on the
+       wrapper with a square img inside it still shows rounded corners, so the
+       wrapper is the one that has to be zeroed. */
     border-radius: 0;
   }
 
-  /* Odd frames sit low and nearly square, even frames sit high and taller —
-   * the alternating stagger Figma shows, continued past the two cards that
-   * fit on a 390px screen. Figma: card 1 is 274x284 with its top 90px below
-   * card 2's, and card 2 is 335 tall, so card 1's bottom edge hangs 39px
-   * lower than card 2's. */
-  .image-1,
+  /* Two heights and two top edges, continued past the two cards that fit on a
+     390px screen. Figma: the low card is 274x284 with its top 90px below the
+     tall card's, and the tall card is 335 high, so the low card's bottom edge
+     hangs 39px lower than the tall card's. */
   .image-3,
   .image-5,
   .image-7 {
@@ -936,6 +913,15 @@
   .image-6 {
     width: 274px;
     height: 335px;
+    margin-top: 0;
+  }
+
+  /* Card 1 keeps the compact size but sits flush with the top of the row, so
+     the strip opens on a card at the high edge rather than dropping to the low
+     one. */
+  .image-1 {
+    width: 274px;
+    height: 284px;
     margin-top: 0;
   }
 
