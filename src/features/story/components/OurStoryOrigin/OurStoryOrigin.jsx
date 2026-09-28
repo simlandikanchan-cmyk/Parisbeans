@@ -14,9 +14,9 @@ export default function OurStoryOrigin() {
         <div className="ostory-origin-copy reveal">
           <p className="eyebrow ostory-eyebrow">— From Paris to HAIR RAP BY YOYO</p>
           <h2 className="ostory-origin-title">
-            From a <em>Parisian <br />Feeling</em> to a Salon 
-            <br />
-            <em>Experience.</em>
+            From a <em>Parisian<br className="ostory-br-narrow" /> Feeling</em>
+            <br className="ostory-br-tablet" /> to a Salon
+            <br className="ostory-br-wide" /> <em>Experience.</em>
           </h2>
           <p className="ostory-origin-text">
             ParisBeans was created inside HAIR RAP BY YOYO as a café corner

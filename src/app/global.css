@@ -1,5 +1,26 @@
 /* ============================================================
    Paris Beans — Global styles & design tokens
+   ============================================================
+
+   BREAKPOINT SCALE — canonical, do not invent new edges.
+
+   CSS has no variables for media queries, so the scale is defined
+   here and every component stylesheet must follow it verbatim.
+
+     mobile            max-width: 767px
+     tablet portrait   min-width: 768px  and max-width: 1023px
+     tablet landscape  min-width: 1024px and max-width: 1099px
+     desktop           min-width: 1100px
+
+   Rules of the scale:
+   1. The mobile edge is 767, never 768. 768px is a real device width
+      (iPad portrait) and must get the tablet tier, not the phone one.
+   2. Tablet ranges are always written as a `min-width and max-width`
+      pair so there is never a 1px dead zone and never a double-apply.
+   3. A `min-width` band that follows a `max-width` band in source order
+      is a bug waiting to happen — keep the two families disjoint.
+   4. Anything wider than 1099px is desktop; do not add a query between
+      1100 and 1440 unless it is paired with its own lower bound.
    ============================================================ */
 
 :root {
@@ -71,8 +92,16 @@
   /* Spacing */
   --container-max: 1920px;
   --section-pad-desktop: 110px;
+  --section-pad-tablet: 84px;
   --section-pad-mobile: 64px;
   --gutter: clamp(20px, 4vw, 72px);
+  --gutter-tablet: clamp(24px, 3.4vw, 40px);
+
+  /* Header height — mirrored by anything that offsets itself from the
+     sticky header (scroll-margin-top, sticky tops, 100svh calculations).
+     Header.css compresses this at the 1024px edge. */
+  --header-h: 78px;
+  --header-h-tablet: 66px;
 
   /* Effects */
   --radius-btn: 999px;
@@ -205,10 +234,30 @@ button {
   padding-block: 88px;
 }
 
-@media (max-width: 768px) {
+/* Tablet portrait / landscape — the band that previously had no
+   section rhythm of its own and jumped straight from 64px to 110px. */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .container {
+    padding-inline: var(--gutter-tablet);
+  }
+
+  .section {
+    padding-block: var(--section-pad-tablet);
+  }
+
+  .section--tight {
+    padding-block: 72px;
+  }
+}
+
+@media (max-width: 767px) {
   .section,
   .section--tight {
     padding-block: var(--section-pad-mobile);
+  }
+
+  .section--tight {
+    padding-block: 56px;
   }
 }
 

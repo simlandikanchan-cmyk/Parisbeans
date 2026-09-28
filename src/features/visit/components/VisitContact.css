@@ -100,7 +100,17 @@
   max-width: 72%;
 }
 
-@media (min-width: 1000px) {
+/* The hero title is 32 characters of Fraunces italic, and it does not fit on
+   one line inside the 72% copy column at any width in the desktop range — at
+   1100px it needs ~702px against 677px available, at 1280px ~817px against
+   788px. `nowrap` therefore only ever clipped the tail against the hero's
+   `overflow: hidden`. It is held back to 1100px and the copy cap is released
+   alongside it, which is the same pairing `.visit-cta-title` already uses. */
+@media (min-width: 1100px) {
+  .visit-hero-copy {
+    max-width: none;
+  }
+
   .visit-hero-title {
     white-space: nowrap;
   }
@@ -162,7 +172,7 @@
   margin-bottom: clamp(1.5rem, 2vw, 2.25rem);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .visit-card-title {
     font-size: clamp(1.75rem, 6vw, 2.4rem);
   }
@@ -542,15 +552,67 @@
   }
 }
 
-/* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 1024px) {
+/* ── Tablet portrait: 768–1023px ──────────────────────────────
+   The contact grid used to collapse at `max-width: 1024px`, which inverted the
+   layout: at 1024px it was one column capped at 720px, and at 1025px it became
+   two columns — so the available content *grew* by 223px while the per-card
+   measure *shrank* by 41% (648px to 384px) on a one-pixel change. Both tablet
+   tiers now keep the card and the map stacked, with a cap that grows with the
+   viewport, and the side-by-side grid only returns at 1100px where there is
+   genuinely room for it. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .visit-contact-grid {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .visit-map-wrap {
+    height: clamp(320px, 46vw, 440px);
+  }
+
+  .visit-hero {
+    min-height: 220px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  /* Widened from the desktop 72% so the title has room for two comfortable
+     lines instead of breaking mid-phrase. */
+  .visit-hero-copy {
+    max-width: 82%;
+  }
+}
+
+/* ── Tablet landscape: 1024–1099px ────────────────────────────
+   Same stacked treatment, one step wider, so crossing 1024 grows the measure
+   instead of halving it. */
+@media (min-width: 1024px) and (max-width: 1099px) {
   .visit-contact-grid {
     grid-template-columns: 1fr;
     max-width: 720px;
+    gap: clamp(1.75rem, 3vw, 2.25rem);
   }
 
   .visit-map-wrap {
     height: clamp(360px, 42vw, 480px);
+  }
+
+  .visit-hero-copy {
+    max-width: 80%;
+  }
+}
+
+/* ── Narrow desktop, 900–1099px ───────────────────────────────
+   `max-width: 900px` used to leave 901–999px holding the desktop
+   `min-height` (219px) while the title wrapped to two lines needing ~187px, so
+   the banner silently grew past the proportion the 900px block exists to set.
+   The nowrap below used to start at 1000px, in the middle of that dead zone. */
+@media (min-width: 900px) and (max-width: 1099px) {
+  .visit-hero {
+    min-height: 240px;
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 }
 

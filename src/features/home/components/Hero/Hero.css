@@ -211,7 +211,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero {
     height: clamp(540px, 88svh, 680px);
     min-height: clamp(540px, 88svh, 680px);

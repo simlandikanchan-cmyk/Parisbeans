@@ -38,8 +38,37 @@
   line-height: var(--lh-text);
 }
 
+/* ---------- Tablet: 768–1099px ----------
+   The three benefits stay in one row — that is the intended shape of the
+   section, icon over title over text, three across. What the tablet band needs
+   is more width per column, not a different layout.
+
+   Two things were eating it. The desktop `clamp(2rem, 5vw, 4.5rem)` gap took
+   77–110px of a 716–1024px content box, and `.benefit`'s `padding-inline:
+   0.5rem` took a further 16px out of every column. Both come back here, which
+   widens each column from 210–296px to 226–323px across the band without
+   touching the type sizes or the alignment.
+
+   Deliberately not a type-size change: the phone rule below drops
+   `.benefit-text` to 12px, which is smaller than the 15.7px the tablet band
+   already gets, so shrinking text here would only buy back a little width. */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .benefits {
+    padding-block: var(--section-pad-tablet);
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  }
+
+  .benefit {
+    padding-inline: 0;
+  }
+}
+
 /* ---------- Responsive ---------- */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .benefits {
     padding-block: var(--section-pad-mobile);
   }
@@ -47,6 +76,10 @@
   .benefits-grid {
     grid-template-columns: 1fr;
     gap: 3.2rem;
+  }
+
+  .benefit {
+    padding-inline: 0.5rem;
   }
 
   .benefit-title {

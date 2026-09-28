@@ -157,27 +157,57 @@ export default function AiAssistant() {
       return
     }
     setBusy(true)
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 25000)
     try {
       const res = await fetch('/api/ai/chat', {
         method: 'POST',
+        signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           messages: history.map((m) => ({ role: m.role, content: m.content })),
         }),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || 'Service unavailable')
+
+      // Check status BEFORE parsing. A 404/405/5xx from the edge often returns
+      // an HTML error page, so res.json() would throw a SyntaxError and mask
+      // the real status code.
+      const raw = await res.text()
+      if (!res.ok) {
+        let detail = ''
+        try {
+          detail = JSON.parse(raw)?.error || ''
+        } catch {
+          detail = ''
+        }
+        throw new Error(detail || `Request failed (${res.status})`)
+      }
+
+      let data
+      try {
+        data = JSON.parse(raw)
+      } catch {
+        throw new Error('The assistant returned an unreadable response.')
+      }
+
+      if (typeof data?.reply !== 'string' || !data.reply.trim()) {
+        throw new Error('The assistant returned an empty reply.')
+      }
+
       setMessages((m) => [...m, { role: 'assistant', content: data.reply }])
-    } catch {
+    } catch (err) {
       setMessages((m) => [
         ...m,
         {
           role: 'assistant',
           content:
-            'Excusez-moi, I couldn\u2019t reach my assistant brain right now. Please try again in a moment, or tap one of the quick topics below.',
+            err?.name === 'AbortError'
+              ? 'Excusez-moi, that took too long. Please try again in a moment.'
+              : 'Excusez-moi, I couldn\u2019t reach my assistant brain right now. Please try again in a moment, or tap one of the quick topics below.',
         },
       ])
     } finally {
+      clearTimeout(timer)
       setBusy(false)
     }
   }

@@ -243,7 +243,43 @@
   }
 }
 
-@media (max-width: 768px) {
+/* ---------- Tablet: 768–1099px ----------
+   The two-column 42% / 58% split used to hold all the way down to 769px, which
+   is inside the band that never had rules. At 769px the copy column worked out
+   to 293px and, after its 25px right padding, 268px of body copy at 15.7px —
+   roughly 28-32 characters a line, with a 30px section heading set in it. Worse,
+   the grid's `min-height: 700px` was only ever released below 768px, so all
+   that 268px column sat centred inside a 700px box with dead space above and
+   below it.
+
+   The split is kept for the landscape tier, where 42% of ~1000px is a
+   comfortable measure, and stacked for portrait, where it is not. Both tiers
+   release the fixed 700px minimum, which was always a desktop value. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    row-gap: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .story-copy {
+    max-width: 640px;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1099px) {
+  .story-grid {
+    min-height: 560px;
+    grid-template-columns: minmax(0, 46%) minmax(0, 54%);
+  }
+
+  .story-copy {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 767px) {
   .story {
     padding: 60px 22px 110px;
     background-image: none;

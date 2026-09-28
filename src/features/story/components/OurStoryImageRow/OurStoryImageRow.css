@@ -7,8 +7,23 @@
   padding-block: clamp(0.5rem, 1vw, 1.25rem);
 }
 
-.ostory-story-img img {
+/* The <picture> wrapper carries the width, not the <img>. As a centred grid
+   item (and a centred flex item in the tablet band) <picture> shrink-wraps to
+   its content, so a percentage width on the <img> resolved against the
+   image's own intrinsic width and never reached the section. Phone and tablet
+   sources are narrower than their viewports, so the row sat at 390px and
+   744px wide with up to 188px of dead space either side. Only the desktop
+   source (1935px) happened to exceed its viewport, which is why the
+   full-bleed read as working on desktop. Giving <picture> the full measure
+   and the <img> 100% of it lets each source fill the row. */
+.ostory-story-img picture {
   display: block;
   width: min(1920px, 100%);
+  margin-inline: auto;
+}
+
+.ostory-story-img img {
+  display: block;
+  width: 100%;
   height: auto;
 }

@@ -31,8 +31,15 @@
 }
 
 /* Desktop & laptop: collapse the balanced two-line break and keep both the
-   heading and the lead on a single centred line. */
-@media (min-width: 1024px) {
+   heading and the lead on a single centred line.
+
+   Held to 1200px, not 1024px. The lead is 128 characters, which needs roughly
+   960–1000px on one line at this type size, and the section's `overflow: clip`
+   truncates whatever does not fit. At 1024px the content box is 942px, so the
+   rule engaged at almost exactly the one width where it overflowed and was safe
+   again from about 1101px. 1200px is the first width with a content box
+   (1104px) that holds the string. */
+@media (min-width: 1200px) {
   .gallery-break {
     display: none;
   }
@@ -318,7 +325,15 @@
   .gallery-stage {
     --side-x: 14vw;
     --mid-x: 30vw;
-    --far-x: 44vw;
+    /* 38vw, not 44vw. The far cards are `min(400px, 32vw)` wide at scale 0.6,
+       so each one reaches a further 9.6vw past `--far-x` from the centre. At
+       44vw that put the arc at 53.6vw per side — 107.2vw across a 100vw
+       viewport — so the section's `overflow: clip` sheared roughly 3.6vw off
+       each of the two outer cards for the whole 901–1100px band, including
+       1024px. 38.6vw is the largest value that keeps the arc inside 100vw
+       (38.6 + 9.6 = 48.2 per side); 38 leaves a little more of a margin for
+       the card's own shadow. */
+    --far-x: 38vw;
     --hide-x: 58vw;
     --side-y: 20px;
     --far-y: 38px;

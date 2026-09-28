@@ -5,15 +5,27 @@
   overflow: hidden;
 }
 
-/* Phone (below 748px) */
-@media (max-width: 747px) {
+/* Decorative wave art, one variant per breakpoint, drawn at the width it was
+   authored for. The set is phone_menu (390), tab_menu, from748upto1440, and
+   menu (1920) — the phone variant was on disk but never referenced, because the
+   phone band was set to `background-image: none` and left empty.
+
+   The old phone edge was 748px, which matched none of the other breakpoints in
+   the codebase. This now sits on the project's canonical scale, so the art
+   swaps at the same 768px edge as the type and padding do. */
+
+/* Phone (767px and below) */
+@media (max-width: 767px) {
   .cafe {
-    background-image: none;
+    background-image: url('../../../../shared/assets/images/menu/phone_menu.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 }
 
-/* Tablet (748px and up) */
-@media (min-width: 748px) {
+/* Tablet portrait (768–1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .cafe {
     background-image: url('../../../../shared/assets/images/menu/tab_menu.svg');
     background-repeat: no-repeat;
@@ -22,17 +34,23 @@
   }
 }
 
-/* Laptop / desktop up to 1440px */
-@media (min-width: 1024px) {
+/* Tablet landscape and laptops (1024–1440px) */
+@media (min-width: 1024px) and (max-width: 1440px) {
   .cafe {
     background-image: url('../../../../shared/assets/images/menu/from748upto1440.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 }
 
-/* Wide desktops (above 1440px) use the full 1920px variant */
+/* Wide desktops (1441px and up) use the full 1920px variant */
 @media (min-width: 1441px) {
   .cafe {
     background-image: url('../../../../shared/assets/images/menu/menu.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 }
 
@@ -276,7 +294,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .cafe {
     padding-block: var(--section-pad-mobile);
   }

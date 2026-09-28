@@ -105,15 +105,22 @@
   .ostory-desc {
     white-space: normal;
   }
+}
 
-  .ostory-gallery {
-    height: clamp(360px, 40vw, 500px);
-  }
+/* Accordion height.
+   These three bands are chained so the height only ever climbs. The old
+   46vw/40vw pair inverted across the 900px edge — 414.0px at 900px against
+   360.4px at 901px, so the accordion lost 53.6px of height as the screen grew
+   one pixel, and the curve flipped with it. Each band's value at its own widest
+   point is held at or just under the next band's value at its narrowest, so no
+   edge can step down: 900→901 is 360→360.4px, 640→641 is 281.6→300px. */
+.ostory-gallery {
+  height: clamp(360px, 40vw, 500px);
 }
 
 @media (max-width: 900px) {
   .ostory-gallery {
-    height: clamp(300px, 46vw, 420px);
+    height: clamp(300px, 40vw, 360px);
   }
 }
 
@@ -138,8 +145,47 @@
   }
 
   .ostory-gallery {
-    height: clamp(240px, 62vw, 360px);
+    height: clamp(240px, 44vw, 300px);
     gap: 8px;
+  }
+}
+
+/* Tablet: match the page-wide 56px heading / 20px body scale set in
+   OurStoryOrigin.css. Overrides --fs-h1 and --fs-text rather than redefining
+   them, because both tokens are global and also drive the header, footer,
+   gallery and AI assistant.
+
+   Two things this band has to undo, not just restate:
+
+   - The <=767px block above pins .ostory-title to max-width: 350px. That was
+     sized against the ~32px phone clamp; at 56px the heading would wrap into
+     fragments. Restating the title's width here reclaims the full column
+     (92vw, so 707px at 768 and 942px at 1024) and the 640px cap only engages
+     once there is room for it.
+   - .ostory-desc has no max-width at all, so it stretches to the full box.
+     Harmless at ~16px, but at 20px it runs to ~94 characters a line on a 1024
+     tablet, well past the readable 45-75 band. Capping it at 640px holds the
+     measure near 64 characters.
+
+   The bands no longer overlap, so this no longer depends on source order to
+   beat the 640px and 767px blocks — it starts where they stop. */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .ostory-title {
+    font-size: 56px;
+    max-width: 640px;
+  }
+
+  .ostory-desc {
+    font-size: 20px;
+    max-width: 640px;
+    /* StoryPage.css makes this box a flex column in the tablet band, and flex
+       items do not collapse their margins. Left alone, the title's 1.2rem
+       bottom and this 1.1rem top would stack to 36.8px instead of collapsing to
+       the 19.2px the block layout gave — an 18px jump in the hero's vertical
+       rhythm that has nothing to do with the type scale. Dropping the top
+       margin leaves the title's 1.2rem as the single gap, so the spacing is
+       what it was before the box became flex. */
+    margin-top: 0;
   }
 }
 

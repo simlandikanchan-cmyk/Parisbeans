@@ -915,9 +915,20 @@
     gap: 2.5rem;
   }
 
+  /* The cup is the image *inside* .menu-cup-frame, and the frame is a clipping
+     window: `border-radius: 18px; overflow: hidden`, sized to the cup at
+     `min(118%, 560px)`. Resizing the image instead of the frame made it 112% of
+     the frame's own width with a -6% right margin, so the frame sliced off the
+     right 12% of the cup for the whole 901–1100px band and the visible portion
+     sat off-centre. Scaling the frame keeps the image at 100% of its clip
+     window, which is what every other tier does. */
+  .menu-cup-frame {
+    width: min(100%, 480px);
+    margin-right: 0;
+  }
+
   .menu-cup {
-    width: min(112%, 480px);
-    margin-right: -6%;
+    width: 100%;
   }
 
   .menu-special-ghost {
@@ -935,6 +946,15 @@
 
   .menu-cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tablet portrait: 768–1023px. Three cards across a 707–941px content box is
+   210–279px per card, which leaves the price/name row on one line only just.
+   Two columns gives a 330–445px card and keeps the three-card row intact. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .menu-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -973,7 +993,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .menu-hero-copy {
     max-width: 78%;
   }

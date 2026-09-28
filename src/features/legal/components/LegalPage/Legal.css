@@ -389,7 +389,14 @@
 }
 
 /* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 960px) {
+/* Held to 1099px, not 960px. The base is a 240px sticky TOC column beside the
+   article, which needs the desktop's 1180px measure to breathe. Between 961px
+   and 1099px the wrap is only 883–1017px wide, so the article body was down to
+   590–723px *and* still fighting a sticky sidebar — the one width band where
+   this page was worst off. Extending the single-column rule over the whole
+   tablet range moves the TOC above the article as a wrapping chip row, which is
+   what this block already does well. */
+@media (max-width: 1099px) {
   .legal-wrap {
     grid-template-columns: 1fr;
     gap: 2rem;

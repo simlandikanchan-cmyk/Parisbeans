@@ -297,6 +297,14 @@
 .contact-body {
   display: flex;
   flex-direction: column;
+  /* This is a flex child of `.contact-item` (an icon beside a text column), and
+     a flex item defaults to `min-width: auto`, so it refuses to shrink below
+     its longest unbreakable run. The footer's email address and the legal line
+     are the culprits: at 768–1099px the contact column is ~200–280px wide, and
+     a 240px email set in the body size pushed the whole grid past the
+     viewport rather than wrapping. `min-width: 0` lets the column shrink and the
+     text wrap, which is what the layout wants. */
+  min-width: 0;
   font-size: var(--fs-body-sm);
   line-height: var(--lh-body);
   transition: color 0.3s var(--ease);
@@ -540,6 +548,23 @@ a.contact-body:focus-visible,
   .footer-legal {
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+
+/* Tablet landscape: 1024–1099px. The `max-width: 900px` rule drops the footer to
+   two columns, so 901–1099px was the one band still running the desktop
+   1.4fr / 0.8fr / 1.1fr three-column split. At 1024px that leaves the contact
+   column around 250px and the 5vw gap another 51px per gutter, which is a lot
+   of gutter for a 900px content box. Two columns with the brand still spanning
+   both reads better there and matches what 900px already does one step lower. */
+@media (min-width: 1024px) and (max-width: 1099px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
   }
 }
 

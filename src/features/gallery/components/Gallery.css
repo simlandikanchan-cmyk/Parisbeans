@@ -245,13 +245,23 @@
   max-width: 640px;
 }
 
-/* Keep gallery headings + descriptions on a single line on desktop */
+/* Keep gallery headings + descriptions on a single line on desktop.
+   `white-space: nowrap` and a `max-width` are mutually contradictory — the
+   nowrap wins and the text simply paints past the cap, where the section's
+   `overflow: clip` truncates it. So the cap is released here rather than left
+   to fight. Every string in this block is measured against the container at
+   1200px, the narrowest width it applies to, and fits. */
 @media (min-width: 1200px) {
   .gal-hero-title,
   .gal-hero-desc,
   .gal-section-title,
   .gal-section-desc {
     white-space: nowrap;
+  }
+
+  .gal-section-title,
+  .gal-section-desc {
+    max-width: none;
   }
 }
 
@@ -379,21 +389,134 @@
   }
 }
 
-/* ── Tablet ───────────────────────────────────────────────── */
-@media (max-width: 1100px) {
-  .gal-grid--atmosphere,
-  .gal-grid--wall,
-  .gal-grid--salon {
-    aspect-ratio: 4 / 3;
+/* ── Tablet portrait: 768–1023px ────────────────────────────────
+   The desktop templates are a fixed mosaic hung off a container-level
+   `aspect-ratio`, which only works when there is room for it. Handed a
+   700–940px box the same templates produce 156px tiles and a feature tile
+   stretched to 1:2.9, because the ratio is satisfied by the container rather
+   than by the tiles. So the tablet drops the container ratio and gives each
+   tile its own, with the feature promoted to a full-width row. Nothing is
+   placed by the desktop grid areas any more — every tile is re-placed, which
+   is why this is a separate tier rather than a column-count tweak. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gal-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+    aspect-ratio: auto;
+    row-gap: clamp(12px, 1.8vw, 18px);
   }
 
-  .gal-grid--food {
-    aspect-ratio: 16 / 11;
+  .gal-grid--atmosphere .gal-tile--feature,
+  .gal-grid--wall .gal-tile--feature,
+  .gal-grid--food .gal-tile--feature,
+  .gal-grid--salon .gal-tile--feature {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .gal-grid--atmosphere .gal-tile--wide {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    aspect-ratio: 16 / 9;
+  }
+
+  .gal-grid--atmosphere .gal-tile--a { grid-column: 1; grid-row: 3; }
+  .gal-grid--atmosphere .gal-tile--b { grid-column: 2; grid-row: 3; }
+
+  .gal-grid--wall .gal-tile--a { grid-column: 1; grid-row: 2; }
+  .gal-grid--wall .gal-tile--b { grid-column: 2; grid-row: 2; }
+  .gal-grid--wall .gal-tile--c { grid-column: 1; grid-row: 3; }
+  .gal-grid--wall .gal-tile--d { grid-column: 2; grid-row: 3; }
+
+  .gal-grid--food .gal-tile--a { grid-column: 1; grid-row: 2; }
+  .gal-grid--food .gal-tile--b { grid-column: 2; grid-row: 2; }
+  .gal-grid--food .gal-tile--c { grid-column: 1; grid-row: 3; }
+  .gal-grid--food .gal-tile--d { grid-column: 2; grid-row: 3; }
+  .gal-grid--food .gal-tile--e { grid-column: 1; grid-row: 4; }
+  .gal-grid--food .gal-tile--g { grid-column: 2; grid-row: 4; }
+
+  .gal-grid--salon .gal-tile--a { grid-column: 1; grid-row: 2; }
+  .gal-grid--salon .gal-tile--b { grid-column: 2; grid-row: 2; }
+  .gal-grid--salon .gal-tile--c { grid-column: 1; grid-row: 3; }
+  .gal-grid--salon .gal-tile--d { grid-column: 2; grid-row: 3; }
+
+  /* Portrait 4/5 suits the salon and cafe photography far better than the
+     1:2.9 sliver the container ratio produced, and keeps a 3-row section to a
+     scannable height instead of 1300px of stacked slivers. */
+  .gal-grid .gal-tile:not(.gal-tile--feature):not(.gal-tile--wide) {
+    aspect-ratio: 4 / 5;
+  }
+
+  .gal-section-title,
+  .gal-section-desc {
+    max-width: 640px;
+  }
+
+  .gal-section {
+    padding-block: var(--section-pad-tablet);
   }
 }
 
-/* ── Hero composition: tablet — its own layout, not a shrunk desktop ── */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* ── Tablet landscape: 1024–1099px ──────────────────────────────
+   There is room for three columns again, but the container ratio is still the
+   wrong tool: at 1024px the atmosphere grid's feature column came out 275px
+   against a 530px grid height. Same fix as portrait, one column wider. */
+@media (min-width: 1024px) and (max-width: 1099px) {
+  .gal-grid {
+    grid-template-columns: 1fr 1fr 1.2fr;
+    grid-template-rows: none;
+    aspect-ratio: auto;
+    row-gap: clamp(14px, 1.8vw, 20px);
+  }
+
+  .gal-grid--atmosphere .gal-tile--feature,
+  .gal-grid--wall .gal-tile--feature,
+  .gal-grid--food .gal-tile--feature,
+  .gal-grid--salon .gal-tile--feature {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .gal-grid--atmosphere .gal-tile--a { grid-column: 3; grid-row: 1; }
+  .gal-grid--atmosphere .gal-tile--b { grid-column: 1; grid-row: 2; }
+  .gal-grid--atmosphere .gal-tile--wide { grid-column: 2 / span 2; grid-row: 2; }
+
+  .gal-grid--wall .gal-tile--a { grid-column: 3; grid-row: 1; }
+  .gal-grid--wall .gal-tile--b { grid-column: 1; grid-row: 2; }
+  .gal-grid--wall .gal-tile--c { grid-column: 2; grid-row: 2; }
+  .gal-grid--wall .gal-tile--d { grid-column: 3; grid-row: 2; }
+
+  /* Seven tiles, so the feature takes two of the three columns and the six
+     others pair off below it. */
+  .gal-grid--food .gal-tile--a { grid-column: 3; grid-row: 1; }
+  .gal-grid--food .gal-tile--b { grid-column: 1; grid-row: 2; }
+  .gal-grid--food .gal-tile--c { grid-column: 2; grid-row: 2; }
+  .gal-grid--food .gal-tile--d { grid-column: 3; grid-row: 2; }
+  .gal-grid--food .gal-tile--e { grid-column: 1; grid-row: 3; }
+  .gal-grid--food .gal-tile--g { grid-column: 2; grid-row: 3; }
+
+  .gal-grid--salon .gal-tile--a { grid-column: 3; grid-row: 1; }
+  .gal-grid--salon .gal-tile--b { grid-column: 1; grid-row: 2; }
+  .gal-grid--salon .gal-tile--c { grid-column: 2; grid-row: 2; }
+  .gal-grid--salon .gal-tile--d { grid-column: 3; grid-row: 2; }
+
+  .gal-grid .gal-tile:not(.gal-tile--feature):not(.gal-tile--wide) {
+    aspect-ratio: 4 / 5;
+  }
+
+  .gal-section {
+    padding-block: var(--section-pad-tablet);
+  }
+}
+
+/* ── Hero composition: tablet — its own layout, not a shrunk desktop ──
+   The tablet composition holds across both tablet tiers, 768–1099px. It used
+   to stop at 1024px inclusive, so the collage ran at 38vw up to 1024 and then
+   dropped to 17.5vw at 1025 — the frame halved as the viewport grew one pixel,
+   which is the opposite of a breakpoint. */
+@media (min-width: 768px) and (max-width: 1099px) {
   .gal-hero-collage {
     /* Bigger base unit again (was 280–320px). Raising it scales every frame's
        width, height, offset and overlap by the same factor, so the stagger and
@@ -401,8 +524,10 @@
        gets bigger. At 768px the three frames the composition leads with now
        stand at 192 / 310 / 180px, the tall centre frame spanning 40% of the
        screen, against 174 / 280 / 162px before. The row resolves to 1.48 units
-       tall, ~456px at the 768px floor, still comfortably inside the fold. */
-    --gal-frame-w: clamp(310px, 38vw, 360px);
+       tall, ~456px at the 768px floor, still comfortably inside the fold. The
+       upper cap is raised over the landscape tier so the unit keeps growing
+       into 1099px rather than pinning at 360px. */
+    --gal-frame-w: clamp(310px, 40vw, 440px);
     /* Slightly wider than before, which is what pushes frame 3 past the right
        edge of the screen: at 768px it now starts at 778px and runs to 958px,
        i.e. ~190px of it is cut off. */
@@ -462,8 +587,15 @@
    changes is the per-frame geometry, which is why this block rewrites `--w`,
    `--o` and the two overlap pairs instead of touching a single scale factor. */
 @media (max-width: 767px) {
+  /* The one inset that both the copy and the collage measure from, so the
+     first frame's left edge lands exactly on the heading's and can never drift
+     away from it the way a duplicated literal does. */
+  .gal-hero {
+    --gal-inset: clamp(16px, 4.5vw, 22px);
+  }
+
   .gal-hero .container {
-    padding-inline: clamp(16px, 4.5vw, 22px);
+    padding-inline: var(--gal-inset);
   }
 
   .gal-hero-copy {
@@ -481,15 +613,33 @@
   }
 
   .gal-hero-collage {
-    /* One frame spans the viewport less the side padding the Figma frame keeps,
-       so what is left over — 48px, i.e. the peek — is a constant 13% of frame
-       width at every phone size, instead of a `vw` share that would grow with
-       the screen. */
-    --gal-frame-w: calc(100vw - 48px);
-    /* Plain 16px between frames, matching the peek: the next frame's leading
-       13% shows past the right edge. */
-    --gal-gap: 16px;
-    margin-top: clamp(2.2rem, 7vw, 3rem);
+    /* Figma insets the frame to the same margin as the copy above it, so frame 1
+       begins on the text's left edge rather than at the screen edge. The inset
+       is padding on the collage rather than a margin on the frame: the collage
+       box itself stays full-bleed, and `overflow: hidden` on it is what slices
+       frame 2 at the right screen edge to produce the peek. Insetting the box
+       instead would move the clip line in to the container edge and swallow the
+       peek entirely. */
+    padding-left: var(--gal-inset);
+    /* Pixels of frame 2 left showing past the right screen edge, held as a thin
+       sliver so the row reads as "there is more this way" rather than as a
+       second card. Whatever frame 1 gives up lands here, so making frame 1 more
+       compact widens the peek instead of pushing frame 2 off screen. */
+    --gal-peek: 58px;
+    /* Plain gap between the two frames, so the peek reads as a separate image
+       rather than as an extension of frame 1. */
+    --gal-gap: 18px;
+    /* Frame 1 as a share of the inset column — the width the copy above it
+       occupies — rather than "viewport minus whatever is left over". Measuring
+       it as a share is what keeps the frame compact and Figma-proportioned as
+       the phone narrows, instead of letting it grow to swallow the screen. The
+       peek is then simply the remainder, so it is not subtracted here. */
+    --gal-main: 0.78;
+    /* A percentage cannot be used for the frame directly: the track is `width:
+       max-content`, where a percentage would resolve cyclically against the very
+       content it is meant to divide, so the share is resolved in vw first. */
+    --gal-frame-w: calc((100vw - var(--gal-inset) * 2) * var(--gal-main));
+    margin-top: clamp(48px, 12vw, 64px);
     /* Hard-cut edges, as on tablet: the 4%/96% edge mask fades the outermost
        frame out across the last ~15px, and a fade at the boundary reads as a
        gap between the frame and the browser edge. Dropping the mask leaves
@@ -511,6 +661,16 @@
   .image-7 {
     --w: 1;
     --o: 0;
+  }
+
+  /* The peek is dropped below the main frame's top edge rather than sitting
+     flush with it, which is what turns two same-height cards into a staggered
+     pair. Positive `--o` grows the collage downward, so the frame is never
+     clipped by the collage's `overflow: hidden` the way a negative offset would
+     clip it off the top. `--o` is a share of the base unit, so the step holds
+     its proportion at every phone size. */
+  .image-2 {
+    --o: 0.1;
   }
 
   /* The two corner pairs (4 over 3, 7 over 6) belong to the staggered collage
@@ -539,7 +699,7 @@
 }
 
 /* ── Other gallery sections: mobile — swipeable carousel ────── */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* Break the strip out of the container so a tile spans the full viewport
      width, while the gutter padding still frames the first and last frame. */
   .gal-grid {
@@ -632,7 +792,7 @@
 }
 
 /* ── Mobile spacing ────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .gal-section {
     padding-block: var(--section-pad-mobile);
   }
@@ -650,7 +810,11 @@
 /* ── Small mobile refinement ────────────────────────────────── */
 @media (max-width: 480px) {
   .gal-hero-collage {
-    margin-top: clamp(1.8rem, 6vw, 2.4rem);
+    /* Kept identical to the 767px block's value on purpose: this rule lands
+       later in the cascade and silently wins on every phone, so a tighter value
+       here is what actually ships. Both are declared so the gap below the
+       paragraph reads as deliberate rather than as leftover default. */
+    margin-top: clamp(48px, 12vw, 64px);
   }
 }
 

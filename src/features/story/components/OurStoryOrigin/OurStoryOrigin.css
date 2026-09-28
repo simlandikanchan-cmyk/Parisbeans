@@ -32,6 +32,30 @@
   color: var(--color-espresso);
 }
 
+/* Heading line breaks.
+
+   The heading is three hardcoded lines everywhere except tablet, where it is
+   two: "From a Parisian Feeling" / "to a Salon Experience." That two-line
+   measure is deliberately NOT global — at a 1200px desktop the first line needs
+   ~521px in a 480px column and would rewrap to three anyway, so applying it
+   everywhere would only trade one set of breaks for another. Each break is a
+   separate element so the tablet arrangement can be switched on by CSS alone
+   rather than by duplicating the heading in JSX. */
+.ostory-br-tablet {
+  display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .ostory-br-tablet {
+    display: block;
+  }
+
+  .ostory-br-narrow,
+  .ostory-br-wide {
+    display: none;
+  }
+}
+
 .ostory-origin-text {
   font-family: var(--font-sans);
   font-size: var(--fs-body-sm);
@@ -65,10 +89,13 @@
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media (max-width: 1024px) {
+@media (max-width: 1099px) {
   .ostory-origin-grid {
     grid-template-columns: 1fr;
-    gap: clamp(3rem, 7vw, 5rem);
+    /* A single-column stack does not need the two-column gutter: at 7vw this
+       reached 72px, which stacked on top of the section padding to leave the
+       block feeling loosely bound together rather than grouped. */
+    gap: clamp(2rem, 4vw, 3rem);
   }
 
   .ostory-origin-copy {
@@ -76,10 +103,122 @@
   }
 }
 
-@media (max-width: 640px) {
+/* ── Tablet: 768–1099px ────────────────────────────────────────
+   This band used to start at 641px, which put a 56px heading and 20px body into
+   a 583–698px measure — a desktop type scale in a phone-width column. The
+   heading comment below relies on ~12px of slack that only exists once the
+   title has a full 640px to sit in, so between 641 and 689 the deliberately
+   two-line heading silently became three. The band now starts at 768px with the
+   rest of the site and the phone tier below owns everything under it.
+
+   Sized against the collapsed column rather than the viewport. The base
+   clamp(300px, 32vw, 580px) is pinned to its 300px floor across this whole
+   band — 32vw only reaches 328px at 1024 — which left a 300px circle marooned
+   in a 582-932px column with 140-300px of dead space either side. min() ties
+   the width to the column it actually sits in, so it fills the band without a
+   vw floor that would overflow a narrower screen. It has to be centred too: an
+   explicitly sized flex item is placed at the start of its area, not centred,
+   so without that the whole dead space would simply move to the right. */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .ostory-origin {
+    padding-block: clamp(64px, 8vw, 88px);
+  }
+
+  .ostory-emblem-wrap {
+    width: min(100%, 640px);
+    /* align-self, not margin-inline: auto, and not justify-self. StoryPage.css
+       makes this grid a column flex container across both tablet tiers, so the
+       block-axis alignment the base grid rule was written for no longer
+       applies — justify-self does nothing on a flex item, and align-self is the
+       property that centres the emblem in the band. */
+    align-self: center;
+    /* The emblem is a child of the section grid rather than of the copy, so it
+       needs its own order to slot between the heading and the description. */
+    order: 3;
+  }
+
+  .ostory-emblem-photo {
+    width: 100%;
+  }
+
+  /* Tablet type scale: 56px heading, 20px body.
+     Both are overrides of the base scales, not new tokens: --fs-section tops
+     out at 2.9rem (46.4px) and --fs-body-sm is 0.92rem (14.7px), so neither can
+     reach these on its own. A flat 56px is safe across this band only because
+     the title's own max-width is 640px and the longest line, "From a Parisian
+     Feeling", measures ~628px in it — roughly 12px of slack. Widening the title
+     to 56px without that measured fit would have rewrapped to three lines and
+     undone the two-line break above. */
+  .ostory-origin-title {
+    font-size: 56px;
+  }
+
+  .ostory-origin-text {
+    font-size: 20px;
+  }
+
+  /* The copy block joins the other section containers on flex, and the ragged
+     right edge that came with it goes.
+
+     The whitespace was never a display-type problem: the paragraphs carry a
+     540px max-width against a 640px copy column, so from 768px up their right
+     edge sat 100px short of the heading's on the same column. 640px is the
+     measure the hero description already uses one section up, and at 20px it
+     lands at 60-63 characters — inside the readable 45-75 band, not over it,
+     which is what the old comment here claimed. It also drops two of the three
+     paragraphs from four lines to three.
+
+     The block is flattened rather than kept as a flex column, because the
+     tablet reading order is eyebrow → heading → image → description, the same
+     one the phone tier below already produces. `display: contents` promotes the
+     eyebrow, heading and three paragraphs to flex items of the section grid so
+     `order` can drop the emblem between the heading and the first paragraph
+     without moving the emblem in the DOM — it has to stay a sibling of the copy
+     to remain the right-hand column of the two-column desktop grid at 1100px.
+
+     Because the copy no longer generates a box, the 640px centred column that
+     used to come from `.ostory-origin-copy` is re-applied to its children
+     instead. Without that they would stretch to the full column under the
+     grid's `align-items: stretch` and their left edges would no longer line up
+     with the emblem's. The title's auto inline margins are zeroed for the same
+     reason the old block did it: as a flex item they would re-centre it and
+     undo the 640px measure.
+
+     One consequence, shared with the phone tier: the copy's own `.reveal`
+     entrance is inert while the block has no box, so the text is simply present
+     on load. The emblem keeps its `.reveal-delay-1`, and the desktop layout at
+     1100px and up is untouched. */
+  .ostory-origin-copy {
+    display: contents;
+  }
+
+  .ostory-origin-copy > * {
+    align-self: center;
+    max-width: 640px;
+    margin-inline: 0;
+  }
+
+  .ostory-origin-copy > .eyebrow {
+    order: 1;
+  }
+
+  .ostory-origin-copy > .ostory-origin-title {
+    order: 2;
+  }
+
+  .ostory-origin-copy > .ostory-origin-text {
+    order: 4;
+  }
+
+  /* Flex items do not collapse margins, so the title's 1.2rem bottom and this
+     paragraph's 1.15rem top would stack to 37.6px instead of 19.2px. Scoped to
+     that one paragraph so the 1.15rem between the paragraphs is untouched. */
+  .ostory-origin-title + .ostory-origin-text {
+    margin-top: 0;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .ostory-origin-grid {
     gap: 0;
   }
