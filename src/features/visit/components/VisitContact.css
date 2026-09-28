@@ -552,6 +552,30 @@
   }
 }
 
+/* ── Phone: 767px and below ───────────────────────────────────
+   The grid had no phone tier at all. Its base rule is `1fr 1fr`
+   and the first block that collapses it is the 768–1023px band
+   below, so every width from 320 to 767 ran the form card and the
+   info card side by side. That put the form's fields in a 123px
+   column at 390px and pushed the info card 30px past the right
+   edge; at 320px the document ran 449px wide against a 320px
+   viewport. body sets `overflow-x: hidden`, so there was no
+   scrollbar to signal it — the right column was simply clipped
+   off-screen and unreachable. Both tablet tiers below already
+   collapse to a single column; this is the missing third one. */
+@media (max-width: 767px) {
+  .visit-contact-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  /* The base clamp floors at 400px, which is a near-square map
+     once the card is the full width of a phone. */
+  .visit-map-wrap {
+    height: clamp(240px, 62vw, 400px);
+  }
+}
+
 /* ── Tablet portrait: 768–1023px ──────────────────────────────
    The contact grid used to collapse at `max-width: 1024px`, which inverted the
    layout: at 1024px it was one column capped at 720px, and at 1025px it became

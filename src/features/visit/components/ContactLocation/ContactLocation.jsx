@@ -48,15 +48,10 @@ export default function ContactLocation() {
               <span className="sr-only">Email</span>
               <input type="email" name="reply_to" placeholder="Email" required autoComplete="email" />
             </label>
-<label className="visit-field">
-  <span className="sr-only">Message</span>
-  <textarea name="message" placeholder="Message" rows="4" required enterKeyHint="send" />
-</label>
-
-<label className="visit-field">
-  <span className="sr-only">Message</span>
-  <textarea name="message" placeholder="Comment Box" rows="4" required enterKeyHint="send" />
-</label>
+            <label className="visit-field">
+              <span className="sr-only">Message</span>
+              <textarea name="message" placeholder="Message" rows="4" required enterKeyHint="send" />
+            </label>
 
             <label className="visit-checkbox">
               <input type="checkbox" name="newsletter" value="yes" />

@@ -56,7 +56,7 @@ export const menuCategories = [
     id: 'cold-frappe',
     label: 'Cold Frappe',
     heading: 'Cold Frappe',
-    size: '(240 ml)',
+    size: '(350 ml)',
     image: menuImages.tab2,
     imageAlt: 'Iced frappe coffee',
     items: coldFrappeMenu,
