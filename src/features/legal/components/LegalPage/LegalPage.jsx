@@ -43,6 +43,7 @@ export default function LegalPage({ title, eyebrow, lede, sections, children }) 
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
+                    aria-current={activeId === s.id ? 'location' : undefined}
                     className={`legal-toc-link${activeId === s.id ? ' is-active' : ''}`}
                   >
                     <span className="legal-toc-num">{s.num}</span>

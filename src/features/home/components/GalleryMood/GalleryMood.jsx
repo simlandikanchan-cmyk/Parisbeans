@@ -82,6 +82,21 @@ export default function GalleryMood() {
       <div
         className="gallery-stage reveal reveal-delay-1"
         ref={stageRef}
+        role="group"
+        aria-roledescription="carousel"
+        aria-label="Gallery slideshow — use the left and right arrow keys to move"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault()
+            carousel.pause()
+            carousel.go(-1)
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault()
+            carousel.pause()
+            carousel.go(1)
+          }
+        }}
         onMouseEnter={carousel.pause}
         onMouseLeave={() => {
           dragRef.current.dragging = false
@@ -98,11 +113,10 @@ export default function GalleryMood() {
             const state = stateClass(offset(i))
             const dims = galleryDims[img.key]
             return (
-              <figure
+              <button
                 key={img.key}
+                type="button"
                 className={`carousel-item ${state}`}
-                role="button"
-                tabIndex={0}
                 aria-label={img.alt}
                 onClick={() => {
                   if (dragRef.current.moved) {
@@ -110,12 +124,6 @@ export default function GalleryMood() {
                     return
                   }
                   carousel.setActive(i)
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    carousel.setActive(i)
-                  }
                 }}
               >
                 <div className="polaroid">
@@ -131,14 +139,18 @@ export default function GalleryMood() {
                     />
                   </div>
                 </div>
-              </figure>
+              </button>
             )
           })}
         </div>
       </div>
 
       <div className="gallery-meta reveal reveal-delay-2">
-        <p className="gallery-caption" key={gallery[carousel.active].key}>
+        <p
+          className="gallery-caption"
+          key={gallery[carousel.active].key}
+          aria-live="polite"
+        >
           {gallery[carousel.active].alt}
         </p>
         <div className="gallery-dots" role="group" aria-label="Gallery slideshow">

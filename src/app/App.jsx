@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import ErrorBoundary from '../shared/components/ErrorBoundary'
 import Layout from './Layout'
+import Preloader from './Layout/components/Preloader'
 import { routePaths } from './router'
 
 const Home = lazy(() => import('../pages/home/HomePageWrapper.jsx'))
@@ -13,14 +14,10 @@ const PrivacyPolicy = lazy(() => import('../pages/legal/PrivacyPolicyPage.jsx'))
 const TermsConditions = lazy(() => import('../pages/legal/TermsConditionsPage.jsx'))
 const NotFound = lazy(() => import('../pages/not-found/NotFoundPageWrapper.jsx'))
 
-function Loading() {
-  return null
-}
-
 export default function App() {
   return (
     <ErrorBoundary>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Preloader />}>
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />

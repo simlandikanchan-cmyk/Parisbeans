@@ -112,6 +112,21 @@
   transform: translate(-50%, -50%);
 }
 
+/* The slide is a native <button> so it is focusable and activatable without
+   JavaScript, but it must present exactly like the figure it replaced: no
+   UA background, border, padding or button font. */
+.carousel-item {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 /* ---------- Photo frame: a hand-finished gallery print ---------- */
 .polaroid {
   position: relative;

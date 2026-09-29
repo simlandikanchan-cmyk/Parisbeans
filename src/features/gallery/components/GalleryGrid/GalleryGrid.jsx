@@ -48,6 +48,19 @@ export default function GalleryGrid({
 
         <div
           className={`gal-grid ${gridClass} reveal reveal-delay-1`}
+          role="group"
+          aria-roledescription="carousel"
+          aria-label={`${eyebrow.replace(/—\s*/, '')} slideshow — use the left and right arrow keys to move`}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft') {
+              e.preventDefault()
+              carousel.setActive((p) => Math.max(p - 1, 0))
+            } else if (e.key === 'ArrowRight') {
+              e.preventDefault()
+              carousel.setActive((p) => Math.min(p + 1, count - 1))
+            }
+          }}
           onMouseEnter={carousel.pause}
           onMouseLeave={carousel.resume}
           onFocus={carousel.pause}
@@ -88,6 +101,10 @@ export default function GalleryGrid({
             })}
           </div>
         </div>
+
+        <p className="sr-only" aria-live="polite">
+          Showing image {carousel.active + 1} of {count}
+        </p>
 
         {/* Kept outside .gal-grid: that element captures the pointer during a
             drag, which would retarget the click away from these buttons. */}
