@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { menuCategories } from '../../../../shared/models/siteData'
-import { useReveal } from '../../../../shared/hooks/useReveal'
+import { menuCategories } from '@shared/models/siteData'
+import { useReveal } from '@shared/hooks/useReveal'
 import '../Menu.css'
 
 export default function MenuCategories({ activeId, onSelect }) {

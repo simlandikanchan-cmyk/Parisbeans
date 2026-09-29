@@ -1,4 +1,4 @@
-import { heroImages, storyImages } from '../../../shared/assets/images'
+import { heroImages, storyImages } from '@shared/assets/images'
 import {
   gallery,
   galleryDims,
@@ -6,7 +6,7 @@ import {
   menuItems,
   cafeCardTitles,
   cafeCardPrices,
-} from '../../../shared/models/siteData'
+} from '@shared/models/siteData'
 import { toMenuItems, toCafeCards } from '../menuItem'
 import { toGalleryImageList } from '../galleryImage'
 

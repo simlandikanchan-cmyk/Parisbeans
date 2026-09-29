@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { srcSize } from '../../../../shared/assets/srcSize'
-import { menuImages } from '../../../../shared/assets/images'
+import { useReveal } from '@shared/hooks/useReveal'
+import { srcSize } from '@shared/assets/srcSize'
+import { menuImages } from '@shared/assets/images'
 import '../Menu.css'
 
 export default function MenuHero() {

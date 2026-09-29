@@ -1,5 +1,5 @@
-import CallToAction from '../../shared/components/CallToAction'
-import { VisitHero, ContactLocation } from '../../features/visit'
+import CallToAction from '@shared/components/CallToAction'
+import { VisitHero, ContactLocation } from '@features/visit'
 
 export default function VisitContactPage() {
   return (

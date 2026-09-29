@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { icons } from '../../../../shared/assets/icons'
+import { useReveal } from '@shared/hooks/useReveal'
+import { icons } from '@shared/assets/icons'
 import './BenefitsSection.css'
 
 const benefits = [

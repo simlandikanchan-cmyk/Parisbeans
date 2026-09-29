@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { heroImages, storyImages } from '../../../../shared/assets/images'
+import { useReveal } from '@shared/hooks/useReveal'
+import { heroImages, storyImages } from '@shared/assets/images'
 import './OurStoryHero.css'
 
 const PANELS = [

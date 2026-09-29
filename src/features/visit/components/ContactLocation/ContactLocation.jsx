@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { sendContactMessage } from '../../api/contactApi'
-import Button from '../../../../shared/components/Button'
-import { contact } from '../../../../shared/models/siteData'
-import { MapPinIcon, PhoneIcon, MailIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from '../../../../shared/components/Icons'
+import { useReveal } from '@shared/hooks/useReveal'
+import { sendContactMessage } from '@features/visit/api/contactApi'
+import Button from '@shared/components/Button'
+import { contact } from '@shared/models/siteData'
+import { MapPinIcon, PhoneIcon, MailIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from '@shared/components/Icons'
 import '../VisitContact.css'
 
 export default function ContactLocation() {

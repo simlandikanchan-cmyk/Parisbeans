@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { useReveal } from '../../hooks/useReveal'
+import { useReveal } from '@shared/hooks/useReveal'
 import Button from '../Button'
 
 export default function CallToAction({

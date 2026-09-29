@@ -1,5 +1,5 @@
-import { contact } from '../../../shared/models/siteData'
-import { heroImages } from '../../../shared/assets/images'
+import { contact } from '@shared/models/siteData'
+import { heroImages } from '@shared/assets/images'
 
 export const visitPageData = {
   heroImage: heroImages.salonInterior,

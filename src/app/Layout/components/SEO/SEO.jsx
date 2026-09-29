@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger-with-children */
 import { useEffect } from 'react'
-import { routeSeo, routePaths } from '../../../router'
+import { routeSeo, routePaths } from '@app/router'
 
 const DEFAULTS = {
   image: 'https://parisbeans.com/images/og-image.jpg',

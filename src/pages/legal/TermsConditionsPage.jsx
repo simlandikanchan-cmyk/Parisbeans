@@ -1,4 +1,4 @@
-import { LegalPage } from '../../features/legal'
+import { LegalPage } from '@features/legal'
 
 const sections = [
   { id: 'terms-acceptance', num: '01', title: 'Acceptance of Terms' },

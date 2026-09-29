@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import preloaderVideo from '../../../../shared/assets/images/story/logo.webm'
+import preloaderVideo from '@shared/assets/images/story/logo.webm'
 import './Preloader.css'
 
 const WORDMARK = ['P', 'a', 'r', 'i', 's', ' ', 'B', 'e', 'a', 'n', 's']

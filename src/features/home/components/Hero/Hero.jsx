@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import Button from '../../../../shared/components/Button'
-import { heroImages } from '../../../../shared/assets/images'
+import { useReveal } from '@shared/hooks/useReveal'
+import Button from '@shared/components/Button'
+import { heroImages } from '@shared/assets/images'
 import './Hero.css'
 
 export default function Hero() {

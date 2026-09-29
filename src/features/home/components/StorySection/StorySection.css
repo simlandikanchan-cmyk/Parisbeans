@@ -1,6 +1,6 @@
 .story {
   background-color: var(--color-white);
-  background-image: url('../../../../shared/assets/images/hero/Frame 48096466.png');
+  background-image: url('@shared/assets/images/hero/Frame 48096466.png');
   background-repeat: no-repeat;
   background-size: 1040px auto;
   background-position: 110px 280px;

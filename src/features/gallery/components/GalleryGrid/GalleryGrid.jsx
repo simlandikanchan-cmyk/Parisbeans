@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { useCarousel } from '../../../../shared/hooks/useCarousel'
-import { galleryImages, galleryAlt, galleryDims } from '../../../../shared/models/siteData'
+import { useReveal } from '@shared/hooks/useReveal'
+import { useCarousel } from '@shared/hooks/useCarousel'
+import { galleryImages, galleryAlt, galleryDims } from '@shared/models/siteData'
 import '../Gallery.css'
 
 export default function GalleryGrid({

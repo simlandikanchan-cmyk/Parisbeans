@@ -1,5 +1,5 @@
-import { galleryHeroImages } from '../../../shared/assets/images'
-import { gallerySections, galleryImages, galleryAlt, galleryDims } from '../../../shared/models/siteData'
+import { galleryHeroImages } from '@shared/assets/images'
+import { gallerySections, galleryImages, galleryAlt, galleryDims } from '@shared/models/siteData'
 import { toGalleryImageList } from '../galleryImage'
 
 const toSectionImages = (keys) =>

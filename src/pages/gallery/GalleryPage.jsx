@@ -1,5 +1,5 @@
-import { GalleryHero, GalleryGrid } from '../../features/gallery'
-import { gallerySections } from '../../shared/models/siteData'
+import { GalleryHero, GalleryGrid } from '@features/gallery'
+import { gallerySections } from '@shared/models/siteData'
 
 const sections = [
   {

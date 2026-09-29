@@ -1,9 +1,9 @@
 import { useRef } from 'react'
-import { menuItems } from '../../../../shared/models/siteData'
-import { srcSize } from '../../../../shared/assets/srcSize'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { useCarousel } from '../../../../shared/hooks/useCarousel'
-import Button from '../../../../shared/components/Button'
+import { menuItems } from '@shared/models/siteData'
+import { srcSize } from '@shared/assets/srcSize'
+import { useReveal } from '@shared/hooks/useReveal'
+import { useCarousel } from '@shared/hooks/useCarousel'
+import Button from '@shared/components/Button'
 import './CafeMenu.css'
 
 export default function CafeMenu() {

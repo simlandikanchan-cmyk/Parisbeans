@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { useCarousel } from '../../../../shared/hooks/useCarousel'
-import { gallery, galleryImages, galleryDims } from '../../../../shared/models/siteData'
-import Button from '../../../../shared/components/Button'
+import { useReveal } from '@shared/hooks/useReveal'
+import { useCarousel } from '@shared/hooks/useCarousel'
+import { gallery, galleryImages, galleryDims } from '@shared/models/siteData'
+import Button from '@shared/components/Button'
 import './GalleryMood.css'
 
 export default function GalleryMood() {

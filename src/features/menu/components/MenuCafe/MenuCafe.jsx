@@ -1,8 +1,8 @@
 import { useMemo, useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { useCarousel } from '../../../../shared/hooks/useCarousel'
-import { menuItems, cafeCardTitles } from '../../../../shared/models/siteData'
-import { srcSize } from '../../../../shared/assets/srcSize'
+import { useReveal } from '@shared/hooks/useReveal'
+import { useCarousel } from '@shared/hooks/useCarousel'
+import { menuItems, cafeCardTitles } from '@shared/models/siteData'
+import { srcSize } from '@shared/assets/srcSize'
 import '../Menu.css'
 
 export default function MenuCafe() {

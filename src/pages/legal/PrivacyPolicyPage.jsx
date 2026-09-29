@@ -1,4 +1,4 @@
-import { LegalPage } from '../../features/legal'
+import { LegalPage } from '@features/legal'
 
 const sections = [
   { id: 'privacy-collect', num: '01', title: 'Information We Collect' },

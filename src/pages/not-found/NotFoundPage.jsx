@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { useReveal } from '../../shared/hooks/useReveal'
-import Button from '../../shared/components/Button'
+import { useReveal } from '@shared/hooks/useReveal'
+import Button from '@shared/components/Button'
 import './NotFoundPage.css'
 
 export default function NotFoundPage() {

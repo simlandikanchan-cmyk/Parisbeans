@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { heroImages } from '../../../../shared/assets/images'
+import { useReveal } from '@shared/hooks/useReveal'
+import { heroImages } from '@shared/assets/images'
 import '../VisitContact.css'
 
 export default function VisitHero() {

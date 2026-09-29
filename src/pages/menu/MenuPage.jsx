@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { menuCategories } from '../../shared/models/siteData'
-import CallToAction from '../../shared/components/CallToAction'
-import { MenuHero, MenuCategories, MenuSpecialty, MenuCafe } from '../../features/menu'
+import { menuCategories } from '@shared/models/siteData'
+import CallToAction from '@shared/components/CallToAction'
+import { MenuHero, MenuCategories, MenuSpecialty, MenuCafe } from '@features/menu'
 
 export default function MenuPage() {
   const [activeId, setActiveId] = useState(menuCategories[0].id)

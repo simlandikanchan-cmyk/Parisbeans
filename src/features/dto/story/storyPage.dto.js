@@ -1,4 +1,4 @@
-import { heroImages, storyImages } from '../../../shared/assets/images'
+import { heroImages, storyImages } from '@shared/assets/images'
 
 export const storyPageData = {
   heroPanels: [

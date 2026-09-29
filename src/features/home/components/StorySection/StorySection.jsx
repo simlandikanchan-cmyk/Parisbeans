@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { srcSize } from '../../../../shared/assets/srcSize'
-import Button from '../../../../shared/components/Button'
-import { storyImages } from '../../../../shared/assets/images'
+import { useReveal } from '@shared/hooks/useReveal'
+import { srcSize } from '@shared/assets/srcSize'
+import Button from '@shared/components/Button'
+import { storyImages } from '@shared/assets/images'
 import './StorySection.css'
 
 const storySlides = [

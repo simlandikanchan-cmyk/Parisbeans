@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { useScroll } from '../../../../shared/hooks/useScroll'
-import { contact as siteContact } from '../../../../shared/models/siteData'
+import { useReveal } from '@shared/hooks/useReveal'
+import { useScroll } from '@shared/hooks/useScroll'
+import { contact as siteContact } from '@shared/models/siteData'
 import './Legal.css'
 
 export default function LegalPage({ title, eyebrow, lede, sections, children }) {

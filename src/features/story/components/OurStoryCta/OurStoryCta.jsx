@@ -1,4 +1,4 @@
-import Button from '../../../../shared/components/Button'
+import Button from '@shared/components/Button'
 import './OurStoryCta.css'
 
 export default function OurStoryCta() {

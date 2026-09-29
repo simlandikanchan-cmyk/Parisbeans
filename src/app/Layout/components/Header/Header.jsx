@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
-import { navLinks, contact } from '../../../../shared/models/siteData'
-import { routePathsList } from '../../../router'
+import { navLinks, contact } from '@shared/models/siteData'
+import { routePathsList } from '@app/router'
 import {
   InstagramIcon,
   YoutubeIcon,
   FacebookIcon,
   ClockIcon,
   PhoneIcon,
-} from '../../../../shared/components/Icons'
-import Button from '../../../../shared/components/Button'
+} from '@shared/components/Icons'
+import Button from '@shared/components/Button'
 import './Header.css'
 
 function Hamburger({ open = false }) {

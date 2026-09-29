@@ -1,4 +1,4 @@
-import { contact } from '../../../shared/models/siteData'
+import { contact } from '@shared/models/siteData'
 
 export const toLegalDocument = ({ eyebrow, title, lede, sections }) => ({
   eyebrow,

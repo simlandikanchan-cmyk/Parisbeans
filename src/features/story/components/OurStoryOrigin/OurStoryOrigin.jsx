@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { srcSize } from '../../../../shared/assets/srcSize'
-import { storyImages } from '../../../../shared/assets/images'
+import { useReveal } from '@shared/hooks/useReveal'
+import { srcSize } from '@shared/assets/srcSize'
+import { storyImages } from '@shared/assets/images'
 import './OurStoryOrigin.css'
 
 export default function OurStoryOrigin() {

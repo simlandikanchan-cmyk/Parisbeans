@@ -1,4 +1,4 @@
-import { OurStoryHero, OurStoryOrigin, OurStoryImageRow, OurStoryCta } from '../../features/story'
+import { OurStoryHero, OurStoryOrigin, OurStoryImageRow, OurStoryCta } from '@features/story'
 import './StoryPage.css'
 
 export default function StoryPage() {

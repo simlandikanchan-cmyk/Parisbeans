@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { galleryHeroImages } from '../../../../shared/assets/images'
+import { useReveal } from '@shared/hooks/useReveal'
+import { galleryHeroImages } from '@shared/assets/images'
 import '../Gallery.css'
 
 // Intrinsic dimensions of the source files (all 660px wide). Declaring them on

@@ -1,5 +1,5 @@
-import { srcSize } from '../../../../shared/assets/srcSize'
-import { storyImages } from '../../../../shared/assets/images'
+import { srcSize } from '@shared/assets/srcSize'
+import { storyImages } from '@shared/assets/images'
 import './OurStoryImageRow.css'
 
 export default function OurStoryImageRow() {

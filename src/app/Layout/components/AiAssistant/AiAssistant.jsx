@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { cafeCardPrices, contact } from '../../../../shared/models/siteData'
+import { cafeCardPrices, contact } from '@shared/models/siteData'
 import './AiAssistant.css'
 
 const AI_ENABLED = Boolean(import.meta.env.VITE_AI_ENDPOINT)

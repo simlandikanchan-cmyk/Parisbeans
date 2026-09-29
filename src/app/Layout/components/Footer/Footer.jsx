@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { exploreLinks, contact } from '../../../../shared/models/siteData'
-import { routePathsList } from '../../../router'
-import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon } from '../../../../shared/components/Icons'
+import { exploreLinks, contact } from '@shared/models/siteData'
+import { routePathsList } from '@app/router'
+import { InstagramIcon, YoutubeIcon, FacebookIcon, MapPinIcon, ClockIcon, PhoneIcon } from '@shared/components/Icons'
 import './Footer.css'
 
 export default function Footer({ route }) {

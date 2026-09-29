@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { useReveal } from '../../../../shared/hooks/useReveal'
-import { useParallaxTilt } from '../../../../shared/hooks/useParallaxTilt'
-import { srcSize } from '../../../../shared/assets/srcSize'
+import { useReveal } from '@shared/hooks/useReveal'
+import { useParallaxTilt } from '@shared/hooks/useParallaxTilt'
+import { srcSize } from '@shared/assets/srcSize'
 import '../Menu.css'
 
 export default function MenuSpecialty({ category }) {
