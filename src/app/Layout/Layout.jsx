@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Preloader from './components/Preloader'
 import SEO from './components/SEO'
 import { routeByPath, routeJsonLd } from '../router'
 
@@ -44,6 +45,7 @@ export default function Layout() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
+      <Preloader />
       <Header story={route === 'story'} route={route} />
       <Outlet />
       <Footer route={route} />
