@@ -180,12 +180,10 @@
   }
 
   .ostory-title {
-    font-size: 56px;
     max-width: 640px;
   }
 
   .ostory-desc {
-    font-size: 20px;
     max-width: 640px;
     /* This box is a flex column in the tablet band, and flex items do not
        collapse their margins. Left alone, the title's 1.2rem bottom and this

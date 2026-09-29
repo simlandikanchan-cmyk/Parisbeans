@@ -69,23 +69,11 @@
    RESPONSIVE
    ============================================================ */
 
-/* Tablet: match the page-wide 56px heading / 20px body scale set in
-   OurStoryOrigin.css, so every section on /our-story reads at one size instead
-   of jumping between three different scales in the same viewport. Overrides
-   --fs-section and --fs-small rather than redefining them, because both tokens
-   are global and also drive the header, footer, gallery and AI assistant.
-   The title's 640px max-width is left alone on purpose: at 56px the line wraps
-   to two inside it, which is the intent for a centred closing statement. The
-   min-width:1100px nowrap above cannot reach this band, so nothing fights it. */
-@media (min-width: 768px) and (max-width: 1099px) {
-  .ostory-cta-title {
-    font-size: 56px;
-  }
-
-  .ostory-cta-desc {
-    font-size: 20px;
-  }
-}
+/* The 768-1099px block that used to sit here pinned .ostory-cta-title to 56px
+   and .ostory-cta-desc to 20px, matching a scale that only /our-story used. It
+   is gone: the closing CTA now takes --fs-section and --fs-small like every
+   other section on the page, so the page reads at one scale across the whole
+   768-1099px band. The min-width:1100px nowrap above is unaffected. */
 
 @media (max-width: 640px) {
   .ostory-cta {

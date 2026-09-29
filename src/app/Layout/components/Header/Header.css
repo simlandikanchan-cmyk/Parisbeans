@@ -605,11 +605,10 @@ a.drawer-meta-row:hover {
   pointer-events: auto;
 }
 
-@media (min-width: 1441px) {
-  .nav-link {
-    font-size: var(--fs-text);
-  }
-}
+/* The @media (min-width: 1441px) block that used to sit here resized .nav-link
+   from --fs-body-sm to --fs-text, a 14.72px -> 16.96px (+15.2%) step at one
+   arbitrary width, for no reason tied to the header's own layout. It is gone:
+   nav links now hold --fs-body-sm at every width. */
 
 /* Responsive */
 @media (max-width: 1180px) {

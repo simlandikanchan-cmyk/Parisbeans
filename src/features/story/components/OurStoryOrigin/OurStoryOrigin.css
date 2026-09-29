@@ -190,15 +190,7 @@
     width: 100%;
   }
 
-  /* Tablet type scale: 56px heading, 20px body.
-     Both are overrides of the base scales, not new tokens: --fs-section tops
-     out at 2.9rem (46.4px) and --fs-body-sm is 0.92rem (14.7px), so neither can
-     reach these on its own. A flat 56px is safe across this band only because
-     the title's own measure is 640px and the longest line, "From a Parisian
-     Feeling", measures ~628px in it — roughly 12px of slack. Widening the title
-     to 56px without that measured fit would have rewrapped to three lines and
-     undone the two-line break above.
-
+  /* Tablet spacing for the origin title.
      The 1rem top is the base value and is what keeps the eyebrow attached to
      the heading, as on every other tier. The 3rem bottom is the title→image gap
      the zeroed flex gap used to supply, rounded down from the 51.2px it
@@ -209,15 +201,15 @@
      .ostory-br-tablet, and balance only applies within a run of text between
      forced breaks, so the longest line keeps the full 640px it was measured
      against. It costs nothing if the copy is ever reworded into a segment that
-     would otherwise wrap. */
+     would otherwise wrap.
+
+     The two font-size overrides that used to sit in this block (56px title,
+     20px body) are gone. Both elements take the page-wide tokens like every
+     other heading and paragraph, so /our-story no longer reads at a different
+     scale from the other pages in the 768-1099px band. */
   .ostory-origin-title {
-    font-size: 56px;
     margin-bottom: 3rem;
     text-wrap: balance;
-  }
-
-  .ostory-origin-text {
-    font-size: 20px;
   }
 
   /* The copy block joins the other section containers on flex, and the ragged
