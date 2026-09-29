@@ -485,10 +485,21 @@ a.contact-body:focus-visible,
   content: '';
   width: 18px;
   height: 18px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 19V5m0 0l-6 6m6-6l6 6' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  /* `currentColor` does not cross into a background-image data URI: the SVG is
+     parsed as its own document, so the stroke resolved to plain black and the
+     arrow never matched the label (proved: forcing `color` to red left the
+     arrow 99.9% black). Only the alpha channel is used here, so painting the
+     same SVG as a mask in `currentColor` makes the arrow inherit the element's
+     colour -- it tracks the label at rest and darkens with it on hover. */
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 19V5m0 0l-6 6m6-6l6 6' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 19V5m0 0l-6 6m6-6l6 6' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .back-to-top:hover {
