@@ -10,11 +10,18 @@
    menu (1920) — the phone variant was on disk but never referenced, because the
    phone band was set to `background-image: none` and left empty.
 
-   The old phone edge was 748px, which matched none of the other breakpoints in
-   the codebase. This now sits on the project's canonical scale, so the art
-   swaps at the same 768px edge as the type and padding do. */
+   The bands below are spelled with the canonical edges from global.css
+   (767 / 1023 / 1099 / 1100) rather than one 1024–1440 run, so they line up
+   with every other component's breakpoints. from748upto1440 spans two canonical
+   tiers — tablet landscape and desktop up to 1440 — so it is stated twice, once
+   per tier, rather than as a single query that would straddle the 1100 edge the
+   rest of the site treats as significant. The pixel ranges are unchanged: the
+   same art is served at every width it was served at before.
 
-/* Phone (767px and below) */
+   The 1441 edge is kept: the wide-desktop art was drawn at 1920px, so it has to
+   start where the design's own wide breakpoint does. */
+
+/* Mobile (767px and below) */
 @media (max-width: 767px) {
   .cafe {
     background-image: url('@shared/assets/images/menu/phone_menu.svg');
@@ -34,8 +41,18 @@
   }
 }
 
-/* Tablet landscape and laptops (1024–1440px) */
-@media (min-width: 1024px) and (max-width: 1440px) {
+/* Tablet landscape (1024–1099px) */
+@media (min-width: 1024px) and (max-width: 1099px) {
+  .cafe {
+    background-image: url('@shared/assets/images/menu/from748upto1440.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/* Desktop (1100–1440px) */
+@media (min-width: 1100px) and (max-width: 1440px) {
   .cafe {
     background-image: url('@shared/assets/images/menu/from748upto1440.svg');
     background-repeat: no-repeat;
@@ -248,6 +265,13 @@
 }
 
 /* ---------- Responsive ---------- */
+
+/* This edge is 1100px, not the canonical 1099px, and that one pixel is load
+   bearing: global.css treats 1100px as the first desktop width, but here 1100px
+   still gets the stacked layout, because the edge is written as `max-width`.
+   Rewriting it to `max-width: 1099px` would align it with the documented scale
+   and would flip exactly the 1100px viewport to the two-column desktop layout.
+   Left as-is pending a decision on which of the two is intended. */
 @media (max-width: 1100px) {
   .cafe-grid {
     grid-template-columns: 1fr;

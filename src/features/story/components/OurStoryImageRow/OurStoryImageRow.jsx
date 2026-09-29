@@ -6,10 +6,12 @@ export default function OurStoryImageRow() {
   return (
     <div className="ostory-story-img">
       <picture>
+        {/* <source> takes no width/height — those are not valid attributes on
+            it. The dimensions belong on the <img> below, which is the element
+            the browser lays out. */}
         <source
           srcSet={storyImages.phoneStoryPage}
           media="(max-width: 767px)"
-          {...srcSize(storyImages.phoneStoryPage)}
         />
         {/* The tablet source covers both tablet tiers. It used to stop at 1023px
             while the CSS tablet band ran to 1024px, so at exactly 1024px the
@@ -22,7 +24,6 @@ export default function OurStoryImageRow() {
         <source
           srcSet={storyImages.tabletStory}
           media="(min-width: 768px) and (max-width: 1099px)"
-          {...srcSize(storyImages.tabletStory)}
         />
         <img
           src={storyImages.img}

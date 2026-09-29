@@ -75,11 +75,6 @@ export default function OurStoryHero() {
   const safeIndex = activeIndex >= visible.length ? 0 : activeIndex
 
   useEffect(() => {
-    if (activeIndex < visible.length) return
-    setActiveIndex(0)
-  }, [activeIndex, visible.length])
-
-  useEffect(() => {
     if (visible.length === 0 || isHovering || reduceMotion) return
     const t = setInterval(
       () => setActiveIndex((p) => (p + 1) % visible.length),

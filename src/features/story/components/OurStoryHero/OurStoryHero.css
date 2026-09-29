@@ -170,6 +170,15 @@
    The bands no longer overlap, so this no longer depends on source order to
    beat the 640px and 767px blocks — it starts where they stop. */
 @media (min-width: 768px) and (max-width: 1099px) {
+  /* The hero box becomes a column flex box across both tablet tiers. It is a
+     plain block everywhere else, so this needs restating rather than inheriting.
+     Moved here from StoryPage.css, which used to own it and won the tie only by
+     being imported last. */
+  .ostory-hero-box {
+    display: flex;
+    flex-direction: column;
+  }
+
   .ostory-title {
     font-size: 56px;
     max-width: 640px;
@@ -178,13 +187,13 @@
   .ostory-desc {
     font-size: 20px;
     max-width: 640px;
-    /* StoryPage.css makes this box a flex column in the tablet band, and flex
-       items do not collapse their margins. Left alone, the title's 1.2rem
-       bottom and this 1.1rem top would stack to 36.8px instead of collapsing to
-       the 19.2px the block layout gave — an 18px jump in the hero's vertical
-       rhythm that has nothing to do with the type scale. Dropping the top
-       margin leaves the title's 1.2rem as the single gap, so the spacing is
-       what it was before the box became flex. */
+    /* This box is a flex column in the tablet band, and flex items do not
+       collapse their margins. Left alone, the title's 1.2rem bottom and this
+       1.1rem top would stack to 36.8px instead of collapsing to the 19.2px the
+       block layout gave — an 18px jump in the hero's vertical rhythm that has
+       nothing to do with the type scale. Dropping the top margin leaves the
+       title's 1.2rem as the single gap, so the spacing is what it was before the
+       box became flex. */
     margin-top: 0;
   }
 }

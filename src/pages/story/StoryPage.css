@@ -28,46 +28,18 @@
 }
 
 /* ============================================================
-   TABLET — every section container on flex
-   Covers both tablet tiers, 768–1099px. This block used to start at 641px,
-   which made the story page the only part of the site that treated a large
-   phone as a tablet: between 641 and 767 it ran a 56px/20px desktop type scale
-   in a 583–698px measure, under a header and above a footer both set at
-   14.7–15.2px. The edge is now the same 768px the rest of the site uses.
-   ============================================================ */
-@media (min-width: 768px) and (max-width: 1099px) {
-  .ostory-hero-box,
-  .ostory-origin-grid,
-  .ostory-story-img,
-  .ostory-cta-inner {
-    display: flex;
-  }
+   TABLET
+   ============================================================
+   The three 768–1099px section containers that needed to change shape are no
+   longer handled here. Each rule lives with the component that owns the class —
+   .ostory-hero-box in OurStoryHero.css, .ostory-origin-grid in
+   OurStoryOrigin.css, .ostory-story-img in OurStoryImageRow.css — so the
+   cascade no longer depends on this file happening to be imported last.
 
-  /* The three text sections stack; the image row stays a centred row. */
-  .ostory-hero-box,
-  .ostory-origin-grid,
-  .ostory-cta-inner {
-    flex-direction: column;
-  }
-
-  /* .ostory-origin-grid inherits align-items: center from the base rule, where
-     it aligns on the block axis of a two-column grid and so does nothing. As a
-     column flex container the same property is the inline axis, so it would
-     pull the 640px copy and the emblem to the middle of the band. stretch
-     restores the full-width items the grid was giving them. */
-  .ostory-origin-grid {
-    align-items: stretch;
-  }
-
-  /* justify-items: center replaced by its flex equivalent. align-items is
-     flex-start rather than stretch so the picture is never stretched to a
-     cross size it does not ask for. */
-  .ostory-story-img {
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-  }
-}
+   .ostory-cta-inner was dropped rather than moved: this block used to give it
+   `display: flex; flex-direction: column` in the tablet band, and
+   OurStoryCta.css:16 already declares exactly that as its base rule, so the
+   override never changed anything. */
 
 /* ============================================================
    ANIMATION (shared entrance)

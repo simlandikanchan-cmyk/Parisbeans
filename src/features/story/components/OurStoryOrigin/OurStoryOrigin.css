@@ -120,34 +120,48 @@
    explicitly sized flex item is placed at the start of its area, not centred,
    so without that the whole dead space would simply move to the right. */
 @media (min-width: 768px) and (max-width: 1099px) {
+  /* The two-column grid becomes a column flex box across both tablet tiers.
+     Moved here from StoryPage.css, which used to own it and won the tie only by
+     being imported last.
+
+     align-items inherits `center` from the base grid rule at the top of this
+     file, where it aligns on the block axis and so does nothing. As a column
+     flex container the same property is the inline axis, so it would pull the
+     640px copy and the emblem to the middle of the band; stretch restores the
+     full-width items the grid was giving them. */
+  .ostory-origin-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .ostory-origin {
     padding-block: clamp(64px, 8vw, 88px);
   }
 
   /* The two-column gutter has to be zeroed here, not just narrowed.
 
-     In a single-column stack the gap is a *block* gap, and StoryPage.css has
-     made this container a column flex box, so it lands between every pair of
-     items — not just between the two blocks the desktop grid separated. The
-     six siblings are eyebrow, heading, image and three paragraphs, so a single
-     gap value had to serve three different relationships and served none of
-     them: it pushed the eyebrow 32px off the heading it labels, and added
-     itself to the paragraphs' own 1.15rem so the run of three read as three
-     separate blocks at 50.4px apart instead of one at 18.4px. The block rhythm
-     is set by explicit margins on the blocks instead — the heading's bottom,
-     the emblem's bottom — which is how the desktop and phone tiers already
-     space the same content. */
+     In a single-column stack the gap is a *block* gap, and the container above
+     is a column flex box, so it lands between every pair of items — not just
+     between the two blocks the desktop grid separated. The six siblings are
+     eyebrow, heading, image and three paragraphs, so a single gap value had to
+     serve three different relationships and served none of them: it pushed the
+     eyebrow 32px off the heading it labels, and added itself to the paragraphs'
+     own 1.15rem so the run of three read as three separate blocks at 50.4px
+     apart instead of one at 18.4px. The block rhythm is set by explicit margins
+     on the blocks instead — the heading's bottom, the emblem's bottom — which is
+     how the desktop and phone tiers already space the same content. */
   .ostory-origin-grid {
     gap: 0;
   }
 
   .ostory-emblem-wrap {
     width: min(100%, 640px);
-    /* align-self, not margin-inline: auto, and not justify-self. StoryPage.css
-       makes this grid a column flex container across both tablet tiers, so the
-       block-axis alignment the base grid rule was written for no longer
-       applies — justify-self does nothing on a flex item, and align-self is the
-       property that centres the emblem in the band. */
+    /* align-self, not margin-inline: auto, and not justify-self. The grid above
+       is a column flex container across both tablet tiers, so the block-axis
+       alignment the base grid rule was written for no longer applies —
+       justify-self does nothing on a flex item, and align-self is the property
+       that centres the emblem in the band. */
     align-self: center;
     /* The emblem is a child of the section grid rather than of the copy, so it
        needs its own order to slot between the heading and the description. */
