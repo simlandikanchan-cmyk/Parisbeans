@@ -342,6 +342,7 @@
   letter-spacing: var(--tracking-tight);
   color: #a96e3f;
   margin-bottom: clamp(1.5rem, 2.2vw, 2.2rem);
+  animation: menuTitleIn 0.7s var(--ease) both;
 }
 
 .menu-special-size {
@@ -379,14 +380,6 @@
   opacity: 0.08;
   transform: rotate(8deg);
   pointer-events: none;
-}
-
-.menu-special-ghost::after {
-  content: '';
-  position: absolute;
-  inset: -16% -20% -8% -14%;
-  border: 1px dashed rgba(169, 110, 63, 0.3);
-  border-radius: 48% 56% 46% 54% / 54% 44% 58% 46%;
 }
 
 .menu-special-ghost-cup {
@@ -505,91 +498,96 @@
 }
 
 /* ── Large coffee visual ─────────────────────────────────── */
+/* The category cutouts are square PNGs with a lot of transparent padding and
+   very different subjects: tab1 is a wide, squat cup-and-saucer shot, tab2 and
+   tab3 are tall narrow glasses. So the visual is a fixed-height stage with
+   `object-fit: contain` — every tab then fills the same band, nothing is
+   cropped, and switching tabs never changes the section height.
+
+   `.menu-visual-stage` is keyed on the category, so a tab switch remounts the
+   whole visual and the pour, the halo bloom and the glint replay as one
+   sequence. The halo is masked by the frame's clip wipe rather than a separate
+   reveal layer, and because the cutouts are transparent the wipe edge lands
+   exactly on the drink, whatever the tab. */
 .menu-special-visual {
   position: relative;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  min-height: 0;
+  justify-content: center;
+  width: 100%;
+  height: clamp(300px, 36vw, 540px);
+  --tilt-x: 0;
+  --tilt-y: 0;
+  --shift-x: 0px;
+  --shift-y: 0px;
 }
 
-/* Soft breathing glow behind the cup */
+.menu-visual-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Soft breathing glow behind the cup, concentric with the stage so it reads as
+   a halo around the subject rather than a shape sitting off to one side.
+   Centring uses the independent `translate` property and the pulse only uses
+   `transform`, so the halo stays centred even when the animation is off
+   (prefers-reduced-motion) instead of collapsing to its top-left corner.
+   The parallax shift rides on the same `translate` at a third of the cup's
+   travel, so the two layers separate instead of sliding as one flat image. */
 .menu-glow {
   position: absolute;
-  right: -4%;
-  z-index: 0;
-  width: clamp(320px, 32vw, 520px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(169, 110, 63, 0.2), rgba(196, 166, 74, 0.08) 45%, transparent 62%);
-  pointer-events: none;
-  animation: menuGlowBreathe 5.5s ease-in-out infinite;
-}
-
-/* Rotating dashed ring around the cup */
-.menu-ring {
-  position: absolute;
-  right: 2%;
-  z-index: 0;
-  width: clamp(300px, 30vw, 480px);
-  aspect-ratio: 1;
-  border: 1px dashed rgba(169, 110, 63, 0.35);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: menuRingSpin 42s linear infinite;
-}
-
-/* Beads riding the ring */
-.menu-ring::before,
-.menu-ring::after {
-  content: '';
-  position: absolute;
+  top: 50%;
   left: 50%;
+  z-index: 0;
+  width: min(122%, 600px);
+  aspect-ratio: 1;
   border-radius: 50%;
+  background: radial-gradient(circle, rgba(169, 110, 63, 0.18), rgba(196, 166, 74, 0.07) 45%, transparent 62%);
+  transform: scale(0.94);
+  opacity: 0.5;
+  translate: calc(-50% + var(--shift-x) * 0.34) calc(-50% + var(--shift-y) * 0.34);
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: translate 0.45s var(--ease);
+  animation: menuGlowBloom 1.05s var(--ease) both,
+             menuGlowBreathe 5.5s ease-in-out 1.05s infinite;
 }
 
-.menu-ring::before {
-  top: -6px;
-  width: 11px;
-  height: 11px;
-  margin-left: -5.5px;
-  background: var(--color-gold);
-  box-shadow: 0 0 12px rgba(196, 166, 74, 0.65);
-}
-
-.menu-ring::after {
-  bottom: 16%;
-  width: 7px;
-  height: 7px;
-  margin-left: -3.5px;
-  background: var(--color-coffee);
-  opacity: 0.6;
-}
-
-/* Floating decorative cup — no card, no shadow */
+/* Floating decorative cup — no card, no shadow, nothing cropped.
+   The idle float rides on the individual `translate`/`rotate`/`scale`
+   properties and the pointer tilt on `transform`, so the two compose instead
+   of one animation stomping the other's transform every frame. */
 .menu-cup-frame {
   position: relative;
   z-index: 1;
-  width: min(118%, 560px);
-  margin-left: auto;
-  margin-right: -8%;
-  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  animation: menuFloat 8s var(--ease) 0.6s infinite;
+  clip-path: inset(0);
+  transform: translate3d(var(--shift-x), var(--shift-y), 0) perspective(1100px)
+             rotateY(calc(var(--tilt-x) * 1deg)) rotateX(calc(var(--tilt-y) * 1deg));
+  will-change: transform;
+  transition: transform 0.4s var(--ease);
+  animation: menuPourRise 0.8s var(--ease) both,
+             menuFloat 8s var(--ease) 0.8s infinite backwards;
 }
 
 .menu-cup {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: auto;
+  height: 100%;
   object-fit: contain;
-  border-radius: 0;
-  box-shadow: none;
-  animation: menuSwapIn 0.8s var(--ease) both;
+  animation: menuSettle 0.95s var(--ease) 0.08s both;
 }
 
-/* Periodic shine sweep across the cup */
+/* Periodic shine sweep across the cup, retimed to land as the drink settles */
 .menu-shine {
   position: absolute;
   top: -25%;
@@ -598,72 +596,89 @@
   width: 55%;
   height: 150%;
   transform: translateX(-130%) skewX(-18deg);
+  translate: calc(var(--shift-x) * 1.5) calc(var(--shift-y) * 1.5);
   background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.42), transparent);
   pointer-events: none;
-  animation: menuShine 5.2s var(--ease) 1.4s infinite;
+  transition: translate 0.4s var(--ease);
+  animation: menuShine 5.2s var(--ease) 0.95s infinite;
 }
 
-/* Echo cup layered behind the main cup */
-.menu-cup-echo {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 0;
-  pointer-events: none;
-  animation: menuEcho 9s var(--ease) infinite;
+/* ── Tab-switch sequence ─────────────────────────────────── */
+/* 0.00s  halo blooms out from the centre
+   0.00s  clip wipe rises from the bottom edge of the frame
+   0.08s  the drink unblurs and settles with a slight overshoot
+   0.95s  a glint runs across the surface as it comes to rest */
+@keyframes menuPourRise {
+  0% {
+    clip-path: inset(96% 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
-.menu-echo-cup {
-  width: 56%;
-  transform: rotate(-9deg);
-  opacity: 0.16;
+@keyframes menuSettle {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.9);
+    filter: blur(9px);
+  }
+  35% {
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-3px) scale(1.035);
+    filter: blur(0);
+  }
+  100% {
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes menuGlowBloom {
+  0% {
+    opacity: 0.08;
+    transform: scale(0.6);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.16);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.94);
+  }
 }
 
 @keyframes menuGlowBreathe {
   0%,
   100% {
-    opacity: 0.55;
+    opacity: 0.5;
     transform: scale(0.94);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.06);
-  }
-}
-
-@keyframes menuRingSpin {
-  to {
-    transform: rotate(360deg);
+    opacity: 0.9;
+    transform: scale(1.04);
   }
 }
 
 @keyframes menuFloat {
   0%,
   100% {
-    transform: translateY(0) rotate(0deg) scale(1);
+    translate: 0 0;
+    rotate: 0deg;
+    scale: 1;
   }
   33% {
-    transform: translateY(-12px) rotate(-1.2deg) scale(1.02);
+    translate: 0 -12px;
+    rotate: -1.2deg;
+    scale: 1.02;
   }
   66% {
-    transform: translateY(6px) rotate(1deg) scale(0.99);
-  }
-}
-
-@keyframes menuSwapIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.84) translateY(18px);
-  }
-  55% {
-    opacity: 1;
-    transform: scale(1.03) translateY(-4px);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
+    translate: 0 6px;
+    rotate: 1deg;
+    scale: 0.99;
   }
 }
 
@@ -677,13 +692,16 @@
   }
 }
 
-@keyframes menuEcho {
-  0%,
-  100% {
-    transform: translateY(0);
+@keyframes menuTitleIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(7px);
   }
-  50% {
-    transform: translateY(9px);
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
   }
 }
 
@@ -874,20 +892,8 @@
     gap: 2.5rem;
   }
 
-  /* The cup is the image *inside* .menu-cup-frame, and the frame is a clipping
-     window: `border-radius: 18px; overflow: hidden`, sized to the cup at
-     `min(118%, 560px)`. Resizing the image instead of the frame made it 112% of
-     the frame's own width with a -6% right margin, so the frame sliced off the
-     right 12% of the cup for the whole 901–1100px band and the visible portion
-     sat off-centre. Scaling the frame keeps the image at 100% of its clip
-     window, which is what every other tier does. */
-  .menu-cup-frame {
-    width: min(100%, 480px);
-    margin-right: 0;
-  }
-
-  .menu-cup {
-    width: 100%;
+  .menu-special-visual {
+    height: clamp(280px, 40vw, 400px);
   }
 
   .menu-special-ghost {
@@ -942,13 +948,8 @@
   .menu-special-visual {
     order: 2;
     justify-content: center;
+    height: clamp(260px, 56vw, 440px);
     margin-top: 1.75rem;
-  }
-
-  .menu-cup {
-    margin-left: auto;
-    margin-right: auto;
-    width: min(78%, 440px);
   }
 }
 
@@ -1064,8 +1065,7 @@
     opacity: 0.09;
   }
 
-  .menu-row::before,
-  .menu-special-ghost::after {
+  .menu-row::before {
     display: none;
   }
 
@@ -1074,22 +1074,12 @@
     overflow-wrap: break-word;
   }
 
+  .menu-special-visual {
+    height: clamp(260px, 72vw, 340px);
+  }
+
   .menu-glow {
-    width: min(88%, 360px);
-    right: 6%;
-    opacity: 0.85;
-  }
-
-  .menu-ring {
-    width: min(82%, 330px);
-    right: 9%;
-    opacity: 0.85;
-  }
-
-  .menu-cup-frame {
-    width: 88%;
-    margin-left: auto;
-    margin-right: 0;
+    width: min(108%, 320px);
   }
 }
 
@@ -1126,13 +1116,23 @@
     transform: none;
   }
 
+  /* Every base declaration here already matches its animation's end state, so
+     dropping the animations lands the visual fully composed — no half-played
+     clip wipe, no drink stuck behind a blur, no halo collapsed to a corner. */
   .menu-glow,
-  .menu-ring,
   .menu-shine,
+  .menu-cup,
   .menu-cup-frame,
-  .menu-cup-echo,
-  .menu-special-ghost-cup {
+  .menu-special-ghost-cup,
+  .menu-special-title,
+  .menu-list {
     animation: none;
+  }
+
+  .menu-cup-frame,
+  .menu-glow,
+  .menu-shine {
+    transition: none;
   }
 
   .menu-slider-track {
