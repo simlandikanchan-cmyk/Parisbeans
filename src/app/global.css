@@ -58,20 +58,23 @@
      hit the viewport where it matched the max, which left the scale flat while
      --container-max kept the layout growing to 1920px. The + <rem> form keeps
      rising until the max lands at or just past the container width, so the
-     last tier that matters is still moving when the layout stops. */
-  --fs-eyebrow: clamp(0.75rem, 0.1vw + 0.72rem, 0.8rem);
+     last tier that matters is still moving when the layout stops.
+
+     Coefficients calibrated so each tier hits its min at 375px and its max at
+     1920px (the --container-max), scaling linearly between. */
+  --fs-eyebrow: clamp(0.75rem, 0.13vw + 0.72rem, 0.875rem);
   --fs-micro: 0.78rem;
   --fs-label: 0.8rem;
   --fs-btn-sm: 0.82rem;
   --fs-small: 0.95rem;
-  --fs-text: clamp(1rem, 0.2vw + 0.95rem, 1.2rem);
-  --fs-lead: clamp(1.0625rem, 0.55vw + 0.85rem, 1.625rem);
+  --fs-text: clamp(1rem, 0.26vw + 0.94rem, 1.25rem);
+  --fs-lead: clamp(1.0625rem, 0.7vw + 0.9rem, 1.75rem);
   --fs-btn: 0.92rem;
   --fs-body-sm: 0.92rem;
-  --fs-section: clamp(2rem, 1.6vw + 1.6rem, 3.5rem);
-  --fs-h1: clamp(2.25rem, 2.9vw + 1.5rem, 5.25rem);
+  --fs-section: clamp(2rem, 1.55vw + 1.64rem, 3.5rem);
+  --fs-h1: clamp(2.25rem, 2.1vw + 1.85rem, 5.25rem);
   --fs-h2: var(--fs-section);
-  --fs-h3: clamp(1.5rem, 1vw + 1.05rem, 2.5rem);
+  --fs-h3: clamp(1.5rem, 1.04vw + 1.26rem, 2.5rem);
   --fs-sub: clamp(1.02rem, 1.3vw, 1.2rem);
   --fs-display: clamp(2.4rem, 3.4vw, 3.4rem);
   --fs-word: clamp(4.5rem, 15vw, 11rem);
