@@ -245,17 +245,11 @@
   max-width: 640px;
 }
 
-/* Keep gallery headings + descriptions on a single line on desktop.
-   `white-space: nowrap` and a `max-width` are mutually contradictory — the
-   nowrap wins and the text simply paints past the cap, where the section's
-   `overflow: clip` truncates it. So the cap is released here rather than left
-   to fight. Every string in this block is measured against the container at
-   1200px, the narrowest width it applies to, and fits. */
+/* Keep gallery headings on a single line on desktop.
+   Descriptions are allowed to wrap — the container max-widths (560/720px)
+   are too narrow for the full strings at 1200px+. */
 @media (min-width: 1200px) {
-  .gal-hero-title,
-  .gal-hero-desc,
-  .gal-section-title,
-  .gal-section-desc {
+  .gal-hero-title {
     white-space: nowrap;
   }
 
@@ -587,9 +581,9 @@
    changes is the per-frame geometry, which is why this block rewrites `--w`,
    `--o` and the two overlap pairs instead of touching a single scale factor. */
 @media (max-width: 767px) {
-  /* The one inset that both the copy and the collage measure from, so the
-     first frame's left edge lands exactly on the heading's and can never drift
-     away from it the way a duplicated literal does. */
+  /* The inset the copy above the collage measures from, so the heading's left
+     edge is one value rather than two. The collage no longer shares it: its
+     frames are centred on the screen, not aligned to the text. */
   .gal-hero {
     --gal-inset: clamp(16px, 4.5vw, 22px);
   }
@@ -613,32 +607,30 @@
   }
 
   .gal-hero-collage {
-    /* Figma insets the frame to the same margin as the copy above it, so frame 1
-       begins on the text's left edge rather than at the screen edge. The inset
-       is padding on the collage rather than a margin on the frame: the collage
-       box itself stays full-bleed, and `overflow: hidden` on it is what slices
-       frame 2 at the right screen edge to produce the peek. Insetting the box
-       instead would move the clip line in to the container edge and swallow the
-       peek entirely. */
-    padding-left: var(--gal-inset);
-    /* Pixels of frame 2 left showing past the right screen edge, held as a thin
-       sliver so the row reads as "there is more this way" rather than as a
-       second card. Whatever frame 1 gives up lands here, so making frame 1 more
-       compact widens the peek instead of pushing frame 2 off screen. */
-    --gal-peek: 58px;
-    /* Plain gap between the two frames, so the peek reads as a separate image
-       rather than as an extension of frame 1. */
-    --gal-gap: 18px;
-    /* Frame 1 as a share of the inset column — the width the copy above it
-       occupies — rather than "viewport minus whatever is left over". Measuring
-       it as a share is what keeps the frame compact and Figma-proportioned as
-       the phone narrows, instead of letting it grow to swallow the screen. The
-       peek is then simply the remainder, so it is not subtracted here. */
+    /* Frame 1 is centred on the screen rather than aligned to the copy above
+       it, so the row is led in by whatever the viewport has left over once
+       frame 1 is paid for. That lead is padding on the collage rather than a
+       margin on the frame: the collage box itself stays full-bleed, and
+       `overflow: hidden` on it is what slices frame 2 at the right screen edge
+       to produce the peek. Insetting the box instead would move the clip line
+       in to the container edge and swallow the peek entirely. */
     --gal-main: 0.78;
     /* A percentage cannot be used for the frame directly: the track is `width:
        max-content`, where a percentage would resolve cyclically against the very
        content it is meant to divide, so the share is resolved in vw first. */
-    --gal-frame-w: calc((100vw - var(--gal-inset) * 2) * var(--gal-main));
+    --gal-frame-w: calc(100vw * var(--gal-main));
+    --gal-lead: calc((100vw - var(--gal-frame-w)) / 2);
+    padding-left: var(--gal-lead);
+    /* Plain gap between the two frames, so the peek reads as a separate image
+       rather than as an extension of frame 1. Whatever the lead gives up past
+       this is the peek, so it is not subtracted here. */
+    --gal-gap: 18px;
+    /* How far frame 1 drops below the line the rest of the row sits on, which
+       is what leaves frame 2 reading as raised above it. Positive, so the row
+       grows downward and nothing is clipped off the top of the collage the way
+       a negative offset would clip it. A share of the base unit, so the step
+       holds its proportion at every phone size. */
+    --gal-drop: 0.09;
     margin-top: clamp(48px, 12vw, 64px);
     /* Hard-cut edges, as on tablet: the 4%/96% edge mask fades the outermost
        frame out across the last ~15px, and a fade at the boundary reads as a
