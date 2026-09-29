@@ -184,7 +184,7 @@
 .legal-lede {
   max-width: 640px;
   font-size: var(--fs-lead);
-  line-height: var(--lh-text);
+  line-height: var(--lh-lead);
   color: var(--color-muted);
   animation-delay: 0.25s;
 }
@@ -247,7 +247,7 @@
 .legal-h2 {
   font-family: var(--font-serif);
   font-weight: var(--fw-bold);
-  font-size: var(--fs-h3);
+  font-size: var(--fs-section);
   line-height: var(--lh-heading);
   color: var(--color-espresso);
 }

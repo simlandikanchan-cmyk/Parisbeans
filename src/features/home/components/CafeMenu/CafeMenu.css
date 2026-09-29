@@ -121,6 +121,7 @@
   max-width: 440px;
   margin-bottom: 2.4rem;
   font-size: var(--fs-text);
+  line-height: var(--lh-text);
 }
 
 .cafe-cta {
