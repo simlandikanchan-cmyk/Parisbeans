@@ -85,7 +85,7 @@ export default function OurStoryHero() {
 
   return (
     <section className="ostory-hero" ref={ref}>
-      <div className="ostory-hero-box">
+      <div className="ostory-shell">
         <p className="eyebrow ostory-eyebrow reveal">
           <span className="ostory-dash" aria-hidden="true" />
           OUR STORY

@@ -119,7 +119,7 @@
   font-style: italic;
   font-size: var(--fs-h3);
   line-height: var(--lh-heading);
-  color: var(--color-white);
+  color: #c7a45a;
   margin-bottom: 0.9rem;
 }
 
@@ -194,7 +194,7 @@
   font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--color-coffee-light);
+  color: #c7a45a;
   margin-bottom: 1.4rem;
 }
 
@@ -417,7 +417,7 @@ a.contact-body:focus-visible,
 .footer-tagline {
   font-family: var(--font-serif);
   font-style: italic;
-  color: var(--color-coffee-light);
+  color: #c7a45a;
   letter-spacing: var(--tracking-tagline);
 }
 

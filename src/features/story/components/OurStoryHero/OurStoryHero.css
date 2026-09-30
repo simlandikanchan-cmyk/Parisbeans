@@ -9,14 +9,7 @@
   padding: clamp(40px, 6.5vw, 104px) 0 clamp(40px, 6.5vw, 100px);
 }
 
-.ostory-hero-box {
-  width: min(1920px, 92vw);
-  margin-inline: auto;
-  padding-inline: 0;
-}
-
 .ostory-hero .ostory-eyebrow {
-  margin-left: clamp(0px, 5vw, 72px);
 }
 
 .ostory-title {
@@ -174,7 +167,7 @@
      plain block everywhere else, so this needs restating rather than inheriting.
      Moved here from StoryPage.css, which used to own it and won the tie only by
      being imported last. */
-  .ostory-hero-box {
+  .ostory-shell {
     display: flex;
     flex-direction: column;
   }

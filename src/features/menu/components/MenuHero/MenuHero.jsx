@@ -19,9 +19,11 @@ export default function MenuHero() {
         />
       </div>
       <div className="menu-hero-overlay" aria-hidden="true" />
+      {/*
       <span className="menu-hero-word" aria-hidden="true">
         PARIS
       </span>
+      */}
 
       <div className="menu-hero-content container">
         <div className="menu-hero-copy reveal">
