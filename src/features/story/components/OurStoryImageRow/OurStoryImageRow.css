@@ -4,7 +4,7 @@
 .ostory-story-img {
   display: grid;
   justify-items: center;
-  padding-block: clamp(0.5rem, 1vw, 1.25rem);
+  padding-block: clamp(0rem, 0vw, 1.25rem);
 }
 
 /* The <picture> wrapper carries the width, not the <img>. As a centred grid

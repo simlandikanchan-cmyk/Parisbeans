@@ -1,10 +1,15 @@
 /* ============================================================
    ORIGIN STORY — cream · image on the right
    ============================================================ */
+/* The 42px floor is the phone tier's value and only ever applies there: 9vw
+   reaches it at 467px, and from 768px up the preferred value (69px and up)
+   wins outright — the tablet band overrides padding-block outright below 1100px.
+   So the floor is what a 390px phone gets (42px, where it used to get the 92px
+   floor) and nothing else moves. */
 .ostory-origin {
   position: relative;
   overflow: hidden;
-  padding: clamp(92px, 9vw, 128px) 0;
+  padding: clamp(42px, 9vw, 128px) 0;
   background-color: #f7f3eb;
 }
 
@@ -45,7 +50,7 @@
   display: none;
 }
 
-@media (min-width: 768px) and (max-width: 1099px) {
+@media (min-width: 600px) and (max-width: 1099px) {
   .ostory-br-tablet {
     display: block;
   }
@@ -87,6 +92,243 @@
 }
 
 /* ============================================================
+   PHONE-TIER DECORATIONS
+
+   The two pale pieces of art (beans, cup + croissant) are cut out of the old
+   744x1248 phone background, which carried the same drawings on a ground of
+   its own. They are now separate images with no ground, positioned against the
+   two elements they sit beside, and hidden at every tier above the phone.
+   ============================================================ */
+
+/* Both wrappers exist at every tier but only earn a box on the phone, where the
+   art needs a positioning context to hang from. `display: contents` above it
+   promotes their children straight into the grid, so the eyebrow/heading/photo
+   are still the items they were before the art was split out — the tablet
+   reading order and the 640px measure are untouched. */
+.ostory-origin-heading,
+.ostory-emblem-frame {
+  display: contents;
+}
+
+/* Shared by every tier. `display: none` is the default and each band that wants
+   the art overrides it; the rest is the same everywhere, so it is stated once
+   here rather than repeated in each band. No filter or rotation, and no opacity
+   outside the phone band, which is the one that dims it: the art is already as
+   pale as the design wants it everywhere else. */
+.pb-story-deco {
+  display: none;
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+@media (max-width: 599px) {
+  /* ── 1. Side padding: exactly 16px ───────────────────────────
+     The section's inset is not padding — it is `.ostory-shell { width: 91% }`,
+     which leaves 17.55px either side at 390. A fixed 32px subtraction gives
+     the 16px the frame calls for at every phone width, and the rule is scoped
+     to this section so the hero and the image row above it keep their 91%. */
+  .ostory-origin .ostory-shell {
+    width: calc(100% - 32px);
+  }
+
+  /* ── 2. Eyebrow ─────────────────────────────────────────────
+     Uppercase and the gold are already `.eyebrow`'s; what changed on the phone
+     is the size, the weight (500 read too heavy) and the tracking, which was
+     0.32em — at this size that alone accounted for over 120px of the line. */
+  .ostory-origin .ostory-eyebrow {
+    font-size: 13px;
+    font-weight: 400;
+    /* 0.02em measured 230px of text at the phone's 13px; the frame's is about
+       242px, and 0.05em is the 0.03em that closes it — 30 gaps at 13px. */
+    letter-spacing: 0.05em;
+  }
+
+  /* ── 3. Photo: 302px, centred ───────────────────────────────
+     The wrap breaks out of the 16px inset to the full 390px, so the photo's
+     width and the two decoration offsets are both measured from the screen
+     edge — that is what makes `calc(100% - 88px)` come out at 302 and the
+     art's `right: 20px` sit 20px from the edge rather than 36px. The frame
+     centres it, so the free space is 44px on each side.
+
+     52px is the gap from the *title's* box bottom, which is where the frame
+     measures it from, so the title gives up its 1.2rem bottom margin and the
+     wrap carries the whole gap on its own margin. */
+  /* 52px is the gap from the *title's* box bottom, which is where the frame
+     measures it from, so the title gives up its 1.2rem bottom margin and the
+     wrap carries the whole gap on its own margin. */
+  .ostory-emblem-wrap {
+    order: 3;
+    margin: 52px -16px 94px;
+  }
+
+  /* The width goes on the emblem, not the photo.
+
+     The emblem is a flex item of the frame, so its base size is the max-content
+     width of what it holds — and the photo's `width: calc(100% - 88px)` is a
+     percentage, which max-content sizing treats as indefinite and resolves
+     against the source image's intrinsic width instead. The emblem then came
+     out at the frame's full 390px, leaving the frame no free space and
+     `justify-content: center` centring nothing: the photo landed hard against
+     the left edge. Sizing the emblem explicitly gives the frame 88px of free
+     space, 44 each side, and the photo fills the emblem. */
+  /* Capped at 420px so the 599→600px step is 420→444 instead of 511→444: without
+     it the phone measure runs away at the wide end of its own band and the photo
+     jumps 67px at the breakpoint. */
+  .ostory-emblem {
+    width: min(calc(100% - 88px), 420px);
+  }
+
+  .ostory-emblem-photo {
+    /* aspect-ratio: 1 / 1 and the 12px radius are the base values, unchanged;
+       object-fit stays on the img inside. */
+    width: 100%;
+  }
+
+  /* ── 4/5. Paragraphs ────────────────────────────────────────
+     14px on an 18px line, against 14.72px on 25.02px. The 94px below the
+     photo is the 18px the (nonexistent) gold rule sits at plus the 76px the
+     frame measures from it, and it is what leaves the bottom art — which ends
+     63px under the photo — its clear run up to the first line of text. */
+  .ostory-origin-text {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0;
+  }
+
+  /* ── 6. Decorations ─────────────────────────────────────────
+     The heading wrapper is full-bleed here: its own 16px padding cancels its
+     -16px margin, so the box runs to both screen edges while the heading text
+     still sits on the shell's 16px inset. It is a positioning context for
+     nothing now — the beans hang off the section instead, see below. */
+  .ostory-origin-heading {
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+
+  /* Both pieces of art are shown on the phone; the base rule hides them and
+     every band that wants them overrides that. */
+  .pb-story-deco {
+    display: block;
+  }
+
+  /* Top slot: the phone's placement is at the end of this file, where the cluster
+     is stated once and not twice — see PHONE — BEANS, restated last. */
+
+  /* Bottom slot: below the photo, on the left. */
+  .pb-story-deco--bottom {
+    left: 5px;
+    bottom: -63px;
+    width: 125px;
+  }
+
+  .ostory-origin {
+    /* The art hangs past its boxes on both sides of the section; clipped here
+       rather than on the wrappers, so nothing widens the document. */
+    overflow-x: hidden;
+  }
+
+  /* The wrappers become real boxes on the phone. Only the photo one is a
+     positioning context — the cup art hangs off it — and flex + centring keeps
+     the photo on same centre line it had when the emblem was the direct flex
+     item. The heading wrapper needs only the box: it is a grid item at order 2,
+     and nothing inside it is positioned now that the beans have moved to the
+     section. */
+  .ostory-origin-heading {
+    display: block;
+  }
+
+  .ostory-emblem-frame {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+  }
+
+  /* Real content above the decoration layer. The copy is flattened here, so the
+     eyebrow, the heading and the paragraphs are grid items in their own right,
+     and the z-index is what carries each of them above the art: the beans are a
+     z-index 0 layer at the section's own level and the cup art is z-index 0
+     inside the frame, so nothing below needs to know which one it is beside.
+     The emblem is listed as well as the frame around it — the frame carries the
+     cup art, and the emblem is the photograph that has to stay above the beans. */
+  .ostory-origin-copy > .eyebrow,
+  .ostory-origin-copy > .ostory-origin-text,
+  .ostory-origin-title,
+  .ostory-emblem,
+  .ostory-emblem-frame {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* ── 6a. The ring text, and the clip that replaces the old one ────
+   The old ring was outlined paths inside photo.svg, sitting at a radius of 314
+   to 333 against the photograph's own 294.81 — every stroke of it outside the
+   photograph's outline. So below 1024px the clip below takes it out by cutting
+   the image to that outline, and no photograph goes with it; see ARCH_CLIP in
+   the JSX for the geometry. From 1024px up neither applies and the baked ring
+   stays exactly as it is. */
+@media (max-width: 1023px) {
+  .ostory-emblem-photo img {
+    clip-path: url(#pb-photo-arch);
+  }
+}
+
+/* The clip defs host. Sized to nothing so the svg never takes up space. */
+.pb-story-clips {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* The ring's own box is the photo's box, which the component measures; the
+   letters hang outside it, so `overflow: visible` on the svg is what lets them
+   paint at all. Nothing here widens the page — the element's box is the photo's,
+   and only its box counts for scrolling. `.ostory-emblem` is what has to be the
+   containing block here, or `inset: 0` would resolve against the frame, which is
+   full bleed, and the ring would be centred on the section instead of the photo. */
+.ostory-emblem {
+  position: relative;
+}
+
+.pb-story-ring {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pb-story-ring__svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+}
+
+.pb-story-ring__text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 11px;
+  fill: #c7a45a;
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .pb-story-ring__text {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pb-story-ring {
+    display: none;
+  }
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1099px) {
@@ -103,13 +345,14 @@
   }
 }
 
-/* ── Tablet: 768–1099px ────────────────────────────────────────
+/* ── Tablet: 600–1099px ────────────────────────────────────────
    This band used to start at 641px, which put a 56px heading and 20px body into
    a 583–698px measure — a desktop type scale in a phone-width column. The
    heading comment below relies on ~12px of slack that only exists once the
    title has a full 640px to sit in, so between 641 and 689 the deliberately
-   two-line heading silently became three. The band now starts at 768px with the
-   rest of the site and the phone tier below owns everything under it.
+   two-line heading silently became three. It now starts at 600px, which is
+   where the phone tier below ends: 744px — the width of the Figma frame the
+   decorations were cut from — belongs to this tier, not the phone's.
 
    Sized against the collapsed column rather than the viewport. The base
    clamp(300px, 32vw, 580px) is pinned to its 300px floor across this whole
@@ -119,7 +362,7 @@
    vw floor that would overflow a narrower screen. It has to be centred too: an
    explicitly sized flex item is placed at the start of its area, not centred,
    so without that the whole dead space would simply move to the right. */
-@media (min-width: 768px) and (max-width: 1099px) {
+@media (min-width: 600px) and (max-width: 1099px) {
   /* The two-column grid becomes a column flex box across both tablet tiers.
      Moved here from StoryPage.css, which used to own it and won the tie only by
      being imported last.
@@ -256,7 +499,8 @@
     display: contents;
   }
 
-  .ostory-origin-copy > * {
+  .ostory-origin-copy > *,
+  .ostory-origin-copy > .ostory-origin-heading > .ostory-origin-title {
     align-self: center;
     width: min(100%, 640px);
     /* The base rule caps .ostory-origin-text at 540px, and a cap beats `width`:
@@ -271,7 +515,12 @@
     order: 1;
   }
 
-  .ostory-origin-copy > .ostory-origin-title {
+  /* The heading wrapper is `display: contents` at this tier — it exists only to
+     be a positioning context for the phone-tier beans — so it generates no box
+     and takes no part in the flex layout. The h2 is the flex item, and both the
+     order and the shared 640px measure below have to be set on it directly
+     rather than through the wrapper. */
+  .ostory-origin-copy > .ostory-origin-heading > .ostory-origin-title {
     order: 2;
   }
 
@@ -295,7 +544,358 @@
   }
 }
 
-@media (max-width: 767px) {
+/* ── Tablet: 600–1023px ──────────────────────────────────────
+   The two pieces of art were phone-only: the base rule is `display: none` and
+   every declaration that positions them — and the two wrappers they hang from —
+   lived in the phone's own block. Nothing here was hidden by overflow or by a
+   width; the elements were simply never displayed outside it.
+
+   This band reuses the same mechanism one tier up, with the tablet's own
+   numbers. It starts at 600px so that 744 — the width of the Figma frame these
+   drawings were cut from — is treated as the tablet it was drawn as, and stops
+   at 1023px on purpose: the band above runs to 1099px, and 1024px and up is
+   left exactly as it was.
+
+   The wrappers stop being `display: contents` here too, which is what gives the
+   art something to position against. That has two consequences inside a layout
+   that is otherwise untouched:
+
+   - The heading wrapper becomes the flex item, so the `order: 2` set on the h2
+     for this tier is now inert and has to be restated on the wrapper, or the
+     heading sorts ahead of the eyebrow (default order 0 < 1).
+   - The h2 keeps its own 640px measure, but inside a full-bleed wrapper it has
+     to centre itself again: the shared `> *` rule zeroes its auto inline
+     margins for the flex-item case, and it is no longer one. */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .ostory-origin {
+    overflow-x: hidden;
+  }
+
+  /* Full-bleed anchors.
+
+     Upstream the shell is `width: 91%`, which leaves 4.5% of the viewport at
+     each edge of the section; below this block it is pinned to a 24px inset
+     instead. That is what makes `right: 14px` mean 14px from the screen edge
+     rather than 14px from a 640px column floating in the middle of it. The
+     negative margin that cancels a constant inset has to be a constant too —
+     see the note on it below. */
+  .ostory-origin .ostory-shell {
+    width: calc(100% - 48px);
+  }
+
+  .ostory-origin-copy > .ostory-origin-heading,
+  .ostory-emblem-wrap {
+    align-self: stretch;
+    width: auto;
+    /* A fixed length, not a percentage: the shell's inset above is a fixed 24px,
+       but a percentage margin resolves against the shell's own width, and that
+       width is a different number at every viewport — 4.348% of 552 at 600px
+       against 3.448% of 696 at 744px. One percentage cannot cancel a constant. */
+    margin-inline: -24px;
+  }
+
+  /* The heading wrapper is full-bleed (the -24px margin above), so its text has
+     to be given the 24px back as padding: that is what puts the title's first
+     line on the same 24px inset as the eyebrow and the paragraphs below it,
+     rather than flush to the screen edge. The title then needs no auto margin
+     to centre itself — the box already fills the inset measure. */
+  .ostory-origin-copy > .ostory-origin-heading {
+    display: block;
+    position: relative;
+    order: 2;
+    padding-inline: 24px;
+  }
+
+  .ostory-origin-copy > .ostory-origin-heading > .ostory-origin-title {
+    margin-inline: 0;
+  }
+
+  /* The eyebrow and the paragraphs pin to the same 24px inset, on a 700px
+     measure. Upstream they are centred on a 640px box, which put them 28px
+     inside the inset at 744 and left the heading on a different left edge
+     again; `flex-start` on a 700px measure is what makes all three agree, and
+     700 rather than 640 because the shell only reaches 696 at 744 — the frame's
+     widest width in this band — so the measure is the inset box itself here and
+     only starts binding above about 750px. */
+  .ostory-origin-copy > .eyebrow,
+  .ostory-origin-copy > .ostory-origin-text {
+    align-self: flex-start;
+    width: min(100%, 700px);
+  }
+
+  .ostory-emblem-frame {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+
+  /* The photo: 588px, centred — `calc(100% - 156px)` against the frame, which
+     the negative margins above have already stretched to the full screen width.
+     156 is 78 a side, which at 744px gives the 588px the Figma frame shows, and
+     the measure keeps the same proportion of the screen as the phone's
+     `calc(100% - 88px)` below. The width goes on the emblem, not the photo, for
+     the reason given in the phone band: a percentage width on a flex item
+     resolves against its content's intrinsic size, not the frame. */
+  .ostory-emblem {
+    width: calc(100% - 156px);
+    margin-inline: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ostory-emblem-photo {
+    width: 100%;
+  }
+
+  /* The bottom art ends 65px below the photo, so the first paragraph has to
+     start 78px below it to clear the art by the 12px the frame asks for. The
+     space is taken on the wrap's bottom margin rather than as a margin-top on
+     the paragraph, which keeps the run of three paragraphs governed by the
+     rules above instead of needing a first-child selector that breaks if the
+     eyebrow is ever not a <p>. */
+  .ostory-emblem-wrap {
+    margin-bottom: 78px;
+  }
+
+  /* The heading→photo gap on this tier.
+
+     It used to be 172px, added here purely so the beans — which hung off the
+     heading — had somewhere to sit between the two. They hang off the photo now,
+     so that margin would only be empty space, and it is gone. What is left is
+     the title's own bottom margin, which the band above sets to 3rem; this
+     trims it to the 30px the frame asks for. 30 rather than the 48px base so
+     that the beans, which begin 25px above the photo's top edge, still clear the
+     heading by 5px. */
+  .ostory-origin-copy > .ostory-origin-heading > .ostory-origin-title {
+    margin-bottom: 30px;
+  }
+
+  .pb-story-deco {
+    display: block;
+  }
+
+  /* ── Type at 744px, from the frame ───────────────────────────
+     600px is where this tier starts, so 744 is its reference width and every
+     number below is measured at it: a 24px inset either side, a 13px eyebrow on
+     the same gold the phone uses, a two-line 60px title with a 66px pitch, and
+     20px body on 26px lines. The phone tier's own type stops at 599px, so 600 to
+     767 gets this instead — including the title's second line, which is what the
+     frame shows.
+
+     The tracking on the eyebrow is what makes it 241px: the glyphs alone are
+     narrower than that, and the frame's label is a tracked-out one. */
+  .ostory-origin .ostory-eyebrow {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.048em;
+    color: #c7a45a;
+  }
+
+  .ostory-origin-title,
+  .ostory-origin-title em {
+    /* The cap is 58.5px: the first line measures 650px of ink at 60px and the
+     frame's is 634px, and 58.5 is where those two land together. The middle
+     term is unchanged, so 600px keeps its 48.4px, and below that the line
+     scales down with the viewport — it is 634px of type, and anything under
+     about 646px of viewport would wrap it and buy a third line. */
+    font-size: clamp(46px, 8.0645vw, 58.5px);
+    line-height: 1.1;
+    color: #3b2518;
+    /* Two lines, always. The breaks are forced by `.ostory-br-tablet` above, but
+       that only fixes where a line may end: without this the longest run in
+       either line can still wrap inside itself, which at 600-644px is what
+       turned the two-line measure into three and four. The em is listed too
+       because "From a Parisian Feeling" is one em and inherits nothing from a
+       nowrap it does not itself carry. 634px of type at 58.5px, and this band's
+       measure is the full 744px frame inset 24px a side, so it fits at every
+       width this band covers. */
+    white-space: nowrap;
+  }
+
+  /* The heading block, and only the heading block, takes the full bleed. The
+     640px copy measure upstream is narrower than the title's first line, and a
+     box that clips it buys a third line; the eyebrow and the paragraphs keep
+     their 640px measure. `.ostory-br-tablet` alone is active in this band, so
+     the two lines are the ones the copy already breaks into. */
+  .ostory-origin-copy > .ostory-origin-heading,
+  .ostory-origin-copy > .ostory-origin-heading > .ostory-origin-title {
+    width: 100%;
+    max-width: none;
+  }
+
+  .ostory-origin-text {
+    font-size: 20px;
+    line-height: 26px;
+    color: #75675d;
+  }
+
+  .ostory-origin-copy > .ostory-origin-text + .ostory-origin-text {
+    margin-top: 26px;
+  }
+
+  /* Top-right cluster: hangs off the frame — the same full-bleed wrapper the cup
+     uses, whose top edge is the photo's top edge — so it begins 25px above the
+     photo and runs back down beside its top-right corner, where the frame leaves
+     it room, the rest of it behind the opaque photo. `.ostory-emblem` carries
+     `z-index: 1` above, which is what keeps the photo's face over the art
+     instead of under it.
+
+     The copy in the heading wrapper is the phone's anchor and is inert here; at
+     1024px and up the roles swap back, so both tiers still use the one whose
+     anchor they are hanging from. `height: auto` comes from the shared base
+     rule. */
+  .pb-story-deco--top {
+    display: none;
+  }
+
+  .pb-story-deco--top-photo {
+    right: 14px;
+    top: -25px;
+    width: 205px;
+  }
+
+  /* Bottom-left art, below the photo.
+
+     225px is the frame's width and it ends 65px below the photograph, which is
+     what the frame shows. The first paragraph starts 78px below it, so the art's
+     box clears the copy by 13px vertically at every width in this band.
+
+     Its *box* still runs across the first line's measure — at 600px the art
+     spans 15..240px against a 552px shell whose text opens at 24px — so the box
+     rects do overlap the first line. The artwork is mostly transparent there:
+     painting the image into a canvas at its laid-out size and testing its alpha
+     against the line rects finds no ink on the copy from 600px to 1023px. */
+  .pb-story-deco--bottom {
+    left: 15px;
+    bottom: -65px;
+    width: 225px;
+  }
+
+  .ostory-origin-copy > .eyebrow,
+  .ostory-origin-copy > .ostory-origin-text,
+  .ostory-origin-title {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* ── The gold rule, phone and tablet: up to 1023px ─────────────
+   A 2px rule under the photograph, on the frame's own gold and hung off the
+   emblem rather than the photograph so it is not clipped by the photo's radius.
+   `right: 0` aligns it with the photograph's right edge — the emblem is the
+   photograph's box, so the two are the same box — and 52% is just over half its
+   width, which is the measure the phone frame draws.
+
+   It sits 31px below the photograph, which is clear of the bottom art on the
+   left (it ends 63px below on the phone, 65px on the tablet, and is a quarter
+   to a half of the emblem's width where this starts) and clear of the copy below
+   it: the first paragraph starts 94px under the photograph on the phone and
+   78px on the tablet, so the rule has 47px and 47px of clearance. From 1024px up
+   there is no rule — the two-column layout has the copy beside the image rather
+   than under it, and the frame shows none. */
+@media (max-width: 1023px) {
+  .ostory-emblem::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -31px;
+    width: 52%;
+    height: 2px;
+    background: #c7a45a;
+    pointer-events: none;
+  }
+}
+
+/* ── Laptop and desktop: 1024px and up ────────────────────────
+   Two columns here — copy left, photo right — so both pieces of art are placed
+   against the photo's own box and sized as a share of it, so they keep their
+   proportions as that box scales rather than sitting at a fixed pixel size the
+   way the phone and tablet bands do.
+
+   The frame is the anchor. It is `display: contents` everywhere else, so at this
+   tier it is the first box it owns, and it is given the width the photo has at
+   this tier: `clamp(300px, 32vw, 580px)` from 1100px, and the 640px cap the
+   768–1099px band applies below that. The same expression as the photo's, so the
+   two boxes are the same box by measurement rather than by coincidence — which
+   is the whole point, since every offset below is a percentage of it. The photo
+   itself is untouched: it is a block inside a box of exactly its own width, and
+   the wrap still centres the pair exactly as it centred the photo alone. */
+@media (min-width: 1024px) {
+  .ostory-emblem-frame {
+    display: block;
+    position: relative;
+  }
+
+  /* Content above the art. The copy is the block the bottom art reaches towards,
+     so it needs the z-index as much as the photo does — that is the whole of the
+     text-readability rule at this tier. */
+  .ostory-origin-copy,
+  .ostory-emblem {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pb-story-deco {
+    display: block;
+  }
+
+  /* The heading copy of the cluster is handed over to the one in the frame: at
+     this tier the cluster is placed against the photo, and the heading wrapper
+     is `display: contents`, so it cannot be what the art hangs from. */
+  .pb-story-deco--top {
+    display: none;
+  }
+
+  /* Top-right cluster: above the photo's top-right corner. It overhangs the
+     corner rather than clearing it — at 30% of the photo it is 0.24 of the
+     photo's width tall, so -8.5% leaves it hanging into the corner by design
+     and the photo, opaque and above it, hides that part. */
+  .pb-story-deco--top-photo {
+    right: 2%;
+    top: -8.5%;
+    width: 30%;
+    max-width: 240px;
+  }
+
+  /* Bottom-left art: over the photo's lower-left and out into the gap the two
+     columns leave between them. */
+  .pb-story-deco--bottom {
+    left: -35%;
+    bottom: -12%;
+    width: 64%;
+    max-width: 490px;
+  }
+}
+
+/* 1024–1099px is the last of the stacked layout — the two columns only start at
+   1100px — so the gap the bottom art is placed in does not exist yet. The photo
+   is 640px wide and centred, the paragraph below it is the same 640px and only
+   32px down, and there is no space beside the photo for art this size: at the
+   width above it hangs 224px past the left edge of the viewport, lands on that
+   paragraph and gets clipped. It is narrowed to the empty gutter beside the
+   photo's lower-left corner and pulled up so its bottom edge is the photo's
+   bottom edge, which is the only placement at this width that shows the art and
+   leaves every line of text clear. */
+@media (min-width: 1024px) and (max-width: 1099px) {
+  .ostory-emblem-frame {
+    width: min(100%, 640px);
+  }
+
+  .pb-story-deco--bottom {
+    left: -30%;
+    bottom: 0;
+    width: 40%;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .ostory-emblem-frame {
+    width: clamp(300px, 32vw, 580px);
+  }
+}
+
+@media (max-width: 599px) {
   .ostory-origin-grid {
     gap: 0;
   }
@@ -310,18 +910,75 @@
     order: 1;
   }
 
-  .ostory-origin-copy > .ostory-origin-title {
+  /* The order sits on the heading wrapper, not the h2: it is the wrapper that is
+     the grid item on the phone (it is a real block here, for the beans), so
+     ordering the heading itself would do nothing. Above the phone the wrapper is
+     `display: contents` and the same order is set on the h2 instead. */
+  .ostory-origin-copy > .ostory-origin-heading {
     order: 2;
-    margin-left: 0;
-    margin-right: 0;
   }
 
-  .ostory-emblem-wrap {
-    order: 3;
-    margin: 1.25rem 0 2rem;
+  /* The title's own auto inline margins, cancelled as they were when it was a
+     grid item in its own right. It is no longer one — it sits inside the
+     heading wrapper — so the reset moves with it. The bottom margin goes too:
+     the gap to the photo is the wrap's 52px, and leaving a second margin in
+     the chain would make the two meet. */
+  .ostory-origin-copy > .ostory-origin-heading > .ostory-origin-title {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
   }
 
   .ostory-origin-copy > .ostory-origin-text {
     order: 4;
+    /* The first paragraph's leading margin is part of the 94px below the photo,
+       and paragraphs are grid items here, so margins do not collapse the way
+       they did in the block layout this tier replaced. */
+    margin-top: 0;
+  }
+
+  .ostory-origin-copy > .ostory-origin-text + .ostory-origin-text {
+    margin-top: 18px;
+  }
+}
+
+/* ============================================================
+   PHONE — BEANS, restated last
+
+   The whole file above places the cluster twice: once in this tier's own block
+   and once in the tablet block below it. That was two places to keep in step for
+   one placement, and the two answers drifted. These four declarations are the
+   phone tier's placement and nothing else is left to say about it here.
+
+   `--top-photo` is the copy in the frame, so its containing block is
+   `.ostory-emblem-frame` — full bleed on the phone — and the offsets are against
+   the photograph's top-right corner: 13px above the photo's top edge, which is
+   inside the 52px gap `.ostory-emblem-wrap` leaves between the heading and the
+   wrap, and so cannot reach the copy at any width. The rest of the cluster runs
+   back down over the corner and behind the photograph, which is opaque and
+   carries `z-index: 1`. `left`, `bottom` and `transform` are stated because the
+   tablet block sets all three on this same element, and a phone that inherited
+   any of them would place the art against the wrong edge.
+
+   `--top` is the copy against the section, and the phone has no use for it: one
+   cluster, in the frame, on this tier as on every other. It is hidden last so it
+   wins on source order against this file's own `display: block` above, the two
+   selectors having the same weight.
+   ============================================================ */
+@media (max-width: 599px) {
+  .pb-story-deco--top {
+    display: none;
+  }
+
+  .pb-story-deco--top-photo {
+    display: block;
+    top: -13px;
+    right: 7px;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    /* 80px at the narrow end, 28vw to 599, and never past 130px. */
+    width: clamp(80px, 28vw, 130px);
+    opacity: 1;
   }
 }

@@ -13,23 +13,15 @@ const PrivacyPolicy = lazy(() => import('../pages/legal/PrivacyPolicyPage.jsx'))
 const TermsConditions = lazy(() => import('../pages/legal/TermsConditionsPage.jsx'))
 const NotFound = lazy(() => import('../pages/not-found/NotFoundPageWrapper.jsx'))
 
-// A quiet placeholder for the moment a lazy route chunk is in flight. The site
-// intro stays in Layout: as a Suspense fallback it would unmount the instant
-// the chunk resolved, cutting its fixed 2300ms dwell short and making the intro
-// flash past instead of playing.
-function RouteLoading() {
-  return (
-    <div className="route-loading" role="status" aria-live="polite">
-      <span className="route-loading-bar" aria-hidden="true" />
-      <span className="sr-only">Loading page</span>
-    </div>
-  )
-}
-
+// The route chunks are lazy, so Suspense needs a fallback. It is null: a
+// visible placeholder here would read as a loader bar flashing on every
+// navigation, and the site intro (Layout/Preloader) already owns the first
+// paint. Keep the wrapper — useReadiness waits for a real `main` to commit, so
+// a non-null fallback here would stall the intro's route signal.
 export default function App() {
   return (
     <ErrorBoundary>
-      <Suspense fallback={<RouteLoading />}>
+      <Suspense fallback={null}>
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />

@@ -1,33 +1,72 @@
 /* ============================================================
-   PRELOADER — minimal & elegant
+   PRELOADER — "ParisBeans opens."
+
+   A cream editorial curtain that inscribes the seal, reports honest page
+   readiness, then retracts to hand the visitor straight into the hero.
+
+   Timeline (must stay in sync with BRAND_MOMENT_MS in Preloader.jsx):
+
+     0.00  curtain + emblem rise in
+     0.08  ring strokes begin, sweeping outermost -> innermost
+     0.50  the real logo resolves beneath the trace
+     0.52  wordmark letters rise
+     0.80  gold rule grows
+     0.90  gold trace hands off to the espresso ring
+     0.95  tagline fades
+     1.50  brand moment complete
+     1.65  curtain retracts (clip-path), 0.86s
+     2.51  preloader unmounts
    ============================================================ */
+
 .preloader {
+  /* Authored here, read by calc() below and mirrored by BRAND_MOMENT_MS. */
+  --pb-draw-delay: 0.08s;
+  --pb-draw-dur: 0.42s;
+  --pb-draw-stagger: 0.135s;
+  --pb-fill-delay: 0.5s;
+  --pb-fill-dur: 0.55s;
+  --pb-trace-out-delay: 0.9s;
+  --pb-trace-out-dur: 0.55s;
+  --pb-letter-delay: 0.52s;
+  --pb-letter-stagger: 0.03s;
+  --pb-letter-dur: 0.6s;
+  --pb-rule-delay: 0.8s;
+  --pb-rule-dur: 0.6s;
+  --pb-tagline-delay: 0.95s;
+  --pb-tagline-dur: 0.55s;
+  --pb-exit-dur: 0.86s;
+
   position: fixed;
   inset: 0;
+  /* 100dvh, not 100%: the curtain has to cover the full visual viewport or
+     mobile browser chrome shows through it. 100% is the older-browser floor. */
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
   z-index: var(--z-preloader);
   display: grid;
   place-items: center;
   background-color: var(--color-bg);
-  background-image: radial-gradient(
-    1100px 580px at 50% 46%,
-    rgba(201, 147, 89, 0.12),
-    transparent 64%
-  );
   overflow: hidden;
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity 0.45s var(--ease),
-    visibility 0.9s var(--ease),
-    transform 1s var(--ease);
-  will-change: transform, opacity;
+
+  /* The exit. The bottom edge retracts upward, so the cream field peels away
+     and reveals the page already sitting underneath — nothing translates,
+     nothing is dragged off-screen. */
+  clip-path: inset(0 0 0 0);
+  transition: clip-path var(--pb-exit-dur) var(--ease);
+  will-change: clip-path;
 }
 
-.preloader.is-hidden {
-  opacity: 0;
-  visibility: hidden;
+.preloader.is-exiting {
+  clip-path: inset(0 0 100% 0);
   pointer-events: none;
-  transform: translateY(-100%);
+}
+
+/* Content clears ahead of the curtain so the reveal is a clean cream field. */
+.preloader.is-exiting .preloader-inner,
+.preloader.is-exiting .preloader-meta {
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
 }
 
 .preloader-inner {
@@ -35,30 +74,62 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition:
-    opacity 0.4s var(--ease),
-    transform 0.6s var(--ease);
+  transition: opacity 0.3s var(--ease);
 }
 
-.preloader.is-hidden .preloader-inner {
-  opacity: 0;
-  transform: translateY(-30px) scale(1.04);
+.preloader-meta {
+  position: absolute;
+  left: max(24px, var(--gutter));
+  bottom: max(24px, var(--gutter));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: pbMetaIn 0.8s var(--ease) 0.34s both;
+  transition: opacity 0.3s var(--ease);
 }
 
-/* ---------- Emblem ---------- */
+/* ---------- Emblem: trace, then the real mark ---------- */
 .preloader-emblem {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 220px;
-  height: 220px;
-  animation: preloaderEmblemIn 1.1s var(--ease) both;
-}
-
-.preloader-logo {
   width: 172px;
   height: 172px;
+  animation: pbRise 0.9s var(--ease) both;
+}
+
+.preloader-emblem-draw {
+  width: 100%;
+  height: 100%;
+  /* The outer ring is flush with the viewBox edge; without this the hairline
+     would be sliced in half at the extremes. */
+  overflow: visible;
+  animation: pbTraceOut var(--pb-trace-out-dur) var(--ease)
+    var(--pb-trace-out-delay) forwards;
+}
+
+.preloader-emblem-draw path {
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* pathLength="1" on each path normalises every subpath to a unit length, so
+     one dash value and one delay formula drive the whole seal. */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pbDraw var(--pb-draw-dur) var(--ease) forwards;
+  animation-delay: calc(var(--pb-draw-delay) + var(--i) * var(--pb-draw-stagger));
+}
+
+.preloader-emblem-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 16px 30px rgba(67, 39, 25, 0.18));
+  opacity: 0;
+  animation: pbFade var(--pb-fill-dur) var(--ease) var(--pb-fill-delay) forwards;
 }
 
 /* ---------- Wordmark ---------- */
@@ -79,7 +150,8 @@
   display: inline-block;
   opacity: 0;
   transform: translateY(110%);
-  animation: preloaderLetterIn 0.85s var(--ease) forwards;
+  animation: pbLetterIn var(--pb-letter-dur) var(--ease) forwards;
+  animation-delay: calc(var(--pb-letter-delay) + var(--i) * var(--pb-letter-stagger));
 }
 
 .preloader-letter--space {
@@ -89,12 +161,12 @@
 /* ---------- Gold rule ---------- */
 .preloader-line {
   width: 116px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-gold), #d9ae77);
+  height: 1px;
+  background-color: var(--color-gold);
   margin-top: 1.7rem;
   transform: scaleX(0);
   transform-origin: center;
-  animation: preloaderLineGrow 0.9s var(--ease) 0.85s both;
+  animation: pbRuleGrow var(--pb-rule-dur) var(--ease) var(--pb-rule-delay) both;
 }
 
 /* ---------- Tagline ---------- */
@@ -108,35 +180,72 @@
   color: var(--color-coffee);
   margin-top: 1.3rem;
   opacity: 0;
-  animation: preloaderTaglineIn 0.9s var(--ease) 1.15s both;
+  animation: pbFade var(--pb-tagline-dur) var(--ease) var(--pb-tagline-delay) both;
+}
+
+/* ---------- Counter + rail ---------- */
+.preloader-counter {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.22em;
+  color: var(--color-coffee);
+  font-variant-numeric: tabular-nums;
+  /* Fixed measure so the readout never jitters as the digits change. */
+  min-width: 3.6ch;
+  line-height: 1;
+}
+
+.preloader-rail {
+  display: block;
+  width: 148px;
+  max-width: 38vw;
+  height: 1px;
+  background-color: var(--color-border);
+  overflow: hidden;
+}
+
+.preloader-rail-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-gold);
+  transform: scaleX(var(--pb-progress, 0));
+  transform-origin: left center;
+}
+
+/* ============================================================
+   HERO HANDOFF
+
+   Scoped from here rather than added to Hero.css: the hero already owns its
+   own entrance through useReveal and .reveal, and its background is espresso,
+   so there is no white flash to mask. All this adds is a barely-there settle
+   released exactly as the curtain retracts — enough that the page reads as
+   arriving rather than being uncovered.
+   ============================================================ */
+html[data-preloader] .hero {
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+html[data-preloader='active'] .hero {
+  opacity: 0.96;
+  transform: translateY(8px);
+}
+
+html[data-preloader='exiting'] .hero {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scroll lock by attribute, not an inline body style, so the preloader cannot
+   clobber a lock held by the mobile nav or the AI assistant. */
+html[data-preloader],
+html[data-preloader] body {
+  overflow: hidden;
 }
 
 /* ---------- Keyframes ---------- */
-@keyframes preloaderEmblemIn {
-  from {
-    opacity: 0;
-    transform: scale(0.82) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes preloaderLetterIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes preloaderLineGrow {
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes preloaderTaglineIn {
+@keyframes pbRise {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -147,104 +256,166 @@
   }
 }
 
-/* ---------- Tablet ---------- */
-@media (max-width: 1024px) {
-  .preloader-emblem {
-    width: 180px;
-    height: 180px;
+@keyframes pbDraw {
+  to {
+    stroke-dashoffset: 0;
   }
+}
 
-  .preloader-logo {
-    width: 140px;
-    height: 140px;
+@keyframes pbFade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pbTraceOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pbLetterIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pbRuleGrow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes pbMetaIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Tablet portrait + landscape ---------- */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .preloader-emblem {
+    width: 150px;
+    height: 150px;
   }
 
   .preloader-wordmark {
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(2.4rem, 5.4vw, 3.6rem);
     margin-top: 1.5rem;
+  }
+
+  .preloader-rail {
+    width: 132px;
   }
 }
 
 /* ---------- Phone ---------- */
-@media (max-width: 640px) {
-  .preloader {
-    background-image: radial-gradient(
-      600px 380px at 50% 46%,
-      rgba(201, 147, 89, 0.12),
-      transparent 64%
-    );
-  }
-
+@media (max-width: 767px) {
   .preloader-emblem {
-    width: 132px;
-    height: 132px;
-  }
-
-  .preloader-logo {
-    width: 104px;
-    height: 104px;
-    filter: drop-shadow(0 12px 22px rgba(67, 39, 25, 0.18));
+    width: 128px;
+    height: 128px;
   }
 
   .preloader-wordmark {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(1.9rem, 8.4vw, 2.9rem);
     line-height: 1.1;
     letter-spacing: 0.005em;
-    margin-top: 1.3rem;
+    margin-top: 1.25rem;
   }
 
   .preloader-line {
-    width: 84px;
+    width: 88px;
     margin-top: 1.3rem;
   }
 
   .preloader-tagline {
     font-size: var(--fs-eyebrow);
-    letter-spacing: 0.3em;
-    padding-left: 0.3em;
+    letter-spacing: 0.28em;
+    padding-left: 0.28em;
     margin-top: 1rem;
+  }
+
+  .preloader-meta {
+    gap: 12px;
+  }
+
+  .preloader-rail {
+    width: 112px;
+    max-width: 42vw;
   }
 }
 
-/* ---------- Small phones ---------- */
-@media (max-width: 480px) {
+/* ---------- Small phones (320 / 375) ---------- */
+@media (max-width: 380px) {
   .preloader-emblem {
     width: 112px;
     height: 112px;
   }
 
-  .preloader-logo {
-    width: 88px;
-    height: 88px;
+  .preloader-wordmark {
+    font-size: clamp(1.6rem, 8.6vw, 2.2rem);
+    margin-top: 1.05rem;
   }
 
-  .preloader-wordmark {
-    font-size: clamp(1.7rem, 8vw, 2.4rem);
-    margin-top: 1.1rem;
+  .preloader-rail {
+    width: 96px;
   }
 }
 
-/* ---------- Reduced motion ---------- */
+/* ---------- Reduced motion ----------
+   No draw, no clip-path, no hero settle — just the mark, held until the page
+   is genuinely ready, then a plain cut. The JS fallback window drops to 120ms
+   in this mode so nothing lingers. */
 @media (prefers-reduced-motion: reduce) {
   .preloader,
-  .preloader-inner {
-    transition: none;
+  .preloader.is-exiting {
+    clip-path: none;
+    transition: opacity 0.24s linear;
+  }
+
+  .preloader.is-exiting {
+    opacity: 0;
+  }
+
+  .preloader-emblem-draw {
+    display: none;
+  }
+
+  .preloader-emblem-fill {
+    animation: none;
+    opacity: 1;
   }
 
   .preloader-emblem,
   .preloader-letter,
   .preloader-line,
-  .preloader-tagline {
+  .preloader-tagline,
+  .preloader-meta {
     animation: none;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .preloader.is-hidden {
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
     transform: none;
   }
 
-  
+  .preloader.is-exiting .preloader-inner,
+  .preloader.is-exiting .preloader-meta {
+    opacity: 0;
+    transition: opacity 0.15s linear;
+  }
+
+  html[data-preloader] .hero,
+  html[data-preloader='active'] .hero,
+  html[data-preloader='exiting'] .hero {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }

@@ -28,21 +28,28 @@ export default function StorySection() {
 
   return (
     <section id="story" className="section story" ref={ref}>
+      {/* Cup + croissant line art, desktop and laptop only. */}
+      <img
+        className="home-story-deco"
+        src={storyImages.decoCupCroissant}
+        alt=""
+        aria-hidden="true"
+      />
       <div className="story-grid">
         {/* Left — text */}
         <div className="story-copy">
           <div className="pb-story-eyebrow eyebrow reveal">— OUR STORY</div>
           <h2 className="story-title reveal reveal-delay-1">
-            Inspired by Paris
+            Inspired By Paris
             <br />
-            <em>Streets.</em> Crafted for
+            <em>Streets.</em> Created For
             <br />
             Your <em>Salon Day.</em>
           </h2>
           <p className="lead story-paragraph reveal reveal-delay-2">
-            Born from a love for the café culture of Paris, Paris
-            Beans brings the rhythm of a street-side coffee
-            break into the heart of HAIR RAP BY YOYO.
+            Born from a love for the café culture of Paris, ParisBeans
+            brings the rhythm of a street-side coffee break into the heart of
+            HAIR RAP BY YOYO.
           </p>
           <div className="story-cta reveal reveal-delay-3">
             <Button href="/story" variant="primary" arrow>

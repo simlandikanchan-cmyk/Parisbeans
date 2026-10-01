@@ -163,116 +163,78 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Mobile drawer */
-.mobile-drawer {
+/* ==========================================================================
+   Mobile menu drawer
+   Plain rows with hairline dividers, one cream contact block, pinned CTA.
+   The panel itself is animated by framer-motion (x / opacity only), so no
+   transition lives on .pb-menu-drawer.
+   ========================================================================== */
+
+.pb-menu-drawer {
   position: fixed;
   top: 0;
   right: 0;
   height: 100dvh;
   width: min(400px, 94vw);
-  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
-  z-index: 200;
-  transform: translateX(100%);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  max-width: 100%;
+  z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  padding: calc(1.5rem + env(safe-area-inset-top, 0px)) clamp(1.4rem, 6vw, 1.9rem)
-    calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+  padding: calc(1.4rem + env(safe-area-inset-top, 0px)) clamp(1.25rem, 6vw, 1.75rem)
+    calc(1.25rem + env(safe-area-inset-bottom, 0px));
   box-shadow: -22px 0 60px -28px rgba(67, 39, 25, 0.32);
   overscroll-behavior: contain;
-  border: 1px solid var(--color-border);
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
+  border-left: 1px solid var(--color-border);
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+  /* The drawer is a fixed frame: the nav scrolls inside it and the footer
+     stays pinned, so the drawer itself never scrolls and never shows a
+     scrollbar. */
   overflow: hidden;
 }
 
-/* Coffee accent stripe along the drawer's entry edge */
-.mobile-drawer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(
-    180deg,
-    rgba(201, 147, 89, 0.16) 0%,
-    rgba(169, 110, 63, 0.12) 50%,
-    transparent 100%
-  );
-}
-
-/* Coffee dust particles — faint floating coffee-toned specks */
-.mobile-drawer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle at 18% 22%, rgba(169, 110, 63, 0.14) 1.4px, transparent 1.9px),
-    radial-gradient(circle at 82% 15%, rgba(169, 110, 63, 0.1) 1px, transparent 1.5px),
-    radial-gradient(circle at 68% 58%, rgba(169, 110, 63, 0.12) 1.6px, transparent 2.1px),
-    radial-gradient(circle at 30% 72%, rgba(169, 110, 63, 0.1) 1.2px, transparent 1.7px),
-    radial-gradient(circle at 55% 38%, rgba(67, 39, 25, 0.08) 1.8px, transparent 2.3px);
-  background-size: 340px 340px, 420px 420px, 480px 480px, 360px 360px, 520px 520px;
-  background-repeat: repeat;
-  animation: coffeeDrift 36s ease-in-out infinite alternate;
-}
-
-@keyframes coffeeDrift {
-  from {
-    background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
-  }
-  to {
-    background-position: 60px 40px, -50px 70px, 30px -50px, -70px -30px, 50px 20px;
-  }
-}
-
-.mobile-drawer.is-open {
-  transform: translateX(0);
-}
-
-.drawer-head {
+/* ---------- Head: logo + close ---------- */
+.pb-menu-head {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   min-height: 44px;
-  padding-bottom: 1.1rem;
-  margin-bottom: 1.3rem;
-  border-bottom: 1px solid var(--color-border);
-  opacity: 0;
-  transform: translateX(16px);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(43, 27, 18, 0.1);
+  flex-shrink: 0;
 }
 
-.mobile-drawer.is-open .drawer-head {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.08s;
-}
-
-.drawer-logo {
+.pb-menu-logo {
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  color: var(--color-espresso);
+  color: #2B1B12;
+  min-width: 0;
 }
 
-.drawer-logo .logo-img {
-  height: 40px;
+.pb-menu-logo .logo-img {
+  height: 38px;
   width: auto;
+  flex-shrink: 0;
 }
 
-.drawer-logo .logo-word {
+.pb-menu-logo .logo-word {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: var(--fs-text);
   letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* The close control reuses the existing .menu-toggle button, so it needs the
+   same treatment the hamburger gets: no filled pill inside the drawer. */
 .menu-toggle.close {
   flex-shrink: 0;
   background-color: transparent;
@@ -291,16 +253,17 @@
   transform: scale(0.92);
 }
 
-/* Minimal static ✕ — thin bars, no animation */
-.drawer-close-x {
+/* Close ✕ — rotated 90deg by framer-motion, so it needs a transform origin. */
+.pb-menu-close-x {
   position: relative;
   display: block;
   width: 15px;
   height: 15px;
+  transform-origin: center;
 }
 
-.drawer-close-x::before,
-.drawer-close-x::after {
+.pb-menu-close-x::before,
+.pb-menu-close-x::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -311,298 +274,309 @@
   background: currentColor;
 }
 
-.drawer-close-x::before {
+.pb-menu-close-x::before {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.drawer-close-x::after {
+.pb-menu-close-x::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.drawer-nav {
+/* ---------- Nav ---------- */
+.pb-menu-nav {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
+  /* Takes the slack between head and footer, and is the only scrollable part.
+     min-height:0 is required or a flex item refuses to shrink below content. */
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
-  gap: 0.15rem;
-  margin-bottom: 1.5rem;
-  padding-right: 0.25rem;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin-bottom: 1rem;
+  /* Small bottom inset so a row that does overflow reads as "scrolls on"
+     rather than as a hard cut flush against the footer rule. */
+  padding-bottom: 0.15rem;
 }
 
-.drawer-eyebrow {
+.pb-menu-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.pb-menu-eyebrow {
+  position: sticky;
+  top: 0;
+  display: block;
   font-family: var(--font-sans);
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
   text-transform: uppercase;
-  color: #c7a45a;
-  padding: 0.25rem 0.55rem 0.75rem;
-  opacity: 0;
-  transform: translateX(24px);
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  color: #A8703F;
+  padding-bottom: 0.6rem;
 }
 
-.mobile-drawer.is-open .drawer-eyebrow {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.05s;
-}
-
-.drawer-link {
+/* Plain row, no box. Hairline divider only. */
+.pb-menu-link {
   position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(0.9rem, 3vw, 1.25rem);
-  min-height: clamp(3.4rem, 10vh, 4.25rem);
-  color: var(--color-espresso);
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  opacity: 0;
-  transform: translateX(28px);
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease),
-    color 0.35s var(--ease), background-color 0.35s var(--ease);
+  gap: 0.85rem;
+  min-height: 56px;
+  padding: 0.6rem 0.25rem 0.6rem 0.75rem;
+  color: #2B1B12;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(43, 27, 18, 0.1);
+  transition: color 0.3s var(--ease);
 }
 
-.mobile-drawer.is-open .drawer-link {
-  opacity: 1;
-  transform: none;
-  transition-delay: calc(0.05s * var(--i, 0) + 0.12s);
+.pb-menu-link:last-child {
+  border-bottom: 0;
 }
 
-.drawer-link:hover {
-  color: var(--color-coffee);
-  background-color: rgba(169, 110, 63, 0.06);
+.pb-menu-link:hover {
+  color: #A8703F;
 }
 
-.drawer-link:focus-visible {
+.pb-menu-link:focus-visible {
   outline: 2px solid var(--color-coffee);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* Active route — warm espresso block with cream text */
-.drawer-link.is-active {
-  color: var(--color-surface);
-  background-color: var(--color-espresso);
-  border-bottom-color: transparent;
-}
-
-.drawer-index {
+/* 01–05: fixed width so every label starts on the same x. */
+.pb-menu-index {
   flex-shrink: 0;
-  width: 1.9rem;
+  width: 28px;
   font-family: var(--font-sans);
-  font-size: var(--fs-label);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.12em;
-  color: var(--color-muted);
-  transition: color 0.35s var(--ease);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.15em;
+  color: #C68B59;
+  transition: color 0.3s var(--ease);
 }
 
-.drawer-link:hover .drawer-index {
-  color: var(--color-coffee);
-}
-
-.drawer-link.is-active .drawer-index {
-  color: rgba(251, 249, 244, 0.72);
-}
-
-.drawer-label {
+.pb-menu-label {
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 4vw, 1.3rem);
+  font-size: 24px;
   font-weight: var(--fw-medium);
   line-height: 1.2;
-  letter-spacing: -0.015em;
-  transition: transform 0.35s var(--ease);
+  letter-spacing: -0.01em;
+  min-width: 0;
+  transition: transform 0.3s var(--ease);
 }
 
-.drawer-link:hover .drawer-label,
-.drawer-link.is-active .drawer-label {
-  transform: translateX(4px);
-}
-
-.drawer-arrow {
+.pb-menu-arrow {
   margin-left: auto;
   flex-shrink: 0;
+  padding-left: 0.5rem;
   font-family: var(--font-sans);
-  font-size: var(--fs-text);
-  color: var(--color-coffee);
+  font-size: 15px;
+  color: #C68B59;
   opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
-.drawer-link:hover .drawer-arrow,
-.drawer-link.is-active .drawer-arrow {
+.pb-menu-link:hover .pb-menu-label,
+.pb-menu-link.is-active .pb-menu-label {
+  transform: translateX(3px);
+}
+
+.pb-menu-link:hover .pb-menu-arrow,
+.pb-menu-link.is-active .pb-menu-arrow {
   opacity: 1;
+  transform: translateX(0);
 }
 
-.drawer-link.is-active .drawer-arrow {
-  color: inherit;
+/* Active: caramel text + a 2px bar on the left edge. The bar is a pseudo
+   element, so it never shifts the label's alignment. */
+.pb-menu-link.is-active {
+  color: #C68B59;
 }
 
-/* Footer: quick contact, CTA and socials */
-.drawer-footer {
+.pb-menu-link.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 22px;
+  transform: translateY(-50%);
+  background: #C68B59;
+  border-radius: 1px;
+}
+
+.pb-menu-link.is-active .pb-menu-index {
+  color: #C68B59;
+}
+
+.pb-menu-link.is-active .pb-menu-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: #C68B59;
+}
+
+/* ---------- Footer: contact block, CTA, social ---------- */
+.pb-menu-footer {
   position: relative;
   z-index: 1;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--color-border);
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  gap: 0.9rem;
+  margin-top: auto;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(43, 27, 18, 0.1);
 }
 
-.mobile-drawer.is-open .drawer-footer {
-  opacity: 1;
-  transform: none;
-  transition-delay: 0.26s;
-}
-
-.drawer-meta {
+/* One soft cream block, two lines, no per-row borders. */
+.pb-menu-meta {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.7rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 16px;
+  background: #F5EDE3;
   font-size: var(--fs-body-sm);
-  line-height: 1.45;
-  color: var(--color-muted);
+  line-height: 1.4;
+  color: #2B1B12;
 }
 
-.drawer-meta-row {
+.pb-menu-meta-row {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 12px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  gap: 0.65rem;
   text-decoration: none;
-  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+  color: inherit;
+  min-width: 0;
 }
 
-a.drawer-meta-row:hover {
-  border-color: var(--color-coffee);
-  color: var(--color-coffee);
+a.pb-menu-meta-row:hover .pb-menu-meta-value {
+  color: #A8703F;
 }
 
-.drawer-meta-ic {
+.pb-menu-meta-ic {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: var(--color-white);
-  color: var(--color-coffee);
-  box-shadow: 0 2px 8px -4px rgba(53, 29, 19, 0.25);
+  width: 26px;
+  height: 26px;
+  color: #C68B59;
 }
 
-.drawer-meta-txt {
+.pb-menu-meta-ic svg {
+  flex-shrink: 0;
+}
+
+.pb-menu-meta-txt {
   display: flex;
   flex-direction: column;
   gap: 0.05rem;
   min-width: 0;
 }
 
-.drawer-meta-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.09em;
+.pb-menu-meta-label {
+  /* 12px, not the 11px used elsewhere: this is the smallest text in the
+     drawer and 11px sits under the usual mobile floor for a readable label. */
+  font-size: 12px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: rgba(43, 27, 18, 0.55);
   font-weight: var(--fw-medium);
 }
 
-.drawer-meta-value {
-  color: var(--color-espresso);
+.pb-menu-meta-value {
+  /* Pinned to an integer 16px rather than inheriting --fs-body-sm, which
+     resolves to 14.72px. The tap-to-call number and the opening hours are the
+     most actionable text in the drawer, so they get a full mobile body size
+     instead of a fractional one. Verified to fit at 320px with ~59px spare. */
+  font-size: 16px;
+  color: #2B1B12;
   font-weight: var(--fw-semibold);
   letter-spacing: 0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.3s var(--ease);
 }
 
-.drawer-meta svg {
-  flex-shrink: 0;
-}
-
-.drawer-cta {
+/* Caramel pill, full width, 52px tall. */
+.pb-menu-cta {
   width: 100%;
   min-height: 52px;
+  height: 52px;
   justify-content: center;
   border-radius: var(--radius-btn);
-  padding-inline: 1.6rem;
-  padding-block: 0.8rem;
+  padding-inline: 1.5rem;
+  /* The primary action should not sit below body size on a 52px pill.
+     Overridden because .btn resolves to 14.72px via --fs-body-sm. */
+  font-size: 16px;
   font-weight: var(--fw-semibold);
   letter-spacing: 0.015em;
 }
 
-.drawer-cta:active {
-  transform: translateY(0) scale(0.985);
+.pb-menu-cta:active {
+  transform: scale(0.985);
 }
 
-.drawer-social {
+.pb-menu-social {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
-.drawer-social-label {
+.pb-menu-social-label {
   font-family: var(--font-sans);
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
   text-transform: uppercase;
-  color: var(--color-coffee);
+  color: #A8703F;
   margin-right: auto;
 }
 
-.drawer-social a {
+.pb-menu-social a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(169, 110, 63, 0.5);
+  border: 1px solid rgba(198, 139, 89, 0.45);
   background-color: transparent;
-  color: var(--color-coffee);
+  color: #A8703F;
   transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
     color 0.3s var(--ease);
 }
 
-.drawer-social a:hover {
-  background-color: var(--color-coffee);
-  border-color: var(--color-coffee);
-  color: var(--color-surface);
+.pb-menu-social a:hover {
+  background-color: #C68B59;
+  border-color: #C68B59;
+  color: var(--color-white);
 }
 
-.drawer-social a:focus-visible {
+.pb-menu-social a:focus-visible {
   outline: 2px solid var(--color-coffee);
   outline-offset: 3px;
 }
 
-.drawer-backdrop {
+/* ---------- Backdrop ---------- */
+.pb-menu-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(53, 29, 19, 0.52);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  z-index: 150;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.45s var(--ease);
-}
-
-.drawer-backdrop.is-open {
-  opacity: 1;
-  pointer-events: auto;
+  z-index: var(--z-modal-backdrop);
+  background: rgba(43, 27, 18, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 /* The @media (min-width: 1441px) block that used to sit here resized .nav-link
@@ -649,94 +623,60 @@ a.drawer-meta-row:hover {
   }
 }
 
+/* Reduced motion: framer-motion already drops the slide and the stagger
+   (see useReducedMotion in Header.jsx). This only tames the CSS-side
+   hover transforms so nothing slides under a reduced-motion preference. */
 @media (prefers-reduced-motion: reduce) {
-  .mobile-drawer,
-  .drawer-head,
-  .drawer-eyebrow,
-  .drawer-link,
-  .drawer-footer,
-  .drawer-backdrop,
-  .menu-toggle.close,
-  .hamburger-line {
+  .pb-menu-link .pb-menu-label,
+  .pb-menu-link .pb-menu-arrow {
+    transform: none;
     transition: none;
   }
-
-  .mobile-drawer.is-open .drawer-link,
-  .mobile-drawer.is-open .drawer-eyebrow,
-  .mobile-drawer.is-open .drawer-footer,
-  .mobile-drawer.is-open .drawer-head {
-    transition-delay: 0s;
-  }
-
-  .drawer-link,
-  .drawer-eyebrow,
-  .drawer-footer {
-    opacity: 1;
-    transform: none;
-  }
-
-  .drawer-backdrop {
-    opacity: 1;
-  }
 }
 
-/* Short viewports — compress rhythm so everything stays visible and usable */
+/* Short viewports. The 56px row height and 52px CTA are fixed spec, so the
+   space is reclaimed from padding, gaps and dividers instead. Sized so all
+   five rows plus the pinned footer fit at 360x640 with nothing cut off. */
 @media (max-height: 680px) {
-  .mobile-drawer {
-    padding-top: calc(1.1rem + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  .pb-menu-drawer {
+    padding-top: calc(0.8rem + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(0.8rem + env(safe-area-inset-bottom, 0px));
   }
 
-  .drawer-head {
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.85rem;
-    min-height: 40px;
+  .pb-menu-head {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
+    min-height: 38px;
   }
 
-  .drawer-nav {
-    gap: 0.1rem;
-    margin-bottom: 0.9rem;
+  .pb-menu-nav {
+    margin-bottom: 0.6rem;
   }
 
-  .drawer-eyebrow {
-    padding-bottom: 0.45rem;
+  .pb-menu-eyebrow {
+    padding-bottom: 0.35rem;
   }
 
-  .drawer-link {
-    min-height: 3rem;
-    padding-block: 0.35rem;
+  .pb-menu-link {
+    padding-block: 0.4rem;
   }
 
-  .drawer-label {
-    font-size: clamp(0.98rem, 3.6vw, 1.15rem);
+  .pb-menu-footer {
+    gap: 0.6rem;
+    padding-top: 0.6rem;
   }
 
-  .drawer-footer {
-    gap: 0.8rem;
-    padding-top: 0.9rem;
-  }
-
-  .drawer-meta {
-    min-height: 40px;
-  }
-
-  .drawer-cta {
-    min-height: 46px;
+  .pb-menu-meta {
+    gap: 0.5rem;
+    padding: 0.6rem 0.85rem;
   }
 }
 
-/* Very narrow devices — give the drawer the full width */
+/* Very narrow devices — full-bleed drawer. The index column stays 28px and
+   the label stays 24px so the shared left edge holds at every width. */
 @media (max-width: 360px) {
-  .mobile-drawer {
-    width: 100vw;
+  .pb-menu-drawer {
+    width: 100%;
     padding-inline: 1.25rem;
-  }
-
-  .drawer-label {
-    font-size: clamp(1rem, 4vw, 1.15rem);
-  }
-
-  .drawer-index {
-    width: 1.6rem;
   }
 }
