@@ -544,7 +544,108 @@
   }
 }
 
-/* ── Tablet: 600–1023px ──────────────────────────────────────
+/* ── The shared heading scale, 600–1099px ────────────────────────
+   The page's three main headings are one size across the whole tablet band, and
+   the value is --ostory-tablet-heading in global.css, taken by the same band in
+   OurStoryHero.css and OurStoryCta.css.
+
+   The band is 600-1099 rather than the 600-1023px the layout below uses, and
+   that difference is the whole point of this block. The old override stopped at
+   1023px, so at 1024px — the width where the photo moves into its frame and the
+   art is placed against it — this heading fell off its own size onto
+   --fs-section, a 16.4px step down (58.5px -> 42.1px) with no change of layout
+   to account for it, and it landed on exactly the same 42.1px as the CTA
+   heading below it. The step at 1100px is a different matter and is left alone:
+   that is where the section becomes two columns, so the heading's measure
+   changes with it.
+
+   line-height 1.1 and colour #3b2518 are the two declarations the old
+   clamp(46px, 8.0645vw, 58.5px) rule carried besides the size, and they move
+   with it. The colour is this tier's own brown rather than --color-espresso,
+   and it is stated here for the same reason the size is: it was measured
+   against this section's cream ground, and it now has to hold at 600-1099
+   rather than only at 600-1023. 1.1 is --lh-heading, which every heading on
+   the page already takes.
+
+   white-space: nowrap is what keeps the heading on exactly two lines. The
+   breaks are forced by `.ostory-br-tablet`, but that only fixes where a line
+   may end: without nowrap the longest run inside either line can still wrap
+   inside itself, which is what turned the two-line measure into three and four
+   at the narrow end of this band. The em is listed too, because "From a
+   Parisian Feeling" is one em and inherits nothing from a nowrap it does not
+   itself carry.
+
+   Measured at the 52px cap: the longer line, "From a Parisian Feeling", is
+   580.3px of ink and the shorter is 541.6px. The heading's own measure is
+   504px at 600px (100vw - 96px on this tier's full-bleed wrapper), 648px at
+   744, 927px at 1023, and 640px across 1024-1099 where it is the centred copy
+   measure instead. The tightest fit in the band is therefore 59.7px of slack,
+   at 1024-1099, and the narrowest is 29.6px at 600px — so the nowrap lines sit
+   inside their own box everywhere, which matters because this section clips its
+   overflow-x at every width below 1024px.
+
+   The paragraphs take --ostory-tablet-desc from the same band, which is what
+   they were already at across 600-1023px and were not across 1024-1099. At
+   1024 the copy column is the 640px measure set above, and at 20px that is 64
+   characters — inside the 45-75 band — so the size holds to the top of the
+   tablet without the measure having to change with it. The 26px leading and
+   the #75675d colour below are this tier's own and stay where they are.
+
+   The label takes --ostory-tablet-eyebrow for the same reason. Its size was
+   restated only in the 600-1023px block, so across 1024-1099 it fell back to
+   the global --fs-eyebrow and read 12.85px where it reads 13px for the 201px
+   below it — a third size for the same label inside one band. The size is all
+   that is unified here. Its weight and tracking still differ from the other two
+   labels, and below 1024 the difference is deliberate and documented at that
+   block; across 1024-1099 it now takes the global 500 at 0.32em, which is what
+   this label has always had at desktop. */
+@media (min-width: 600px) and (max-width: 1099px) {
+  .ostory-origin-title,
+  .ostory-origin-title em {
+    font-size: var(--ostory-tablet-heading);
+    line-height: 1.1;
+    color: #3b2518;
+    white-space: nowrap;
+  }
+
+  .ostory-origin-text {
+    font-size: var(--ostory-tablet-desc);
+  }
+
+  .ostory-eyebrow {
+    font-size: var(--ostory-tablet-eyebrow);
+  }
+}
+
+/* ── Laptop and desktop: the tablet band's three sizes, continued ─────────
+   Same tokens as the band above, so the three headings on the page, the three
+   descriptions and the three labels stay one size from 600px up. The 1100px
+   edge used to break all three apart in this section alone: the heading fell
+   from the band's 52px to 43.3px — below the size it has on every tablet — and
+   stayed under it for the whole band, and the paragraphs fell further, from
+   20px to 14.72px, where they are still flat at 1920.
+
+   Only the sizes move. `white-space: nowrap`, the 640px measure and the brown
+   stay tablet-only, as does the two-line arrangement `.ostory-br-tablet`
+   switches on: at this edge the copy column is 440px wide and the heading's
+   first line cannot be held to one line there. The size and the arrangement
+   are independent, and this band is where the size was wrong. */
+@media (min-width: 1100px) {
+  .ostory-origin-title,
+  .ostory-origin-title em {
+    font-size: var(--ostory-tablet-heading);
+  }
+
+  .ostory-origin-text {
+    font-size: var(--ostory-tablet-desc);
+  }
+
+  .ostory-eyebrow {
+    font-size: var(--ostory-tablet-eyebrow);
+  }
+}
+
+/* ── Tablet: 600–1023px ──────────────────────────────────────────
    The two pieces of art were phone-only: the base rule is `display: none` and
    every declaration that positions them — and the two wrappers they hang from —
    lived in the phone's own block. Nothing here was hidden by overflow or by a
@@ -677,40 +778,31 @@
   /* ── Type at 744px, from the frame ───────────────────────────
      600px is where this tier starts, so 744 is its reference width and every
      number below is measured at it: a 24px inset either side, a 13px eyebrow on
-     the same gold the phone uses, a two-line 60px title with a 66px pitch, and
-     20px body on 26px lines. The phone tier's own type stops at 599px, so 600 to
-     767 gets this instead — including the title's second line, which is what the
-     frame shows.
+     the same gold the phone uses, and 20px body on 26px lines. The phone tier's
+     own type stops at 599px, so 600 to 767 gets this instead. The title is not
+     in this block: it takes the page-wide scale from the 600-1099px block
+     above, so the number here is no longer the 60px the frame was drawn at.
 
      The tracking on the eyebrow is what makes it 241px: the glyphs alone are
-     narrower than that, and the frame's label is a tracked-out one. */
+     narrower than that, and the frame's label is a tracked-out one.
+
+     font-size is the token, not the 13px this block used to state outright, so
+     that the three labels on the page cannot drift apart again. The value is
+     unchanged — 13px is what it always was here — and the two labels that were
+     on the global clamp now come to it. */
   .ostory-origin .ostory-eyebrow {
-    font-size: 13px;
+    font-size: var(--ostory-tablet-eyebrow);
     font-weight: 400;
     letter-spacing: 0.048em;
     color: #c7a45a;
   }
 
-  .ostory-origin-title,
-  .ostory-origin-title em {
-    /* The cap is 58.5px: the first line measures 650px of ink at 60px and the
-     frame's is 634px, and 58.5 is where those two land together. The middle
-     term is unchanged, so 600px keeps its 48.4px, and below that the line
-     scales down with the viewport — it is 634px of type, and anything under
-     about 646px of viewport would wrap it and buy a third line. */
-    font-size: clamp(46px, 8.0645vw, 58.5px);
-    line-height: 1.1;
-    color: #3b2518;
-    /* Two lines, always. The breaks are forced by `.ostory-br-tablet` above, but
-       that only fixes where a line may end: without this the longest run in
-       either line can still wrap inside itself, which at 600-644px is what
-       turned the two-line measure into three and four. The em is listed too
-       because "From a Parisian Feeling" is one em and inherits nothing from a
-       nowrap it does not itself carry. 634px of type at 58.5px, and this band's
-       measure is the full 744px frame inset 24px a side, so it fits at every
-       width this band covers. */
-    white-space: nowrap;
-  }
+  /* The size is NOT here. It is shared with the hero description and the CTA
+     description in one page-wide band, so it lives with them — see the
+     600-1099px block above, and --ostory-tablet-desc in global.css. What stays
+     in this block is what only this tier needs: the full-bleed measure that
+     gives the heading's forced lines room, this tier's 26px leading on the
+     shared 20px, and the brown the frame was drawn with. */
 
   /* The heading block, and only the heading block, takes the full bleed. The
      640px copy measure upstream is narrower than the title's first line, and a
@@ -724,7 +816,6 @@
   }
 
   .ostory-origin-text {
-    font-size: 20px;
     line-height: 26px;
     color: #75675d;
   }

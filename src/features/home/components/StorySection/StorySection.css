@@ -274,9 +274,7 @@
 }
 
 @media (max-width: 767px) {
-  .story {
-    padding: 60px 22px 110px;
-  }
+  /* Section padding and the 20px inset are shared tokens in global.css. */
 
   .story-grid {
     width: 100%;
@@ -292,20 +290,19 @@
     display: contents;
   }
 
+  /* Order only. Font size, leading and the gaps come from the shared Home
+     mobile tokens — declaring them here re-created the per-section drift this
+     block used to have (25px heading->description against 19.2px elsewhere). */
   .story-copy > .pb-story-eyebrow {
     order: 1;
   }
 
   .story-copy > .story-title {
     order: 2;
-    margin: 0;
   }
 
   .story-copy > .story-paragraph {
     order: 3;
-    font-size: var(--fs-text);
-    line-height: var(--lh-text);
-    margin-top: 25px;
   }
 
   .story-media {

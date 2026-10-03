@@ -49,7 +49,17 @@
   line-height: var(--lh-text);
   color: var(--color-muted);
   margin-top: 0.5rem;
-  max-width: 620px;
+  /* One line on laptop and desktop. The measure is 74 characters, which at
+     --ostory-tablet-desc's 20px is 651px of ink (canvas measureText with the
+     webfont loaded). The old 620px cap sat 31px under that and wrapped the
+     line in two from 600px all the way to 1920px.
+
+     680px rather than 651px: the slack absorbs a wider fallback face on a
+     machine without the webfont, so the line cannot re-break. It stays a cap
+     rather than nowrap because .ostory-cta-inner is a centred flex column —
+     the paragraph is sized fit-content, so below ~730px the shell is the
+     binding constraint, the text wraps normally, and nothing can overflow. */
+  max-width: 680px;
 }
 
 .ostory-cta-btn {
@@ -71,9 +81,70 @@
 
 /* The 768-1099px block that used to sit here pinned .ostory-cta-title to 56px
    and .ostory-cta-desc to 20px, matching a scale that only /our-story used. It
-   is gone: the closing CTA now takes --fs-section and --fs-small like every
-   other section on the page, so the page reads at one scale across the whole
-   768-1099px band. The min-width:1100px nowrap above is unaffected. */
+   is gone, and so is the assumption that this title belongs to whatever
+   --fs-section happens to be: the page's three main headings now share one
+   token, so the closing CTA reads at the same size as the hero above it and
+   the origin section between them. The description is the same story one band
+   down — it was 15.2px here while the hero's was 17.0px and the origin's 20px,
+   and it now takes --ostory-tablet-desc with them. Its own 620px measure is
+   62 characters at 20px, so the size needed no cap to go with it. The
+   min-width:1100px nowrap above is unaffected — desktop is out of the band, and
+   the two lines this page forces on the origin heading are not this element's
+   business. */
+
+/* ── The shared heading scale, 600–1099px ────────────────────────
+   --ostory-tablet-heading is declared once in global.css and scoped to this
+   page; the same band in OurStoryHero.css and OurStoryOrigin.css takes it, so
+   the three cannot drift apart. It starts at 600 rather than 768 because below
+   768 global.css holds --fs-section at the phone's 1.5rem, which is what left
+   this title at 24px while the hero above it sat at 42.2px.
+
+   1.1 is --lh-heading, restated so all three headings share one leading.
+
+   --ostory-tablet-desc is the same arrangement for the three descriptions, and
+   for the same reason: this one was the only description on the page with no
+   tablet size at all, so it read at --fs-small on every width from 600 to
+   1099.
+
+   --ostory-tablet-eyebrow does the same for the three section labels. This one
+   took the global --fs-eyebrow, which global.css holds at the phone's 10px
+   across all of 600-767, against the origin label's flat 13px. */
+@media (min-width: 600px) and (max-width: 1099px) {
+  .ostory-cta-title {
+    font-size: var(--ostory-tablet-heading);
+    line-height: 1.1;
+  }
+
+  .ostory-cta-desc {
+    font-size: var(--ostory-tablet-desc);
+  }
+
+  .ostory-eyebrow {
+    font-size: var(--ostory-tablet-eyebrow);
+  }
+}
+
+/* ── Laptop and desktop: the tablet band's three sizes, continued ─────────
+   Same three tokens as the band above. At 1100px this heading fell from the
+   band's 52px to 43.3px and the description from 20px to 15.2px, the narrowest
+   of the three descriptions on the page at every width — and the band it is
+   measured against is the one the origin frame was drawn at. Above 1100 the
+   title is nowrap on a single line (see the 1100px block near the top), which
+   is why only the size is restated here: at 52px that line is 885.1px of ink
+   against a 1001px shell at this edge, so it still clears its own box. */
+@media (min-width: 1100px) {
+  .ostory-cta-title {
+    font-size: var(--ostory-tablet-heading);
+  }
+
+  .ostory-cta-desc {
+    font-size: var(--ostory-tablet-desc);
+  }
+
+  .ostory-eyebrow {
+    font-size: var(--ostory-tablet-eyebrow);
+  }
+}
 
 @media (max-width: 640px) {
   .ostory-cta {

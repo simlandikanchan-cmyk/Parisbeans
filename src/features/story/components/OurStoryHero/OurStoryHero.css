@@ -30,6 +30,20 @@
   color: inherit;
 }
 
+/* Heading line break.
+
+   The title is one line everywhere except tablet, where it is two:
+   "A Little Paris, Created for" / "Your Salon Day." The break is its own
+   element so the tablet arrangement is switched on by CSS alone, which is the
+   same arrangement the origin heading uses for the same reason — see
+   `.ostory-br-tablet` in OurStoryOrigin.css. Left to wrap on its own the
+   tablet title lands on three or four lines at the narrow end of the band,
+   because the <=767px rule above holds it to a 350px column that the 42px
+   tablet size cannot fit this line into. */
+.ostory-hero-br-tablet {
+  display: none;
+}
+
 .ostory-desc {
   font-family: var(--font-sans);
   font-size: var(--fs-text);
@@ -143,18 +157,16 @@
   }
 }
 
-/* Tablet: match the page-wide 56px heading / 20px body scale set in
-   OurStoryOrigin.css. Overrides --fs-h1 and --fs-text rather than redefining
-   them, because both tokens are global and also drive the header, footer,
-   gallery and AI assistant.
+/* Tablet: the hero box, and the description's measure.
 
    Two things this band has to undo, not just restate:
 
-   - The <=767px block above pins .ostory-title to max-width: 350px. That was
-     sized against the ~32px phone clamp; at 56px the heading would wrap into
-     fragments. Restating the title's width here reclaims the full column
-     (92vw, so 707px at 768 and 942px at 1024) and the 640px cap only engages
-     once there is room for it.
+   - The <=767px block above pins .ostory-title to max-width: 350px, and the
+     title's own measure is not restated here any more — it is stated once, as
+     min(640px, 100%), in the 600-1099px block below, which is the band that
+     actually needs it. This block used to carry the plain 640px and was
+     overridden by that one anyway, which is the source-order dependency the
+     two-band arrangement exists to avoid.
    - .ostory-desc has no max-width at all, so it stretches to the full box.
      Harmless at ~16px, but at 20px it runs to ~94 characters a line on a 1024
      tablet, well past the readable 45-75 band. Capping it at 640px holds the
@@ -172,10 +184,6 @@
     flex-direction: column;
   }
 
-  .ostory-title {
-    max-width: 640px;
-  }
-
   .ostory-desc {
     max-width: 640px;
     /* This box is a flex column in the tablet band, and flex items do not
@@ -186,6 +194,103 @@
        title's 1.2rem as the single gap, so the spacing is what it was before the
        box became flex. */
     margin-top: 0;
+  }
+}
+
+/* ── The shared heading scale, 600–1099px ─────────────────────────
+   The page's three main headings are one size across the whole tablet band.
+   Two reasons this starts at 600 and not 768, where the block below begins:
+   below 768 the two section headings take --fs-section, and global.css
+   overrides that token to 1.5rem on the phone-adjacent band, so at 600-767 the
+   origin and CTA headings were at 24px against this one's 42.2px; and the page
+   then dropped to two different sizes again at 768, where this one went to
+   --fs-h1's 45.7px and the others to --fs-section's 38.1px.
+
+   The value itself is --ostory-tablet-heading, declared once in global.css and
+   scoped to this page. The two sibling rules in OurStoryOrigin.css and
+   OurStoryCta.css take the same token in the same band, so the three cannot
+   drift apart again.
+
+   1.1 restates --lh-heading, which this heading already takes: the pitch is
+   shared with the other two so all three lines sit on the same leading.
+
+   This block deliberately states only the size. The hero's measure and its
+   column flex box belong to the 768-1099px block below, and widening either to
+   600px is a layout change, not a type one.
+
+   --ostory-tablet-desc is declared in global.css alongside the heading token
+   and is shared with the origin paragraphs and the CTA description, so the
+   three descriptions on the page are one size across the band instead of the
+   17.0 / 20 / 15.2px they were at 768px.
+
+   The hero needs no measure of its own at 600-767: at 20px its uncapped 92vw
+   column is 55 characters at the 600px floor, and from 768 up the block below
+   holds it at the 640px cap.
+
+   The break is switched on here, and nowrap with it. The <br> fixes where a
+   line ends but not what happens inside one, so a nowrap line can still wrap
+   within itself — which is what the origin heading's own nowrap comment
+   describes. Two nowrap lines at 52px have to fit the 640px measure set by the
+   block above, and they do: measured at the 52px cap, "A Little Paris, Created
+   for" is 621.6px of ink and "Your Salon Day." is 377.4px, so the first line
+   clears its own box by 18.4px. That is the tightest fit in the band — the box
+   is pinned at the 640px cap from 743px up while the font is at its own cap, and
+   below that the 92vw column and the ramped font grow together, so the slack
+   opens from 18.4px at 743 to 48.0px at 700 and 37.1px at the 600px floor.
+
+   max-width: min(640px, 100%) replaces the plain 640px the block above sets,
+   because this band also covers 600-767 where the <=767px rule pins the title
+   to a 350px column. min() reclaims the full 92vw column at those widths —
+   546px at the 600px floor, which the 508.9px first line fits inside — and holds
+   the 640px cap from 768 up. It has to be stated here rather than left to the
+   block above, which starts at 768 and so never covers the width that needed
+   it. */
+@media (min-width: 600px) and (max-width: 1099px) {
+  .ostory-title {
+    font-size: var(--ostory-tablet-heading);
+    line-height: 1.1;
+    white-space: nowrap;
+    max-width: min(640px, 100%);
+  }
+
+  .ostory-hero-br-tablet {
+    display: block;
+  }
+
+  /* The label is 13px here rather than the global --fs-eyebrow, which global.css
+     pins to 10px below 768 and which reaches only 12.52px at the 768 edge. The
+     origin label has been a flat 13px across this whole band since it was
+     measured from the frame, so this puts the hero on the same number. */
+  .ostory-eyebrow {
+    font-size: var(--ostory-tablet-eyebrow);
+  }
+
+  .ostory-desc {
+    font-size: var(--ostory-tablet-desc);
+  }
+}
+
+/* ── Laptop and desktop: the tablet band's three sizes, continued ─────────
+   At 1100px the section goes two-column, and until now that edge also dropped
+   the description and the label back to the global scale: the description fell
+   from the band's 20px to 17.9px here and only climbed back to 20px at 1920,
+   and the label drifted from the band's 13px up to 14px. Both are stated on the
+   same tokens the tablet band uses, so the three labels and three descriptions
+   on the page cannot drift apart again above the band.
+
+   The title is deliberately not in this block. `.ostory-title` is the page's h1
+   and takes --fs-h1, which is already 52.7px at this edge — the tablet band's
+   52px — and grows to 69.9px at 1920. Holding the h1 at the section headings'
+   size would shrink it by 18px on a wide desktop, which is not what the
+   section-heading scale is for. The three section headings are still one size
+   across laptop and desktop, which is the drift this block exists to stop. */
+@media (min-width: 1100px) {
+  .ostory-eyebrow {
+    font-size: var(--ostory-tablet-eyebrow);
+  }
+
+  .ostory-desc {
+    font-size: var(--ostory-tablet-desc);
   }
 }
 

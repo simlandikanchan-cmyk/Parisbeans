@@ -25,6 +25,8 @@ import menuBackground from './menu/menu_background.jpg'
 import menuHero from './menu/hero.svg'
 import hummus from './menu/hummus.svg'
 import lemonMint from './menu/lemon-mint.svg'
+import menuDecoBottomRight from './menu/Menu bottom Right.svg'
+import menuDecoTopLeft from './menu/Menu Top Left.svg'
 import sundowner from './menu/sundowner.svg'
 import tab1 from './menu/tab1.png'
 import tab2 from './menu/tab2.png'
@@ -88,6 +90,15 @@ export const menuImages = {
   tab2,
   tab3,
   'virgin-mojito': virginMojito,
+}
+
+/* Corner art for the Home "From the Café" section. Both are thin #A66A3F
+   squiggles on a transparent ground, sized in vw per screen band and anchored
+   to the section's own corners, so the overflow: hidden on .cafe crops them
+   the way the Figma frames do. */
+export const menuDeco = {
+  topLeft: menuDecoTopLeft,
+  bottomRight: menuDecoBottomRight,
 }
 
 export const storyImages = {

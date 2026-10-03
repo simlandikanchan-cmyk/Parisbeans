@@ -258,6 +258,75 @@ button {
   }
 }
 
+/* ---------- /our-story: one heading scale for the tablet band ----------
+   The page's three main headings — the hero h1, the origin h2 and the closing
+   CTA h2 — are a single size across 600-1099px, so the value is declared once
+   here rather than in each component. It is read by exactly three rules, one
+   in each of OurStoryHero.css, OurStoryOrigin.css and OurStoryCta.css, and
+   only inside that band.
+
+   Declared on the three sections the headings live in rather than on a page
+   wrapper: StoryPage.jsx renders the four sections as siblings with no root
+   element of its own, and the property inherits down to the headings from
+   here. `.ostory-story-img` is the fourth section and has no heading, so it is
+   not listed.
+
+   Deliberately not an override of --fs-h1 or --fs-section. Both are global and
+   also drive the header, the footer, the gallery and the AI assistant on every
+   other page; retuning them here would move type on five other routes. Before
+   this token the three headings were at three different scales: at 768px the
+   hero was 45.73px, the origin 58.5px — larger than the h1 above it — and the
+   CTA 38.14px, and between 600 and 767 the two section headings were both held
+   at the phone's 24px against the hero's 42.2px.
+
+   The floor is the 600px edge of the band, the cap is reached at 743px (7vw
+   there is 52.01px) and the value is flat from there to 1099px. The cap has to
+   clear the origin heading's forced first line, "From a Parisian Feeling",
+   which is nowrap so it cannot re-break to fit: it measures 580.3px of ink at
+   the 52px cap, and the heading's measure is 504px at 600px, 648px at 744,
+   927px at 1023 and 640px at 1024-1099. The tightest of those is 59.7px of
+   slack, so nothing in the band can reach the edge of its own box.
+
+   --ostory-tablet-desc does the same job for the three descriptions — the
+   hero's `.ostory-desc`, the origin's `.ostory-origin-text` and the CTA's
+   `.ostory-cta-desc` — and is read by the same three stylesheets in the same
+   band. It is a flat 20px, not a clamp, because 20px is the size the origin
+   frame was drawn at and the size the rest of the band now matches: before
+   this token the three sat at 17.0px, 20px and 15.2px at 768px, and the
+   origin's own 20px stopped at 1023px and fell to 14.72px on the 1024px
+   tablet, so the same paragraph changed size inside one band.
+
+   The measure each description already carries is what makes a flat 20px
+   safe: 640px on the hero and the origin, 620px on the CTA, which is 62-64
+   characters at this size, inside the 45-75 band. Below 768 the hero has no
+   cap, but at 600px its 92vw column is 552px — 55 characters — so the cap is
+   not load-bearing there either.
+
+   The step at 1100px is left alone for the same reason the headings' is: the
+   section becomes two columns there, so the measure changes with it.
+
+   --ostory-tablet-eyebrow does the same for the three section labels — the
+   hero's, the origin's and the CTA's — and is 13px for the same flat reason.
+   Before it the hero and CTA labels took the global --fs-eyebrow clamp, which
+   global.css pins to 0.625rem below 768 and which otherwise lands between
+   12.52px and 12.95px across 768-1099, while the origin label was a flat 13px
+   drawn from the frame. So the three were 10 / 13 / 10 at 600-767 and drifted
+   again to 12.52 / 13 / 12.52 at 768. 13px is the number the frame asks for
+   and it is what all three take now.
+
+   The three labels are 9, 30 and 25 characters long, so this is a size
+   unification only. Their weight and tracking still differ — the origin label
+   is 400 at 0.048em against the global 500 at 0.32em — and that is left as it
+   is: the origin's own tracking was measured against its frame, and at
+   0.32em that label is 120px wider than the frame draws it. */
+.ostory-hero,
+.ostory-origin,
+.ostory-cta {
+  --ostory-tablet-heading: clamp(42px, 7vw, 52px);
+  --ostory-tablet-desc: 20px;
+  --ostory-tablet-eyebrow: 13px;
+}
+
 @media (max-width: 767px) {
   .section,
   .section--tight {
@@ -266,6 +335,177 @@ button {
 
   .section--tight {
     padding-block: 56px;
+  }
+
+  /* Section headings resolved to 32px on the phone (the token's 375px value),
+     which is larger than the hero h1 sitting above them at ~28px. The page read
+     backwards. Dropped to 24px so the hero stays the largest type on screen.
+
+     Flat across the whole band, not a ramp: the section h2 tier and the benefits
+     h3 tier (BenefitsSection.css) are both pinned to 24px on the phone, and a
+     ramp would have put the two h2 blocks at 38px and the benefit titles at
+     24px at the top of the same band. The price is a +14.1px step at the
+     767/768 boundary (24px -> 38.14px). Left as-is deliberately: 768 is where
+     every mobile tier in this file stops and the tablet/desktop ramp starts,
+     the hero h1 already takes a +8.1px step on the same boundary, and a
+     half-stepped h2 would sit between the two tiers instead of in one of them.
+
+     Overridden on the token rather than on h2/.section-heading because the
+     component classes (.experience-title, .story-title, .cafe-title,
+     .gallery-title) are imported after this file and would win a same-specificity
+     element rule. A custom property resolves at computed-value time, so every
+     consumer picks this up regardless of file order. */
+  :root {
+    --fs-section: 1.5rem;
+    /* One eyebrow tier for the phone band. The hero ran a hard 0.625rem of its
+       own while every other section sat on --fs-eyebrow's 12px floor; the token
+       now carries 10px everywhere so the hero no longer needs a local size. */
+    --fs-eyebrow: 0.625rem;
+
+    /* ---------- Mobile type tokens — Home page ----------
+       Every Home section resolves its eyebrow, heading and description from
+       these, so a value changes once and lands everywhere. Scoped to the Home
+       sections only; /our-story, /menu, /gallery and the rest keep their own
+       tiers and are untouched at 768px and up. */
+    --m-eyebrow-size: 0.75rem;
+    --m-eyebrow-weight: var(--fw-regular);
+    --m-eyebrow-lh: 1.4;
+    --m-eyebrow-tracking: 0.05em;
+    --m-heading-size: 1.5rem;
+    --m-heading-lh: 1.15;
+    --m-body-size: 1rem;
+    --m-body-lh: 1.5;
+    --m-gap-eyebrow: 8px;
+    --m-gap-heading: 16px;
+    --m-inset: 20px;
+    --m-section-pad: clamp(42px, 9vw, 64px);
+  }
+
+  /* ---------- Home page: unified mobile typography ----------
+     Selectors are doubled (.hero.hero) or triple (.hero .hero-content) on
+     purpose. global.css is imported before every component stylesheet, so a
+     single-class rule here would lose the cascade to the component's own rule
+     of equal specificity. Doubling the class wins on specificity without
+     !important, and the conflicting declarations have been deleted from the
+     component mobile blocks rather than overridden. */
+
+  /* Section rhythm and inset. Hero owns an extra min-height that is left
+     alone; only its content padding is normalised. */
+  .hero.hero .hero-content,
+  .experience.experience,
+  .benefits.benefits,
+  .cafe.cafe,
+  .gallery.gallery {
+    padding-block: var(--m-section-pad);
+  }
+
+  .section.story {
+    padding: var(--m-section-pad) var(--m-inset);
+  }
+
+  .hero.hero .hero-content.container,
+  .experience.experience .experience-content.container,
+  .cafe.cafe .container,
+  .gallery.gallery .container {
+    padding-inline: var(--m-inset);
+  }
+
+  /* Benefits cards sat 8px inside the container gutter; the cards now align
+     with every other section's left edge. */
+  .benefits.benefits .benefit {
+    padding-inline: 0;
+  }
+
+  /* Eyebrow — one tier across all six sections. Colour is left alone: the hero
+     sits on the dark espresso photo and keeps its light #e8d9c5, every other
+     section keeps the gold #c7a45a from .eyebrow. That is the only intended
+     difference. */
+  .hero.hero .hero-eyebrow,
+  .experience.experience .eyebrow,
+  .section.story .pb-story-eyebrow,
+  .cafe.cafe .cafe-copy .eyebrow,
+  .gallery.gallery .eyebrow {
+    font-size: var(--m-eyebrow-size);
+    font-weight: var(--m-eyebrow-weight);
+    line-height: var(--m-eyebrow-lh);
+    letter-spacing: var(--m-eyebrow-tracking);
+  }
+
+  /* The hero eyebrow sits inside a flex wrapper, so the gap lives on the
+     wrapper there and on the element everywhere else. */
+  .hero.hero .hero-eyebrow-wrap {
+    margin-bottom: var(--m-gap-eyebrow);
+  }
+
+  .hero.hero .hero-eyebrow,
+  .experience.experience .eyebrow,
+  .section.story .pb-story-eyebrow,
+  .cafe.cafe .cafe-copy .eyebrow,
+  .gallery.gallery .eyebrow {
+    margin-bottom: var(--m-gap-eyebrow);
+  }
+
+  .hero.hero .hero-eyebrow {
+    margin-bottom: 0;
+  }
+
+  /* Heading — 24px serif on all five section headings, same leading and same
+     gaps. margin-block only: the centred sections keep `margin-inline: auto`. */
+  .experience.experience .experience-title,
+  .section.story .story-title,
+  .benefits.benefits .benefit-title,
+  .cafe.cafe .cafe-title,
+  .gallery.gallery .gallery-title {
+    font-size: var(--m-heading-size);
+    line-height: var(--m-heading-lh);
+    letter-spacing: var(--tracking-tight);
+    margin-block: 0 var(--m-gap-heading);
+  }
+
+  /* Italic is the section-heading style, but not for the benefit card titles:
+     they are short three-word card labels sitting upright above centred body
+     copy, and italic read as a mismatch at 24px. Declared explicitly rather
+     than left to inherit, because the hero h1 and the four h2s are all italic
+     and the card titles are the only upright heading in the mobile set. */
+  .experience.experience .experience-title,
+  .section.story .story-title,
+  .cafe.cafe .cafe-title,
+  .gallery.gallery .gallery-title,
+  .hero.hero .hero-title {
+    font-style: italic;
+  }
+
+  .benefits.benefits .benefit-title {
+    font-style: normal;
+  }
+
+  /* The hero h1 keeps its own fluid ladder (Hero.css) so it stays the largest
+     type on the page; only its leading and the gaps are unified. The divider
+     stays in place, so the heading -> description distance is split across it:
+     8px + 2px rule + 6px = the 16px gap every other section uses. */
+  .hero.hero .hero-title {
+    line-height: var(--m-heading-lh);
+    margin-bottom: calc(var(--m-gap-eyebrow) + 0.16em);
+  }
+
+  .hero.hero .hero-divider {
+    margin-bottom: calc(var(--m-gap-heading) - var(--m-gap-eyebrow) - 2px);
+  }
+
+  /* Description — 16px / 1.5 on every section, hero colour excepted.
+     margin-top is cleared because the heading's 16px bottom margin is the gap;
+     any top margin here would sit on top of it rather than collapse with it
+     (the story grid is a flex container, so its children never collapse). */
+  .hero.hero .hero-desc,
+  .experience.experience .experience-desc,
+  .section.story .story-paragraph,
+  .benefits.benefits .benefit-text,
+  .cafe.cafe .cafe-copy .cafe-paragraph,
+  .gallery.gallery .gallery-desc {
+    font-size: var(--m-body-size);
+    line-height: var(--m-body-lh);
+    letter-spacing: 0;
+    margin-top: 0;
   }
 }
 

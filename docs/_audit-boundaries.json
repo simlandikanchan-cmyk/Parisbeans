@@ -1,0 +1,155 @@
+[
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "eyebrow",
+  "block": "ostory-hero",
+  "from": "10px",
+  "to": "13px",
+  "delta": 3
+ },
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "eyebrow",
+  "block": "ostory-cta",
+  "from": "10px",
+  "to": "13px",
+  "delta": 3
+ },
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "heading",
+  "block": "ostory-hero",
+  "from": "42.179px",
+  "to": "42px",
+  "delta": -0.18
+ },
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "heading",
+  "block": "ostory-origin",
+  "from": "24px",
+  "to": "42px",
+  "delta": 18
+ },
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "heading",
+  "block": "ostory-cta",
+  "from": "24px",
+  "to": "42px",
+  "delta": 18
+ },
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "desc",
+  "block": "ostory-hero",
+  "from": "16.5974px",
+  "to": "20px",
+  "delta": 3.4
+ },
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "desc",
+  "block": "ostory-origin",
+  "from": "14px",
+  "to": "20px",
+  "delta": 6
+ },
+ {
+  "route": "story",
+  "edge": "599->600",
+  "role": "desc",
+  "block": "ostory-cta",
+  "from": "15.2px",
+  "to": "20px",
+  "delta": 4.8
+ },
+ {
+  "route": "visit",
+  "edge": "599->600",
+  "role": "heading",
+  "block": "visit-contact section",
+  "from": "35.94px",
+  "to": "36px",
+  "delta": 0.06
+ },
+ {
+  "route": "home",
+  "edge": "1099->1100",
+  "role": "heading",
+  "block": "benefits",
+  "from": "31.5896px",
+  "to": "28px",
+  "delta": -3.59
+ },
+ {
+  "route": "story",
+  "edge": "1099->1100",
+  "role": "heading",
+  "block": "ostory-hero",
+  "from": "52px",
+  "to": "52.7px",
+  "delta": 0.7
+ },
+ {
+  "route": "home",
+  "edge": "320->375",
+  "role": "heading",
+  "block": "hero",
+  "from": "24.32px",
+  "to": "28.5px",
+  "delta": 4.18
+ },
+ {
+  "route": "story",
+  "edge": "320->375",
+  "role": "heading",
+  "block": "ostory-hero",
+  "from": "36.32px",
+  "to": "37.475px",
+  "delta": 1.16
+ },
+ {
+  "route": "menu",
+  "edge": "320->375",
+  "role": "heading",
+  "block": "menu-hero",
+  "from": "36.32px",
+  "to": "37.475px",
+  "delta": 1.16
+ },
+ {
+  "route": "visit",
+  "edge": "320->375",
+  "role": "heading",
+  "block": "visit-hero",
+  "from": "36.32px",
+  "to": "37.475px",
+  "delta": 1.16
+ },
+ {
+  "route": "privacy",
+  "edge": "320->375",
+  "role": "heading",
+  "block": "legal-wrap",
+  "from": "36.32px",
+  "to": "37.475px",
+  "delta": 1.16
+ },
+ {
+  "route": "terms",
+  "edge": "320->375",
+  "role": "heading",
+  "block": "legal-wrap",
+  "from": "36.32px",
+  "to": "37.475px",
+  "delta": 1.16
+ }
+]

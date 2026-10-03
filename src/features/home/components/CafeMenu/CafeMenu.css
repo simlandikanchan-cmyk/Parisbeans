@@ -5,71 +5,12 @@
   overflow: hidden;
 }
 
-/* Decorative wave art, one variant per breakpoint, drawn at the width it was
-   authored for. The set is phone_menu (390), tab_menu, from748upto1440, and
-   menu (1920) — the phone variant was on disk but never referenced, because the
-   phone band was set to `background-image: none` and left empty.
-
-   The bands below are spelled with the canonical edges from global.css
-   (767 / 1023 / 1099 / 1100) rather than one 1024–1440 run, so they line up
-   with every other component's breakpoints. from748upto1440 spans two canonical
-   tiers — tablet landscape and desktop up to 1440 — so it is stated twice, once
-   per tier, rather than as a single query that would straddle the 1100 edge the
-   rest of the site treats as significant. The pixel ranges are unchanged: the
-   same art is served at every width it was served at before.
-
-   The 1441 edge is kept: the wide-desktop art was drawn at 1920px, so it has to
-   start where the design's own wide breakpoint does. */
-
-/* Mobile (767px and below) */
-@media (max-width: 767px) {
-  .cafe {
-    background-image: url('@shared/assets/images/menu/phone_menu.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-/* Tablet portrait (768–1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .cafe {
-    background-image: url('@shared/assets/images/menu/tab_menu.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-/* Tablet landscape (1024–1099px) */
-@media (min-width: 1024px) and (max-width: 1099px) {
-  .cafe {
-    background-image: url('@shared/assets/images/menu/from748upto1440.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-/* Desktop (1100–1440px) */
-@media (min-width: 1100px) and (max-width: 1440px) {
-  .cafe {
-    background-image: url('@shared/assets/images/menu/from748upto1440.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-/* Wide desktops (1441px and up) use the full 1920px variant */
-@media (min-width: 1441px) {
-  .cafe {
-    background-image: url('@shared/assets/images/menu/menu.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
-}
+/* The decorative wave art that used to sit behind this section (phone_menu,
+   tab_menu, from748upto1440, menu — one variant per breakpoint) has been
+   removed; the section is now a flat white field. All five breakpoint rules
+   went with it, so the white background-color above is the only background
+   at every width. The SVGs are still on disk under
+   @shared/assets/images/menu/ if the art is ever wanted back. */
 
 .cafe .container {
   display: flex;
@@ -263,6 +204,97 @@
 
 .menu-dot {
   display: none;
+}
+
+/* ---------- Corner art ----------
+   Two squiggles shown at roughly their natural size and pushed off the section
+   edge, so only a large curve shows in each corner and the strokes stay bold —
+   the Figma treatment. `.cafe` is already position: relative with
+   overflow: hidden, so the negative offsets below are clipped by the section
+   rather than by the art itself.
+
+   Every number lives in a custom property on `.cafe` so the art can be tuned
+   without touching the rules that place it. */
+
+.home-menu-deco {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  display: block;
+}
+
+.home-menu-deco--tl {
+  width: var(--deco-tl-w);
+  left: var(--deco-tl-left);
+  top: var(--deco-tl-top);
+}
+
+.home-menu-deco--br {
+  width: var(--deco-br-w);
+  right: var(--deco-br-right);
+  bottom: var(--deco-br-bottom);
+}
+
+/* The art must always sit behind the copy. `.menu-item` already carries
+   position: relative + z-index 1 from its own rule, so only the text and the
+   button are lifted here. position: relative on an inline-flex button and on
+   block text is inert for layout — nothing inside them is absolutely positioned
+   against them. */
+.cafe-copy .eyebrow,
+.cafe-title,
+.cafe-paragraph,
+.cafe-cta .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* The six offsets are the values that could not be kept exactly as designed, and
+   they were measured rather than guessed. Each drawing is a diagonal — the
+   top-left runs top-right to bottom-left, the bottom-right the other way — so
+   where the piece sits decides whether the stroke lands on the copy. For every
+   band these are the offsets that show the most ink while holding at least
+   ~4.5px of clearance from the eyebrow, heading, description, button and first
+   and last card, at every width in that band, and while keeping the piece cut by
+   the section's own edge. The widths are unchanged from the Figma frames.
+
+   Visible ink: 56x57px at 320 up to 271x327px for the top-left piece, and
+   137x105px up to 267x223px for the bottom-right one. */
+
+/* Phone — fitted to the 390px frame. Defaults, so they are declared on `.cafe`
+   and overridden per band below. */
+.cafe {
+  --deco-tl-w: 45vw;
+  --deco-tl-left: -19vw;
+  --deco-tl-top: -15vw;
+  --deco-br-w: 50vw;
+  --deco-br-right: -4vw;
+  --deco-br-bottom: -6vw;
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .cafe {
+    --deco-tl-w: 31vw;
+    --deco-tl-left: -13vw;
+    --deco-tl-top: -7.5vw;
+    --deco-br-w: 33vw;
+    --deco-br-right: -3.5vw;
+    --deco-br-bottom: -4.5vw;
+  }
+}
+
+/* Desktop and laptop — fitted to the 1920px frame. 110px of section padding
+   here, so both pieces stay large and bold. */
+@media (min-width: 1024px) {
+  .cafe {
+    --deco-tl-w: 24.3vw;
+    --deco-tl-left: -8vw;
+    --deco-tl-top: -3.5vw;
+    --deco-br-w: 26.1vw;
+    --deco-br-right: -8.5vw;
+    --deco-br-bottom: -7vw;
+  }
 }
 
 /* ---------- Responsive ---------- */

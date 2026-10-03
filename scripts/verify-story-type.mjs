@@ -1,10 +1,12 @@
 // Reports the Our Story page type scale at every breakpoint: for each section
-// that has a heading/description pair, the rendered font-size, line count and
-// characters-per-line, plus whether the page picked up horizontal overflow.
+// that has a label/heading/description set, the rendered font-size, line count
+// and characters-per-line, plus whether the page picked up horizontal overflow.
 // Companion to measure-origin-heading.mjs, which only covers the Origin heading.
 //
-// Expects 56px headings / 20px bodies across the 641-1024px tablet band, and
-// each section's own existing scale outside it.
+// Expects the shared tablet scale across the 600-1099px band — 13px labels
+// (--ostory-tablet-eyebrow), 52px headings (--ostory-tablet-heading, capped) and
+// 20px descriptions (--ostory-tablet-desc) on all three sections — and each
+// section's own existing scale outside it.
 //
 // Run: node scripts/verify-story-type.mjs
 import { spawn } from 'node:child_process'
@@ -16,11 +18,11 @@ const PROFILE = 'C:\\Users\\stdlocal\\AppData\\Local\\Temp\\kilo\\story-type-pro
 const BASE = 'http://[::1]:5173'
 
 // OurStoryImageRow is deliberately absent: it is a full-bleed picture with no
-// heading and no description, so there is no type scale to hold it to.
+// heading, no label and no description, so there is no type scale to hold it to.
 const SECTIONS = [
-  { name: 'hero', title: '.ostory-title', desc: '.ostory-desc' },
-  { name: 'origin', title: '.ostory-origin-title', desc: '.ostory-origin-text' },
-  { name: 'cta', title: '.ostory-cta-title', desc: '.ostory-cta-desc' },
+  { name: 'hero', label: '.ostory-hero .ostory-eyebrow', title: '.ostory-title', desc: '.ostory-desc' },
+  { name: 'origin', label: '.ostory-origin .ostory-eyebrow', title: '.ostory-origin-title', desc: '.ostory-origin-text' },
+  { name: 'cta', label: '.ostory-cta .ostory-eyebrow', title: '.ostory-cta-title', desc: '.ostory-cta-desc' },
 ]
 
 const chrome = spawn(
@@ -58,7 +60,7 @@ await cdp('Runtime.enable')
 await cdp('Page.navigate', { url: `${BASE}/our-story` })
 let ok = false
 for (let i = 0; i < 100; i++) {
-  ok = await ev(SECTIONS.every((s) => `!!document.querySelector('${s.title}') && !!document.querySelector('${s.desc}')`)).catch(() => false)
+  ok = await ev(SECTIONS.map((s) => `!!document.querySelector('${s.label}') && !!document.querySelector('${s.title}') && !!document.querySelector('${s.desc}')`).join(' && ')).catch(() => false)
   if (ok) break
   await sleep(300)
 }
@@ -91,11 +93,14 @@ const PROBE = `(() => {
   for (const s of SECTIONS) {
     const t = document.querySelector(s.title);
     const d = document.querySelector(s.desc);
+    const l = document.querySelector(s.label);
     const ts = getComputedStyle(t);
     const ds = getComputedStyle(d);
+    const ls2 = getComputedStyle(l);
     const tl = linesOf(t);
     const dl = linesOf(d);
     out[s.name] = {
+      labelSize: ls2.fontSize,
       titleSize: ts.fontSize,
       titleMaxW: ts.maxWidth,
       titleLines: tl.length,
@@ -114,21 +119,42 @@ const PROBE = `(() => {
   };
 })()`
 
+// The tablet band's own edges, from the canonical scale in global.css. It is
+// 600-1099px: 1099 is the last tablet width, so 1025-1099 is tablet landscape
+// and is checked like the rest of the band, not written off as desktop.
+const TABLET_MIN = 600
+const TABLET_MAX = 1099
+
+// --ostory-tablet-heading is clamp(42px, 7vw, 52px): the floor holds from 600
+// to 600px (7vw is 42 at the band's own floor), the ramp runs to the 52px cap
+// at 743px, and the value is flat above it. Comparing against a hardcoded 52px
+// flags the 600-742px ramp as a mismatch when it is the token working.
+const expectedHeading = (w) => `${Math.min(52, Math.max(42, w * 0.07)).toFixed(2).replace(/\.?0+$/, '')}px`
+
 console.log('\n########  Our Story page type scale  ########\n')
-for (const w of [360, 480, 640, 641, 700, 768, 834, 900, 1024, 1025, 1200, 1440]) {
+for (const w of [360, 480, 599, 600, 640, 700, 768, 834, 900, 1023, 1024, 1025, 1099, 1100, 1200, 1440]) {
   await cdp('Emulation.setDeviceMetricsOverride', { width: w, height: 1000, deviceScaleFactor: 1, mobile: false })
   await sleep(450)
   const p = await ev(PROBE)
-  const band = w <= 640 ? 'phone' : w <= 1024 ? 'TABLET' : 'desktop'
+  const band = w < TABLET_MIN ? 'phone' : w <= TABLET_MAX ? 'TABLET' : 'desktop'
   const isTablet = band === 'TABLET'
-  console.log(`--- ${w}px (${band})${band === 'phone' ? '' : ''} ---`)
+  console.log(`--- ${w}px (${band}) ---`)
+  const wantTitle = expectedHeading(w)
+  const flag = (ok, want) => (ok ? '' : `   <-- MISMATCH (want ${want})`)
   for (const s of SECTIONS) {
     const v = p.sections[s.name]
-    const tOk = !isTablet || v.titleSize === '56px'
+    const lOk = !isTablet || v.labelSize === '13px'
+    const tOk = !isTablet || v.titleSize === wantTitle
     const dOk = !isTablet || v.descSize === '20px'
-    const flag = (ok) => (ok ? '' : '   <-- MISMATCH')
-    console.log(`  ${s.name.padEnd(7)} h2 ${v.titleSize.padEnd(7)} ${v.titleLines} lines ~${String(v.titleCpl).padStart(2)} chars  max-w ${String(v.titleMaxW).padEnd(8)}${flag(tOk)}`)
-    console.log(`  ${''.padEnd(7)} p  ${v.descSize.padEnd(7)} ${v.descLines} lines ~${String(v.descCpl).padStart(2)} chars  max-w ${String(v.descMaxW).padEnd(8)}${flag(dOk)}`)
+    console.log(`  ${s.name.padEnd(7)} label ${v.labelSize.padEnd(7)}${flag(lOk, '13px')}`)
+    console.log(`  ${''.padEnd(7)} h2    ${v.titleSize.padEnd(7)} ${v.titleLines} lines ~${String(v.titleCpl).padStart(2)} chars  max-w ${String(v.titleMaxW).padEnd(8)}${flag(tOk, wantTitle)}`)
+    console.log(`  ${''.padEnd(7)} p     ${v.descSize.padEnd(7)} ${v.descLines} lines ~${String(v.descCpl).padStart(2)} chars  max-w ${String(v.descMaxW).padEnd(8)}${flag(dOk, '20px')}`)
+  }
+  // The three labels are one token in the band, so a disagreement between them
+  // is the failure worth naming even where the shared value itself is right.
+  const labelSizes = [...new Set(SECTIONS.map((s) => p.sections[s.name].labelSize))]
+  if (isTablet && labelSizes.length > 1) {
+    console.log(`  <-- LABELS DISAGREE across the band: ${labelSizes.join(' / ')}`)
   }
   console.log(`  overflow-x: ${p.overflowX}${p.overflowX ? `  (scrollWidth ${p.scrollW} > ${p.vw})   <-- PAGE SCROLLS SIDEWAYS` : ''}`)
   console.log('')

@@ -49,9 +49,9 @@
    widens each column from 210–296px to 226–323px across the band without
    touching the type sizes or the alignment.
 
-   Deliberately not a type-size change: the phone rule below drops
-   `.benefit-text` to 12px, which is smaller than the 15.7px the tablet band
-   already gets, so shrinking text here would only buy back a little width. */
+   Deliberately not a type-size change: the phone rule below pins
+   `.benefit-title` to 24px, the same tier the section headings sit on across
+   the phone band, so there is no tablet-sized title to shrink to match. */
 @media (min-width: 768px) and (max-width: 1099px) {
   .benefits {
     padding-block: var(--section-pad-tablet);
@@ -67,18 +67,29 @@
   }
 }
 
-/* ---------- Responsive ---------- */
+/* ---------- Responsive ----------
+   Type, section padding and the card inset are shared Home mobile tokens in
+   global.css (--m-heading-size, --m-section-pad, --m-inset), so nothing here
+   restates them. */
 @media (max-width: 767px) {
-  .benefits {
-    padding-block: var(--section-pad-mobile);
-  }
-
   .benefits-grid {
     grid-template-columns: 1fr;
     gap: 3.2rem;
   }
+}
 
-  .benefit {
-    padding-inline: 0.5rem;
+/* ---------- Laptop and desktop (1100px and up): 28px, one line ----------
+   The card titles were on --fs-h3, which is fluid: 24px at 375px rising to the
+   40px cap at 1920px. By 1440px that put "Complimentary Coffee" at 35px, where
+   it wrapped to two lines and pushed the three cards out of line with each
+   other. Pinned to a flat 28px here, which fits the narrowest desktop column
+   (301px at 1100px) on one line, and held there with nowrap so a longer title
+   can never re-wrap at a wide viewport.
+
+   Tablet keeps --fs-h3 and mobile keeps the shared 24px token. */
+@media (min-width: 1100px) {
+  .benefit-title {
+    font-size: 28px;
+    white-space: nowrap;
   }
 }

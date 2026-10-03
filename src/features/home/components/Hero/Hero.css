@@ -114,6 +114,9 @@
 .hero-title-line {
   display: block;
   overflow: hidden;
+  /* Cancelled by .hero .hero-title's mobile margin-bottom, which adds the
+     same 0.16em back. Without that the heading -> divider distance would grow
+     and shrink with the fluid h1 instead of holding at --m-gap-eyebrow. */
   padding-bottom: 0.16em;
   margin-bottom: -0.16em;
 }
@@ -244,45 +247,41 @@
     );
   }
 
-  /* The header is sticky (in-flow), so no large top offset is needed here. */
-  .hero-content {
-    padding-block: 48px 40px;
-  }
+  /* The header is sticky (in-flow), so no large top offset is needed here.
+     Section padding and the 20px inset live in global.css's Home mobile block
+     (--m-section-pad / --m-inset) so all six Home sections share them. */
 
-  .hero-content.container {
-    padding-inline: 24px;
-  }
-
-  .hero-eyebrow-wrap {
-    margin-bottom: 20px;
-  }
-
-  /* 0.32em tracking + uppercase overflows below ~400px. Tighten it and let
-     the line wrap instead of pushing past the viewport. */
+  /* Eyebrow: 0.32em tracking overflowed below ~400px, which is why this block
+     existed. The phone tier now sets 0.05em, so the whole local override is
+     gone and the element inherits the shared token like every other section. */
   .hero-eyebrow {
-    font-size: 0.66rem;
-    letter-spacing: 0.16em;
-    line-height: 1.5;
     text-wrap: balance;
   }
 
   .hero-title {
     /* Longest line is "Appointment, With A" (~20 glyphs). 7.6vw keeps it
-       inside the 24px gutters at 320px and up without wrapping. */
-    font-size: clamp(1.55rem, 7.6vw, 2.35rem);
-    line-height: 1.24;
-    margin-bottom: calc(18px + 0.16em);
+       inside the gutters at 320px and up without wrapping.
+
+       One clamp for the whole 320–767 band. The <=480 block used to redeclare
+       this with a different min, max and coefficient, which put a +5.4px step
+       at the 480/481 boundary and a +4.3px step at 360/361; its own max also
+       froze the h1 flat across a 272px band. Floor 1.45rem covers the 20px
+       inset at 320px, cap 2.35rem is the desktop-facing ceiling.
+
+       Size and leading only — line-height, the gaps and the description live
+       in the shared Home mobile block. */
+    font-size: clamp(1.45rem, 7.6vw, 2.35rem);
   }
 
   .hero-divider {
     width: 36px;
-    margin-bottom: 18px;
   }
 
+  /* max-width only. Size, leading and the top margin are shared tokens — the
+     0.97rem / 1.65 / 1.6 overrides here made the hero the one section whose
+     body copy was smaller than every other section's. */
   .hero-desc {
     max-width: 100%;
-    font-size: 0.97rem;
-    line-height: 1.65;
     margin-bottom: 24px;
   }
 
@@ -310,12 +309,8 @@
     min-height: clamp(520px, 94svh, 640px);
   }
 
-  .hero-title {
-    font-size: clamp(1.45rem, 7.4vw, 1.95rem);
-  }
-
+  /* Only the bottom gap to the buttons; line-height is a shared token now. */
   .hero-desc {
-    line-height: 1.6;
     margin-bottom: 1.25rem;
   }
 
@@ -325,22 +320,6 @@
 
   .hero-actions .btn {
     min-height: 48px;
-  }
-}
-
-/* Very narrow phones (iPhone SE and below) */
-@media (max-width: 360px) {
-  .hero-content.container {
-    padding-inline: 18px;
-  }
-
-  .hero-eyebrow {
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-  }
-
-  .hero-title {
-    font-size: 1.4rem;
   }
 }
 

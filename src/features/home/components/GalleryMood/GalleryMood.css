@@ -387,12 +387,11 @@
   }
 }
 
-/* ---------- Mobile: bigger center card + a peek on each side ---------- */
+/* ---------- Mobile: bigger center card + a peek on each side ----------
+   Section padding moved to the shared Home mobile token in global.css. It used
+   to live at max-width: 640px here, which left 641–767px on the 110px desktop
+   padding — the only Home section whose rhythm changed inside the phone band. */
 @media (max-width: 640px) {
-  .gallery {
-    padding-block: var(--section-pad-mobile);
-  }
-
   .gallery-stage {
     --side-x: 22vw;
     --side-y: 12px;

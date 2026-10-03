@@ -83,8 +83,9 @@
   }
 }
 
+/* Section padding is a shared Home mobile token in global.css. */
 @media (max-width: 767px) {
-  .experience {
-    padding-block: var(--section-pad-mobile);
+  .experience-desc {
+    max-width: 100%;
   }
 }
